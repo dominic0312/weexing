@@ -29,12 +29,6 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "coupon_relations", :force => true do |t|
-    t.integer "coupon_id",     :null => false
-    t.integer "customer_id",   :null => false
-    t.string  "coupon_status"
-  end
-
   create_table "coupons", :force => true do |t|
     t.integer  "shopid"
     t.string   "usertype"
@@ -50,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.datetime "updated_at",                      :null => false
     t.integer  "sent",             :default => 0
     t.string   "pic"
-    t.string   "pic_file_name"
+    t.string   "photo_file_name"
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
@@ -100,10 +94,10 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.string   "phone"
     t.integer  "agency"
     t.string   "cardtemplate"
-    t.integer  "usertemplate_id", :limit => 255, :default => 1
+    t.integer  "usertemplate_id", :default => 1
     t.string   "logo"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|
