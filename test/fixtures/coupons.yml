@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shopid: 1
+  usertype: MyString
+  content: MyText
+  startdate: 2014-02-20
+  enddate: 2014-02-20
+  type: 
+  present_name: MyString
+  discount: 1
+  present_value: 1
+  branch: MyString
+
+two:
+  shopid: 1
+  usertype: MyString
+  content: MyText
+  startdate: 2014-02-20
+  enddate: 2014-02-20
+  type: 
+  present_name: MyString
+  discount: 1
+  present_value: 1
+  branch: MyString

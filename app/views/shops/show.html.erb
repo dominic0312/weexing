@@ -1,0 +1,94 @@
+<p id="notice">
+	<%= notice %>
+</p>
+<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+<%= stylesheet_link_tag "jquery.multiDialog.css" %>
+<script src="/assets/jquery-191.js"></script>
+<script src="/assets/jquery-ui-1.js"></script>
+<script src="/assets/jquery.ui.dialog.extended-1.0.2.js"></script>
+<script src="/assets/jquery.multiDialog.js"></script>
+<!-- MultiDialog files (needed) -->
+<script type="text/javascript">
+	$(function() {
+		$("a.add-type").MultiDialog({
+			types : {
+				config : {
+					customPath : {
+						test : function(href) {
+							// search for syntaxhighlighter in URL
+							return href.match(/syntaxhighlighter/i);
+						},
+						template : '<iframe width="100%" height="200%" src="{url}" frameborder="0"></iframe>'
+					}
+				}
+			},
+			openCustom : function(data) {
+				if (data.type = "customPath") {
+					this._parseHtml(data, "customPath", "url");
+					data.width = 750;
+					data.height = 640;
+					//data.title = "请选择模板";
+					this._open(data);
+				} else {
+					// backfall
+					window.open(data.href, '_newtab');
+				}
+			}
+		});
+
+		$(function() {
+
+			$("a.lightbox").MultiDialog({
+				gallery : {
+					enabled : true,
+				},
+				dialog : {
+					buttons : {}
+				}
+			});
+		});
+
+	}); 
+</script>
+
+<p>
+	<b>Name:</b>
+	<%= @shop.name %>
+</p>
+
+<p>
+	<b>Address:</b>
+	<%= @shop.address %>
+</p>
+
+<p>
+	<b>Phone:</b>
+	<%= @shop.phone %>
+</p>
+
+<p>
+	<b>Agency:</b>
+	<%= @shop.agency %>
+</p>
+
+<p>
+	<b>Cardtemplate:</b>
+	<%= @shop.cardtemplate %>
+</p>
+
+<p>
+	<b>Pagetemplate:</b>
+	<%= @shop.usertemplate_id %>
+</p>
+
+<p>
+	<b>Logo:</b>
+	<%= @shop.logo %>
+</p>
+
+<a class="add-type" href="/usertemplates/display?shopid=<%=@shop.id%>">选择模板</a>
+<a class="lightbox" href="/assets/Spring.jpg"><img src="/assets/pizza.jpg"  title="Open this picture of in a larger version" alt="Example picture #7" longdesc="Exaple picture #7: Lorem ipsum dolor sit amet, consetetur sadipscing elitr." /> </a>
+<a class="lightbox" href="/assets/pizza.jpg"><img src="/assets/pizza.jpg"  title="Open this picture of in a larger version" alt="Example picture #7" longdesc="Exaple picture #7: Lorem ipsum dolor sit amet, consetetur sadipscing elitr." /> </a>
+
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>

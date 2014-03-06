@@ -1,0 +1,190 @@
+<script type="text/javascript">
+	function setupCardTemplate(id) {
+		var user=$.trim($("#session_user").text());
+		var card=$(id).children('img').attr('src');
+		var params = "user_name="+user+"&cardtemplate="+card;
+		$.ajax({
+			type : "POST",
+			url : "/card/updatecardtemplate",
+			data : params,
+			dataType : "json",
+			success : function(data) {
+				$("#img1").html("<img src='"+card+"'/>");
+			},
+			error : function(data) {
+				alert("error");
+			}
+		});
+	}
+
+	var showbrand = function() {
+		var user_name = $.trim($("#session_user").text());
+		var params = "user_name=" + user_name;
+
+		$.ajax({
+			type : "POST",
+			url : "/card/showinfo",
+			data : params,
+			dataType : "json",
+			success : function(data) {
+				var name = data.brand;
+				var template=data.template;
+				$("#brand_name").html(name);
+				$("#img1").html("<img src='"+template+"'/>");
+			},
+			error : function(data) {
+				alert("error");
+			}
+		});
+
+	}
+	showbrand();
+	var updatebrand = function() {
+		var err$ = $("#err_area");
+		var errtip$ = $("#err_tips");
+		var brand = $.trim($("#brand_txt").val());
+		if (brand == "") {
+			errtip$.html(" 商户名不能为空");
+			err$.removeClass('dn');
+			return;
+		}
+		if (len(brand) > 16) {
+			errtip$.html(" 商户名长度过长");
+			err$.removeClass('dn');
+			return;
+		}
+		err$.removeClass().addClass("login-err-panel dn");
+		$.post("/card/updateinfo", {
+			brand : $.trim($("#brand_txt").val()),
+			user_name : $.trim($("#session_user").text())
+		}, null, "script");
+
+		showbrand();
+	};
+	function len(s) {
+		var l = 0;
+		var a = s.split("");
+		for (var i = 0; i < a.length; i++) {
+			if (a[i].charCodeAt(0) < 299) {
+				l++;
+			} else {
+				l += 2;
+			}
+		}
+		return l;
+	};
+	var checkBrandLength = function() {
+		var len_brand;
+		len_brand = len($.trim($("#brand_txt").val()));
+	}
+	var clean = function() {
+		alert('hello');
+		$("#inline3").html("helloworld2");
+	}
+
+	$('.fancybox').fancybox({
+		'showCloseButton' : true,
+		'width' : 700,
+		'title' : '请选择一个卡片模板',
+		'closeClick' : true
+
+	});
+
+</script>
+
+<div class="main_hd">
+	<div class="title_tab" id="topTab">
+		<ul class="title_tab_navs">
+
+			<li class="title_tab_nav js_top" data-id="setting">
+				<a href="#">商户开通</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="main_bd">
+
+	<div class="appmsg_list" id="appmsgList">
+
+		<div class="appmsg_col">
+			<div class="appmsg" style="float:left;width:300px">
+				<div class="appmsg_content">
+
+					<h4 class="appmsg_title">商户名</h4>
+					<div class="login-err-panel dn" id="err_area">
+						<span class="icon-wrapper"><i class="icon24-login err" style="margin-top:-.2em;*margin-top:0;"></i></span>
+						<span id="err_tips"></span>
+					</div>
+					<span class="frm_input_box" style="width:250px" title="商户名需要小于8个汉字，或者16个英文字母">
+						<input type="text" class="frm_input" id="brand_txt" >
+					</span>
+					<span id="brand_submit" class="btn btn_input btn_primary" style="position:relative;top:20px;left:170px">
+						<button  id="brand_button" onclick="updatebrand()">
+							保存
+						</button> </span>
+				</div>
+
+			</div>
+
+			<div class="appmsg" style="float:right;width:360px;height:240px" id="frame_brand" >
+				<h1 id="brand_name"></h1>
+							<div style="margin:10px" id="img1">
+								<img id="image1" src="" style="margin-top:10px"/>
+							</div>
+			</div>
+
+			<div class="appmsg" style="float:left;width:300px;height:240px" id="frame_brand" id=>
+
+				<div class="appmsg_content">
+					<h4 class="appmsg_title">会员卡外观(点击修改)</h4>
+				</div>
+				<a class="fancybox" id="inline" href="#inline1" style="position:relative;top:20px;left:30px"><img border="0" src="/assets/card1.jpg" /></a>
+
+			</div>
+
+		</div>
+	</div>
+	<div class="tool_area">
+
+	</div>
+	<div id="inline1" style="width:400px;display:none">
+		<script>
+			var params = "user_name=166@qq.com&cardtemplate=/assets/card1.jpg";
+
+			function showcardTemplate() {
+				$.ajax({
+					type : "POST",
+					url : "/card/showcardtemplate",
+					data : params,
+					dataType : "json",
+					success : function(data) {
+						var templates = data.card;
+						Tempo.prepare("cards").render(templates);
+					},
+					error : function(data) {
+						alert("error");
+					}
+				});
+			}
+
+			showcardTemplate();
+		</script>
+		<ol id="cards">
+			<li data-template>
+				<div style="background-color: grey;width:270px;height: 185px;margin: 10px" onmouseover="high(this)" onmouseout="grey(this)" onclick="setupCardTemplate(this)">
+						<img src="#" data-src="{{card_image_url}}" style="margin-top:10px"/>
+						<h3>{{card_name}}</h3>
+				</div>
+			</li>
+			<li data-template-fallback>
+				Sorry, JavaScript required!
+			</li>
+		</ol>
+	</div>
+
+	<div id="inline2" style="width:400px;display: none;">
+		inline2
+	</div>
+
+</div>
+

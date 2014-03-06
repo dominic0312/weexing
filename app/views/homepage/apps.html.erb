@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<%= stylesheet_link_tag "selector.css" %>
+		<%= stylesheet_link_tag "jquery-ui.css" %>
+
+		<title>微行-微信营销专家</title>
+	</head>
+	<body>
+		<div id="header">
+			<div class="wrapper">
+				<a href="https://mp.weixin.qq.com/" class="dib"><%= image_tag("weixing.png", height: '56', width: '426') %></a>
+				<span class="hd_login_info"> <%= link_to '立即注册', homepage_regist_url%></td> </span>
+			</div>
+		</div>
+		<div id="banner">
+			<div class="wrapper">
+				<div id="product1" class="product"  style="position:absolute;top:30px;left:0;width:300px;height:450px" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
+					<h3> &nbsp&nbsp&nbsp会员卡 </h3>
+				</div>
+
+				<div id="product2" class="product" style="position:absolute;top:200px;right:0" >
+					<h3><%=session[:user_name]%></h3>
+				</div>
+				<a href="#" id="button" class="ui-state-default ui-corner-all">Run Effect</a>
+			</div><!--End of wrapper-->
+		</div><!--End of banner-->
+		<script type="text/javascript" src="/assets/jquery-1.js"></script>
+		<script type="text/javascript" src="/assets/jquery-ui-1.js"></script>
+		<script type="text/javascript">
+			function highlight(id) {
+				if (navigator.userAgent.indexOf("MSIE") > 0) {
+					id.filters.alpha.opacity = 80;
+				} else {
+					id.style.opacity = 0.8;
+				}
+			}
+
+			function dehighlight(id) {
+				if (navigator.userAgent.indexOf("MSIE") > 0) {
+					id.filters.alpha.opacity = 30;
+				} else {
+					id.style.opacity = 0.3;
+				}
+			}
+
+			function callback() {
+				alert("hello2");
+			};
+
+			function runEffect() {
+				// get effect type from
+				// most effect types need no options passed by default
+				var options = {};
+				// some effects have required parameters
+
+				// run the effect
+				$("#product1").hide('slide', options, 500, callback);
+			};
+
+			$("#button").click(runEffect);
+		</script>
+
+	</body>
+</html>

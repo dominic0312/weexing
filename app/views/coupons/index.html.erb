@@ -1,0 +1,59 @@
+<h1>优惠劵列表</h1>
+<%= javascript_include_tag "jquery-1.js" %>
+<%= javascript_include_tag "jquery-ujs.js" %>
+<script type="text/javascript">
+	function coupon_sent(id) {
+		alert("优惠券发送成功");
+	}
+
+	function coupon_fail() {
+		alert("优惠券已经");
+	}
+	
+   function coupon_update(id) {
+		alert("优惠券已经发送了");
+	}
+</script>
+<table>
+	<tr>
+		<th>商家id</th>
+		<th>用户级别</th>
+		<th>内容</th>
+		<th>开始时间</th>
+		<th>结束时间</th>
+		<th>优惠劵类型</th>
+		<th>礼品名称</th>
+		<th>折扣</th>
+		<th>礼品价值</th>
+		<th>分店</th>
+		<th>是否发出</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	<% @coupons.each do |coupon| %>
+	<tr>
+		<td><%= coupon.shopid %></td>
+		<td><%= coupon.usertype %></td>
+		<td><%= coupon.content %></td>
+		<td><%= coupon.startdate %></td>
+		<td><%= coupon.enddate %></td>
+		<td><%= coupon.coupon_type %></td>
+		<td><%= coupon.present_name %></td>
+		<td><%= coupon.discount %></td>
+		<td><%= coupon.present_value %></td>
+		<td><%= coupon.branch %></td>
+		<div id="cid<%=coupon.id%>"><% if coupon.sent == 0 %><td>未发出</td><%else%><td>已发出</td><%end%></div>
+		<td><%= link_to '详细', coupon %></td>
+		<% if coupon.sent == 0 %><div id="ucid<%=coupon.id%>"><td><%= link_to '编辑', edit_coupon_path(coupon) %></td>
+		<td><%= link_to '删除', coupon, method: :delete, data: { confirm: '确定删除?' } %></td>
+		<td><%= link_to '发出', { :action => "send_coupon",:id =>coupon,:coupon_id=>coupon.id }, method: :post,  :remote => true,data: { coupon_id: coupon }%></td></div><% end %>
+	</tr>
+	<% end %>
+</table>
+
+<br />
+
+<%= link_to '新优惠券', new_coupon_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Owner:</b>
+  <%= @customer.owner %>
+</p>
+
+<p>
+  <b>Cardid:</b>
+  <%= @customer.cardid %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @customer.balance %>
+</p>
+
+<p>
+  <b>Bonus:</b>
+  <%= @customer.bonus %>
+</p>
+
+<p>
+  <b>Realcardid:</b>
+  <%= @customer.realcardid %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%= @customer.level %>
+</p>
+
+<p>
+  <b>Openid:</b>
+  <%= @customer.openid %>
+</p>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>

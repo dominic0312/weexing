@@ -1,0 +1,41 @@
+<%= form_for @usertemplate, :url => usertemplates_path,:html => { :multipart => true } do |f| %>
+  <% if @usertemplate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@usertemplate.errors.count, "error") %> 该模板因为错误没有被保存:</h2>
+
+      <ul>
+      <% @usertemplate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :模板名 %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :图片 %><br />
+    <%= f.text_field :pic %>
+  </div>
+  <div class="field">
+    <%= f.label :描述 %><br />
+    <%= f.text_area :description %>
+  </div>
+   <div class="field">
+    <%= f.label :模板文件 %><br />
+    <%= f.file_field :attachfile %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :模板预览图%><br />
+    <%= f.file_field :preview %>
+  </div>
+  
+ 
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

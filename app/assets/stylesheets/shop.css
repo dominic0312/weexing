@@ -1,0 +1,38 @@
+.shopsborder {
+	padding: 12px;
+	width: 48em;
+	height: 38.5em;
+	min-width: 300px;
+	margin: 0 auto;
+	border: 1px solid dimgrey;
+}
+
+.shopgrid {
+	font-size: 12px;
+	text-align: left;
+	display: block;
+	height: 87px;
+	width: 530px;
+	border: 2px dashed black;
+	margin-right: 25px;
+	margin-bottom: 10px;
+	text-align: center;
+	padding-top: 10px
+}
+
+.shopswrapper {
+	padding: 12px;
+	width: 48em;
+	height: 33em;
+	min-width: 300px;
+	margin: 0 auto;
+}
+
+.shop_pag {
+	width: 49em;
+	position: absolute;
+	height: 20px;
+	margin-top:12px;
+	margin-bottom:10em;
+	margin-left: 40px;
+}

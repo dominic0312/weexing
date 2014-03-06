@@ -1,0 +1,27 @@
+<%= form_for(@pointcode) do |f| %>
+  <% if @pointcode.errors.any? %>
+    <div id="error_explanation">
+
+      <ul>
+      <% @pointcode.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <li>该兑换码已经存在了</li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :兑换码 %><br />
+    <%= f.text_field :secretcode %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :点数%><br />
+    <%= f.number_field :point %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit :添加%>
+  </div>
+<% end %>

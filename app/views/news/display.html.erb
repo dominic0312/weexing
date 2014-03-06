@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>微行微系统</title>
+		<script type="text/javascript"></script>
+		<%= stylesheet_link_tag "base.css" %>
+		<%= stylesheet_link_tag "lib1.css" %>
+		<%= stylesheet_link_tag "media.css" %>
+		<link rel="stylesheet" href="https://res.wx.qq.com/mpres/htmledition/style/xss/page/page_news1a954a.css">
+	</head>
+	<body class="zh_CN">
+		<div class="head" id="header">
+			<div class="head_box">
+				<div class="inner wrp">
+					<h1 class="logo"><a href="/" title="微信公众平台">微信公众平台</a></h1>
+					<div class="account">
+						<div class="account_meta account_faq">
+							<a class="account_primary_link" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&f=1&ty=1&ap=000011:400792:|m:12|f:400792:m:12" target="_blank">在线客服</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="body" class="body page_news ">
+			<div class="container_box side_l">
+				<div class="container_hd">
+					<h2></h2>
+					<div class="extra_info">
+						&nbsp;
+					</div>
+				</div>
+				<div class="container_bd">
+					<div class="col_side"></div>
+					<div class="col_main">
+						<div class="news_box ">
+							<div class="inner">
+								<h3><%= @news.title %></h3>
+								<%= @news.content.html_safe %>
+							
+							</div>
+						</div>
+						<div class="tool_bar">
+							<a href="<%= homepage_login_url%>" class="btn btn_default">返回首页</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="foot" id="footer">
+			<ul class="links ft">
+				<li class="links_item no_extra">
+					<a href="http://www.tencent.com/zh-cn/index.shtml" target="_blank">关于微行</a>
+				</li>
+				<li class="links_item">
+					<a href="/cgi-bin/readtemplate?t=home/agreement_tmpl&type=info&lang=zh_CN&token=" target="_blank">服务协议</a>
+				</li>
+				<li class="links_item">
+					<a href="http://kf.qq.com/product/weixinmp.html" target="_blank">客服中心</a>
+				</li>
+				<li class="links_item">
+					<a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&f=1&ty=1&ap=000011:400792:|m:12|f:400792:m:12" target="_blank">在线客服</a>
+				</li>
+				<li class="links_item">
+					<a href="mailto:support@weexing.com" target="_blank">联系邮箱</a>
+				</li>
+			</ul>
+			<p class="copyright">
+				Copyright &copy; 2012-2013 WEEXING. All Rights Reserved.
+			</p>
+		</div>
+	</body>
+</html>
+

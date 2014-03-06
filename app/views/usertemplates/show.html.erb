@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>模板名:</b>
+  <%= @usertemplate.name %>
+</p>
+
+<p>
+  <b>预览:</b>
+  <%= image_tag @usertemplate.preview.url(:thumb) %>
+</p>
+
+<p>
+  <b>描述:</b>
+  <%= @usertemplate.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_usertemplate_path(@usertemplate) %> |
+<%= link_to 'Back', usertemplates_path %>

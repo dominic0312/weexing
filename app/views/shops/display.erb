@@ -1,0 +1,20 @@
+<script src="/assets/jquery-191.js"></script>
+<%= stylesheet_link_tag "pagenate.css" %>
+<%= stylesheet_link_tag "shop.css" %>
+
+<div id="shops" class="shopsborder">
+	<div id="wrapper" class="shopswrapper">
+
+		<ul class="float">
+			<% @shops.each do |shop| %>
+			<li class="shopgrid">
+				<h1><%= shop.name%></h1>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="digg_pagination shop_pag">
+	<%= ajax_will_paginate @shops %>
+	</div>
+</div>
+

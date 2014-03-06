@@ -1,0 +1,73 @@
+<%= form_for @coupon, :url => coupons_path,:html => { :multipart => true } do |f| %>
+<% if @coupon.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@coupon.errors.count, "error") %> prohibited this coupon from being saved:</h2>
+
+	<ul>
+		<% @coupon.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="field">
+	<%= f.label :shopid %>
+	<br />
+	<%= f.number_field :shopid %>
+</div>
+<div class="field">
+	<%= f.label :usertype %>
+	<br />
+	<%= f.text_field :usertype %>
+</div>
+<div class="field">
+	<%= f.label :content %>
+	<br />
+	<%= f.text_area :content %>
+</div>
+<div class="field">
+	<%= f.label :startdate %>
+	<br />
+	<%= f.date_select :startdate %>
+</div>
+<div class="field">
+	<%= f.label :enddate %>
+	<br />
+	<%= f.date_select :enddate %>
+</div>
+<div class="field">
+	<%= f.label :coupon_type %>
+	<br />
+	<%= f.text_field :coupon_type %>
+</div>
+<div class="field">
+	<%= f.label :present_name %>
+	<br />
+	<%= f.text_field :present_name %>
+</div>
+<div class="field">
+	<%= f.label :discount %>
+	<br />
+	<%= f.number_field :discount %>
+</div>
+<div class="field">
+	<%= f.label :present_value %>
+	<br />
+	<%= f.number_field :present_value %>
+</div>
+<div class="field">
+	<%= f.label :branch %>
+	<br />
+	<%= f.text_field :branch %>
+</div>
+
+<div class="field">
+<%= f.file_field :pic %>
+</div>
+<div class="actions">
+	<%= f.submit %>
+</div>
+<% end %>

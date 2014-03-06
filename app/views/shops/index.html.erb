@@ -1,0 +1,35 @@
+<h1>店铺列表</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Agency</th>
+    <th>Cardtemplate</th>
+    <th>Pagetemplate</th>
+    <th>Logo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shops.each do |shop| %>
+  <tr>
+    <td><%= shop.name %></td>
+    <td><%= shop.address %></td>
+    <td><%= shop.phone %></td>
+    <td><%= shop.agency %></td>
+    <td><%= shop.cardtemplate %></td>
+    <td><%= shop.usertemplate_id %></td>
+    <td><%= shop.logo %></td>
+    <td><%= link_to 'Show', shop %></td>
+    <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
+    <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+ <%= will_paginate @shops %>
+<br />
+
+<%= link_to 'New Shop', new_shop_path %>

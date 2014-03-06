@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  secretcode: MyString
+  userby: MyString
+  used: 1
+
+two:
+  secretcode: MyString
+  userby: MyString
+  used: 1

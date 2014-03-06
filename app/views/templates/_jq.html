@@ -1,0 +1,87 @@
+<body>
+		<div data-role="page" id="home" data-theme="a" data-fullscreen="true">
+			<div data-role="header">
+				<h1>COCO烘培坊</h1>
+			</div><!-- /header -->
+			<div data-role="content">
+				<div id="card">
+					<img border="0" src="/assets/card1.jpg" alt="card" align="center"/></a>
+				</div>
+
+				<div class="ui-grid-b">
+					<div class="ui-block-a" id="customer_balance">
+						<div class="content-title">
+							<strong>储值</strong>
+							<div class="content-value" data-template>
+								{{balance}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-block-b" id="customer_bonus">
+						<div class="content-title">
+							<strong>积分</strong>
+							<div class="content-value" data-template>
+	                            {{bonus}}							
+							</div>
+						</div>
+
+					</div>
+					<div class="ui-block-c" id="customer_level">
+						<div class="content-title">
+							<strong>级别</strong>
+							<div class="content-value" data-template>
+								{{level}}	
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<a href="#coupon" class="ui-icon-star ui-btn-icon-left">优惠</a>
+						<span class="ui-li-count countBubl" id="coupon_num"><div data-template>{{coupon_num}}</div></span>
+					</li>
+
+					<li>
+						<a href="./speakers.html">赠品</a>
+					</li>
+
+					<li>
+						<a href="./schedule.html">在线预定</a>
+					</li>
+
+					<li>
+						<a href="./information.html">联系我们</a>
+					</li>
+
+				</ul>
+
+			</div><!-- /content -->
+		</div>
+		<div data-role="page" id="coupon" data-fullscreen="true">
+
+			<div data-role="header">
+				<h1>优惠卷</h1>
+				<a href="#home" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left">后退</a>
+			</div>
+				<div data-role="content">
+					<ul data-role="listview" id="coupons" style="overflow-y:visible">
+						<li data-template  style="overflow-y:visible">
+							<img src="default.png" data-src="{{pic}}" alt="" height="40" /><h3>{{usertype}}</h3>
+							<p>
+								{{content}}
+							</p>
+						</li>
+						<li data-template-fallback>
+							Sorry, JavaScript required!
+						</li>
+					</ul>
+				</div>
+		</div>
+
+	</body>
+
+
+
+
