@@ -6,9 +6,6 @@
 		<meta charset="utf-8">
 		<title>微信公众平台</title>
 		<%= stylesheet_link_tag "base.css" %>
-		<%= stylesheet_link_tag "lib1.css" %>
-		<%= stylesheet_link_tag "media.css" %>
-		<%= stylesheet_link_tag "media1.css" %>
 		<%= stylesheet_link_tag "login.css" %>
 		<%= stylesheet_link_tag "jquery.fancybox.css" %>
 		<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
@@ -70,151 +67,6 @@
 		</script>
 
 		<style>
-			.style1 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #96C2F1;
-				background-color: #EFF7FF
-			}
-
-			.style2 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #9BDF70;
-				background-color: #F0FBEB
-			}
-
-			.style3 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #BBE1F1;
-				background-color: #EEFAFF
-			}
-
-			.style4 {
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #CCEFF5;
-				background-color: #FAFCFD
-			}
-
-			.style5 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #FFCC00;
-				background-color: #FFFFF7
-			}
-
-			.style6 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #92B0DD;
-				background-color: #FFFFFf
-			}
-			.style6 h5 {
-				margin: 1px;
-				background-color: #E2EAF8;
-				height: 24px;
-			}
-
-			.style7 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #A9C9E2;
-				background-color: #E8F5FE
-			}
-
-			.style8 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #E3E197;
-				background-color: #FFFFDD
-			}
-
-			.style9 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #ADCD3C;
-				background-color: #F2FDDB
-			}
-
-			.style10 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #F8B3D0;
-				background-color: #FFF5FA
-			}
-
-			.style11 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #D3D3D3;
-				background-color: #F7F7F7
-			}
-
-			.style12 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #BFD1EB;
-				background-color: #F3FAFF
-			}
-
-			.style13 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #FFDD99;
-				background-color: #FFF9ED
-			}
-
-			.style14 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #CACAFF;
-				background-color: #F7F7FF
-			}
-
-			.style15 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #A5B6C8;
-				background-color: #EEF3F7
-			}
-			.style16 {
-				width: 800px;
-				height: 100px;
-				margin: 0px auto;
-				margin-bottom: 20px;
-				border: 1px solid #CEE3E9;
-				background-color: #F1F7F9
-			}
 		</style>
 	</head>
 	<body class="zh_CN">
@@ -242,18 +94,18 @@
 				</div>
 			</div>
 		</div>
-		<div id="body" class="body page_media_list page_appmsg_list">
-			<div id="js_container_box" class="container_box side_l">
+		<div id="body" class="body">
+			<div id="body_box" class="container_box side_l">
 				<div class="col_side">
 					<div class="menu_box" id="menuBar">
 						<dl id="menu_card" class="menu  no_extra closed">
 							<dt class="menu_title">
 								<i class="icon_menu card"></i><i class="icon_menu_switch"></i>商户管理
 							</dt>
-							<dd id="menu_setting" class="menu_item " onclick="showPageAjax('setting');">
+							<dd id="menu_setting" class="menu_item " onclick="showcreatepage('setting');">
 								<a href="#">商户开通</a>
 							</dd>
-							<dd id="menu_outline" class="menu_item " onclick="showiframepage('outline');">
+							<dd id="menu_outline" class="menu_item " onclick="showmanagepage('outline');">
 								<a href="#">商户前台管理</a>
 							</dd>
 							<dd id="menu_business" class="menu_item " onclick="showPageAjax('business');">
@@ -381,6 +233,7 @@
 					 */
 
 					var currentpage = "setting";
+					var user_name = $.trim($("#session_user").text());
 					var options = {
 						color : "#FFFFFF"
 					};
@@ -393,18 +246,30 @@
 						$(id).css("background-color", "grey")
 					}
 
-					function showiframepage(id) {
+					function showmanagepage(id) {
 						$("#menu_" + id).addClass("selected");
-						$("#menu_" + currentpage).removeClass("selected");
+						if (currentpage != id) {
+							$("#menu_" + currentpage).removeClass("selected");
+						}
 						$('#page').html("<iframe src='/shops/display' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
 						$('#page').show();
+						currentpage = id;
+					}
 
+					function showcreatepage(id) {
+						$("#menu_" + id).addClass("selected");
+						if (currentpage != id) {
+							$("#menu_" + currentpage).removeClass("selected");
+						}
+						$('#page').html("<iframe src='/shops/createshop' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
+						$('#page').show();
+						currentpage = id;
 					}
 
 					function runEffect() {
 					}
 				</script>
-				<script type="text/javascript"></script><script type="text/javascript" src="/assets/top1a954a.js"></script><script type="text/javascript" src="/assets/appmsg_list1a954a.js"></script>
+				<script type="text/javascript"></script><script type="text/javascript" src="/assets/top1a954a.js"></script>
 				<script type="text/javascript"></script>
 				<script></script>
 	</body>

@@ -17,8 +17,9 @@ Weexing::Application.routes.draw do
   
   get 'usertemplates/display'
   get 'shops/display' 
+  get "shops/createshop"
   resources :usertemplates
-  resources :shops
+  #resources :shops
   match "/cardguest/:id" => "cardguest#cardpage"
   match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info"
   match "/news/display/:id" => "news#display"
@@ -59,6 +60,8 @@ Weexing::Application.routes.draw do
   post "card/showcardtemplate"
   post "card/updatecardtemplate"
   post "shops/updateusertemplate"
+  post "shops/paycreateshop"
+  
   post "shops/index"
   post "cardguest/get_customer_info"
   post "card/pages"

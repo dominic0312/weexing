@@ -1,0 +1,223 @@
+<script src="/assets/jquery-191.js"></script>
+<script src="/assets/jquery-ui-1.10.4.custom.js"></script>
+<script src="/assets/jquery.ui.dialog.extended-1.0.2.js"></script>
+<script src="/assets/jquery.multiDialog.js"></script>
+<script type="text/javascript" src="/assets/notify.js"></script>
+<%= stylesheet_link_tag "pagenate.css" %>
+<%= stylesheet_link_tag "shop.css" %>
+<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+<%= stylesheet_link_tag "jquery.multiDialog.css" %>
+<%= stylesheet_link_tag "ui.notify.css" %>
+
+<style>
+	.openbtn {
+		position: absolute;
+		left: 200px;
+		padding-top: 10px;
+		padding-left: 10px;
+		padding-right: 0px;
+		padding-bottom: 10px;
+		margin-top: 5px;
+		border-radius: 8px;
+		width: 40px
+	}
+
+	.trailbtn {
+		left: 260px;
+		width: 75px;
+		padding-left: 13px;
+	}
+
+	.cancelbtn {
+		left: 360px;
+		width: 45px;
+		padding-left: 13px;
+	}
+
+	.guidebtn {
+		left: 680px;
+		top: 35px;
+		width: 75px;
+		background: #CCC;
+		font-family: Arial;
+		color: grey;
+		font-size: 16px;
+	}
+
+	.guidebtn:hover {
+		background: #black;
+		text-decoration: none;
+	}
+
+	p.guidefont {
+		font-family: Microsoft  YaHei;
+		color: grey;
+		font-size: 12px;
+	}
+</style>
+
+<div id="shops" class="shopsborder">
+	<div id="newshopdiv" class="newshop">
+		<div id="newshopbtn" class="nshoppbtn">
+			添加新商家
+		</div>
+
+		<div id="first" style="display:none">
+			<input type="text" id="shopname" style="position: absolute;top:8px;left:20px;background-color: #CCC;" placeholder="例如:xx酒店" title="此处输入商家名称，账号建立后名称不能更改."/>
+			<a id="openbtn" class="nshoppbtn openbtn" href="#" onclick="openaccount(uid);return false;">开通</a>
+			<a id="trailbtn" class="nshoppbtn openbtn trailbtn" href="#">申请试用</a>
+			<a id="cancelbtn" class="nshoppbtn openbtn cancelbtn" href="#" onclick="$('#first').hide('slide');return false;">取消</a>
+			<span id="top"></span>
+		</div>
+		<div id="guide">
+			<a id="guidebutton" class="openbtn guidebtn" href="#" onclick="showguide();return false;">开通指南</a>
+		</div>
+	</div>
+	<div id="wrapper" class="shopswrapper">
+
+		<ul class="float">
+			<% @shops.each do |shop| %>
+			<li class="shopgrid">
+				<h1><%= shop.name%></h1>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="digg_pagination shop_pag">
+		<%= ajax_will_paginate @shops %>
+	</div>
+	<div id="test" style="display: none">
+
+		<h1>hellowrold</h1>
+	</div>
+	<div id="uname" style="display:none">
+		<%= @user_id%>
+	</div>
+	<div id="cred" style="display:none">
+		<%= @credits%>
+	</div>
+
+</div>
+
+<script>
+	var uid = $.trim($("#uname").text());
+	var credit = $.trim($("#cred").text());
+	$(function() {
+		$(document).tooltip();
+		$(document).on('click', '.notifyjs-shops-guide .yes', function() {
+			//programmatically trigger propogating hide event
+			$(this).trigger('notify-hide');
+		});
+
+		$(document).on('click', '.notifyjs-uncharged-base .yes', function() {
+			//programmatically trigger propogating hide event
+			$(this).trigger('notify-hide');
+		});
+
+		$(document).on('click', '.notifyjs-charged-base .yes', function() {
+			//programmatically trigger propogating hide event
+			pay_create_user();
+			$(this).trigger('notify-hide');
+		});
+
+		$(document).on('click', '.notifyjs-charged-base .no', function() {
+			//programmatically trigger propogating hide event
+			$(this).trigger('notify-hide');
+		});
+
+		$.notify.addStyle('shops', {
+			html : "<div>" + "<div class='clearfix'>" + "<div class='title' data-notify-html='title'/>" + "<div class='content' data-notify-html='content'/>" + "</div>" + "<button class='yes'>关闭</button>" + "</div>",
+			classes : {
+				guide : {
+				}
+			}
+		});
+
+		$.notify.addStyle('uncharged', {
+			html : "<div>" + "<div class='clearfix'>" + "<div class='title' data-notify-html='title'/>" + "<div class='content' data-notify-html='content'/>" + "</div>" + "<button class='yes'>确定</button>" + "</div>",
+			classes : {
+				base : {
+				}
+			}
+		});
+
+		$.notify.addStyle('charged', {
+			html : "<div>" + "<div class='clearfix'>" + "<div class='title' data-notify-html='title'/>" + "<div class='content' data-notify-html='content'/>" + "</div>" + "<button class='yes'>确定</button>" + "<button class='no'>取消</button>" + "</div>",
+			classes : {
+				base : {
+				}
+			}
+		});
+
+	});
+	$("#first").hide();
+	$("#newshopbtn").click(function() {
+		options = {};
+		$("#first").show('slide');
+		return false;
+	});
+
+	function showguide() {
+
+		if ($(".notifyjs-shops-guide").length > 0) {
+			$(".notifyjs-shops-guide").trigger('notify-hide');
+		}
+
+		var guidestr = "<p>1.开通一个会员卡应用需要5点点数.</p>" + "<p>2.该开通费用包含一年的服务器使用费用，后续费用为3点/年.</p>" + "<p>3.购买点数请与我们的管理员联系，或参见首页指引.</p>" + "<p>4.申请试用的客户请点击<b>添加新商家->申请试用</b>按钮,提交信息后可以试用3天.</p>";
+
+		$.notify({
+			title : "<b>开通指南</b>",
+			content : guidestr
+		}, {
+			style : 'shops',
+			className : 'guide',
+			autoHide : false,
+			clickToHide : false
+		});
+
+	}
+
+	//callback function to bring a hidden box back
+	function openaccount(id) {
+
+		var uncharged = "<p>余额不足以支付此次操作，请充值。</p>"
+		var charged = "<p>将使用5点来开启这个账户，请确认。</p>"
+		if ($(".notifyjs-uncharged-base").length > 0) {
+			$(".notifyjs-uncharged-base").trigger('notify-hide');
+		}
+
+		if (credit < 5) {
+			$.notify({
+				title : "<b>余额不足</b>",
+				content : uncharged
+			}, {
+				style : 'uncharged',
+				className : 'base',
+				autoHide : false,
+				clickToHide : false
+			});
+		} else {
+			$.notify({
+				title : "<b>确认充值</b>",
+				content : charged
+			}, {
+				style : 'charged',
+				className : 'base',
+				autoHide : false,
+				clickToHide : false
+			});
+		}
+	}
+
+	function pay_create_user() {
+		shopnm=$.trim($("#shopname").val())
+
+		$.post("/shops/paycreateshop", {
+			userid : uid,
+			payment : 3,
+			shopname :shopnm
+		}, null, "script");
+
+	}
+
+</script>

@@ -28,7 +28,7 @@ class CardController < ApplicationController
 
   def showinfo
     page=Cardpage.find_by_account(params[:user_name])
-    @brand=page.brand   
+    @brand=page.brand
     @template=page.cardtemplate
     respond_to do |format|
       format.html{}
@@ -44,10 +44,10 @@ class CardController < ApplicationController
     end
 
   end
-  
+
   def updatecardtemplate
     page=Cardpage.find_by_account(params[:user_name])
-    page.cardtemplate = params[:cardtemplate] 
+    page.cardtemplate = params[:cardtemplate]
     respond_to do |format|
       format.html{}
       format.json { render :json => {:cardtemplate => params[:cardtemplate]}  }
@@ -55,4 +55,5 @@ class CardController < ApplicationController
     page.save
   end
 
+  
 end

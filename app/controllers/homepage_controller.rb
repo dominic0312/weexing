@@ -5,6 +5,7 @@ class HomepageController < ApplicationController
     if user = User.authenticate(params[:username], params[:password])
       session[:user_name] = user.email
       session[:credits] = user.credit
+      session[:user_id] = user.id
       #render(:action=>regist)
       render  :js=> "setUserCheckPass();"
     #render  :js=> "window.location = '/admin';"
@@ -61,6 +62,7 @@ class HomepageController < ApplicationController
 
         @point=pointcode.point
         @credit=user.credit
+        session[:credits]=user.credit
         render :json => {:point => @point,:card_credit=>@credit}
       else
       end
