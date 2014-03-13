@@ -1,11 +1,12 @@
 class CardguestController < ApplicationController
   def cardpage
     shopname=params[:id]
-    shoppage=Shop.find_by_name(shopname)
+    shoppage=Shop.where(:shopurl=>shopname).first
 
     respond_to do |format|
       if shoppage
         @brandname=shoppage.name
+        logger.info("logo is:"+shoppage.logo)
         @logo=shoppage.logo
         @page=shoppage.usertemplate.name
       format.html

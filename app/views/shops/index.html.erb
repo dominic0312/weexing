@@ -34,6 +34,7 @@ td   {border:solid
 		<td><% if shop.expried ==1%><%= link_to '下线', shop %><%end%></td>
 		<td><% if shop.istrial ==1%><%= link_to '核准', edit_shop_path(shop) %><%end%></td>
 		<td><%= link_to '編輯', edit_shop_path(shop) %></td>
+		<td><%= link_to '显示', shop %></td>
 		<td><%= link_to '删除', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	</tr>
 	<% end %>

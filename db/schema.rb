@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313092008) do
+ActiveRecord::Schema.define(version: 20140313140551) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140313092008) do
     t.integer  "istrial",         default: 0
     t.integer  "user_id"
     t.string   "weixin_token"
+    t.string   "shopurl"
   end
 
   create_table "users", force: true do |t|
