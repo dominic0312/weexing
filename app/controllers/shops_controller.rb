@@ -121,14 +121,14 @@ class ShopsController < ApplicationController
       end
 
       shop.name=params[:shopname]
-      shop.agency=userid
+      shop.user_id=userid
 
       shop.exprieddate=expriedate
       shop.save
-      @shops = Shop.where(:agency=>userid).paginate(:page => params[:page]).order('id DESC')
+      @shops = Shop.where(:user_id=>userid).paginate(:page => params[:page]).order('id DESC')
 
     else
-      @shops = Shop.where(:agency=>userid).paginate(:page => params[:page]).order('id DESC')
+      @shops = Shop.where(:user_id=>userid).paginate(:page => params[:page]).order('id DESC')
       @user_name=session[:user_name]
       @user_id=session[:user_id]
       @credits=session[:credits]
