@@ -6,7 +6,6 @@ class CardguestController < ApplicationController
     respond_to do |format|
       if shoppage
         @brandname=shoppage.name
-        logger.info("logo is:"+shoppage.logo)
         @logo=shoppage.logo
         @page=shoppage.usertemplate.name
       format.html
