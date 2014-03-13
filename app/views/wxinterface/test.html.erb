@@ -1,0 +1,34 @@
+<html>
+	<head>
+
+		<%= stylesheet_link_tag "shop2.css" %>
+		<script src="/assets/jquery-191.js"></script>
+	</head>
+	<body>
+
+		<a class="nshoppbtn startbutton" id="testbtn1" onclick="online();return false;">设置菜单</a>
+
+	</body>
+</html>
+<script>
+	var menustr =    "{
+	'button':[
+	{
+	'type':'click',
+	'name':'今日歌曲',
+	'key':'V1001_TODAY_MUSIC'
+	}]}";
+
+$.ajaxSetup({
+  url: "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=dominic",
+  global: false,
+  type: "POST"
+});
+$.ajax({ data: myData });
+
+
+	function online(){
+
+	}
+
+</script>

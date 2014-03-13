@@ -1,6 +1,7 @@
 Weexing::Application.routes.draw do
  
  
+  mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
 
   resources :pointcodes
@@ -14,18 +15,23 @@ Weexing::Application.routes.draw do
 
   resources :card_templates
   
-  
+  resources :shops
   get 'usertemplates/display'
   get 'shops/display' 
   get "shops/createshop"
+    get  'weixin/:weixin_token', to: 'weixin#index2 '
+  post 'weixin/:weixin_token', to: 'weixin#reply'
   resources :usertemplates
-  #resources :shops
-  match "/cardguest/:id" => "cardguest#cardpage"
-  match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info"
-  match "/news/display/:id" => "news#display"
+  
+  match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
+  match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
+  match "/shops/display/:id" => "shops#display",via: [:get, :post]
+  match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info", via: [:get, :post]
+  match "/news/display/:id" => "news#display",via: [:get, :post]
   get 'card' => 'card#index'
-  get 'cardguest' => 'cardguest#cardpage'
+  get 'cardguest' => 'cardguest#cardpage' 
   get 'homepage' => 'homepage#login'
+  
   
   controller :homepage do
   end
@@ -60,8 +66,9 @@ Weexing::Application.routes.draw do
   post "card/showcardtemplate"
   post "card/updatecardtemplate"
   post "shops/updateusertemplate"
-  post "shops/paycreateshop"
-  
+  post "shops/createshop"
+  post "shops/onlineshop"
+  get "shops/manageshop"
   post "shops/index"
   post "cardguest/get_customer_info"
   post "card/pages"

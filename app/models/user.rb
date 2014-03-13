@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible :credit
+  attr_accessible :credit,:email,:company
   validates_presence_of :email
   validates_uniqueness_of :email
   attr_accessor :password_confirmation

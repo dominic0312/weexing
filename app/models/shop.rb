@@ -1,5 +1,6 @@
 class Shop < ActiveRecord::Base
-  attr_accessible :address, :agency, :cardtemplate, :logo, :name, :usertemplate_id, :phone
+  attr_accessible :address, :agency, :cardtemplate, :logo, :name, :usertemplate_id, :phone, :exprieddate
   belongs_to :usertemplate
-  self.per_page = 4
+  belongs_to :user
+  self.per_page = 5
 end

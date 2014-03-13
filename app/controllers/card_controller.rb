@@ -1,7 +1,14 @@
 class CardController < ApplicationController
   def index
-    @counter=session[:user_name]
-    @credit= session[:credits]
+    respond_to do |format|
+      if session[:user_name]
+        @counter=session[:user_name]
+        @credit= session[:credits]
+        format.html{}
+      else
+        format.html{redirect_to homepage_login_url}
+      end
+    end
   end
 
   def pages
@@ -55,5 +62,4 @@ class CardController < ApplicationController
     page.save
   end
 
-  
 end

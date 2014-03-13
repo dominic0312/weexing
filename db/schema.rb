@@ -9,27 +9,27 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303094229) do
+ActiveRecord::Schema.define(version: 20140313092008) do
 
-  create_table "card_templates", :force => true do |t|
+  create_table "card_templates", force: true do |t|
     t.string   "card_name"
     t.string   "card_image_url"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  create_table "cardpages", :force => true do |t|
+  create_table "cardpages", force: true do |t|
     t.string   "account"
     t.string   "brand"
     t.string   "logo"
     t.string   "cardtemplate"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  create_table "coupons", :force => true do |t|
+  create_table "coupons", force: true do |t|
     t.integer  "shopid"
     t.string   "usertype"
     t.text     "content"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.integer  "discount"
     t.integer  "present_value"
     t.string   "branch"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "sent",             :default => 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "sent",             default: 0
     t.string   "pic"
     t.string   "photo_file_name"
     t.string   "pic_content_type"
@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.datetime "pic_updated_at"
   end
 
-  create_table "coupons_customers", :force => true do |t|
+  create_table "coupons_customers", force: true do |t|
     t.integer "customer_id"
     t.integer "coupon_id"
   end
 
-  create_table "customers", :force => true do |t|
+  create_table "customers", force: true do |t|
     t.string   "owner"
     t.string   "cardid"
     t.integer  "balance"
@@ -63,63 +63,72 @@ ActiveRecord::Schema.define(:version => 20140303094229) do
     t.string   "realcardid"
     t.string   "level"
     t.string   "openid"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "unread"
-    t.integer  "coupon_num", :default => 0
+    t.integer  "coupon_num", default: 0
   end
 
-  create_table "news", :force => true do |t|
+  create_table "news", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.string   "doctype",    :default => "news"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "doctype",    default: "news"
   end
 
-  create_table "pointcodes", :force => true do |t|
+  create_table "pointcodes", force: true do |t|
     t.string   "secretcode"
-    t.string   "userby",     :default => "empty"
-    t.integer  "used",       :default => 0
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "point",      :default => 1
+    t.string   "userby",     default: "empty"
+    t.integer  "used",       default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "point",      default: 1
   end
 
-  add_index "pointcodes", ["secretcode"], :name => "index_pointcodes_on_secretcode"
+  add_index "pointcodes", ["secretcode"], name: "index_pointcodes_on_secretcode", using: :btree
 
-  create_table "shops", :force => true do |t|
+  create_table "shops", force: true do |t|
     t.string   "name"
     t.text     "address"
     t.string   "phone"
     t.integer  "agency"
     t.string   "cardtemplate"
-    t.integer  "usertemplate_id", :default => 1
+    t.integer  "usertemplate_id", default: 1
     t.string   "logo"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "online",          default: 0
+    t.datetime "exprieddate"
+    t.integer  "expried",         default: 0
+    t.integer  "istrial",         default: 0
+    t.integer  "user_id"
+    t.string   "weixin_token"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "email"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "credit",          :default => 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "credit",          default: 0
+    t.string   "company"
+    t.string   "phone"
+    t.string   "name"
   end
 
-  create_table "usertemplates", :force => true do |t|
+  create_table "usertemplates", force: true do |t|
     t.string   "name"
     t.string   "pic"
     t.text     "description"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "attachfile_file_name"
     t.string   "attachfile_content_type"
     t.integer  "attachfile_file_size"
     t.datetime "attachfile_updated_at"
-    t.integer  "installed",               :default => 0
+    t.integer  "installed",               default: 0
     t.string   "preview_file_name"
     t.string   "preview_content_type"
     t.integer  "preview_file_size"

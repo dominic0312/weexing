@@ -10,7 +10,7 @@ class ShopsController < ApplicationController
   end
 
   def display
-    @shops = Shop.paginate(:page => params[:page])
+    @shops = Shop.paginate(:page => params[:page]).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.js
@@ -99,12 +99,41 @@ class ShopsController < ApplicationController
   end
 
   def createshop
+    userid=session[:user_id]
+    if params[:createtype]
 
-    @shops = Shop.paginate(:page => params[:page]).order('id DESC')
-    @user_name=session[:user_name]
-    @user_id=session[:user_id]
-    @credits=session[:credits]
-    logger.info("we are in else section")
+      payment =params[:payment].to_i
+      uid=params[:userid].to_i
+      datenow = DateTime.current
+      shop=Shop.new
+
+      if params[:createtype] == "create"
+        user=User.find(uid)
+        if user.credit < payment
+          render :js=> "alert('failedofnomoney');" and return
+        end
+        expriedate=datenow.advance(:years => 1)
+      user.credit=user.credit-payment
+      user.save
+      elsif params[:createtype] == "trail"
+        shop.istrial = 1
+        expriedate=datenow.advance(:days => 4)
+      end
+
+      shop.name=params[:shopname]
+      shop.agency=userid
+
+      shop.exprieddate=expriedate
+      shop.save
+      @shops = Shop.where(:agency=>userid).paginate(:page => params[:page]).order('id DESC')
+
+    else
+      @shops = Shop.where(:agency=>userid).paginate(:page => params[:page]).order('id DESC')
+      @user_name=session[:user_name]
+      @user_id=session[:user_id]
+      @credits=session[:credits]
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
@@ -120,7 +149,7 @@ class ShopsController < ApplicationController
     end
 
     user.credit=user.credit-payment
-    #user.save
+    user.save
 
     logger.info("user credit is:"+user.credit.to_s)
     shop=Shop.new
@@ -132,6 +161,40 @@ class ShopsController < ApplicationController
       format.js
     end
 
+  end
+
+  def onlineshop
+    uid=params[:userid].to_i
+    shopid=params[:shopid].to_i
+    operation=params[:operation]
+    if uid!=session[:user_id]
+      logger.info("illegal user")
+      render :js=>"onlinefault()" and return
+    end
+
+    shop=Shop.find(shopid)
+
+    if operation == "online"
+      if shop.expried == 1
+        render :js=>"onlinefail()" and return
+      end
+      shop.online=1
+      shop.save
+      render :js=>"onlinesuccess("+params[:shopid]+")" and return
+    elsif operation == "offline"
+      shop.online=0
+      shop.save
+      render :js=>"offlinesuccess("+params[:shopid]+")" and return
+    end
+
+  end
+
+  def manageshop
+    @shops = Shop.paginate(:page => params[:page])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json
+    end
   end
 
 end

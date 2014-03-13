@@ -48,7 +48,7 @@
 				dialog : {
 					// see jQuery UI Dialog docs for al options, some options are not available!
 					closeOnEscape : true,
-					closeText : "close",
+					closeText : "关闭",
 					closeModalOnClick : true, // close MultiDialog by click on overlay
 
 					// size (int), width and height set the content size, not overall size, auto not allowed

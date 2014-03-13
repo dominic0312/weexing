@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "shop.css" %>
 
 <div id="shops" class="shopsborder">
+	<div id="cont">
 	<div id="wrapper" class="shopswrapper">
 
 		<ul class="float">
@@ -15,6 +16,7 @@
 	</div>
 	<div class="digg_pagination shop_pag">
 	<%= ajax_will_paginate @shops %>
+	</div>
 	</div>
 </div>
 

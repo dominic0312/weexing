@@ -1,35 +1,42 @@
+<%= javascript_include_tag "jquery-1.js" %>
+<%= javascript_include_tag "jquery-ujs.js" %>
+<style>
+td   {border:solid
+	}
+</style>
+
 <h1>店铺列表</h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>Agency</th>
-    <th>Cardtemplate</th>
-    <th>Pagetemplate</th>
-    <th>Logo</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>终端客户名</th>
+		<th>地址</th>
+		<th>代理商</th>
+		<th>代理商邮件</th>
+		<th>上线时间</th>
+		<th>到期时间</th>
+		<th>状态</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @shops.each do |shop| %>
-  <tr>
-    <td><%= shop.name %></td>
-    <td><%= shop.address %></td>
-    <td><%= shop.phone %></td>
-    <td><%= shop.agency %></td>
-    <td><%= shop.cardtemplate %></td>
-    <td><%= shop.usertemplate_id %></td>
-    <td><%= shop.logo %></td>
-    <td><%= link_to 'Show', shop %></td>
-    <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
-    <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+	<% @shops.each do |shop| %>
+	<tr>
+		<td><%= shop.name %></td>
+		<td><%= shop.address %></td>
+		<td><%= shop.user.company %></td>
+		<td><%= shop.user.email %></td>
+		<td><%= shop.created_at %></td>
+		<td><%= shop.exprieddate %></td>
+		<% if shop.expried ==1%><td>过期</td><%elsif shop.expried == 0 && shop.istrial ==1%> <td>试用</td> <%else%><td>正常</td><%end%>
+		
+		<td><% if shop.expried ==1%><%= link_to '下线', shop %><%end%></td>
+		<td><% if shop.istrial ==1%><%= link_to '核准', edit_shop_path(shop) %><%end%></td>
+		<td><%= link_to '删除', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+	<% end %>
 </table>
- <%= will_paginate @shops %>
+<%= will_paginate @shops,:inner_window=>3,:outer_window=>2 %>
 <br />
 
-<%= link_to 'New Shop', new_shop_path %>
