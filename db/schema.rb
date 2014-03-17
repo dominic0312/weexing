@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313140551) do
+ActiveRecord::Schema.define(version: 20140317101314) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20140313140551) do
     t.integer  "coupon_num", default: 0
   end
 
+  create_table "membercards", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
+  end
+
   create_table "news", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -93,18 +103,22 @@ ActiveRecord::Schema.define(version: 20140313140551) do
     t.text     "address"
     t.string   "phone"
     t.integer  "agency"
-    t.string   "cardtemplate"
-    t.integer  "usertemplate_id", default: 1
+    t.integer  "membercard_id",        default: 1
+    t.integer  "usertemplate_id",      default: 1
     t.string   "logo"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "online",          default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "online",               default: 0
     t.datetime "exprieddate"
-    t.integer  "expried",         default: 0
-    t.integer  "istrial",         default: 0
+    t.integer  "expried",              default: 0
+    t.integer  "istrial",              default: 0
     t.integer  "user_id"
     t.string   "weixin_token"
     t.string   "shopurl"
+    t.string   "logopic_file_name"
+    t.string   "logopic_content_type"
+    t.integer  "logopic_file_size"
+    t.datetime "logopic_updated_at"
   end
 
   create_table "users", force: true do |t|

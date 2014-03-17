@@ -10,7 +10,8 @@ class ShopsController < ApplicationController
   end
 
   def display
-    @shops = Shop.paginate(:page => params[:page]).order('id DESC')
+    userid=session[:user_id]
+    @shops = Shop.where(:user_id=>userid).paginate(:page => params[:page]).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.js
@@ -68,7 +69,7 @@ class ShopsController < ApplicationController
 
     respond_to do |format|
       if @shop.update_attributes(params[:shop])
-        format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
+        format.html { redirect_to uploadlogo_shop_path(@shop), notice: 'Shop was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -92,6 +93,15 @@ class ShopsController < ApplicationController
   def updateusertemplate
     shop=Shop.find(params[:shop_id])
     shop.usertemplate_id=params[:template_id]
+    shop.save
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
+  def updatemembercard
+    shop=Shop.find(params[:shop_id])
+    shop.membercard_id=params[:card_id]
     shop.save
     respond_to do |format|
       format.json { head :no_content }
@@ -195,6 +205,86 @@ class ShopsController < ApplicationController
       format.html # index.html.erb
       format.json
     end
+  end
+
+  def uploadlogo
+    sid=params[:id]
+    if sid
+      @shop=Shop.find(sid)
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json
+    end
+
+  end
+
+  def setupcard
+    sid=params[:id]
+    if sid
+      @shop=Shop.find(sid)
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json
+    end
+
+  end
+
+  def updatelogo
+    @shop = Shop.find(params[:id])
+
+    respond_to do |format|
+      if @shop.update_attributes(params[:shop])
+        format.html { redirect_to uploadlogo_url(@shop), notice: 'Shop was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @shop.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def sysinfo
+    sid=params[:id]
+    if sid
+      shop=Shop.find(sid)
+      @shopurl=shop.shopurl
+      @token=shop.weixin_token
+      @shopid=sid
+    end
+
+    respond_to do |format|
+      format.html {}# index.html.erb
+      format.json
+    end
+  end
+
+  def urlcheck
+    url=params[:url_name]
+    token=params[:token_name]
+    sid=params[:shop_id]
+    shop=Shop.where(:shopurl=>url).first
+    
+    if shop
+      render  :js=> "urlexist()" and return
+    else
+      shop2=Shop.where(:weixin_token=>token).first
+      if shop2
+      render  :js=> "tokenexist();" and return
+      end
+    end
+    
+    shop =Shop.find(sid);
+    shop.shopurl=url
+    shop.weixin_token=token
+    shop.save
+    render :js=>"urlsuccess();"
+    
+    
   end
 
 end

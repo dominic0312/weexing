@@ -37,10 +37,31 @@
 				<div class="accountmanagetrial">
 					<a id="trialbutton" class="trialbutton" href="#">试用审核中,请等待</a>
 				</div>
+				
+				
 				<%end%>
+				
+				
+				
+				<div class="logoset">
+
+					<a class="setupbutton logobutton"  onclick="return setuplogo(<%= shop.id%>)">LOGO上传</a>
+
+				</div>
+				<div class="templateset">
+					<a class="setupbutton templatebutton" onclick="return setTemplate(<%= shop.id%>)">模板样式</a>
+				</div>
+
+				<div class="cardset">
+					<a class="setupbutton logobutton" onclick="return setupcard(<%= shop.id%>)">卡片样式</a>
+				</div>
+
+				<div class="sysinfo">
+					<a class="setupbutton templatebutton" onclick="setupurl(<%= shop.id%>)">系统信息</a>
+				</div>
 			</li>
 			<% end %>
 		</div>
-		<div class="digg_pagination shop_pag">
+		<div class="flickr_pagination shop_pag">
 			<%= ajax_will_paginate @shops,:inner_window => 1,:outer_window=>1 %>
 		</div>

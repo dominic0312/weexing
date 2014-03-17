@@ -1,0 +1,108 @@
+<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+<%= stylesheet_link_tag "cardchoose.css" %>
+<%= stylesheet_link_tag "pagenate.css" %>
+<%= stylesheet_link_tag "ui.notify.css" %>
+<%= stylesheet_link_tag "jquery.fancybox.css" %>
+<script src="/assets/jquery-191.js"></script>
+<script src="/assets/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="/assets/jquery.notify.js"></script>
+<script type="text/javascript" src="/assets/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+
+		// move the nav to the bottom
+
+
+		$("#container").notify({
+			speed : 500,
+			expires : 2000
+		});
+
+	});
+
+
+
+	function saveCard() {
+		var myRadio = $('input[name=templ]');
+		var checkedValue = myRadio.filter(':checked').val();
+		var sid = $.trim($("#shopid").text());
+		var params = "shop_id=" + sid + "&card_id=" + checkedValue;
+		$.ajax({
+			type : "POST",
+			url : "/shops/updatemembercard",
+			data : params,
+			dataType : "json",
+			success : function(data) {
+				$("#container").notify("create", {
+					title : '保存成功',
+					text : '卡片信息已经保存成功'
+				});
+			},
+			error : function(data) {
+				$("#container").notify("create", {
+					title : '保存失败',
+					text : '卡片信息没有被保存，请联系管理员'
+				});
+			}
+		});
+
+	}
+
+</script>
+
+<style>
+	a:link {
+		color: black
+	}/* 未访问的链接 */
+	a:visited {
+		color: black
+	}/* 已访问的链接 */
+	a:active {
+		color: black
+	} /* 选定的链接 */
+</style>
+<body>
+<div class="membercards">
+	<div id="cards">
+		
+		<ul class="float">
+			<% @membercards.each do |membercard| %>
+			<li>
+				<a class="themegrid"> <%= image_tag membercard.pic.url(:medium)%> </a>
+				<input type='radio'  id='radio<%= membercard.id%>' name='templ'  class="css-checkbox" value=<%= membercard.id%> <% if membercard.id == @current_membercard.to_i %> checked="checked"<%end%>/>
+				<label for="radio<%= membercard.id%>" class="css-label"><%= membercard.name%></label>
+			</li>
+			<% end %>
+		</ul>
+		<div class="flickr_pagination pag_pos">
+			<%= ajax_will_paginate @membercards %>
+		</div>
+	</div>
+</div>
+<div id='shopid' style="display:none">
+	<%= @shopid%>
+</div>
+<div id="container" style="display:none">
+	<!--
+	Later on, you can choose which template to use by referring to the
+	ID assigned to each template.  Alternatively, you could refer
+	to each template by index, so in this example, "basic-tempate" is
+	index 0 and "advanced-template" is index 1.
+	-->
+	<div id="basic-template">
+		<a class="ui-notify-cross ui-notify-close" href="#">x</a>
+		<h1>#{title}</h1>
+		<p>
+			#{text}
+		</p>
+	</div>
+
+	<div id="advanced-template">
+		<!-- ... you get the idea ... -->
+	</div>
+</div>
+
+<a class="btn" onclick="saveCard()">保存</a>
+</body>
+

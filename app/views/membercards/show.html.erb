@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @membercard.name %>
+</p>
+<p>
+<%= image_tag @membercard.pic.url(:thumb) %>
+</p>
+
+<%= link_to 'Edit', edit_membercard_path(@membercard) %> |
+<%= link_to 'Back', membercards_path %>

@@ -6,6 +6,7 @@ class Usertemplate < ActiveRecord::Base
     attachment.instance.name
   end
   attr_accessible :description, :name, :pic,:attachfile,:installed,:preview
+  validates :name, :pic, :presence=>true
   has_attached_file :attachfile,
                     :path => ":rails_root/public/system/:attachment/:template_name.:extension",
                     :url  => "/:attachment/:template_name.:extension"
@@ -22,7 +23,7 @@ class Usertemplate < ActiveRecord::Base
   end
 
   def file_path
-    File.join('public','templates',self.name)
+    File.join('public','templates',self.pic)
   end
 
   def add_path(filename)
@@ -38,7 +39,6 @@ class Usertemplate < ActiveRecord::Base
   end
 
   def unzip_file
-    logger.info("2222222222222222222")
     begin
       Zip::File.open(zip_path(self.name)) do |zipfile|
         zipfile.each do |file|
@@ -47,7 +47,6 @@ class Usertemplate < ActiveRecord::Base
       end
 
     rescue
-      logger.info("222222222222222222")
       print "An error occurred: ",$!, "\n"
 
     #remove_file_path

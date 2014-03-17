@@ -1,15 +1,10 @@
 <%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
-<%= stylesheet_link_tag "jquery.multiDialog.css" %>
 <%= stylesheet_link_tag "templateschoose.css" %>
 <%= stylesheet_link_tag "pagenate.css" %>
 <%= stylesheet_link_tag "ui.notify.css" %>
 <%= stylesheet_link_tag "jquery.fancybox.css" %>
-<script type="text/javascript" src="/assets/log4javascript.js"></script>
-<script type="text/javascript">var log = log4javascript.getDefaultLogger();</script>
 <script src="/assets/jquery-191.js"></script>
 <script src="/assets/jquery-ui-1.10.4.custom.js"></script>
-<script src="/assets/jquery.ui.dialog.extended-1.0.2.js"></script>
-<script src="/assets/jquery.multiDialog.js"></script>
 <script type="text/javascript" src="/assets/jquery.notify.js"></script>
 <script type="text/javascript" src="/assets/jquery.fancybox.js"></script>
 
@@ -78,11 +73,10 @@
 		color: black
 	} /* 选定的链接 */
 </style>
+<body>
 <div class="templates">
 	<div id="usertemplates">
-		<div class="digg_pagination">
-			<%= ajax_will_paginate @usertemplates %>
-		</div>
+		
 		<ul class="float">
 			<% @usertemplates.each do |usertemplate| %>
 			<li>
@@ -92,6 +86,9 @@
 			</li>
 			<% end %>
 		</ul>
+		<div class="flickr_pagination pag_pos">
+			<%= ajax_will_paginate @usertemplates %>
+		</div>
 	</div>
 </div>
 <div id='shopid' style="display:none">
@@ -117,5 +114,6 @@
 	</div>
 </div>
 
-<a class="btn" onclick="saveTemplate()">保存&关闭</a>
+<a class="btn" onclick="saveTemplate()">保存</a>
+</body>
 

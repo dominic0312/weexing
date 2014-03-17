@@ -1,0 +1,12 @@
+<ul class="float">
+	<% @membercards.each do |membercard| %>
+	<li>
+		<a class="themegrid"> <%= image_tag membercard.pic.url(:medium)%> </a>
+		<input type='radio'  id='radio<%= membercard.id%>' name='templ'  class="css-checkbox" value=<%= membercard.id%> <% if membercard.id == @current_membercard.to_i %> checked="checked"<%end%>/>
+		<label for="radio<%= membercard.id%>" class="css-label"><%= membercard.name%></label>
+	</li>
+	<% end %>
+</ul>
+<div class="flickr_pagination pag_pos">
+	<%= ajax_will_paginate @membercards %>
+</div>

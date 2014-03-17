@@ -1,6 +1,8 @@
 Weexing::Application.routes.draw do
  
  
+  
+
   mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
 
@@ -10,22 +12,34 @@ Weexing::Application.routes.draw do
   resources :coupons
   resources :customers
 
-  
-
 
   resources :card_templates
   
-  resources :shops
+  
   get 'usertemplates/display'
+  get 'membercards/display'
+  #post 'shops/updatelogo'
+  match "/shops/uploadlogo/:id" => "shops#uploadlogo",via: [:get,:post],:as=>"uploadlogo"
+  match '/shops/updatelogo/:id' => 'shops#updatelogo',via: [:get,:post], :as => "updatelogo"
+  match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
+  match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
+  
+  match "/shops/setupcard/:id" => "shops#setupcard",via: [:get,:post]
+  
+  
   get 'shops/display' 
   get "shops/createshop"
-    get  'weixin/:weixin_token', to: 'weixin#index2 '
+  post "shops/urlcheck"
+  get  'weixin/:weixin_token', to: 'weixin#index'
   post 'weixin/:weixin_token', to: 'weixin#reply'
   resources :usertemplates
+  resources :shops
+  resources :membercards
   
   match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
   match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
   match "/shops/display/:id" => "shops#display",via: [:get, :post]
+
   match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info", via: [:get, :post]
   match "/news/display/:id" => "news#display",via: [:get, :post]
   get 'card' => 'card#index'
@@ -66,6 +80,7 @@ Weexing::Application.routes.draw do
   post "card/showcardtemplate"
   post "card/updatecardtemplate"
   post "shops/updateusertemplate"
+  post "shops/updatemembercard"
   post "shops/createshop"
   post "shops/onlineshop"
   get "shops/manageshop"

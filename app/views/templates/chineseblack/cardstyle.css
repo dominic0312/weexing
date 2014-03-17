@@ -1,0 +1,52 @@
+div#card {
+	width: 350px;
+	margin: 10px 0;
+	position: relative;
+	left: 20px;
+}
+
+div .price {
+
+	height: 80px;
+	width: 70px;
+	border: 1px dashed grey;
+}
+
+.content-title {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.content-value {
+	text-align: center;
+	margin-top: 10px;
+}
+.countBubl {
+	float: left;
+	margin-top: -42px;
+	margin-left: 35px;
+	background: #FF0000;
+	color: #fff;
+	padding: 2px;
+}
+
+.ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon {
+	padding-left: 47px;
+}
+
+.ui-listview-filter {
+	margin-top: 20px;
+}
+
+.ui-li-thumb {
+	top: 21px;
+}
+
+ul.copy-divider {
+	margin: 20px -15px 0 -15px !important;
+}
+
+.cardhead{
+    text-align:center
+}
+

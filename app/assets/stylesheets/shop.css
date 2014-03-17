@@ -1,5 +1,5 @@
 .shopsborder {
-	padding: 12px;
+	padding: 2px;
 	width: 47em;
 	height: 38.5em;
 	min-width: 300px;
@@ -9,35 +9,137 @@
 }
 
 .shopgrid {
-	font-size: 12px;
-	text-align: left;
-	display: block;
-	height: 87px;
-	width: 531px;
-	border: 2px dashed black;
-	margin-right: 25px;
-	margin-bottom: 10px;
 	text-align: center;
+	display: block;
+	height: 70px;
+	width: 681px;
+	border: 2px solid #CCC;
+	margin-left: 15px;
+	margin-bottom: 17px;
 	padding-top: 10px
 }
 
 .shopswrapper {
-	padding: 12px;
-	width: 48em;
+	padding-top: 20px;
+	width: 45em;
 	height: 33em;
 	min-width: 300px;
 	margin: 0 auto;
 }
 
+.shopgrid .accountname {
+
+	display: block;
+	position: relative;
+	left: 0;
+	bottom: 12px;
+	width: 180px;
+	height: 51px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 30px;
+	overflow: hidden;
+	background-color: #F3F3F3;
+	color: #424242
+}
+
+.shopgrid .logoset {
+	position: relative;
+	left: 182px;
+	bottom: 94px;
+	display: block;
+	width: 130px;
+	height: 51px;
+	padding-top: 30px;
+	padding-left: 20px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .templateset {
+	position: relative;
+	left: 325px;
+	bottom: 175px;
+	display: block;
+	width: 120px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .cardset {
+	position: relative;
+	left: 435px;
+	bottom: 256px;
+	display: block;
+	width: 120px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .sysinfo {
+	position: relative;
+	left: 545px;
+	bottom: 337px;
+	display: block;
+	width: 134px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.setupbutton {
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	font-size: 16px;
+	padding: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	padding-left: 15px;
+	padding-right: 15px;
+	background: #FFFFFF;
+	color: #CCC;
+	border: solid #CCC
+}
+
+.logobutton {
+
+}
+
+.logobutton:hover {
+	background: #CCCCCC;
+	color: #FFFFFF
+}
+
+.templatebutton {
+	background: #F3F3F3
+}
+
+.templatebutton:hover {
+	background: #FFFFFF
+}
+
 .shop_pag {
-	width: 45em;
+	width: 43em;
 	position: absolute;
 	height: 20px;
-	margin-top: 12px;
-	margin-left: 42px;
-	bottom: 20px;
-	left: 10px;
-	border: solid
+	margin-top: 0;
+	margin-left: 25px;
 }
 
 .nshoppbtn {
@@ -132,190 +234,13 @@ input[type=text] {
 	margin: 0 0 10px 0;
 }
 
-.notifyjs-shops-guide {
-	height: 400px;
-	width: 350px;
-	position: fixed;
-	top: 120px;
-	right: 200px;
-	background: #505050;
-	background: rgba(80,80,80,0.4);
-	-moz-box-shadow: 0 0 6px #000;
-	-webkit-box-shadow: 0 0 6px #000;
-	box-shadow: 0 0 6px #000;
-}
 
-.notifyjs-shops-guide .title {
-	width: 100px;
-	float: left;
-	margin-left: 120px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 18px
-}
-
-.notifyjs-shops-guide .content {
-	width: 280px;
-	float: left;
-	margin-left: 35px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 16px
-}
-
-.notifyjs-shops-guide .yes {
-	position: absolute;
-	bottom: 30px;
-	left: 130px;
-	width: 80px;
-	height: 40px;
-	-webkit-border-radius: 8;
-	-moz-border-radius: 8;
-	border-radius: 8px;
-	font-family: Arial;
-	color: #black;
-	font-size: 16px;
-	padding: 10px;
-	background: #CCC;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.notifyjs-uncharged-base {
-	height: 150px;
-	width: 350px;
-	position: fixed;
-	top: 120px;
-	right: 200px;
-	background: #505050;
-	background: rgba(80,80,80,0.4);
-	-moz-box-shadow: 0 0 6px #000;
-	-webkit-box-shadow: 0 0 6px #000;
-	box-shadow: 0 0 6px #000;
-}
-
-.notifyjs-uncharged-base .title {
-	width: 100px;
-	float: left;
-	margin-left: 120px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 18px
-}
-
-.notifyjs-uncharged-base .content {
-	width: 280px;
-	float: left;
-	margin-left: 35px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 16px
-}
-
-.notifyjs-uncharged-base .yes {
-	position: absolute;
-	bottom: 10px;
-	left: 130px;
-	width: 80px;
-	height: 40px;
-	-webkit-border-radius: 8;
-	-moz-border-radius: 8;
-	border-radius: 8px;
-	font-family: Arial;
-	color: #black;
-	font-size: 16px;
-	padding: 10px;
-	background: #CCC;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-
-.notifyjs-charged-base {
-	height: 150px;
-	width: 350px;
-	position: fixed;
-	top: 120px;
-	right: 200px;
-	background: #505050;
-	background: rgba(80,80,80,0.6);
-	-moz-box-shadow: 0 0 6px #000;
-	-webkit-box-shadow: 0 0 6px #000;
-	box-shadow: 0 0 6px #000;
-}
-
-.notifyjs-charged-base .title {
-	width: 100px;
-	float: left;
-	margin-left: 130px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 18px
-}
-
-.notifyjs-charged-base .content {
-	width: 280px;
-	float: left;
-	margin-left: 45px;
-	margin-top: 10px;
-	text-align: left;
-	font-family: SimSun;
-	color: #2A2A2A;
-	font-size: 16px
-}
-
-.notifyjs-charged-base .yes {
-	position: absolute;
-	bottom: 10px;
-	left: 80px;
-	width: 80px;
-	height: 40px;
-	-webkit-border-radius: 8;
-	-moz-border-radius: 8;
-	border-radius: 8px;
-	font-family: Arial;
-	color: #black;
-	font-size: 16px;
-	padding: 10px;
-	background: #CCC;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.notifyjs-charged-base .no{
-	position: absolute;
-	bottom: 10px;
-	left: 190px;
-	width: 80px;
-	height: 40px;
-	-webkit-border-radius: 8;
-	-moz-border-radius: 8;
-	border-radius: 8px;
-	font-family: Arial;
-	color: #black;
-	font-size: 16px;
-	padding: 10px;
-	background: #CCC;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.shopgrid .accountmanage {
+.fileupload{
 
 	display: none;
 }
 
-.shopgrid .accountname {
+.shopgrid .accountmanage {
 
 	display: none;
 }
@@ -335,4 +260,13 @@ input[type=text] {
 	display: none;
 }
 
+.shopgrid .status-online {
+	display: none
+}
+
+
+
+.shopgrid .accountmanagetrial {
+	display: none;
+}
 

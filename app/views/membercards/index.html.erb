@@ -1,0 +1,29 @@
+<%= javascript_include_tag "jquery-1.js" %>
+<%= javascript_include_tag "jquery-ujs.js" %>
+<h1>Listing membercards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @membercards.each do |membercard| %>
+      <tr>
+        <td><%= membercard.name %></td>
+        <td><%= link_to 'Show', membercard %></td>
+        <td><%= link_to 'Edit', edit_membercard_path(membercard) %></td>
+        <td><%= link_to 'Destroy', membercard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Membercard', new_membercard_path %>

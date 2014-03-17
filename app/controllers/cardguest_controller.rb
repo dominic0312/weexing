@@ -6,8 +6,9 @@ class CardguestController < ApplicationController
     respond_to do |format|
       if shoppage
         @brandname=shoppage.name
-        @logo=shoppage.logo
-        @page=shoppage.usertemplate.name
+        @logopic=shoppage.logopic.url
+        @cardpic=shoppage.membercard.pic
+        @page=shoppage.usertemplate.pic
       format.html
       else
          format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }

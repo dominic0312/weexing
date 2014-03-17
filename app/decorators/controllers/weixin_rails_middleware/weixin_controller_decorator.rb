@@ -17,15 +17,15 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     end
 
     def response_image_message(options={})
-      # image message handler
+       reply_text_message("Your Message: helloworld")
     end
 
     def response_link_message(options={})
-      # link message handler
+      reply_text_message("Your Message: helloworld")
     end
 
     def response_event_message(options={})
-      # event messge handler
+       reply_text_message("Your Message: helloworld")
     end
 
     def response_voice_message(options={})

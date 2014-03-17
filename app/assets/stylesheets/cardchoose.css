@@ -1,0 +1,121 @@
+/* Site
+ -------------------------------- */
+
+body {
+	font-size: 12px;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+}
+
+p {
+	margin: 0
+}
+
+.membercards {
+	padding-left: 30px;
+	padding-bottom: 22px;
+	width: 46em;
+	height: 35em;
+	min-width: 300px;
+	margin: 0 auto;
+	border: 1px solid dimgrey;
+}
+
+
+.membercards ul {
+	padding: 0 15px;
+	margin: 0;
+}
+.membercards ul li {
+	padding: 3px 0;
+}
+
+.membercards ul.float {
+	padding: 10px 5px;
+}
+.membercards ul.float li {
+	list-style-type: none;
+	float: left;
+	margin: 0.33em;
+}
+
+.themegrid {
+	display: block;
+	height: 147px;
+	width: 230px;
+	border: 2px dashed black;
+	margin-right: 30px;
+	margin-bottom: 10px;
+	text-align: center;
+	padding-top: 10px;
+	overflow:hidden
+}
+
+.pag_pos {
+	width: 45em;
+	position: absolute;
+	height: 20px;
+	margin-top: 430px;
+	margin-left: 0px;
+}
+
+a:visited {
+	color: black
+}
+
+input[type=radio].adjust {
+	padding-left: 35px;
+}
+
+input[type=radio].css-checkbox {
+	display: none;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+	padding-left: 30px;
+	height: 24px;
+	display: inline-block;
+	line-height: 24px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+	background-position: 0 -24px;
+}
+label.css-label {
+	background-image: url(/assets/radio.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.btn {
+	-webkit-border-radius: 11;
+	-moz-border-radius: 11;
+	border-radius: 11px;
+	font-family: Arial;
+	color: #cbe0c7;
+	font-size: 20px;
+	background: #549249;
+	padding: 10px 30px 12px 31px;
+	text-decoration: none;
+	position: relative;
+	top:50px;
+	left: 520px;
+	cursor: pointer
+}
+
+.btn:hover {
+	background: #21A334;
+	text-decoration: none;
+}
+
+body{
+	height:550px;
+}

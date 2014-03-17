@@ -129,7 +129,7 @@
 			</li>
 			<% end %>
 		</div>
-		<div class="digg_pagination shop_pag">
+		<div class="flickr_pagination shop_pag">
 			<%= ajax_will_paginate @shops,:inner_window => 1,:outer_window=>1 %>
 		</div>
 	</div>
@@ -220,12 +220,30 @@
 		</form>
 	</div>
 
+	<div id="trail-form" title="申请试用商家" style="display: none">
+		<p class="validateTips">
+			请输入以下信息申请试用:
+		</p>
+
+		<form>
+			<fieldset>
+				<label for="name" class="trailinfo">您的姓名</label>
+				<input type="text" name="name" id="name" title="此处不能为空" class="text ui-widget-content ui-corner-all">
+				<label for="company" class="trailinfo">公司名称</label>
+				<input type="text" name="company" id="company" title="公司名字长度需要大于3字符"value="" class="text ui-widget-content ui-corner-all">
+				<label for="phone" class="trailinfo">电话号码</label>
+				<input type="text" name="phone" id="phone"  title="请输入您的常用手机号，这是本次试用的唯一凭证。" class="text ui-widget-content ui-corner-all">
+			</fieldset>
+		</form>
+	</div>
+
 </div>
 
 <script>
 	var uid = $.trim($("#uname").text());
 	var credit = $.trim($("#cred").text());
 	var tips = $(".validateTips");
+	var trailDialog;
 	$(function() {
 		$(document).tooltip();
 
@@ -294,9 +312,11 @@
 			return false;
 		});
 
-		var name = $("#name"), company = $("#company"), phone = $("#phone"), allFields = $([]).add(name).add(company).add(phone);
+	});
 
-		$("#trail-form").dialog({
+	$(document).ready(function() {
+		var name = $("#name"), company = $("#company"), phone = $("#phone"), allFields = $([]).add(name).add(company).add(phone);
+		trailDialog = $("#trail-form").dialog({
 			autoOpen : false,
 			height : 500,
 			width : 350,
@@ -378,10 +398,6 @@
 	}
 
 	//callback function to bring a hidden box back
-	function requesttrail(id) {
-		$("#trail-form").dialog("open");
-
-	}
 
 	function checkshopempty() {
 		spnm = $.trim($("#shopname").val());
@@ -538,5 +554,13 @@
 				}
 			}
 		});
+	}
+
+	function requesttrail(id) {
+		if (checkshopempty()) {
+			return;
+		}
+		trailDialog.dialog("open");
+
 	}
 </script>

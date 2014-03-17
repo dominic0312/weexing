@@ -1,0 +1,28 @@
+<%= form_for @membercard,:html => { :multipart => true } do |f| %>
+  <% if @membercard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@membercard.errors.count, "error") %> prohibited this membercard from being saved:</h2>
+
+      <ul>
+      <% @membercard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :卡片文件%><br />
+    <%= f.file_field :pic %>
+  </div>
+  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

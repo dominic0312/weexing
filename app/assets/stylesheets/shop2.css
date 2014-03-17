@@ -8,6 +8,7 @@
 	border-radius: 8px;
 }
 .shopgrid {
+	
 	font-size: 12px;
 	text-align: left;
 	display: block;
@@ -59,6 +60,7 @@
 	overflow: hidden;
 	background-color: #F3F3F3;
 	color: #444
+	
 }
 .shopgrid .accountenddate {
 	display: block;
@@ -120,8 +122,8 @@
 }
 .shopswrapper {
 	padding: 15px;
-	width: 47em;
-	height: 33em;
+	width: 45em;
+	height: 30em;
 	min-width: 300px;
 	margin: 0 auto;
 }
@@ -129,10 +131,8 @@
 	width: 45em;
 	position: absolute;
 	height: 20px;
-	margin-top: 12px;
+	margin-top:0px;
 	margin-left: 42px;
-	bottom: 55px;
-	left: 10px;
 }
 .nshoppbtn {
 	-webkit-border-radius: 15;
@@ -445,3 +445,21 @@ input[type=text] {
 	color: #CCC;
 	border: solid #CCC
 }
+
+.shopgrid .logoset{
+	display:none
+}
+
+.shopgrid .cardset{
+	display:none
+}
+
+.shopgrid .templateset{
+	display:none
+}
+
+.shopgrid .sysinfo{
+	display:none
+}
+
+
