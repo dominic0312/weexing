@@ -23,6 +23,7 @@ Weexing::Application.routes.draw do
   match '/shops/updatelogo/:id' => 'shops#updatelogo',via: [:get,:post], :as => "updatelogo"
   match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
   match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
+  match "/useractivate" => "users#activate",via: [:get]
   
   match "/shops/setupcard/:id" => "shops#setupcard",via: [:get,:post]
   

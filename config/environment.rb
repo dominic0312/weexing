@@ -9,7 +9,7 @@ Weexing::Application.configure do
     :port => 25,
     :domain => "exmail.qq.com",
     :authentication => "login",
-    :user_name => "dominic@weexing.com",
+    :user_name => "regist@weexing.com",
     :password => "wqxyy1985",
     :enable_starttls_auto => true
   }

@@ -26,18 +26,18 @@
 				<div class="containerBox boxIndex">
 					<div class="rn-reg-t-wrapper group">
 						<ul>
-							<li class="tc left rn-reg-t current">
+							<li class="tc left rn-reg-t current" id="info">
 								1 基本信息
 							</li>
-							<li class="tc left rn-reg-t next">
-								2 邮箱激活
+							<li class="tc left rn-reg-t next" id="activate">
+								2 邮箱验证
 							</li>
-							<li class="tc left rn-reg-t nnext">
-								3 信息登记
+							<li class="tc left rn-reg-t nnext" id="last">
+								3 激活成功
 							</li>
 						</ul>
 					</div>
-					<div style="display: block;" class="rn-box reg-box">
+					<div style="display: block;" class="rn-box reg-box" id="regist-box">
 						<div class="frm">
 							<div class="frm-bd group">
 								<div class="frm-section l">
@@ -94,18 +94,15 @@
 							</div>
 						</div>
 					</div>
-					<div style="display: none;" class="rn-box active-box">
+					<div style="display: none;" class="rn-box active-box" id="activate-box">
 						<div class="frm">
 							<div class="frm-hd">
 								<div class="frm-msg">
 									<span class="msg-pic"><i class="user-icon email-icon"></i></span>
 									<div class="frm-msg-content" style="padding-top:5px">
-										<h3 class="frm-msg-t">激活公众平台帐号</h3>
+										<h3 class="frm-msg-t">激活帐号</h3>
 										<p class="frm-msg-text">
-											感谢注册！确认邮件已发送至你的注册邮箱 : <span id="confirm_email"></span>。请进入邮箱查看邮件，并激活公众平台帐号。
-										</p>
-										<p class="mailto-access">
-											<a href="javascript:;" id="login_email" class="btnGreen">登录邮箱</a>
+											感谢注册！确认邮件已发送至你的注册邮箱 : <span id="confirm_email"></span>。请进入邮箱查看邮件，并激活微行微系统帐号。
 										</p>
 									</div>
 								</div>
@@ -117,13 +114,13 @@
 											没有收到邮件？
 										</dt>
 										<dd class="frm-qa-item">
-											1、请检查邮箱地址是否正确，你可以返回<a id="returnEmail" href="javascript:;">重新填写</a>。
+											1、请检查邮箱地址是否正确，你可以返回<a id="returnEmail" href="/homepage/regist">重新填写</a>。
 										</dd>
 										<dd class="frm-qa-item">
 											2、检查你的邮件垃圾箱
 										</dd>
 										<dd class="frm-qa-item">
-											3、若仍未收到确认，请尝试<a id="reSendEmail" href="javascript:;">重新发送</a>
+											3、若仍未收到确认，请联系管理员(webmaster@weexing.com)确认
 										</dd>
 									</dl>
 								</div>
@@ -375,6 +372,15 @@
 				pw1 : 1,
 				pw2 : 1
 			};
+
+			function regsuccess(email) {
+				$("#info").removeClass("current").addClass("prev");
+				$("#activate").removeClass("next").addClass("current");
+				$("#last").removeClass("nnext").addClass("next");
+				$("#regist-box").css("display","none");
+				$("#activate-box").css("display","block");
+				$("#confirm_email").html(email);
+			}
 
 		</script>
 

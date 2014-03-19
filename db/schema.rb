@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318145957) do
+ActiveRecord::Schema.define(version: 20140319123507) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20140318145957) do
     t.string   "company"
     t.string   "phone"
     t.string   "name"
+    t.integer  "activated",       default: 0
   end
 
   create_table "usertemplates", force: true do |t|

@@ -5,8 +5,8 @@ class UsersController < ApplicationController
     @users = User.order(:name)
 
     respond_to do |format|
-    format.html # index.html.erb
-    format.xml { render :xml => @users }
+      format.html # index.html.erb
+      format.xml { render :xml => @users }
     end
   end
 
@@ -47,18 +47,48 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         Regconfirm.delay.regist_confirm(@user)
-        format.js { render  :js=> "alert('success');"}
+        format.js { render  :js=> "regsuccess('"+@user.email+"');"}
       else
-        format.js { render  :js=> "alert('fail');"}
+        format.js { render  :js=> "regfail();"}
+      end
+    end
+  end
+
+  def activate
+    id=params[:userid]
+    token=params[:token]
+    user=User.find(id) rescue nil
+    respond_to do |format|
+      if user && (user.activated == 0)
+        if user.hashed_password == token
+          user.activated =1
+          user.save
+          @email=user.email
+          format.html{render :action=>"activatesuccess"}
+        else
+          format.html{render :action=>"activatefail"}
+        end
+      else
+
+        format.html{render :action=>"activatefail"}
       end
     end
   end
   
+  def activatesuccess
+    
+    
+  end
+  
+  def activatefail
+    
+  end
+
   def createCardpage(email)
-      @page=Cardpage.new
-      @page.account=email
-      @page.brand='WEEXING'
-      @page.save
+    @page=Cardpage.new
+    @page.account=email
+    @page.brand='WEEXING'
+    @page.save
   end
 
   # PUT /users/1
