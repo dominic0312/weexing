@@ -93,7 +93,6 @@ class PointcodesController < ApplicationController
       end
       1.upto(card_num){@pointcode= Pointcode.new
         sect=make_random_string(16)
-        logger.info(sect)
         @pointcode.secretcode=sect
         @pointcode.point=point_num
         @pointcode.save}

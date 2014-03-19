@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        createCardpage(@user.email)    
+        Regconfirm.delay.regist_confirm(@user)
         format.js { render  :js=> "alert('success');"}
       else
         format.js { render  :js=> "alert('fail');"}

@@ -1,0 +1,272 @@
+.shopsborder {
+	padding: 2px;
+	width: 47em;
+	height: 38.5em;
+	min-width: 300px;
+	margin: 0 auto;
+	border: 3px solid #CCC;
+	border-radius: 8px;
+}
+
+.shopgrid {
+	text-align: center;
+	display: block;
+	height: 70px;
+	width: 681px;
+	border: 2px solid #CCC;
+	margin-left: 15px;
+	margin-bottom: 17px;
+	padding-top: 10px
+}
+
+.shopswrapper {
+	padding-top: 20px;
+	width: 45em;
+	height: 33em;
+	min-width: 300px;
+	margin: 0 auto;
+}
+
+.shopgrid .accountname {
+
+	display: block;
+	position: relative;
+	left: 0;
+	bottom: 12px;
+	width: 180px;
+	height: 51px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 30px;
+	overflow: hidden;
+	background-color: #F3F3F3;
+	color: #424242
+}
+
+.shopgrid .logoset {
+	position: relative;
+	left: 182px;
+	bottom: 94px;
+	display: block;
+	width: 130px;
+	height: 51px;
+	padding-top: 30px;
+	padding-left: 20px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .templateset {
+	position: relative;
+	left: 325px;
+	bottom: 175px;
+	display: block;
+	width: 120px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .cardset {
+	position: relative;
+	left: 435px;
+	bottom: 256px;
+	display: block;
+	width: 120px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.shopgrid .sysinfo {
+	position: relative;
+	left: 545px;
+	bottom: 337px;
+	display: block;
+	width: 134px;
+	height: 51px;
+	padding-top: 30px;
+	font-size: 20px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	color: #444
+}
+
+.setupbutton {
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	font-size: 16px;
+	padding: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	padding-left: 15px;
+	padding-right: 15px;
+	background: #FFFFFF;
+	color: #CCC;
+	border: solid #CCC
+}
+
+.logobutton {
+
+}
+
+.logobutton:hover {
+	background: #CCCCCC;
+	color: #FFFFFF
+}
+
+.templatebutton {
+	background: #F3F3F3
+}
+
+.templatebutton:hover {
+	background: #FFFFFF
+}
+
+.shop_pag {
+	width: 43em;
+	position: absolute;
+	height: 20px;
+	margin-top: 0;
+	margin-left: 25px;
+}
+
+.nshoppbtn {
+	-webkit-border-radius: 15;
+	-moz-border-radius: 15;
+	border-radius: 15px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 15px;
+	background: #549249;
+	text-decoration: none;
+	width: 12%;
+	cursor: pointer;
+}
+
+.nshoppbtn:hover {
+	background: #21a334;
+	text-decoration: none;
+}
+
+.guidebtn {
+	-webkit-border-radius: 15;
+	-moz-border-radius: 15;
+	border-radius: 8px;
+	padding: 15px;
+	text-decoration: none;
+	cursor: pointer;
+	left: 680px;
+	top: 35px;
+	width: 75px;
+	background: #CCC;
+	font-family: Arial;
+	color: grey;
+	font-size: 16px;
+}
+
+.guidebtn:hover {
+	background: #549249;
+	color: black;
+	text-decoration: none;
+}
+
+.newshop {
+	width: 97%;
+	padding: 10px;
+	border: solid
+}
+
+.newshop_frame {
+	border: solid
+}
+
+#top {
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	line-height: 0px;/*为了防止ie下出现题型*/
+	border-right: 10px solid #C3C3C3;
+	border-bottom: 10px solid #FFF;
+	border-top: 10px solid #FFF;
+	left: -10px;
+	top: 15px;
+}
+#first {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	position: absolute;
+	height: 50px;
+	width: 450px;
+	background: #C3C3C3;
+	left: 172px;
+	top: 33px;
+	overflow: hidden
+}
+#first p {
+	padding: 10px;
+	line-height: 1.5;
+	color: #FFF;
+}
+
+input[type=text] {
+	border: 2px solid white;
+	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	padding: 8px;
+	background: rgba(255,255,255,0.5);
+	margin: 0 0 10px 0;
+}
+
+
+.fileupload{
+
+	display: none;
+}
+
+.shopgrid .accountmanage {
+
+	display: none;
+}
+
+.shopgrid .accountenddate {
+
+	display: none;
+}
+
+.shopgrid .accountstartdate {
+
+	display: none;
+}
+
+.shopgrid .status {
+
+	display: none;
+}
+
+.shopgrid .status-online {
+	display: none
+}
+
+
+
+.shopgrid .accountmanagetrial {
+	display: none;
+}
+

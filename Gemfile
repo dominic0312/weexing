@@ -17,6 +17,7 @@ gem 'rails', '~>4.0.2'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'protected_attributes'
+gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,6 +30,7 @@ gem 'yajl-ruby'
 gem 'will_paginate', '~> 3.0'
 gem 'rubyzip', '>= 1.0.0'
 gem 'weixin_rails_middleware'
+gem 'daemons'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

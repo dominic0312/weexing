@@ -5,18 +5,17 @@
 		<meta charset="utf-8">
 		<title>微行平台注册</title>
 		<%= stylesheet_link_tag "common1.css" %>
-		<%= stylesheet_link_tag "emoji1.css" %>
 		<%= stylesheet_link_tag "common2.css" %>
 		<%= stylesheet_link_tag "component.css" %>
-		<%= stylesheet_link_tag "jquery-ui.css" %>
-	
-		<link href="https://res.wx.qq.com/mpres/htmledition/images/favicon1a951a.ico" rel="Shortcut Icon">
+		<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+		<%= javascript_include_tag "jquery-191.js" %>
+		<%= javascript_include_tag "formhandler.js" %>
 	</head>
 	<body class="zh_CN realnameRegPage">
 		<div id="header" class="header">
 			<div class="logo_area">
 				<div class="wrapper">
-					<img src="/assets/weixing.png" onClick="javascript:location.href='/'" alt="微行平台">
+					<img src="/images/weixing.png" onClick="javascript:location.href='/'" alt="微行平台">
 					<span class="hd_login_info"> <a class="account_primary_link" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&amp;f=1&amp;ty=1&amp;ap=000011:400792:%7Cm:12%7Cf:400792:m:12" target="_blank"> 在线客服 </a> </span>
 				</div>
 				<!--end of wrapper-->
@@ -273,9 +272,7 @@
 						<div class="frm">
 							<div class="frm-bd">
 								<div class="frm-section group">
-									<div class="section-hd account-pic-box">
-										<em class="account-name-tip" style="display:none"></em><img src="https://res.wx.qq.com/mpres/htmledition/images/new/example_zh_CN1a9519.jpg" alt="" class="mp-account-pic">
-									</div>
+									<div class="section-hd account-pic-box"></div>
 									<div class="section-bd">
 										<div class="group frm_control_group">
 											<label for="" class="frm_label">帐号名称</label>
@@ -367,23 +364,19 @@
 		<div id="footer" class="footer">
 			<span> <a target="_blank" href="http://www.tencent.com/zh-cn/index.shtml">关于微行</a>&nbsp;|&nbsp; <a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/agreement_tmpl&amp;type=info&amp;lang=zh_CN">服务协议</a>&nbsp;|&nbsp; <a target="_blank" href="http://kf.qq.com/product/weixinmp.html">客服中心</a> &nbsp;|&nbsp; <a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&amp;f=1&amp;ty=1&amp;ap=000011:400792:%7Cm:12%7Cf:400792:m:12" target="_blank">在线客服</a>&nbsp;|&nbsp; <a target="_blank" href="mailto:weixinmp@qq.com">联系邮箱</a>&nbsp;|&nbsp; <a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/infringement_tmpl&amp;lang=zh_CN">侵权投诉</a> </span><span>Copyright&nbsp;© 2012-2013 Weixing. All Rights Reserved.</span>
 		</div>
-		<script type="text/javascript" src="/assets/jquery.js"></script>
-		<script type="text/javascript" src="/assets/jquery-1.js"></script>
-		<script type="text/javascript" src="/assets/formhandler.js"></script>
 
 		<script type="text/javascript">
-		
 			$("#pw1").blur(checkpass1);
 			$("#pw2").blur(checkpass2);
 			$("#email").blur(checkmail);
 			var reg$ = $("#reg");
-			var valid={email:1,pw1:1,pw2:1};
-		
-        
+			var valid = {
+				email : 1,
+				pw1 : 1,
+				pw2 : 1
+			};
+
 		</script>
 
-		<script type="text/javascript" src="https://res.wx.qq.com/mpres/zh_CN/htmledition/js/wxm-locations1a954a.js"></script>
-
-		<script type="text/javascript" src="https://res.wx.qq.com/mpres/zh_CN/htmledition/js/wxm2-realname-reg1a954a.js"></script>
 	</body>
 </html>

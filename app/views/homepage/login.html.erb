@@ -4,18 +4,17 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<%= stylesheet_link_tag "jquery-ui.css" %>
 		<%= stylesheet_link_tag "login.css" %>
-
 		<title>微行-微信营销专家</title>
 	</head>
 	<body>
 		<div id="header">
 			<div class="wrapper" id="hearder_wrapper">
-				<a href="https://mp.weixin.qq.com/" class="dib"><%= image_tag("weixing.png", height: '56', width: '426') %></a>
+				<a href="http://www.weexing.com/" class="dib"><%= image_tag("weixing.png", height: '56', width: '426') %></a>
 				<span class="hd_login_info" id="hd_login"> <%= link_to '立即注册', homepage_regist_url%></td> </span>
 			</div>
 		</div>
 		<!--End of header-->
-		<div id="banner" style="background:#070916 url('/assets/Spring.jpg') no-repeat center center">
+		<div id="banner" style="background:#070916 url('/images/Spring.jpg') no-repeat center center">
 			<div class="wrapper" id="banner_wrapper">
 				<div id="loginpanel" class="login-panel" >
 					<h3>登录</h3>
@@ -62,23 +61,23 @@
 			</div><!--End of wrapper-->
 		</div><!--End of banner-->
 
-		<div id="banner2" class="banner" style="display:none;background:#070916 url('/assets/mountain.jpg') no-repeat center center">
+		<div id="banner2" class="banner" style="display:none;background:#070916 url('/images/mountain.jpg') no-repeat center center">
 			<div class="wrapper" id="banner_wrapper2">
 				<div id="div_wrapper" style="position:relative;left:-50px">
-					<div id="product1" class="product"  style="position:absolute;top:50px;left:0;width:448px;height:253px;background:#070916 url('/assets/cc2.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" 
+					<div id="product1" class="product"  style="position:absolute;top:50px;left:0;width:448px;height:253px;background:#070916 url('/images/cardpic.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" 
 				onclick="location.href='/card'">
 						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp会员卡 </h3>
 					</div>
 
-					<div id="product2" class="product"  style="position:absolute;top:50px;left:600px;width:448px;height:253px;background:#070916 url('/assets/c3.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
+					<div id="product2" class="product"  style="position:absolute;top:50px;left:600px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
 						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp微店铺 </h3>
 					</div>
 					
-					<div id="product3" class="product"  style="position:absolute;top:350px;left:0px;width:448px;height:253px;background:#070916 url('/assets/c3.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
+					<div id="product3" class="product"  style="position:absolute;top:350px;left:0px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
 						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp地产应用</h3>
 					</div>
 					
-					<div id="product4" class="product"  style="position:absolute;top:350px;left:600px;width:448px;height:253px;background:#070916 url('/assets/c3.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
+					<div id="product4" class="product"  style="position:absolute;top:350px;left:600px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
 						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp教育应用 </h3>
 					</div>
 				</div>
@@ -108,9 +107,9 @@
 
 		</div><!--End of footer-->
 		<!--Java Script starts from here-->
-		<script type="text/javascript" src="/assets/jquery-1.js"></script>
-		<script type="text/javascript" src="/assets/jquery-ui-1.js"></script>
-		<script type="text/javascript" src="/assets/formhandler.js"></script>
+		<script type="text/javascript" src="/javascripts/jquery-191.js"></script>
+		<script type="text/javascript" src="/javascripts/jquery-ui-1.10.4.custom.js"></script>
+		<script type="text/javascript" src="/javascripts/formhandler.js"></script>
 		<script type="text/javascript">
 			var commit$ = $("#commit");
 			var err_panel$ = $("#err_area");

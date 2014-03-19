@@ -22,7 +22,6 @@ class NewsController < ApplicationController
   end
 
   def display
-    logger.info(params[:id])
     if params[:id] == 'top1'
       @news = News.find_by_doctype('top1')
     elsif params[:id] == 'top2'

@@ -161,7 +161,6 @@ class ShopsController < ApplicationController
     user.credit=user.credit-payment
     user.save
 
-    logger.info("user credit is:"+user.credit.to_s)
     shop=Shop.new
     shop.name=params[:shopname]
     shop.save
@@ -178,7 +177,6 @@ class ShopsController < ApplicationController
     shopid=params[:shopid].to_i
     operation=params[:operation]
     if uid!=session[:user_id]
-      logger.info("illegal user")
       render :js=>"onlinefault()" and return
     end
 

@@ -1,0 +1,465 @@
+.shopsborder {
+	padding: 12px;
+	width: 47em;
+	height: 38.5em;
+	min-width: 300px;
+	margin: 0 auto;
+	border: 3px solid #CCC;
+	border-radius: 8px;
+}
+.shopgrid {
+	
+	font-size: 12px;
+	text-align: left;
+	display: block;
+	height: 80px;
+	width: 731px;
+	border: 2px solid #CCC;
+	margin-right: 25px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.shopgrid .accountmanage {
+	display: block;
+	position: relative;
+	left: 521px;
+	bottom: 334px;
+	width: 208px;
+	height: 52px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 29px;
+	overflow: hidden
+}
+
+.shopgrid .accountmanagetrial {
+	display: block;
+	position: relative;
+	left: 521px;
+	bottom: 334px;
+	width: 208px;
+	height: 52px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 29px;
+	overflow: hidden
+}
+.shopgrid .accountname {
+	display: block;
+	position: relative;
+	left: 0;
+	bottom: 1px;
+	width: 180px;
+	height: 55px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 25px;
+	overflow: hidden;
+	background-color: #F3F3F3;
+	color: #444
+	
+}
+.shopgrid .accountenddate {
+	display: block;
+	position: relative;
+	bottom: 165px;
+	left: 303px;
+	height: 55px;
+	width: 100px;
+	border: 1px solid #CCC;
+	font-size: 18px;
+	padding-top: 26px;
+	padding-left: 8px;
+	padding-right: 8px;
+	background-color: #F3F3F3;
+	color: #444
+}
+.shopgrid .accountstartdate {
+	display: block;
+	position: relative;
+	left: 181px;
+	bottom: 83px;
+	width: 105px;
+	height: 54px;
+	border: 1px solid #CCC;
+	font-size: 18px;
+	padding-top: 26px;
+	padding-left: 8px;
+	padding-right: 8px;
+	color: #444
+}
+.shopgrid .status {
+	display: block;
+	position: relative;
+	left: 420px;
+	bottom: 250px;
+	width: 100px;
+	height: 55px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 29px;
+	overflow: hidden;
+	background-color: #CCCCCC
+}
+.shopgrid .status-online {
+	display: block;
+	position: relative;
+	left: 420px;
+	bottom: 250px;
+	width: 100px;
+	height: 55px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 29px;
+	overflow: hidden;
+	background-color: #CCCCCC;
+	color: #549249
+}
+.shopswrapper {
+	padding: 15px;
+	width: 45em;
+	height: 30em;
+	min-width: 300px;
+	margin: 0 auto;
+}
+.shop_pag {
+	width: 45em;
+	position: absolute;
+	height: 20px;
+	margin-top:0px;
+	margin-left: 42px;
+}
+.nshoppbtn {
+	-webkit-border-radius: 15;
+	-moz-border-radius: 15;
+	border-radius: 15px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 15px;
+	background: #549249;
+	text-decoration: none;
+	width: 12%;
+	cursor: pointer;
+}
+.nshoppbtn:hover {
+	background: #21a334;
+	text-decoration: none;
+}
+.guidebtn {
+	-webkit-border-radius: 15;
+	-moz-border-radius: 15;
+	border-radius: 8px;
+	padding: 15px;
+	text-decoration: none;
+	cursor: pointer;
+	left: 700px;
+	top: 35px;
+	width: 75px;
+	background: #CCC;
+	font-family: Arial;
+	color: grey;
+	font-size: 16px;
+}
+.guidebtn:hover {
+	background: #549249;
+	color: black;
+	text-decoration: none;
+}
+.newshop {
+	width: 97%;
+	padding-left: 15px
+}
+.newshop_frame {
+	border: solid
+}
+#top {
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	line-height: 0px;/*为了防止ie下出现题型*/
+	border-right: 10px solid #C3C3C3;
+	border-bottom: 10px solid #FFF;
+	border-top: 10px solid #FFF;
+	left: -10px;
+	top: 15px;
+}
+#first {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	position: absolute;
+	height: 50px;
+	width: 450px;
+	background: #C3C3C3;
+	left: 172px;
+	top: 23px;
+	overflow: hidden
+}
+#first p {
+	padding: 10px;
+	line-height: 1.5;
+	color: #FFF;
+}
+input[type=text] {
+	border: 2px solid white;
+	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+	padding: 8px;
+	background: rgba(255,255,255,0.5);
+	margin: 0 0 10px 0;
+}
+.notifyjs-shops-guide {
+	height: 400px;
+	width: 350px;
+	position: fixed;
+	top: 120px;
+	right: 200px;
+	background: #CCCCCC;
+	-moz-box-shadow: 0 0 6px #000;
+	-webkit-box-shadow: 0 0 6px #000;
+	box-shadow: 0 0 6px #000;
+}
+.notifyjs-shops-guide .title {
+	width: 100px;
+	float: left;
+	margin-left: 120px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 18px
+}
+.notifyjs-shops-guide .content {
+	width: 280px;
+	float: left;
+	margin-left: 35px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 16px
+}
+.notifyjs-shops-guide .yes {
+	position: absolute;
+	bottom: 30px;
+	left: 130px;
+	width: 80px;
+	height: 40px;
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #black;
+	font-size: 16px;
+	padding: 10px;
+	background: #CCC;
+	text-decoration: none;
+	cursor: pointer;
+}
+.notifyjs-uncharged-base {
+	height: 150px;
+	width: 350px;
+	position: fixed;
+	top: 120px;
+	right: 200px;
+	background: #505050;
+	background: rgba(80,80,80,0.4);
+	-moz-box-shadow: 0 0 6px #000;
+	-webkit-box-shadow: 0 0 6px #000;
+	box-shadow: 0 0 6px #000;
+}
+.notifyjs-uncharged-base .title {
+	width: 100px;
+	float: left;
+	margin-left: 120px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 18px
+}
+.notifyjs-uncharged-base .content {
+	width: 280px;
+	float: left;
+	margin-left: 35px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 16px
+}
+.notifyjs-uncharged-base .yes {
+	position: absolute;
+	bottom: 10px;
+	left: 130px;
+	width: 80px;
+	height: 40px;
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #black;
+	font-size: 16px;
+	padding: 10px;
+	background: #CCC;
+	text-decoration: none;
+	cursor: pointer;
+}
+.notifyjs-charged-base {
+	height: 150px;
+	width: 350px;
+	position: fixed;
+	top: 120px;
+	right: 200px;
+	background: #CCCCCC;
+	-moz-box-shadow: 0 0 6px #000;
+	-webkit-box-shadow: 0 0 6px #000;
+	box-shadow: 0 0 6px #000;
+}
+.notifyjs-charged-base .title {
+	width: 100px;
+	float: left;
+	margin-left: 130px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 18px
+}
+.notifyjs-charged-base .content {
+	width: 280px;
+	float: left;
+	margin-left: 45px;
+	margin-top: 10px;
+	text-align: left;
+	font-family: SimSun;
+	color: #2A2A2A;
+	font-size: 16px
+}
+.notifyjs-charged-base .yes {
+	position: absolute;
+	bottom: 10px;
+	left: 80px;
+	width: 80px;
+	height: 40px;
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #black;
+	font-size: 16px;
+	padding: 10px;
+	background: #CCC;
+	text-decoration: none;
+	cursor: pointer;
+}
+.notifyjs-charged-base .no {
+	position: absolute;
+	bottom: 10px;
+	left: 190px;
+	width: 80px;
+	height: 40px;
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #black;
+	font-size: 16px;
+	padding: 10px;
+	background: #CCC;
+	text-decoration: none;
+	cursor: pointer;
+}
+.notifyjs-tips-base {
+	height: 50px;
+	width: 250px;
+	position: fixed;
+	top: 90px;
+	right: 390px;
+	background: #505050;
+	background: #CCC;
+	-moz-box-shadow: 0 0 6px #000;
+	-webkit-box-shadow: 0 0 6px #000;
+	box-shadow: 0 0 6px #000;
+}
+.notifyjs-tips-base .content {
+	color: #444;
+	font-size: 16px;
+	text-align: center;
+	margin-top: 14px
+}
+
+.chargebutton {
+	padding-left: 20px;
+	padding-right: 20px;
+	background: #FFFFFF;
+	border-radius: 8px;
+	color: #CCC;
+	border: solid #CCC
+}
+.chargebutton:hover {
+	background: rgba(210,145,39,1)
+}
+.stopbutton {
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 8px;
+	color: #CCC;
+	border: solid #CCC;
+	background: rgba(210,145,39,1)
+}
+
+.stopbutton:hover {
+	background: rgba(220,155,49,1)
+}
+
+.startbutton {
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 8px;
+	color: #CCC;
+	border: solid #CCC
+}
+
+.trialbutton {
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	font-size: 16px;
+	padding: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	padding-left: 15px;
+	padding-right: 15px;
+	background: #FFFFFF;
+	color: #CCC;
+	border: solid #CCC
+}
+
+.shopgrid .logoset{
+	display:none
+}
+
+.shopgrid .cardset{
+	display:none
+}
+
+.shopgrid .templateset{
+	display:none
+}
+
+.shopgrid .sysinfo{
+	display:none
+}
+
+

@@ -1,0 +1,13 @@
+body {
+	line-height: 1.6;
+	font-family: "Microsoft YaHei", "微软雅黑", Helvetica, "黑体", Arial, Tahoma;
+	color: #222;
+	font-size: 14px;
+}
+
+.head .inner::after {
+content: "​200B";
+display: block;
+height: 0;
+clear: both;
+}
