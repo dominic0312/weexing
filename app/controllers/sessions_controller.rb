@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_name] = nil
      session[:user_id] = nil
+      session[:usertype] = nil
     redirect_to homepage_url
   end
 end

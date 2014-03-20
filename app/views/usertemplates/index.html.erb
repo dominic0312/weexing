@@ -1,6 +1,8 @@
-<h1>模板列表</h1>
-<%= javascript_include_tag "jquery-1.js" %>
+<%= stylesheet_link_tag "admin.css" %>
+<%= javascript_include_tag "jquery-191.js" %>
 <%= javascript_include_tag "jquery-ujs.js" %>
+<%= stylesheet_link_tag "admin.css" %>
+<%= stylesheet_link_tag "pagenate.css" %>
 <script type="text/javascript">
 	function install_success() {
 		alert("安装成功");
@@ -10,15 +12,14 @@
 		alert("安装失败");
 	}
 </script>
+<div class="mainbody">
 <table>
 	<tr>
 		<th>模板名称</th>
 		<th>目录名</th>
 		<th>描述</th>
 		<th>是否安装</th>
-		<th></th>
-		<th></th>
-		<th></th>
+	
 	</tr>
 
 	<% @usertemplates.each do |usertemplate| %>
@@ -27,13 +28,15 @@
 		<td><%= usertemplate.pic %></td>
 		<td><%= usertemplate.description %></td>
 		<% if usertemplate.installed == 0 %><td>未安装</td><%else%><td>已安装</td><%end%> <td><%= link_to '详情', usertemplate %></td>
-		<td><%= link_to '编辑', edit_usertemplate_path(usertemplate) %></td>
-		<td><%= link_to '删除', usertemplate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to '删除', usertemplate, method: :delete, data: { confirm: '确定删除么?' } %></td>
 		<% if usertemplate.installed == 0 %><td><%= link_to '安装', { :action => "install_template",:id=>usertemplate,:ids=>usertemplate.id }, method: :post,:remote => true,data: {}%></td></div><% end %>
 	</tr>
 	<% end %>
 </table>
-
+<div class="flickr_pagination page_admin">
+	<%= will_paginate @usertemplates,:inner_window=>3,:outer_window=>2 %>
+</div>
 <br />
 
 <%= link_to '增加模板', new_usertemplate_path %>
+</div>

@@ -1,9 +1,9 @@
 class UsertemplatesController < ApplicationController
   # GET /usertemplates
   # GET /usertemplates.json
+  before_filter :authadmin, :only=>[:index,:show, :new, :edit, :update,:destroy]
   def index
-    @usertemplates = Usertemplate.all
-
+    @usertemplates = Usertemplate.paginate(:page => params[:page],:per_page => 15).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @usertemplates }
@@ -107,8 +107,15 @@ class UsertemplatesController < ApplicationController
         return
         end
         @template.save
-        format.js {  render  :js=> "install_success"}
+        format.js {  render  :js=> "install_success();"}
       end
+    end
+  end
+  
+  def authadmin
+    admin=session[:usertype]
+    if admin!='admin'
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
   end
 

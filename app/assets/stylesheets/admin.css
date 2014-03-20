@@ -1,0 +1,31 @@
+.admintitle {
+	color: #252525;
+	position: relative;
+	left: 200px
+}
+.mainbody {
+	position: relative;
+	left: 100px;
+}
+th {
+	border: 1px #444444 solid
+}
+.singlecol {
+	background: #F0F0F0
+}
+.doublecol {
+	background: #CCCCCC
+}
+
+.newbutton {
+	position:relative;
+	left:200px;
+	display:block;
+	text-decoration: none;
+	background:#CCCCCC;
+	width: 120px;
+	padding:10px
+}
+.page_admin{
+	margin-top:20px
+}

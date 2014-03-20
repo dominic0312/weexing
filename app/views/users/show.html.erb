@@ -1,20 +1,40 @@
+
+<%= stylesheet_link_tag "admin.css" %>
+<div class="mainbody">
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>邮件地址:</b>
   <%= @user.email %>
 </p>
 
 <p>
-  <b>Hashed password:</b>
-  <%= @user.hashed_password %>
+  <b>公司名称:</b>
+  <%= @user.company %>
 </p>
 
 <p>
-  <b>Salt:</b>
-  <%= @user.salt %>
+  <b>联系人:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>电话号码:</b>
+  <%= @user.phone %>
+</p> 
+
+
+<p>
+  <b>身份:</b>
+  <%= @user.usertype %>
+</p>
+
+<p>
+  <b>是否激活</b>
+  <%= @user.activated %>
 </p>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '修改', edit_user_path(@user) %> |
+<%= link_to '返回', users_path %>
+</div>

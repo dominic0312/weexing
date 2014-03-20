@@ -1,10 +1,11 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible :credit,:email,:company,:phone,:id,:hashed_password
+  attr_accessible :credit,:email,:company,:phone,:id,:hashed_password,:usertype,:activated
   validates_presence_of :email
   validates_uniqueness_of :email
   attr_accessor :password_confirmation
+  self.per_page =  20
   #validates_presence_of :password
   def after_destory
     if User.count.zero?
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def create_new_salt
-    self.salt = self.object_id.to_s + rand.to_s 
+    self.salt = self.object_id.to_s + rand.to_s
   end
 
 end

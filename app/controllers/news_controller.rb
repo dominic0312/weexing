@@ -1,9 +1,12 @@
 class NewsController < ApplicationController
   # GET /news
   # GET /news.json
+  
+  
+ before_filter :authadmin, :except=>:show
+  
   def index
-    @news = News.all
-
+    @news = News.paginate(:page => params[:page]).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @news }
@@ -58,7 +61,7 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: 'News was successfully created.' }
+        format.html { redirect_to news_index_url}
         format.json { render json: @news, status: :created, location: @news }
       else
         format.html { render action: "new" }
@@ -74,7 +77,7 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.update_attributes(params[:news])
-        format.html { redirect_to @news, notice: 'News was successfully updated.' }
+        format.html { redirect_to news_index_url }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -94,4 +97,12 @@ class NewsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def authadmin
+      admin=session[:usertype]
+      if admin!='admin'
+        render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
+      end
+  end
+  
 end

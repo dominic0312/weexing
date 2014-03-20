@@ -1,9 +1,11 @@
 class MembercardsController < ApplicationController
   before_action :set_membercard, only: [:show, :edit, :update, :destroy]
+  before_filter :authadmin, :only=>[:index,:show, :new, :edit, :update,:destroy]
   # GET /membercards
   # GET /membercards.json
   def index
-    @membercards = Membercard.all
+    @membercards = Membercard.paginate(:page => params[:page],:per_page => 15).order('id DESC')
+   
   end
 
   # GET /membercards/1
@@ -73,6 +75,13 @@ class MembercardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to membercards_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def authadmin
+    admin=session[:usertype]
+    if admin!='admin'
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
   end
 

@@ -1,6 +1,10 @@
-<h1>Editing news</h1>
+<%= stylesheet_link_tag "admin.css" %>
+<div class="admintitle">
+	<h1>新闻编辑</h1>
+</div>
+<div class="mainbody">
+	<%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @news %> |
-<%= link_to 'Back', news_index_path %>
+	<%= link_to '详情', @news %> |
+	<%= link_to '后退', news_index_path %>
+</div>

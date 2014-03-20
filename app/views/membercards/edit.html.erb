@@ -1,6 +1,8 @@
-<h1>Editing membercard</h1>
-
+<%= stylesheet_link_tag "admin.css" %>
+<div class="admintitle"><h1>编辑卡片</h1></div>
+<div class="mainbody">
 <%= render 'form' %>
 
-<%= link_to 'Show', @membercard %> |
-<%= link_to 'Back', membercards_path %>
+<%= link_to '详情', @membercard %> |
+<%= link_to '返回', membercards_path %>
+</div>

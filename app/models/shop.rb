@@ -1,5 +1,5 @@
 class Shop < ActiveRecord::Base
-  attr_accessible :address, :agency, :cardtemplate, :logo, :name, :usertemplate_id, :phone, :exprieddate, :weixin_token,:shopurl,:logopic
+  attr_accessible :address, :agency, :cardtemplate, :logo, :name, :usertemplate_id, :phone, :exprieddate, :weixin_token,:shopurl,:logopic,:online,:expried,:istrial
   belongs_to :usertemplate
   belongs_to :membercard
   belongs_to :user

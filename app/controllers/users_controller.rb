@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  def index
-    @users = User.order(:name)
 
+  before_filter :authadmin, :except=>[:create,:activate, :activatesuccess, :activatefail]
+  def index
+    @users = User.paginate(:page => params[:page]).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @users }
@@ -74,21 +75,13 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def activatesuccess
-    
-    
-  end
-  
-  def activatefail
-    
+
   end
 
-  def createCardpage(email)
-    @page=Cardpage.new
-    @page.account=email
-    @page.brand='WEEXING'
-    @page.save
+  def activatefail
+
   end
 
   # PUT /users/1
@@ -116,6 +109,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  def authadmin
+    admin=session[:usertype]
+    if admin!='admin'
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
   end
 end

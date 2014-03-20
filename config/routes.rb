@@ -19,6 +19,7 @@ Weexing::Application.routes.draw do
   get 'usertemplates/display'
   get 'membercards/display'
   #post 'shops/updatelogo'
+  match "/admin" => "admins#login",via: [:get]
   match "/shops/uploadlogo/:id" => "shops#uploadlogo",via: [:get,:post],:as=>"uploadlogo"
   match '/shops/updatelogo/:id' => 'shops#updatelogo',via: [:get,:post], :as => "updatelogo"
   match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
@@ -62,9 +63,11 @@ Weexing::Application.routes.draw do
   resources :users
   get "sessions/destroy"
   post "test/check"
+  get "admins/index"
   
   post "users/create"
   post "homepage/usercheck"
+  post "admins/adminlogin"
   post "coupons/send_coupon"
   get 'homepage/apps' 
   get "homepage/login"

@@ -1,8 +1,9 @@
 class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
+  before_filter :authadmin, :only=>[:index,:show, :edit, :update,:destroy]
   def index
-    @shops = Shop.paginate(:page => params[:page])
+    @shops = Shop.paginate(:page => params[:page],:per_page => 15).order('id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.json
@@ -32,14 +33,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/new
   # GET /shops/new.json
-  def new
-    @shop = Shop.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @shop }
-    end
-  end
 
   # GET /shops/1/edit
   def edit
@@ -48,19 +42,7 @@ class ShopsController < ApplicationController
 
   # POST /shops
   # POST /shops.json
-  def create
-    @shop = Shop.new(params[:shop])
 
-    respond_to do |format|
-      if @shop.save
-        format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
-        format.json { render json: @shop, status: :created, location: @shop }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PUT /shops/1
   # PUT /shops/1.json
@@ -69,7 +51,7 @@ class ShopsController < ApplicationController
 
     respond_to do |format|
       if @shop.update_attributes(params[:shop])
-        format.html { redirect_to uploadlogo_shop_path(@shop), notice: 'Shop was successfully updated.' }
+        format.html { redirect_to(shops_url, :notice=> 'Shop was successfully updated.') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -266,23 +248,29 @@ class ShopsController < ApplicationController
     token=params[:token_name]
     sid=params[:shop_id]
     shop=Shop.where(:shopurl=>url).first
-    
+
     if shop
       render  :js=> "urlexist()" and return
     else
       shop2=Shop.where(:weixin_token=>token).first
       if shop2
-      render  :js=> "tokenexist();" and return
+        render  :js=> "tokenexist();" and return
       end
     end
-    
+
     shop =Shop.find(sid);
     shop.shopurl=url
     shop.weixin_token=token
     shop.save
     render :js=>"urlsuccess();"
-    
-    
+
+  end
+
+  def authadmin
+    admin=session[:usertype]
+    if admin!='admin'
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
+    end
   end
 
 end

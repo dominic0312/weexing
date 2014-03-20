@@ -1,14 +1,13 @@
-<%= javascript_include_tag "jquery-1.js" %>
+<%= javascript_include_tag "jquery-191.js" %>
 <%= javascript_include_tag "jquery-ujs.js" %>
-<h1>Listing membercards</h1>
-
+<%= stylesheet_link_tag "admin.css" %>
+<%= stylesheet_link_tag "pagenate.css" %>
+<div class="mainbody">
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>卡片名称</th>
+  
     </tr>
   </thead>
 
@@ -16,14 +15,16 @@
     <% @membercards.each do |membercard| %>
       <tr>
         <td><%= membercard.name %></td>
-        <td><%= link_to 'Show', membercard %></td>
-        <td><%= link_to 'Edit', edit_membercard_path(membercard) %></td>
-        <td><%= link_to 'Destroy', membercard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '详情', membercard %></td>
+        <td><%= link_to '删除', membercard, method: :delete, data: { confirm: '确定删除么?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<div class="flickr_pagination page_admin">
+	<%= will_paginate @membercards,:inner_window=>3,:outer_window=>2 %>
+</div>
 <br>
 
-<%= link_to 'New Membercard', new_membercard_path %>
+<%= link_to '新卡片', new_membercard_path %>
+</div>

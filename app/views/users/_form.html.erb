@@ -11,23 +11,26 @@
     </div>
   <% end %>
 
-  <fieldset>
-  <legend>Enter User Details</legend>
-  <div>
-   <%= f.label :name %>:
-   <%= f.text_field :name, :size => 40 %>
+
+  <div  class="field">
+   <%= f.label :email,"邮件" %>:
+   <%= f.text_field :email, :size => 40 %>
   </div>
-  <div>
-   <%= f.label :password, 'Password' %>:
-   <%= f.password_field :password, :size => 40 %>
+  <div class="field">
+   <%= f.label :company, '公司' %>:
+   <%= f.text_field :company, :size => 40 %>
   </div>
-  <div>
-   <%= f.label :password_confirmation, 'Confirm' %>:
-   <%= f.password_field :password_confirmation, :size => 40 %>
+  
+   <div  class="field">
+   <%= f.label :usertype, '身份' %>:
+   <%= f.text_field :usertype, :size => 6 %>
   </div>
-  <div>
-   <%= f.submit %>
+  <div  class="field">
+   <%= f.label :activated, '是否激活' %>:
+   <%= f.number_field :activated, :size => 2 %>
   </div>
- </fieldset>
+  <div  class="field">
+   <%= f.submit "提交修改"%>
+  </div>
 <% end %>
-</div>
+

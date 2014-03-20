@@ -1,48 +1,61 @@
 <%= javascript_include_tag "jquery-191.js" %>
 <%= javascript_include_tag "jquery-ujs.js" %>
 <%= stylesheet_link_tag "pagenate.css" %>
+<%= stylesheet_link_tag "admin.css" %>
+
 <script type="text/javascript">
 	function refresh() {
 		window.location.reload();
 	}
 
-	
 </script>
-<h1>兑换码列表</h1>
 
-<table>
-	<tr>
-		<th>兑换码</th>
-		<th>点数</th>
-		<th>兑换用户</th>
-		<th>是否使用</th>
-		<th></th>
-	</tr>
-	<% @pointcodes.each do |pointcode| %>
-	<tr>
-		<td><%= pointcode.secretcode %></td>
-		<td><%= pointcode.point %></td>
-		<td><%= pointcode.userby %></td>
-		<td><%= pointcode.used %></td>
-		<td><%= link_to '删除', pointcode, method: :delete, data: { confirm: '确定删除?' } %></td>
-	</tr>
-	<% end %>
+<style>
+	.page_sty {
+		text-align: left
+	}
 
-</table>
-	<div class="digg_pagination"><%= will_paginate @postcodes %></div>
+	td {
+		padding-right: 10px
+	}
+</style>
 
-<br />
+<div class="mainbody">
+	<table>
+		<tr>
+			<th>兑换码</th>
+			<th>点数</th>
+			<th>兑换用户</th>
+			<th>是否使用</th>
+		</tr>
+		<% @pointcodes.each do |pointcode| %>
+		<tr>
+			<td class="singlecol"><%= pointcode.secretcode %></td>
+			<td class="doublecol"><%= pointcode.point %></td>
+			<td class="singlecol"><%= pointcode.userby %></td>
+			<td class="doublecol"><%= pointcode.used %></td>
+			<td><%= link_to '删除', pointcode, method: :delete, data: { confirm: '确定删除?' } %></td>
+		</tr>
+		<% end %>
 
-<%= link_to '添加新兑换码', new_pointcode_path %>
-<%= form_tag('/pointcodes/add_pointcodes', remote: true) do  %>
-<div class="field">
-	<%= label_tag 'card_num','生成数量' %>
-	<%= number_field_tag 'card_quantity' %>
+	</table>
+	<div class="flickr_pagination page_sty">
+		<%= will_paginate @pointcodes %>
+	</div>
+
+	<br />
+
+	
+	<%= form_tag('/pointcodes/add_pointcodes', remote: true) do  %>
+	<div class="field">
+		<%= label_tag 'card_num','生成数量' %>
+		<%= number_field_tag 'card_quantity' %>
+	</div>
+	<div class="field">
+		<%= label_tag 'point_num','每个点数' %>
+		<%= number_field_tag 'point_quantity' %>
+	</div>
+	<%= submit_tag "批量生成"%>
+	<%end%>
 </div>
-<div class="field">
-	<%= label_tag 'point_num','每个点数' %>
-	<%= number_field_tag 'point_quantity' %>
-</div>
-<%= submit_tag "批量生成"%>
-<%end%>
 

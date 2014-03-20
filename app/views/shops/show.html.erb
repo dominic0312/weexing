@@ -1,94 +1,53 @@
 <p id="notice">
 	<%= notice %>
 </p>
-<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
-<%= stylesheet_link_tag "jquery.multiDialog.css" %>
 <script src="/assets/jquery-191.js"></script>
-<script src="/assets/jquery-ui-1.js"></script>
-<script src="/assets/jquery.ui.dialog.extended-1.0.2.js"></script>
-<script src="/assets/jquery.multiDialog.js"></script>
+<%= javascript_include_tag "jquery-191.js" %>
+<%= javascript_include_tag "jquery-ujs.js" %>
+<%= stylesheet_link_tag "admin.css" %>
 <!-- MultiDialog files (needed) -->
 <script type="text/javascript">
-	$(function() {
-		$("a.add-type").MultiDialog({
-			types : {
-				config : {
-					customPath : {
-						test : function(href) {
-							// search for syntaxhighlighter in URL
-							return href.match(/syntaxhighlighter/i);
-						},
-						template : '<iframe width="100%" height="200%" src="{url}" frameborder="0"></iframe>'
-					}
-				}
-			},
-			openCustom : function(data) {
-				if (data.type = "customPath") {
-					this._parseHtml(data, "customPath", "url");
-					data.width = 750;
-					data.height = 640;
-					//data.title = "请选择模板";
-					this._open(data);
-				} else {
-					// backfall
-					window.open(data.href, '_newtab');
-				}
-			}
-		});
 
-		$(function() {
-
-			$("a.lightbox").MultiDialog({
-				gallery : {
-					enabled : true,
-				},
-				dialog : {
-					buttons : {}
-				}
-			});
-		});
-
-	}); 
 </script>
-
+<div class="mainbody">
 <p>
-	<b>Name:</b>
+	<b>店名:</b>
 	<%= @shop.name %>
 </p>
 
 <p>
-	<b>Address:</b>
+	<b>地址:</b>
 	<%= @shop.address %>
 </p>
 
 <p>
-	<b>Phone:</b>
+	<b>电话:</b>
 	<%= @shop.phone %>
 </p>
 
 <p>
-	<b>Agency:</b>
-	<%= @shop.agency %>
+	<b>代理公司:</b>
+	<%= @shop.user.company %>
 </p>
 
 <p>
-	<b>Cardtemplate:</b>
-	<%= @shop.cardtemplate %>
+	<b>代理邮件:</b>
+	<%= @shop.user.email %>
 </p>
 
-<p>
-	<b>Pagetemplate:</b>
-	<%= @shop.usertemplate_id %>
-</p>
 
 <p>
-	<b>token:</b>
+	<b>微信token:</b>
 	<%= @shop.weixin_token %>
 </p>
 
-<a class="add-type" href="/usertemplates/display?shopid=<%=@shop.id%>">选择模板</a>
-<a class="lightbox" href="/assets/Spring.jpg"><img src="/assets/pizza.jpg"  title="Open this picture of in a larger version" alt="Example picture #7" longdesc="Exaple picture #7: Lorem ipsum dolor sit amet, consetetur sadipscing elitr." /> </a>
-<a class="lightbox" href="/assets/pizza.jpg"><img src="/assets/pizza.jpg"  title="Open this picture of in a larger version" alt="Example picture #7" longdesc="Exaple picture #7: Lorem ipsum dolor sit amet, consetetur sadipscing elitr." /> </a>
 
-<%= link_to 'Edit', edit_shop_path(@shop) %> |
-<%= link_to 'Back', shops_path %>
+<p>
+	<b>子域名:</b>
+	<%= @shop.shopurl%>
+</p>
+
+<%= link_to '修改', edit_shop_path(@shop) %> |
+<%= link_to '返回', shops_path %>
+
+</div>

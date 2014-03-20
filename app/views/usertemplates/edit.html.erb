@@ -1,6 +1,8 @@
-<h1>编辑模板</h1>
-
+<%= stylesheet_link_tag "admin.css" %>
+<div class="admintitle"><h1>编辑模板</h1></div>
+<div class="mainbody">
 <%= render 'form' %>
 
-<%= link_to 'Show', @usertemplate %> |
-<%= link_to 'Back', usertemplates_path %>
+<%= link_to '详情', @usertemplate %> |
+<%= link_to '返回', usertemplates_path %>
+</div>

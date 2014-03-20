@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319123507) do
+ActiveRecord::Schema.define(version: 20140319171048) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -141,13 +141,14 @@ ActiveRecord::Schema.define(version: 20140319123507) do
     t.string   "email"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "credit",          default: 0
     t.string   "company"
     t.string   "phone"
     t.string   "name"
     t.integer  "activated",       default: 0
+    t.string   "usertype",        default: "agency"
   end
 
   create_table "usertemplates", force: true do |t|

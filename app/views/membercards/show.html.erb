@@ -1,12 +1,14 @@
+<%= stylesheet_link_tag "admin.css" %>
+<div class="mainbody">
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>卡片名称:</strong>
   <%= @membercard.name %>
 </p>
 <p>
 <%= image_tag @membercard.pic.url(:thumb) %>
 </p>
 
-<%= link_to 'Edit', edit_membercard_path(@membercard) %> |
-<%= link_to 'Back', membercards_path %>
+<%= link_to '返回', membercards_path %>
+</div>

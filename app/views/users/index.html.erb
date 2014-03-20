@@ -1,25 +1,28 @@
 <%= javascript_include_tag "jquery-191.js" %>
 <%= javascript_include_tag "jquery-ujs.js" %>
-<h1>用户列表</h1>
-
+<%= stylesheet_link_tag "admin.css" %>
+<div class="admintitle"><h1>代理商列表</h1></div>
+<div class="mainbody">
 <table>
-  <tr>
-    <th>邮件地址</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>邮件地址</th>
+		<th>公司名</th>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.email %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+	</tr>
+
+	<% @users.each do |user| %>
+	<tr>
+		<td class="singlecol"><%= user.email %></td>
+		<td class="doublecol"><%= user.company %></td>
+		<td><%= link_to '详细', user %></td>
+		<td><%= link_to '編輯', edit_user_path(user) %></td>
+		<td><%= link_to '删除', user, method: :delete, data: { confirm: '确定删除么?' } %></td>
+	</tr>
+	<% end %>
 </table>
+	<%= will_paginate @users %>
 
 <br />
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to '建立新代理商', new_user_path ,:class=>"newbutton	"%>
+</div>
