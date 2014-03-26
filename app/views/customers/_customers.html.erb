@@ -1,0 +1,31 @@
+<table class="table table-hover">
+	<th>微信卡号</th>
+	<th>实体卡号</th>
+	<th>级别</th>
+	<th>电话</th>
+	<th>余额</th>
+	<th>积分</th>
+	<th></th>
+	<% @customers.each do |customer| %>
+	<tr>
+		<td style="padding-top: 15px"><%= customer.cardid%></td>
+		<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
+		<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
+		<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>">13590296140</a></td>
+		<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
+		<td style="padding-top: 15px"><%= customer.bonus%></td>
+
+		<td>
+		<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)">
+			修改
+		</button>
+		<button type="button" class="btn btn-danger" recordid="<%= customer.id%>" onclick="delconfirm();">
+			删除
+		</button></td>
+	</tr>
+	<% end %>
+</table>
+<div class="flickr_pagination">
+	<%= ajax_will_paginate @customers %>
+</div>
+

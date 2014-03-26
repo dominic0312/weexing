@@ -80,4 +80,19 @@ class CustomersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    searchtp=params[:searchtp]
+    searchval=params[:searchvalue]
+    if searchtp && searchval
+      @customers= Customer.where("#{searchtp}='#{searchval}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
+    else
+        render  :js=> "searchfail();" and return
+    end
+    respond_to do |format|
+      format.html 
+      format.js   
+    end
+  end
+
 end

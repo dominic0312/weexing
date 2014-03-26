@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319171048) do
+ActiveRecord::Schema.define(version: 20140324175658) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140319171048) do
     t.datetime "updated_at",             null: false
     t.integer  "unread"
     t.integer  "coupon_num", default: 0
+    t.string   "phone"
   end
 
   create_table "delayed_jobs", force: true do |t|

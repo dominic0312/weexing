@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap 101 Template</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Bootstrap -->
+		<%= stylesheet_link_tag "bootstrap.css" %>
+		<%= stylesheet_link_tag "bootstrap-theme.css" %>
+		<%= stylesheet_link_tag "pagenate.css" %>
+
+		<%= stylesheet_link_tag "bootstrap-editable.css" %>
+		<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+		<%= javascript_include_tag "jquery-191.js" %>
+
+		<%= javascript_include_tag "jquery-ui-1.10.4.custom.js" %>
+		<%= javascript_include_tag "bootstrap.js" %>
+		<%= javascript_include_tag "bootstrap-editable.js" %>
+
+	</head>
+	<style>
+		.editab {
+
+		}
+
+		a:hover, a:focus {
+			text-decoration: none;
+		}
+
+		.modal-dialog-center {/* Edited classname 10/03/2014 */
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+		hr {
+			margin-bottom: 5px;
+			margin-top: 5px;
+		}
+
+		.no-close .ui-dialog-titlebar-close {
+			display: none;
+		}
+
+	</style>
+	<body>
+
+		<div id ="headerv" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container" style="width:900px;padding-left:100px ">
+					<a class="brand" href="#" style="text-decoration:none"><h1>COCO烘焙坊</h1></a>
+				</div>
+			</div>
+		</div>
+
+		<div id ="body" class="container" style="padding-top:130px;width:1000px">
+			<div class="rows" >
+				<div class="col-xs-3">
+					<div class="list-group">
+						<a href="#" class="list-group-item active" id="menu_users" onclick="togglepage('menu_users')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<b>客户管理</b></h3>
+						<p class="list-group-item-text">
+							<h6 style="color:#CCCCCC;margin-left: 42px">储值 积分 卡号</h6>
+						</p> </a>
+						<a href="#" class="list-group-item" id="menu_coupons" onclick="togglepage('menu_coupons')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;<b>优惠券</b></h3>
+						<p class="list-group-item-text">
+							<h6 style="color:#CCCCCC;margin-left: 42px">发布 兑换</h6>
+						</p> </a>
+						<a href="#" class="list-group-item" id="menu_products" onclick="togglepage('menu_products')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;<b>商品信息</b></h3>
+						<p class="list-group-item-text">
+							<h6 style="color:#CCCCCC;margin-left: 42px">发布 修改</h6>
+						</p> </a>
+						<a href="#" class="list-group-item" id="menu_shopinfo" onclick="togglepage('menu_shopinfo')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>店铺信息</b></h3>
+						<p class="list-group-item-text">
+							<h6 style="color:#CCCCCC;margin-left: 42px">发布  修改</h6>
+						</p> </a>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div id="menu_users_panel" class="panel panel-default" style="height:700px;">
+						<div class="panel-heading">
+							<h5>会员列表</h5>
+						</div>
+
+						<div class="panel-body" >
+							<div class="well well-sm container" style="width:650px">
+								<div class="rows">
+									<div class="col-xs-6">
+										<div class="input-group">
+											<div class="input-group-btn">
+												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="searchtype">
+													电话号码<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li>
+														<a href="#" onclick="selectsearchtype('卡号')">卡号</a>
+
+													</li>
+													<li>
+														<a href="#" onclick="selectsearchtype('电话号码')">电话号码</a>
+													</li>
+													<li class="divider"></li>
+													<li>
+														<a href="#" onclick="selectsearchtype('用户级别')">用户级别</a>
+													</li>
+
+												</ul>
+											</div><!-- /btn-group -->
+											<input type="text" class="form-control" id="searchtxt">
+											<span class="input-group-btn">
+												<button class="btn btn-primary" type="button" id="search" onclick="search();">
+													<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+												</button> </span>
+										</div><!-- /input-group -->
+									</div><!-- /.col-lg-6 -->
+									<div class="col-xs-4"></div>
+									<div class="col-xs-2">
+										<button class="btn btn-success" type="button" onclick="newuser()">
+											<span class="glyphicon glyphicon-plus"></span>&nbsp;新用户
+										</button>
+									</div>
+
+								</div>
+							</div>
+							<div id="pbody_customer">
+								<table class="table table-hover">
+									<th>微信卡号</th>
+									<th>实体卡号</th>
+									<th>级别</th>
+									<th>电话</th>
+									<th>余额</th>
+									<th>积分</th>
+									<th></th>
+									<% @customers.each do |customer| %>
+									<tr>
+										<td style="padding-top: 15px"><%= customer.cardid%></td>
+										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
+										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
+										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
+										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
+										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
+
+										<td>
+										<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
+											修改
+										</button>
+										<button type="button" class="btn btn-danger" recordid="<%= customer.id%>" onclick="delconfirm(this)" id="deletebtn<%= customer.id%>">
+											删除
+										</button></td>
+									</tr>
+									<% end %>
+								</table>
+								<div class="flickr_pagination">
+									<%= ajax_will_paginate @customers %>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div id="menu_coupons_panel" class="panel panel-default" style="height:800px;display:none">
+						<div class="panel-heading">
+							优惠券
+						</div>
+
+						<div class="panel-body" id="pbody_coupon">
+
+							<table class="table table-hover">
+								<th>用户级别</th>
+								<th>类别</th>
+								<th>折扣</th>
+								<th>分店</th>
+								<th>价值</th>
+								<th></th>
+								<th>
+								<button type="button" class="btn btn-success" onclick="operate()">
+									新建
+								</button></th>
+								<% @coupons.each do |coupon| %>
+								<tr>
+									<td style="padding-top: 15px"><%= coupon.usertype%></td>
+									<td style="padding-top: 15px" id="test2"><%= coupon.coupon_type%></td>
+									<td style="padding-top: 15px"><%= coupon.discount%></td>
+									<td style="padding-top: 15px"><%= coupon.branch%></td>
+									<td style="padding-top: 15px"><%= coupon.present_value%></td>
+									<td>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+										修改
+									</button></td>
+
+									<td>
+									<button type="button" class="btn btn-primary" onclick="">
+										发送
+									</button></td>
+								</tr>
+								<% end %>
+							</table>
+
+							<div class="flickr_pagination">
+								<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+							</div>
+						</div>
+					</div>
+
+					<div id="menu_products_panel" class="panel panel-default" style="height:800px;display:none">
+						<div class="panel-heading">
+							商品信息
+						</div>
+						<div class="panel-body">
+
+							<table class="table table-hover">
+								<tr>
+									<td>3</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div id="menu_shopinfo_panel" class="panel panel-default" style="height:500px;display:none">
+						<div class="panel-heading">
+							店铺信息
+						</div>
+						<div class="panel-body">
+
+							<table class="table table-hover">
+								<tr>
+									<td>4</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>TB - Monthly</td>
+									<td>01/04/2012</td>
+									<td>Approved</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div id="delconfirm" class="ui-helper-hidden" style="width:300px;overflow: hidden">
+			<p>
+				<span class="ui-icon ui-icon-info" style="float:left; margin:0 2px 20px 0;"></span>
+				<b>确定删除该会员记录.</b>
+			</p>
+			<p>
+
+			</p>
+		</div>
+
+		<div id="newuser" class="ui-helper-hidden" style="width:300px;overflow: hidden">
+			<form class="form-horizontal">
+
+				<label class="control-label" contenteditable="true" for="inputcardno">卡号</label>
+
+				<div class="controls">
+					<input id="inputcardno" placeholder="卡号" type="text"/>
+				</div>
+
+				<label class="control-label" contenteditable="true" for="inputphone">电话</label>
+
+				<div class="controls">
+					<input id="inputphone" placeholder="电话号码" type="text" />
+				</div>
+
+				<label class="control-label" contenteditable="true" for="inputbalance">预存</label>
+
+				<div class="controls">
+					<input id="inputbalance" placeholder="0" type="text" />
+				</div>
+
+			</form>
+		</div>
+
+		<div class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container" style="width: 900px">
+				<p class="text-muted credit" style="text-align: right">
+					COCO烘焙坊   2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+				</p>
+			</div>
+
+		</div>
+	</body>
+	<script>
+		var current_menu = "menu_users";
+		var searchtype = "phone"
+		$(document).ready(function() {
+
+			//$('.editab').editable('disable');
+		});
+		function togglepage(id) {
+			if (id == current_menu) {
+				return;
+			} else {
+				$("#" + current_menu).removeClass("active");
+				$("#" + current_menu + "_panel").hide();
+				$("#" + id).addClass("active");
+				$("#" + id + "_panel").show();
+				current_menu = id;
+			}
+		}
+
+		function delconfirm(ref) {
+			var rid = $(ref).attr('recordid');
+			var txt = $.trim($(ref).text());
+			if (txt == "删除") {
+				$("#delconfirm").dialog({
+					modal : false,
+					dialogClass : "no-close",
+					buttons : {
+						"确认" : function() {
+							$(this).dialog("close");
+
+						},
+						"取消" : function() {
+							$(this).dialog("close");
+
+						}
+					},
+					show : {
+						effect : "slideToggle",
+						duration : 100
+					},
+					position : {
+						my : "center center",
+						at : "center center",
+						of : pbody_customer
+					},
+
+					open : function(event) {
+						$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-danger');
+						$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-primary');
+					}
+				});
+			} else {
+				$("#changebtn" + rid).removeClass("btn-success").addClass("btn-primary");
+				$("#changebtn" + rid).html("修改");
+				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				$("#deletebtn" + rid).html("删除");
+			}
+		}
+
+		function newuser() {
+
+			$("#newuser").dialog({
+				dialogClass : "no-close",
+				modal : true,
+				title : "增加新会员",
+				buttons : {
+					"确认" : function() {
+						//$(this).dialog("close");
+						var cardno = $.trim($("#inputcardno").val());
+						if (cardno == "") {
+							$("#inputcardno").popover({
+								placement : 'bottom',
+								content : '卡号不能为空',
+							});
+
+							$("#inputcardno").popover('show');
+							return;
+						} else {
+							adduser();
+							clearuser();
+							$(this).dialog("close");
+							$("#inputcardno").popover('destroy');
+						}
+
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+						clearuser();
+						$("#inputcardno").popover('destroy');
+
+					}
+				},
+				show : {
+					effect : "slideToggle",
+					duration : 100
+				},
+				position : {
+					my : "center top",
+					at : "center top",
+					of : pbody_customer
+				},
+
+				open : function(event) {
+					$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-success');
+					$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-default');
+				}
+			});
+		}
+
+		function adduser() {
+
+		}
+
+		function clearuser() {
+			$("#inputcardno").val("");
+			$("#inputphone").val("");
+			$("#inputbalance").val("");
+
+		}
+
+		function selectsearchtype(str) {
+			$("#searchtype").html(str + "<span class='caret'></span>");
+			if (str == '卡号') {
+				searchtype = "realcardid";
+				return;
+			}
+			if (str == '电话号码') {
+				searchtype = "phone";
+				return;
+			}
+			if (str == '用户级别') {
+				searchtype = "level";
+				return;
+			}
+		}
+
+		function search() {
+			searchvalue = $.trim($("#searchtxt").val());
+			if (searchvalue == "") {
+				$("#searchtxt").popover({
+					placement : 'top',
+					content : '请输入要搜索的数据',
+					delay : 500
+				});
+				$("#searchtxt").popover('show');
+				return
+			}
+			$.post("/customers/search", {
+				searchtp : searchtype,
+				searchvalue : searchvalue,
+			}, null, "script");
+		}
+
+		function operate(obj) {
+			var txt = $.trim($(obj).text());
+			var rid = $(obj).attr('recordid');
+
+			if (txt == '修改') {
+				$('#realcardid' + rid).editable({
+					validate : function(value) {
+						if ($.trim(value).length > 12)
+							return '卡号不能大于12位';
+					}
+				});
+
+				$('#level' + rid).editable({
+					type : 'select',
+					value : 1,
+					source : [{
+						value : 1,
+						text : '普通会员'
+					}, {
+						value : 2,
+						text : 'VIP会员'
+					}, {
+						value : 3,
+						text : '白银会员'
+					}, {
+						value : 4,
+						text : '黄金会员'
+					}, {
+						value : 5,
+						text : '白金会员'
+					}]
+				});
+
+				$('#phone' + rid).editable({
+					validate : function(value) {
+						if ($.trim(value).length > 11)
+							return '电话号码不能大于11位';
+					}
+				});
+
+				$('#balance' + rid).editable({
+					type : 'number',
+					validate : function(value) {
+						var regex = /^[0-9]+$/;
+						if (! regex.test(value)) {
+							return '余额只能是数字';
+						}
+
+						if ($.trim(value).length > 6) {
+							return '余额不能多于6位'
+						}
+					}
+				});
+
+				$('#bonus' + rid).editable({
+					type : 'number',
+					validate : function(value) {
+						var regex = /^[0-9]+$/;
+						if (! regex.test(value)) {
+							return '积分只能是数字';
+						}
+
+						if ($.trim(value).length > 6) {
+							return '积分不能多于6位'
+						}
+					}
+				});
+
+				$("[recordid='edt" + rid + "']").editable('enable');
+				$(obj).removeClass("btn-primary").addClass("btn-success");
+				$(obj).html("保存");
+				$("#deletebtn" + rid).removeClass("btn-danger").addClass("btn-default");
+				$("#deletebtn" + rid).html("取消");
+
+			} else {
+
+				$("[recordid='edt" + rid + "']").editable('toggleDisabled');
+				$(obj).removeClass("btn-success").addClass("btn-primary");
+				$(obj).html("修改");
+				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				$("#deletebtn" + rid).html("删除");
+				$("#deletebtn" + rid).on("click", delconf);
+
+			}
+		}
+	</script>
+</html>

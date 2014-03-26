@@ -1,4 +1,4 @@
-<ul class="float">
+	<ul class="float">
 	<% @usertemplates.each do |usertemplate| %>
 	<li>
 		<a class="lightbox themegrid" id="tem<%= usertemplate.id%>" href="<%= usertemplate.preview.url(:medium)%>&width=800&height=600"> <%= image_tag usertemplate.preview.url(:thumb), title:"点击查看详情", alt:usertemplate.pic, addr:usertemplate.id%> </a>

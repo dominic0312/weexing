@@ -9,7 +9,7 @@ Weexing::Application.routes.draw do
   resources :pointcodes
 
 
-  resources :coupons
+
   resources :customers
 
 
@@ -18,6 +18,8 @@ Weexing::Application.routes.draw do
   
   get 'usertemplates/display'
   get 'membercards/display'
+  get 'cardbackground/index'
+  get 'coupons/display'
   #post 'shops/updatelogo'
   match "/admin" => "admins#login",via: [:get]
   match "/shops/uploadlogo/:id" => "shops#uploadlogo",via: [:get,:post],:as=>"uploadlogo"
@@ -32,11 +34,13 @@ Weexing::Application.routes.draw do
   get 'shops/display' 
   get "shops/createshop"
   post "shops/urlcheck"
+  post "customers/search"
   get  'weixin/:weixin_token', to: 'weixin#index'
   post 'weixin/:weixin_token', to: 'weixin#reply'
   resources :usertemplates
   resources :shops
   resources :membercards
+  #resources :coupons
   
   match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
   match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
@@ -141,7 +145,7 @@ Weexing::Application.routes.draw do
 
 # You can have the root of your site routed with "root"
 # just remember to delete public/index.html.
-# root :to => 'welcome#index'
+root :to => 'homepage#login'
 
 # See how all your routes lay out with "rake routes"
 

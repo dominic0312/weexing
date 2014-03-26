@@ -5,6 +5,7 @@ class Coupon < ActiveRecord::Base
   validates_attachment :pic, :presence => true,
   :content_type => { :content_type => "image/jpeg" },
   :size => { :in => 0..100.kilobytes }
+
 #validates_attachment_content_type :pic, :content_type => ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png']
 # validates_attachment :pic, :presence => true,
 #:content_type => { :content_type => "*.jpg" },

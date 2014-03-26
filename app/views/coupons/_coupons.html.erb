@@ -1,0 +1,34 @@
+<table class="table table-hover">
+	<th>用户级别</th>
+	<th>类别</th>
+	<th>折扣</th>
+	<th>分店</th>
+	<th>价值</th>
+	<th></th>
+	<th>
+	<button type="button" class="btn btn-success" onclick="operate()">
+		新建
+	</button></th>
+	<% @coupons.each do |coupon| %>
+	<tr>
+		<td style="padding-top: 15px"><%= coupon.usertype%></td>
+		<td style="padding-top: 15px" id="test2"><%= coupon.coupon_type%></td>
+		<td style="padding-top: 15px"><%= coupon.discount%></td>
+		<td style="padding-top: 15px"><%= coupon.branch%></td>
+		<td style="padding-top: 15px"><%= coupon.present_value%></td>
+		<td>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+			修改
+		</button></td>
+
+		<td>
+		<button type="button" class="btn btn-primary" onclick="">
+			发送
+		</button></td>
+	</tr>
+	<% end %>
+</table>
+
+<div class="flickr_pagination">
+	<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+</div>
