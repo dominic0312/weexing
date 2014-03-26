@@ -3,7 +3,8 @@ Weexing::Application.routes.draw do
  
   
 
-  mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
+  mount WeixinRailsMiddleware::Engine, at: "/"
+  #mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
 
   resources :pointcodes

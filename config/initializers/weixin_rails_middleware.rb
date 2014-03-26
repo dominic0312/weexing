@@ -2,21 +2,18 @@
 WeixinRailsMiddleware.configure do |config|
 
   ## NOTE:
-  ## If you config all them, it will use `token_string` default
-  ##
+  ## If you config all them, it will use `weixin_token_string` default
+
+  ## Config public_account_class if you SAVE public_account into database ##
   # Th first configure is fit for your weixin public_account is saved in database.
-  # +token_model+ and +token_column+ must in the same table.
-  # +token_model+ The class name that to save your public_account
-  # +token_column+ You can config a column name Optional, but you must have a column `weixin_token` default.
-   config.token_model  = "Shop"
-   config.token_column = "weixin_token"
+  # +public_account_class+ The class name that to save your public_account
+  config.public_account_class = "Shop"
 
+  ## Here configure is for you DON'T WANT TO SAVE your public account into database ##
   # Or the other configure is fit for only one weixin public_account
-  # If you config `token_string`, so it will directly use it
-  # config.token_string = "token string"
-
-  # Router
-  # Default is "/", and recommend you use default directly.
-   #config.engine_path = "/"
+  # If you config `weixin_token_string`, so it will directly use it
+  # config.weixin_token_string = '67b4a167b272aa2fc81565e4'
+  # using to weixin server url to validate the token can be trusted.
+  # config.weixin_secret_string = 'pmrpky7uFLiyr1AlihPLFKYB-4PqFYHe'
 
 end
