@@ -235,6 +235,7 @@ class ShopsController < ApplicationController
       @shopurl=shop.shopurl
       @token=shop.weixin_token
       @shopid=sid
+      @secret=shop.weixin_secret_key
     end
 
     respond_to do |format|
@@ -245,22 +246,15 @@ class ShopsController < ApplicationController
 
   def urlcheck
     url=params[:url_name]
-    token=params[:token_name]
     sid=params[:shop_id]
     shop=Shop.where(:shopurl=>url).first
 
     if shop
       render  :js=> "urlexist()" and return
-    else
-      shop2=Shop.where(:weixin_token=>token).first
-      if shop2
-        render  :js=> "tokenexist();" and return
-      end
     end
 
     shop =Shop.find(sid);
     shop.shopurl=url
-    shop.weixin_token=token
     shop.save
     render :js=>"urlsuccess();"
 

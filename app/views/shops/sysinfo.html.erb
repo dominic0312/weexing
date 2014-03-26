@@ -15,6 +15,9 @@
 <div id="shopid" style="display:none">
 	<%= @shopid%>
 </div>
+<div id="secret" style="display:none">
+	<%= @secret%>
+</div>
 
 <p>
 	应用路径会在微信接入时用到，也会在用户后台的地址中出现。
@@ -24,10 +27,6 @@
 		<label for="url" class="trailinfo">子域名</label>
 		<input type="text" name="url" id="url" title="此处不能为空" class="text ui-widget-content ui-corner-all">
 	</div>
-	<div id="tokencolumn">
-		<label for="token" class="trailinfo">微信token</label>
-		<input type="text" name="token" id="token" title="此处不能为空" value="" class="text ui-widget-content ui-corner-all">
-	</div>
 	<div id="submitbtn">
 		<a class="guidebtn" onclick="submiturl()">提交</a>
 	</div>
@@ -36,10 +35,10 @@
 
 <div id ="urlinfo" style="display:inline-block; width:600px;height:300px;border:solid;vertical-align:top;">
 	<p>
-		此应用的token是:<%= @shopurl%>(请与微信公众平台端保持一致)
+		此应用的token是:<%= @token%>(请与微信公众平台端保持一致)
 	</p>
 	<p>
-		您的接入网址是 http://www.weexing.com/weixin/<%= @token%>, 请在微信公众平台后台接入。
+		您的接入网址是 http://www.weexing.com/weixin/<%= @secret%>, 请在微信公众平台后台接入。
 	</p>
 	<p>
 		此应用的后台网址是 http://www.weexing.com/<%= @shopurl%>，初始密码为:12345678,请及时修改。
@@ -66,7 +65,6 @@
 
 <script>
 	var vurl = $.trim($("#usrurl").text());
-	var vtoken = $.trim($("#usrtoken").text());
 	var vshopid = $.trim($("#shopid").text());
 
 	$(function() {
@@ -78,7 +76,7 @@
 
 	});
 
-	if (vurl != "" && vtoken != "") {
+	if (vurl != "") {
 		$("#urlform").css('display', 'none');
 
 	} else {
@@ -88,7 +86,7 @@
 	function submiturl() {
 
 		var nurl = $.trim($("#url").val());
-		var ntoken = $.trim($("#token").val());
+		
 
 		if (nurl == "") {
 			$("#container").notify("create", {
@@ -98,17 +96,8 @@
 			return;
 		}
 
-		if (ntoken == "") {
-			$("#container").notify("create", {
-				title : 'TOKEN不能为空',
-				text : '请输入不为空的TOKEN'
-			});
-			return;
-		}
-
 		$.post("/shops/urlcheck", {
 			url_name : nurl,
-			token_name : ntoken,
 			shop_id : vshopid
 		}, null, "script");
 
@@ -124,17 +113,11 @@
 
 	}
 
-	function tokenexist() {
-		$("#container").notify("create", {
-				title : '失败',
-				text : '这个TOKEN已经存在，请换一个。'
-			});
-	}
 
 	function urlsuccess() {
 		$("#container").notify("create", {
 				title : '成功',
-				text : 'URL和TOKEN都更新成功。'
+				text : 'URL设置成功。'
 			});
 	 history.go(0);
 

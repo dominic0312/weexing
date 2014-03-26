@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324175658) do
+ActiveRecord::Schema.define(version: 20140326092947) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -130,13 +130,17 @@ ActiveRecord::Schema.define(version: 20140324175658) do
     t.integer  "expried",              default: 0
     t.integer  "istrial",              default: 0
     t.integer  "user_id"
-    t.string   "weixin_token"
     t.string   "shopurl"
     t.string   "logopic_file_name"
     t.string   "logopic_content_type"
     t.integer  "logopic_file_size"
     t.datetime "logopic_updated_at"
+    t.string   "weixin_secret_key"
+    t.string   "weixin_token"
   end
+
+  add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree
+  add_index "shops", ["weixin_token"], name: "index_shops_on_weixin_token", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

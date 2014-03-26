@@ -1,4 +1,6 @@
 class Shop < ActiveRecord::Base
+  # It will auto generate weixin token and secret
+  include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
   attr_accessible :address, :agency, :cardtemplate, :logo, :name, :usertemplate_id, :phone, :exprieddate, :weixin_token,:shopurl,:logopic,:online,:expried,:istrial
   belongs_to :usertemplate
   belongs_to :membercard
