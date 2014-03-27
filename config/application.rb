@@ -10,10 +10,6 @@ if defined?(Bundler)
 end
 
 
-if defined?(Rails) && (Rails.env == 'development')
-  Rails.logger = Logger.new(STDOUT)
-end
-
 module Weexing
   class Application < Rails::Application
         config.to_prepare do

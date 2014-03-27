@@ -13,7 +13,10 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   private
 
     def response_text_message(options={})
-      reply_text_message("Your Message: #{@keyword}")
+      @userid=@weixin_message.FromUserName 
+      #reply_text_message("Your Message: #{@keyword}")
+      response_addcard
+      #reply_text_message("Your Message: #{@userid}")
     end
 
     # <Location_X>23.134521</Location_X>
@@ -54,7 +57,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
           # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
           reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
         end
-        reply_text_message("关注公众账号")
+        #reply_text_message("关注公众账号")
+        response_addcard
       when "unsubscribe" # 取消关注
         reply_text_message("取消关注")
       when "SCAN"        # 扫描带参数二维码事件: 2用户已关注时的事件推送
@@ -65,13 +69,41 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         @precision = @weixin_message.Precision
         reply_text_message("Your Location: #{@lat}, #{@lgt}, #{@precision}")
       when "CLICK"       # 点击菜单拉取消息时的事件推送
-        reply_text_message("你点击了: #{@keyword}")
+        #reply_text_message("你点击了: #{@keyword}")
+        response_article
       when "VIEW"        # 点击菜单跳转链接时的事件推送
         reply_text_message("你点击了: #{@keyword}")
       else
         reply_text_message("处理无法识别的事件")
       end
 
+    end
+    
+    def response_article
+       articles = [generate_article('标题','描述','http://www.weexing.com','http://www.weexing.com')]
+       reply_news_message(nil, nil, articles)
+    end
+    
+    def response_addcard
+        @userid=@weixin_message.FromUserName 
+        if Customer.ismemberexist(@userid)
+           customer=Customer.where(:openid=>@userid).first
+           @cid=customer.cardid
+           
+            articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com','http://www.weexing.com')]
+       reply_news_message(nil, nil, articles)
+           
+           reply_text_message("欢迎回来，我们的老客户,您的卡号是：#{@cid}")
+        else
+          customer=Customer.new
+          customer.openid=@userid
+          customer.save
+          @cardid="00000"+customer.id.to_s
+          customer.cardid=@cardid
+          customer.save
+          reply_text_message("欢迎领取会员卡，您的卡号是#{@cardid}")
+        end
+      
     end
 
     # <MediaId><![CDATA[media_id]]></MediaId>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326144917) do
+ActiveRecord::Schema.define(version: 20140327095205) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140326144917) do
     t.integer  "coupon_num", default: 0
     t.string   "phone"
   end
+
+  add_index "customers", ["openid"], name: "index_customers_on_openid", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
