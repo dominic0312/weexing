@@ -20,6 +20,8 @@ Weexing::Application.routes.draw do
   get 'usertemplates/display'
   get 'membercards/display'
   get 'cardbackground/index'
+  get 'cardbackground/index/:shopurl', to: 'cardbackground#index' 
+  get 'cardbackground/login'
   get 'coupons/display'
   #post 'shops/updatelogo'
   match "/admin" => "admins#login",via: [:get]
@@ -31,13 +33,14 @@ Weexing::Application.routes.draw do
   
   match "/shops/setupcard/:id" => "shops#setupcard",via: [:get,:post]
   
-  
+  post "cardbackground/passcheck"
   get 'shops/display' 
   get "shops/createshop"
   post "shops/urlcheck"
   post "customers/search"
   get  'weixin/:weixin_token', to: 'weixin#index'
   post 'weixin/:weixin_token', to: 'weixin#reply'
+  get 'cardbackground/:shopurl', to: 'cardbackground#login'
   resources :usertemplates
   resources :shops
   resources :membercards
@@ -67,6 +70,7 @@ Weexing::Application.routes.draw do
 
   resources :users
   get "sessions/destroy"
+  post "sessions/destroy_shop"
   post "test/check"
   get "admins/index"
   

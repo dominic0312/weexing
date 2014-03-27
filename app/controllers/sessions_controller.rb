@@ -13,8 +13,15 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_name] = nil
-     session[:user_id] = nil
-      session[:usertype] = nil
+    session[:user_id] = nil
+    session[:usertype] = nil
     redirect_to homepage_url
   end
+
+  def destroy_shop
+    session[:shopid] = nil
+    session[:shop_login]= 'empty'
+    render :js=>"redirect_login()" and return
+  end
+
 end

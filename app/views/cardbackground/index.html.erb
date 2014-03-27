@@ -3,6 +3,7 @@
 	<head>
 		<title>Bootstrap 101 Template</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 		<!-- Bootstrap -->
 		<%= stylesheet_link_tag "bootstrap.css" %>
 		<%= stylesheet_link_tag "bootstrap-theme.css" %>
@@ -41,13 +42,28 @@
 			display: none;
 		}
 
+		body {
+			background-color: #eee;
+		}
+
 	</style>
 	<body>
 
 		<div id ="headerv" class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="container" style="width:900px;padding-left:100px ">
-					<a class="brand" href="#" style="text-decoration:none"><h1>COCO烘焙坊</h1></a>
+				<div class="container" style="width:1000px ">
+					<div class="rows">
+						<div class="col-xs-10">
+							<div class="brand" style="color:#CCCCCC">
+								<h1><%= @shopname%></h1>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div style="padding-top: 30px;padding-left: 80px">
+								<a id="logout" href="#" onclick="logout()" style="color:#3071A9"><h4><b>退出</b></h4></a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -299,16 +315,20 @@
 
 		<div class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container" style="width: 900px">
-				<p class="text-muted credit" style="text-align: right">
-					COCO烘焙坊   2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+				<p class="text-muted credit" style="text-align: right; padding-top: 10px">
+					<%= @shopname%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
 				</p>
 			</div>
 
 		</div>
+		<div id="shopurl" style="display:none">
+			<%= @shopurl%>
+		</div>
 	</body>
 	<script>
 		var current_menu = "menu_users";
-		var searchtype = "phone"
+		var searchtype = "phone";
+
 		$(document).ready(function() {
 
 			//$('.editab').editable('disable');
@@ -457,6 +477,16 @@
 				searchtp : searchtype,
 				searchvalue : searchvalue,
 			}, null, "script");
+		}
+
+		function logout() {
+			$.post("/sessions/destroy_shop", {
+			}, null, "script");
+		}
+
+		function redirect_login() {
+			surl = $.trim($("#shopurl").html());
+			location.href = '/cardbackground/' + surl;
 		}
 
 		function operate(obj) {

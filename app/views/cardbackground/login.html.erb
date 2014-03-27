@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>登录</title>
+
+		<!-- Bootstrap core CSS -->
+		<%= stylesheet_link_tag "bootstrap.css" %>
+		<%= stylesheet_link_tag "signin.css" %>
+		<%= javascript_include_tag "jquery-191.js" %>
+		<%= javascript_include_tag "notify-custom.js" %>
+
+		<!-- Custom styles for this template -->
+
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<style>
+	</style>
+
+	<body>
+
+		<div id="vbody" class="container">
+			<form class="form-signin" action="">
+				<h2 class="form-signin-heading">请输入密码</h2>
+				<input type="password" class="form-control" placeholder="Password" id="passinput" autofocus>
+
+				<a class="btn btn-lg btn-primary btn-block" onclick="pass();"> 登入 </a>
+			</form>
+		</div>
+
+		<div class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container" style="width: 600px">
+				<p class="text-muted credit" style="text-align: right;margin-top:15px">
+					<%=@shopname%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+				</p>
+			</div>
+
+		</div>
+		<div id="shopid" style="display:none">
+			<%= @shopid%>
+		</div>
+		<div id="shopurl" style="display:none">
+			<%= @shopurl%>
+		</div>
+		
+		<div id="shopname" style="display:none">
+			<%= @shopname%>
+		</div>
+		<!-- /container -->
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+	</body>
+	<script>
+		function pass() {
+			passwd = $.trim($("#passinput").val());
+			sid = $.trim($("#shopid").html());
+			if (passwd == "") {
+				$("#passinput").notify("密码不能为空", {
+					position : "right",
+					autoHideDelay : 3000
+				});
+			} else {
+				$.post("/cardbackground/passcheck", {
+					shopid : sid,
+					password : passwd
+				}, null, "script");
+
+			}
+		}
+
+		function checksuccess() {
+			surl = $.trim($("#shopurl").html());
+			location.href = '/cardbackground/index/'+surl;
+		}
+
+		function checkfail() {
+			$("#passinput").notify("密码错误,登录失败", {
+				position : "right",
+				autoHideDelay : 3000
+			});
+
+		}
+
+	</script>
+</html>

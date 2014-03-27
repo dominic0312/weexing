@@ -255,6 +255,7 @@ class ShopsController < ApplicationController
 
     shop =Shop.find(sid);
     shop.shopurl=url
+    shop.password=url
     shop.save
     render :js=>"urlsuccess();"
 

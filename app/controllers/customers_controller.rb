@@ -84,8 +84,9 @@ class CustomersController < ApplicationController
   def search
     searchtp=params[:searchtp]
     searchval=params[:searchvalue]
+    shopid=params[:shopid]
     if searchtp && searchval
-      @customers= Customer.where("#{searchtp}='#{searchval}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
+      @customers= Customer.where("#{searchtp}='#{searchval}' and owner='#{shopid}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
     else
         render  :js=> "searchfail();" and return
     end

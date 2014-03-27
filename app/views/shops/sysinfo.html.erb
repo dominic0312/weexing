@@ -5,7 +5,6 @@
 <%= javascript_include_tag "jquery-ui-1.10.4.custom.js" %>
 <%= javascript_include_tag "jquery.notify.js" %>
 
-
 <div id="usrurl" style="display:none">
 	<%= @shopurl%>
 </div>
@@ -41,7 +40,7 @@
 		您的接入网址是 http://www.weexing.com/weixin/<%= @secret%>, 请在微信公众平台后台接入。
 	</p>
 	<p>
-		此应用的后台网址是 http://www.weexing.com/<%= @shopurl%>，初始密码为:12345678,请及时修改。
+		此应用的后台网址是 http://www.weexing.com/<%= @shopurl%>，初始密码为:<%= @shopurl%>,请及时修改。
 	</p>
 
 </div>
@@ -86,7 +85,6 @@
 	function submiturl() {
 
 		var nurl = $.trim($("#url").val());
-		
 
 		if (nurl == "") {
 			$("#container").notify("create", {
@@ -107,19 +105,18 @@
 
 	function urlexist() {
 		$("#container").notify("create", {
-				title : '失败',
-				text : '这个url已经存在，请换一个。'
-			});
+			title : '失败',
+			text : '这个url已经存在，请换一个。'
+		});
 
 	}
 
-
 	function urlsuccess() {
 		$("#container").notify("create", {
-				title : '成功',
-				text : 'URL设置成功。'
-			});
-	 history.go(0);
+			title : '成功',
+			text : 'URL设置成功。'
+		});
+		history.go(0);
 
 	}
 </script>

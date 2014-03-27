@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326092947) do
+ActiveRecord::Schema.define(version: 20140326144917) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20140326092947) do
     t.datetime "logopic_updated_at"
     t.string   "weixin_secret_key"
     t.string   "weixin_token"
+    t.string   "password"
   end
 
   add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree
