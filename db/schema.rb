@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327095205) do
+ActiveRecord::Schema.define(version: 20140330103129) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140327095205) do
     t.date     "startdate"
     t.date     "enddate"
     t.string   "coupon_type"
-    t.string   "present_name"
+    t.string   "title"
     t.integer  "discount"
     t.integer  "present_value"
     t.string   "branch"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140327095205) do
     t.datetime "updated_at",                   null: false
     t.integer  "sent",             default: 0
     t.string   "pic"
-    t.string   "photo_file_name"
+    t.string   "pic_file_name"
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
@@ -55,17 +55,20 @@ ActiveRecord::Schema.define(version: 20140327095205) do
     t.integer "coupon_id"
   end
 
+  add_index "coupons_customers", ["coupon_id"], name: "index_coupons_customers_on_coupon_id", using: :btree
+  add_index "coupons_customers", ["customer_id"], name: "index_coupons_customers_on_customer_id", using: :btree
+
   create_table "customers", force: true do |t|
-    t.string   "owner"
+    t.string   "shop_id"
     t.string   "cardid"
-    t.integer  "balance"
-    t.integer  "bonus"
+    t.integer  "balance",    default: 0
+    t.integer  "bonus",      default: 0
     t.string   "realcardid"
-    t.string   "level"
+    t.string   "level",      default: "普通会员"
     t.string   "openid"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "unread"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "unread",     default: 0
     t.integer  "coupon_num", default: 0
     t.string   "phone"
   end
@@ -116,6 +119,15 @@ ActiveRecord::Schema.define(version: 20140327095205) do
   end
 
   add_index "pointcodes", ["secretcode"], name: "index_pointcodes_on_secretcode", using: :btree
+
+  create_table "requestcoupons", force: true do |t|
+    t.integer  "couponid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "content"
+    t.string   "cardno"
+  end
 
   create_table "shops", force: true do |t|
     t.string   "name"

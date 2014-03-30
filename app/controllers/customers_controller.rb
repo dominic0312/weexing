@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
+
+  before_filter :authadmin
   def index
     @customers = Customer.all
 
@@ -84,15 +86,61 @@ class CustomersController < ApplicationController
   def search
     searchtp=params[:searchtp]
     searchval=params[:searchvalue]
-    shopid=params[:shopid]
+    shopid=session[:shopid]
     if searchtp && searchval
-      @customers= Customer.where("#{searchtp}='#{searchval}' and owner='#{shopid}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
+      @customers= Customer.where("#{searchtp}='#{searchval}' and shop_id='#{shopid}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
     else
-        render  :js=> "searchfail();" and return
+      render  :js=> "searchfail();" and return
     end
     respond_to do |format|
-      format.html 
-      format.js   
+      format.html
+      format.js
+    end
+  end
+
+  def addcustomer
+    customer=Customer.new
+    customer.realcardid=params[:cardid]
+    customer.phone=params[:phone]
+    customer.balance=params[:balance]
+    customer.level=params[:vusertype]
+    shopid=session[:shopid]
+    customer.shop_id = shopid
+    customer.save
+
+    @customers= Customer.where(:shop_id=>shopid).paginate(:page => params[:page],:per_page => 8).order('id DESC')
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
+
+  def delcustomer
+    @customer = Customer.find(params[:recid])
+    @customer.destroy
+    shopid=session[:shopid]
+    @customers= Customer.where(:shop_id=>shopid).paginate(:page => params[:page],:per_page => 8).order('id DESC')
+    respond_to do |format|
+      format.js
+    end
+
+  end
+
+  def updatecustomer
+    @customer = Customer.find(params[:recid])
+    @customer.realcardid = params[:realcard]
+    @customer.bonus = params[:bonus]
+    @customer.balance=params[:balance]
+    @customer.phone = params[:phone]
+    @customer.level = params[:level]
+    @customer.save
+    render :js=>"success(#{params[:recid]})" and return
+  end
+
+  def authadmin
+    sid=session[:shopid]
+    if !sid
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
   end
 

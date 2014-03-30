@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        Regconfirm.delay.regist_confirm(@user)
+        Regconfirm.regist_confirm(@user).deliver
         format.js { render  :js=> "regsuccess('"+@user.email+"');"}
       else
         format.js { render  :js=> "regfail();"}

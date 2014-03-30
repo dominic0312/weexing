@@ -31,6 +31,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'rubyzip', '>= 1.0.0'
 gem 'weixin_rails_middleware'
 gem 'daemons'
+gem 'remotipart', '~> 1.2.1'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

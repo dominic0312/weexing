@@ -8,14 +8,23 @@
 		<%= stylesheet_link_tag "bootstrap.css" %>
 		<%= stylesheet_link_tag "bootstrap-theme.css" %>
 		<%= stylesheet_link_tag "pagenate.css" %>
+		<%= stylesheet_link_tag "datepicker3.css" %>
+		<%= stylesheet_link_tag "bootstrap-select.min.css" %>
 
 		<%= stylesheet_link_tag "bootstrap-editable.css" %>
 		<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
 		<%= javascript_include_tag "jquery-191.js" %>
-
+		<%= javascript_include_tag "jquery-ujs.js" %>
+		<%= javascript_include_tag "notify-custom.js" %>
+		<%= javascript_include_tag "bootstrap.file-input.js" %>
+		<%= javascript_include_tag "jquery.iframe-transport.js" %>
+		<%= javascript_include_tag "jquery.remotipart.js" %>
 		<%= javascript_include_tag "jquery-ui-1.10.4.custom.js" %>
 		<%= javascript_include_tag "bootstrap.js" %>
 		<%= javascript_include_tag "bootstrap-editable.js" %>
+		<%= javascript_include_tag "bootstrap-datepicker.js" %>
+		<%= javascript_include_tag "bootstrap-datepicker.zh-CN.js" %>
+		<%= javascript_include_tag "bootstrap-select.min.js" %>
 
 	</head>
 	<style>
@@ -44,6 +53,33 @@
 
 		body {
 			background-color: #eee;
+		}
+
+		.controls {
+			margin-bottom: 10px;
+		}
+		td.coupongrid {
+			padding-top: 50px;
+		}
+
+		.table > tbody > tr > td {
+			vertical-align: middle
+		}
+
+		.field {
+			margin-top: 10px
+		}
+
+		.number {
+			display: inline-block
+		}
+
+		.badge-success {
+			background-color: #5CB85C;
+		}
+
+		.badge-inverse {
+			background-color: #333;
 		}
 
 	</style>
@@ -93,7 +129,7 @@
 				<div class="col-xs-9">
 					<div id="menu_users_panel" class="panel panel-default" style="height:700px;">
 						<div class="panel-heading">
-							<h5>会员列表</h5>
+							会员列表
 						</div>
 
 						<div class="panel-body" >
@@ -125,9 +161,14 @@
 												<button class="btn btn-primary" type="button" id="search" onclick="search();">
 													<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 												</button> </span>
+
 										</div><!-- /input-group -->
 									</div><!-- /.col-lg-6 -->
-									<div class="col-xs-4"></div>
+									<div class="col-xs-4">
+										<button type="button" class="btn btn-default" id="listall" onclick="listall()">
+											显示所有
+										</button>
+									</div>
 									<div class="col-xs-2">
 										<button class="btn btn-success" type="button" onclick="newuser()">
 											<span class="glyphicon glyphicon-plus"></span>&nbsp;新用户
@@ -145,15 +186,14 @@
 									<th>余额</th>
 									<th>积分</th>
 									<th></th>
-									<% @customers.each do |customer| %>
 									<tr>
-										<td style="padding-top: 15px"><%= customer.cardid%></td>
-										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
-										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
-										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
-										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
-										<td style="padding-top: 15px"><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
-
+										<% @customers.each do |customer| %>
+										<td><%= customer.cardid%></td>
+										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
+										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
+										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
+										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
+										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
 										<td>
 										<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
 											修改
@@ -165,53 +205,83 @@
 									<% end %>
 								</table>
 								<div class="flickr_pagination">
-									<%= ajax_will_paginate @customers %>
+									<%= ajax_will_paginate @customers, :params=>{:controller=>"cardbackground", :action=>"index"}%>
 								</div>
 							</div>
 
 						</div>
 					</div>
 
-					<div id="menu_coupons_panel" class="panel panel-default" style="height:800px;display:none">
+					<div id="menu_coupons_panel" class="panel panel-default" style="height:700px;display:none">
 						<div class="panel-heading">
 							优惠券
 						</div>
 
-						<div class="panel-body" id="pbody_coupon">
+						<div class="panel-body">
+							<div class="well well-sm container" style="width:650px">
+								<div class="rows">
+									<div class="col-xs-6">
+										<button class="btn btn-success" type="button" onclick="newcoupon()">
+											<span class="glyphicon glyphicon-plus"></span>&nbsp;<b>添加优惠券</b>
+										</button>
+									</div><!-- /.col-lg-6 -->
+									<div class="col-xs-4">
 
-							<table class="table table-hover">
-								<th>用户级别</th>
-								<th>类别</th>
-								<th>折扣</th>
-								<th>分店</th>
-								<th>价值</th>
-								<th></th>
-								<th>
-								<button type="button" class="btn btn-success" onclick="operate()">
-									新建
-								</button></th>
-								<% @coupons.each do |coupon| %>
-								<tr>
-									<td style="padding-top: 15px"><%= coupon.usertype%></td>
-									<td style="padding-top: 15px" id="test2"><%= coupon.coupon_type%></td>
-									<td style="padding-top: 15px"><%= coupon.discount%></td>
-									<td style="padding-top: 15px"><%= coupon.branch%></td>
-									<td style="padding-top: 15px"><%= coupon.present_value%></td>
-									<td>
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-										修改
-									</button></td>
+									</div>
+									<div class="col-xs-2">
 
-									<td>
-									<button type="button" class="btn btn-primary" onclick="">
-										发送
-									</button></td>
-								</tr>
-								<% end %>
-							</table>
+									</div>
 
-							<div class="flickr_pagination">
-								<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+								</div>
+							</div>
+
+							<div id="pbody_coupon">
+								<table class="table table-hover">
+									<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
+									<th>标题</th>
+									<th>类别</th>
+									<th>开始日期</th>
+									<th>截止日期</th>
+									<th></th>
+									<th></th>
+
+									<% @coupons.each do |coupon| %>
+									<tr>
+										<td><%= image_tag coupon.pic.url(:thumb) %></td>
+										<td data-toggle="tooltip" data-placement="top" title="详情:<%= coupon.content%>"><%= coupon.title%></td>
+										<td><%= coupon.usertype%></td>
+										<td><%= coupon.startdate%></td>
+										<td><%= coupon.enddate%></td>
+										<td> <%if coupon.sent== 0%>
+										<button type="button" class="btn btn-primary" coupid="<%= coupon.id%>" onclick="pubcoupconfirm(this)" id="couppubbtn<%= coupon.id%>">
+											发布
+										</button>
+										<button type="button" class="btn btn-danger" coupid="<%= coupon.id%>" onclick="delcoupconfirm(this)" id="coupdeletebtn<%= coupon.id%>">
+											删除
+										</button><%else%>
+
+										<%if coupon.enddate > DateTime.now%>
+										<div class="number">
+
+											<a data-toggle="modal" href="/coupons/requestcoupon" data-target="#requestcoupon" > <span class="badge badge-success">待兑换 <span>42</span id="couponreq<%= coupon.id%>"></span></a>
+											<a href="#"> <span class="badge" style="color:dimgray;display:block;margin-top:5px" id="couponusd<%= coupon.id%>">已兑换 42</span></a>
+										</div>
+										<button type="button" class="btn btn-success" style="position: relative;bottom:12px;left:10px"  coupid="<%= coupon.id%>" onclick="pubcouprefresh(this)" id="couprefreshbtn<%= coupon.id%>">
+											刷新
+										</button> <%else%>
+										<div class="number">
+											<a href="#"> <span class="badge" style="color:dimgray;display:block ">已兑换 42</span></a>
+										</div>
+										<button type="button" class="btn btn-danger"  style="position: relative;bottom:2px;left:10px" coupid="<%= coupon.id%>" onclick="delcoupconfirm(this)" id="coupdeletebtn<%= coupon.id%>">
+											删除
+										</button> <%end%><%end%> </td>
+									</tr>
+									<% end %>
+								</table>
+
+								<div class="flickr_pagination">
+									<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -289,22 +359,53 @@
 			</p>
 		</div>
 
+		<div id="delcouponconfirm" class="ui-helper-hidden" style="width:300px;overflow: hidden">
+			<p>
+				<span class="ui-icon ui-icon-info" style="float:left; margin:0 2px 20px 0;"></span>
+				<b>确定删除该优惠券.</b>
+			</p>
+			<p>
+
+			</p>
+		</div>
+
+		<div id="pubcouponconfirm" class="ui-helper-hidden" style="width:300px;overflow: hidden">
+			<p>
+				<span class="ui-icon ui-icon-info" style="float:left; margin:0 2px 20px 0;"></span>
+				<b>发布后到期前将不能删除,请确认</b>
+			</p>
+			<p>
+
+			</p>
+		</div>
+
 		<div id="newuser" class="ui-helper-hidden" style="width:300px;overflow: hidden">
 			<form class="form-horizontal">
 
-				<label class="control-label" contenteditable="true" for="inputcardno">卡号</label>
+				<label class="control-label"  for="inputcardno">实体卡号</label>
 
 				<div class="controls">
 					<input id="inputcardno" placeholder="卡号" type="text"/>
 				</div>
+				<label class="control-label" for="inputphone">用户类型</label>
 
-				<label class="control-label" contenteditable="true" for="inputphone">电话</label>
+				<div class="controls">
+					<select id="inputusertype" name="coupon[usertype]" class="selectpicker">
+						<option value="普通会员">普通会员</option>
+						<option value="VIP会员">VIP会员</option>
+						<option value="白银会员">白银会员</option>
+						<option value="黄金会员">黄金会员</option>
+						<option value="白金会员">白金会员</option>
+					</select>
+				</div>
+
+				<label class="control-label" for="inputphone">电话</label>
 
 				<div class="controls">
 					<input id="inputphone" placeholder="电话号码" type="text" />
 				</div>
 
-				<label class="control-label" contenteditable="true" for="inputbalance">预存</label>
+				<label class="control-label"  for="inputbalance">预存</label>
 
 				<div class="controls">
 					<input id="inputbalance" placeholder="0" type="text" />
@@ -319,260 +420,95 @@
 					<%= @shopname%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
 				</p>
 			</div>
-
 		</div>
 		<div id="shopurl" style="display:none">
 			<%= @shopurl%>
 		</div>
+
+		<div id="coupon-form">
+
+		</div>
+
+		<div id="newcoupon"  class="ui-helper-hidden"  style="width:330px;overflow: hidden" >
+			<%= form_for @coupon, :remote => true,:url => createcoupon_path(@shopid),:html => { :multipart => true } do |f| %>
+
+			<div class="field" style="margin-top:10px">
+				<%= f.label :"标题" %>
+				<br />
+				<%= f.text_field :title %>
+			</div>
+
+			<div class="field">
+				<%= f.label :"详细" %>
+				<br />
+				<%= f.text_field :content %>
+			</div>
+			<div class="field">
+
+				<%= f.label :"优惠券类型" %>
+				<br />
+				<select id="coupon_usertype" name="coupon[usertype]" class="selectpicker">
+					<option value="折扣卷">折扣卷</option>
+					<option value="礼品卷">礼品卷</option>
+					<option value="礼品卷">积分卷</option>
+				</select>
+
+			</div>
+			<div class="field" id="datepicker">
+
+				<%= f.label :"截止日期" %>
+				<br />
+				<div class="input-daterange input-group" id="datepicker">
+					<input type="text" class="input-sm form-control" name="coupon[startdate]" id="coupon_startdate" />
+					<span class="input-group-addon">到</span>
+					<input type="text" class="input-sm form-control" name="coupon[enddate]" id="coupon_enddate	" />
+				</div>
+
+			</div>
+
+			<input type="hidden" id="coupon_shopid" name="coupon[shopid]" value="<%= @shopid%>" />
+			<div class="field">
+				<%= f.label :"图片" ,:id=>"piclabel"%>
+				<br />
+				<input id="coupon_pic" name="coupon[pic]" title="请选择一个图片" type="file" data-filename-placement="inside" class="btn">
+			</div>
+			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="text-align: right">
+				<%= f.submit "确定",:id=>"commit",:class=>"btn btn-success", :data => {:'disable-with' => "正在生成..."}%>
+
+				<button type="button" class="btn btn-default" onclick="closecoupon();">
+					取消
+				</button>
+
+			</div>
+
+			<% end %>
+		</div>
+
+		<div class="modal fade" id="requestcoupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title">Modal title</h4>
+
+					</div>
+					<div class="modal-body">
+						<div class="te"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+						<button type="button" class="btn btn-primary">
+							Save changes
+						</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+
 	</body>
-	<script>
-		var current_menu = "menu_users";
-		var searchtype = "phone";
-
-		$(document).ready(function() {
-
-			//$('.editab').editable('disable');
-		});
-		function togglepage(id) {
-			if (id == current_menu) {
-				return;
-			} else {
-				$("#" + current_menu).removeClass("active");
-				$("#" + current_menu + "_panel").hide();
-				$("#" + id).addClass("active");
-				$("#" + id + "_panel").show();
-				current_menu = id;
-			}
-		}
-
-		function delconfirm(ref) {
-			var rid = $(ref).attr('recordid');
-			var txt = $.trim($(ref).text());
-			if (txt == "删除") {
-				$("#delconfirm").dialog({
-					modal : false,
-					dialogClass : "no-close",
-					buttons : {
-						"确认" : function() {
-							$(this).dialog("close");
-
-						},
-						"取消" : function() {
-							$(this).dialog("close");
-
-						}
-					},
-					show : {
-						effect : "slideToggle",
-						duration : 100
-					},
-					position : {
-						my : "center center",
-						at : "center center",
-						of : pbody_customer
-					},
-
-					open : function(event) {
-						$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-danger');
-						$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-primary');
-					}
-				});
-			} else {
-				$("#changebtn" + rid).removeClass("btn-success").addClass("btn-primary");
-				$("#changebtn" + rid).html("修改");
-				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
-				$("#deletebtn" + rid).html("删除");
-			}
-		}
-
-		function newuser() {
-
-			$("#newuser").dialog({
-				dialogClass : "no-close",
-				modal : true,
-				title : "增加新会员",
-				buttons : {
-					"确认" : function() {
-						//$(this).dialog("close");
-						var cardno = $.trim($("#inputcardno").val());
-						if (cardno == "") {
-							$("#inputcardno").popover({
-								placement : 'bottom',
-								content : '卡号不能为空',
-							});
-
-							$("#inputcardno").popover('show');
-							return;
-						} else {
-							adduser();
-							clearuser();
-							$(this).dialog("close");
-							$("#inputcardno").popover('destroy');
-						}
-
-					},
-					"取消" : function() {
-						$(this).dialog("close");
-						clearuser();
-						$("#inputcardno").popover('destroy');
-
-					}
-				},
-				show : {
-					effect : "slideToggle",
-					duration : 100
-				},
-				position : {
-					my : "center top",
-					at : "center top",
-					of : pbody_customer
-				},
-
-				open : function(event) {
-					$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-success');
-					$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-default');
-				}
-			});
-		}
-
-		function adduser() {
-
-		}
-
-		function clearuser() {
-			$("#inputcardno").val("");
-			$("#inputphone").val("");
-			$("#inputbalance").val("");
-
-		}
-
-		function selectsearchtype(str) {
-			$("#searchtype").html(str + "<span class='caret'></span>");
-			if (str == '卡号') {
-				searchtype = "realcardid";
-				return;
-			}
-			if (str == '电话号码') {
-				searchtype = "phone";
-				return;
-			}
-			if (str == '用户级别') {
-				searchtype = "level";
-				return;
-			}
-		}
-
-		function search() {
-			searchvalue = $.trim($("#searchtxt").val());
-			if (searchvalue == "") {
-				$("#searchtxt").popover({
-					placement : 'top',
-					content : '请输入要搜索的数据',
-					delay : 500
-				});
-				$("#searchtxt").popover('show');
-				return
-			}
-			$.post("/customers/search", {
-				searchtp : searchtype,
-				searchvalue : searchvalue,
-			}, null, "script");
-		}
-
-		function logout() {
-			$.post("/sessions/destroy_shop", {
-			}, null, "script");
-		}
-
-		function redirect_login() {
-			surl = $.trim($("#shopurl").html());
-			location.href = '/cardbackground/' + surl;
-		}
-
-		function operate(obj) {
-			var txt = $.trim($(obj).text());
-			var rid = $(obj).attr('recordid');
-
-			if (txt == '修改') {
-				$('#realcardid' + rid).editable({
-					validate : function(value) {
-						if ($.trim(value).length > 12)
-							return '卡号不能大于12位';
-					}
-				});
-
-				$('#level' + rid).editable({
-					type : 'select',
-					value : 1,
-					source : [{
-						value : 1,
-						text : '普通会员'
-					}, {
-						value : 2,
-						text : 'VIP会员'
-					}, {
-						value : 3,
-						text : '白银会员'
-					}, {
-						value : 4,
-						text : '黄金会员'
-					}, {
-						value : 5,
-						text : '白金会员'
-					}]
-				});
-
-				$('#phone' + rid).editable({
-					validate : function(value) {
-						if ($.trim(value).length > 11)
-							return '电话号码不能大于11位';
-					}
-				});
-
-				$('#balance' + rid).editable({
-					type : 'number',
-					validate : function(value) {
-						var regex = /^[0-9]+$/;
-						if (! regex.test(value)) {
-							return '余额只能是数字';
-						}
-
-						if ($.trim(value).length > 6) {
-							return '余额不能多于6位'
-						}
-					}
-				});
-
-				$('#bonus' + rid).editable({
-					type : 'number',
-					validate : function(value) {
-						var regex = /^[0-9]+$/;
-						if (! regex.test(value)) {
-							return '积分只能是数字';
-						}
-
-						if ($.trim(value).length > 6) {
-							return '积分不能多于6位'
-						}
-					}
-				});
-
-				$("[recordid='edt" + rid + "']").editable('enable');
-				$(obj).removeClass("btn-primary").addClass("btn-success");
-				$(obj).html("保存");
-				$("#deletebtn" + rid).removeClass("btn-danger").addClass("btn-default");
-				$("#deletebtn" + rid).html("取消");
-
-			} else {
-
-				$("[recordid='edt" + rid + "']").editable('toggleDisabled');
-				$(obj).removeClass("btn-success").addClass("btn-primary");
-				$(obj).html("修改");
-				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
-				$("#deletebtn" + rid).html("删除");
-				$("#deletebtn" + rid).on("click", delconf);
-
-			}
-		}
-	</script>
-</html>

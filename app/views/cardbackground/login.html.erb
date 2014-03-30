@@ -27,36 +27,128 @@
 		<![endif]-->
 	</head>
 	<style>
+		.form-signin {
+			max-width: 330px;
+			padding: 15px;
+			margin: 0 auto;
+			padding-top: 5px;
+		}
+		.form-signin .form-signin-heading, .form-signin .checkbox {
+			margin-bottom: 10px;
+		}
+		.form-signin .checkbox {
+			font-weight: normal;
+		}
+		.form-signin .form-control {
+			position: relative;
+			font-size: 16px;
+			height: auto;
+			padding: 10px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.form-signin .form-control:focus {
+			z-index: 2;
+		}
+		.form-signin input[type="password"] {
+			margin-bottom: 10px;
+		}
+		.account-wall {
+			margin-top: 20px;
+			padding: 40px 0px 20px 0px;
+			background-color: #f7f7f7;
+			-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		}
+		.login-title {
+			color: #555;
+			font-size: 18px;
+			font-weight: 400;
+			display: block;
+		}
+		.profile-img {
+			width: 96px;
+			height: 96px;
+			margin: 0 auto 10px;
+			display: block;
+			-moz-border-radius: 50%;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+		}
+		.profile-name {
+			font-size: 16px;
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 20px;
+			height: 1em;
+		}
+		.profile-email {
+			display: block;
+			padding: 0 8px;
+			font-size: 15px;
+			color: #404040;
+			line-height: 2;
+			font-size: 14px;
+			text-align: center;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.need-help {
+			display: block;
+			margin-top: 10px;
+		}
+		.new-account {
+			display: block;
+			margin-top: 10px;
+		}
 	</style>
 
 	<body>
 
-		<div id="vbody" class="container">
-			<form class="form-signin" action="">
-				<h2 class="form-signin-heading">请输入密码</h2>
-				<input type="password" class="form-control" placeholder="Password" id="passinput" autofocus>
-
-				<a class="btn btn-lg btn-primary btn-block" onclick="pass();"> 登入 </a>
-			</form>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-md-offset-4">
+					 <h1 class="text-center login-title">微信会员卡后台登陆</h1>
+			
+					<div class="account-wall">
+						<%= image_tag @shop.logopic.url(:thumb),:class=>"profile-img" %>
+						<p class="profile-name">
+							<%= @shop.name%>
+						</p>
+						<form class="form-signin" action="">
+							<input type="password" class="form-control" placeholder="密码" id="passinput" autofocus>
+							<a class="btn btn-lg btn-primary btn-block" onclick="pass();">
+								登入
+							</a>
+							<a href="#" class="need-help">如何登录? </a><span class="clearfix"></span>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-
 		<div class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container" style="width: 600px">
 				<p class="text-muted credit" style="text-align: right;margin-top:15px">
-					<%=@shopname%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+					<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
 				</p>
 			</div>
 
 		</div>
 		<div id="shopid" style="display:none">
-			<%= @shopid%>
+			<%= @shop.id%>
 		</div>
 		<div id="shopurl" style="display:none">
-			<%= @shopurl%>
+			<%= @shop.shopurl%>
 		</div>
-		
+
 		<div id="shopname" style="display:none">
-			<%= @shopname%>
+			<%= @shop.name%>
 		</div>
 		<!-- /container -->
 
@@ -84,7 +176,7 @@
 
 		function checksuccess() {
 			surl = $.trim($("#shopurl").html());
-			location.href = '/cardbackground/index/'+surl;
+			location.href = '/sp/' + surl;
 		}
 
 		function checkfail() {

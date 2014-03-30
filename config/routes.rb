@@ -20,13 +20,16 @@ Weexing::Application.routes.draw do
   get 'usertemplates/display'
   get 'membercards/display'
   get 'cardbackground/index'
-  get 'cardbackground/index/:shopurl', to: 'cardbackground#index' 
+  post 'cardbackground/index'
+  get 'sp/:shopurl', to: 'cardbackground#index' 
   get 'cardbackground/login'
   get 'coupons/display'
   #post 'shops/updatelogo'
   match "/admin" => "admins#login",via: [:get]
   match "/shops/uploadlogo/:id" => "shops#uploadlogo",via: [:get,:post],:as=>"uploadlogo"
   match '/shops/updatelogo/:id' => 'shops#updatelogo',via: [:get,:post], :as => "updatelogo"
+  match '/coupons/newcoupon/:shopid' => 'coupons#newcoupon',via: [:get]
+  match '/coupons/createcoupon/:shopid' => 'coupons#createcoupon',via: [:get,:post], :as=>"createcoupon"
   match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
   match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
   match "/useractivate" => "users#activate",via: [:get]
@@ -38,6 +41,12 @@ Weexing::Application.routes.draw do
   get "shops/createshop"
   post "shops/urlcheck"
   post "customers/search"
+  post "customers/addcustomer"
+  post "customers/updatecustomer"
+  post "customers/delcustomer"
+  
+  post "coupons/delcoupon"
+  get "coupons/requestcoupon"
   get  'weixin/:weixin_token', to: 'weixin#index'
   post 'weixin/:weixin_token', to: 'weixin#reply'
   get 'cardbackground/:shopurl', to: 'cardbackground#login'
@@ -77,7 +86,7 @@ Weexing::Application.routes.draw do
   post "users/create"
   post "homepage/usercheck"
   post "admins/adminlogin"
-  post "coupons/send_coupon"
+  post "coupons/sendcoupon"
   get 'homepage/apps' 
   get "homepage/login"
  get "cardguest/cardpage"

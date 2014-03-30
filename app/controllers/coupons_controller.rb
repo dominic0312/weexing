@@ -53,6 +53,31 @@ class CouponsController < ApplicationController
     end
   end
 
+  def createcoupon
+
+    @coupon = Coupon.new(params[:coupon])
+    @shopid=params[:shopid]
+    @title=params[:coupon][:title]
+    @len=@title.split(//u).length
+    if @len>10
+      render :js=>"coupontitlefail()" and return
+    end
+    if @coupon.save
+      @coupons= Coupon.where(:shopid=>@shopid).paginate(:page => params[:page],:per_page => 4).order('id DESC')
+      respond_to do |format|
+        format.js
+      end
+    else
+      render :js=>"savecouponfail();" and return
+    end
+
+  end
+
+  def newcoupon
+    @coupon = Coupon.new
+
+  end
+
   # PUT /coupons/1
   # PUT /coupons/1.json
   def update
@@ -84,29 +109,46 @@ class CouponsController < ApplicationController
   end
 
   def display
-    @coupons = Coupon.where(:shopid => 2).paginate(:page => params[:page],:per_page => 8).order('id DESC')
+    @shopid=session[:shopid]
+    @coupons = Coupon.where(:shopid => @shopid).paginate(:page => params[:page],:per_page => 4).order('id DESC')
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
     end
   end
 
-  def send_coupon
-    @coupon= Coupon.find(params[:id])
+  def sendcoupon
+    @id=params[:recid]
+    @coupon= Coupon.find(@id)
 
-    respond_to do |format|
-      if @coupon.sent == 1
-        format.js {  render  :js=> "coupon_fail();"}
-      else
-        @coupon.sent = 1
-        @coupon.save
-        @customers= Customer.find_all_by_owner(@coupon.shopid);
+    if @coupon.sent == 1
+      render  :js=> "coupon_sendfail(#{@id});" and return
+    else
+      @coupon.sent = 1
+      if @coupon.save
+        @customers= Customer.where(:shop_id=>@coupon.shopid);
         @customers.each do |customer|
           customer.coupons << @coupon
         end
-        str='coupon_sent('+params[:id]+')'
-        format.js {  render  :js=> str}
+
+        render  :js=>"coupon_sendsucc(#{@id});" and return
       end
     end
   end
+
+  def delcoupon
+    @coupon = Coupon.find(params[:recid])
+    @coupon.destroy
+    shopid=session[:shopid]
+    @coupons= Coupon.where(:shopid=>shopid).paginate(:page => params[:page],:per_page => 4).order('id DESC')
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def requestcoupon
+    
+  end
+
 end

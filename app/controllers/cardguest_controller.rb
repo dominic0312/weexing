@@ -1,17 +1,21 @@
 class CardguestController < ApplicationController
   def cardpage
-    shopname=params[:id]
-    shoppage=Shop.where(:shopurl=>shopname).first
+    shopid=params[:id]
+    shoppage=Shop.find(shopid)
 
     respond_to do |format|
       if shoppage
         @brandname=shoppage.name
         @logopic=shoppage.logopic.url
-        @cardpic=shoppage.membercard.pic
+        @card=shoppage.membercard
+        if @card
+          @cardpic=@card.pic
+        else @cardpic=""
+        end
         @page=shoppage.usertemplate.pic
       format.html
       else
-         format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+        format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
       end
 
     end

@@ -1,34 +1,30 @@
 <table class="table table-hover">
-	<th>用户级别</th>
-	<th>类别</th>
-	<th>折扣</th>
-	<th>分店</th>
-	<th>价值</th>
-	<th></th>
-	<th>
-	<button type="button" class="btn btn-success" onclick="operate()">
-		新建
-	</button></th>
-	<% @coupons.each do |coupon| %>
-	<tr>
-		<td style="padding-top: 15px"><%= coupon.usertype%></td>
-		<td style="padding-top: 15px" id="test2"><%= coupon.coupon_type%></td>
-		<td style="padding-top: 15px"><%= coupon.discount%></td>
-		<td style="padding-top: 15px"><%= coupon.branch%></td>
-		<td style="padding-top: 15px"><%= coupon.present_value%></td>
-		<td>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-			修改
-		</button></td>
+									<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
+									<th>标题</th>
+									<th>类别</th>
+									<th>开始日期</th>
+									<th>截止日资</th>
+									<th></th>
+									<th></th>
 
-		<td>
-		<button type="button" class="btn btn-primary" onclick="">
-			发送
-		</button></td>
-	</tr>
-	<% end %>
-</table>
+									<% @coupons.each do |coupon| %>
+									<tr>
+										<td><%= image_tag coupon.pic.url(:thumb) %></td>
+										<td data-toggle="tooltip" data-placement="top" title="详情:<%= coupon.content%>"><%= coupon.title%></td>
+										<td><%= coupon.usertype%></td>
+										<td><%= coupon.startdate%></td>
+										<td><%= coupon.enddate%></td>
+										<td>
+										<button type="button" class="btn btn-primary" coupid="<%= coupon.id%>" onclick="pubcoupconfirm(this)" id="couppubbtn<%= coupon.id%>">
+											发布
+										</button> <%if coupon.enddate < DateTime.now%>
+										<button type="button" class="btn btn-danger" coupid="<%= coupon.id%>" onclick="delcoupconfirm(this)" id="coupdeletebtn<%= coupon.id%>">
+											删除
+										</button><%end%></td>
+									</tr>
+									<% end %>
+								</table>
 
-<div class="flickr_pagination">
-	<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
-</div>
+								<div class="flickr_pagination">
+									<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+								</div>

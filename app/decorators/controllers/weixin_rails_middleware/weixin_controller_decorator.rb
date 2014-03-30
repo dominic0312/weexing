@@ -85,22 +85,23 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     end
     
     def response_addcard
-        @userid=@weixin_message.FromUserName 
+        #@userid=@weixin_message.FromUserName 
         if Customer.ismemberexist(@userid)
            customer=Customer.where(:openid=>@userid).first
-           @cid=customer.cardid
+           @cid=customer.id
+           @wname =@weixin_public_account.shopurl
+            #articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com/system/membercards/pics/000/000/007/original/2.jpg','http://www.weexing.com/cardguest/walmart')]
+            #reply_news_message(nil, nil, articles)
            
-            articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com','http://www.weexing.com')]
-       reply_news_message(nil, nil, articles)
-           
-           reply_text_message("欢迎回来，我们的老客户,您的卡号是：#{@cid}")
+            reply_text_message("欢迎回来，我们的老客户,您的url是:#{@cid}")
         else
-          customer=Customer.new
-          customer.openid=@userid
-          customer.save
-          @cardid="00000"+customer.id.to_s
-          customer.cardid=@cardid
-          customer.save
+          @customer=Customer.new
+          @customer.openid = @userid
+          @customer.shop_id = @weixin_public_account.id
+          @customer.save
+          @cardid="00000"+@customer.id.to_s
+          @customer.cardid=@cardid
+          @customer.save
           reply_text_message("欢迎领取会员卡，您的卡号是#{@cardid}")
         end
       
