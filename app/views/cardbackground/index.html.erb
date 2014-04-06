@@ -26,6 +26,16 @@
 		<%= javascript_include_tag "bootstrap-datepicker.zh-CN.js" %>
 		<%= javascript_include_tag "bootstrap-select.min.js" %>
 
+		<!--[if lt IE 9]>
+		<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+		<script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+		<link href="/stylesheets/bootstrap-ie78.css" rel="stylesheet">
+		<![endif]-->
+
+		<!--[if lt IE 8]>
+
+		<![endif]-->
+
 	</head>
 	<style>
 		.editab {
@@ -63,7 +73,8 @@
 		}
 
 		.table > tbody > tr > td {
-			vertical-align: middle
+			vertical-align: middle;
+			padding-left: 5px
 		}
 
 		.field {
@@ -71,7 +82,8 @@
 		}
 
 		.number {
-			display: inline-block
+			display: inline-block;
+			margin-right: 15px;
 		}
 
 		.badge-success {
@@ -80,6 +92,16 @@
 
 		.badge-inverse {
 			background-color: #333;
+		}
+
+		.badge-usd {
+			color: dimgray;
+			display: block;
+			margin-top: 5px
+		}
+
+		.remotedialog {
+			cursor: pointer
 		}
 
 	</style>
@@ -91,7 +113,10 @@
 					<div class="rows">
 						<div class="col-xs-10">
 							<div class="brand" style="color:#CCCCCC">
-								<h1><%= @shopname%></h1>
+								<div style="display: inline-block; vertical-align: bottom;margin-left: 20px">
+									<h1><%= @shop.name%></h1>
+								</div>
+
 							</div>
 						</div>
 						<div class="col-xs-2">
@@ -115,10 +140,6 @@
 						<a href="#" class="list-group-item" id="menu_coupons" onclick="togglepage('menu_coupons')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;<b>优惠券</b></h3>
 						<p class="list-group-item-text">
 							<h6 style="color:#CCCCCC;margin-left: 42px">发布 兑换</h6>
-						</p> </a>
-						<a href="#" class="list-group-item" id="menu_products" onclick="togglepage('menu_products')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;<b>商品信息</b></h3>
-						<p class="list-group-item-text">
-							<h6 style="color:#CCCCCC;margin-left: 42px">发布 修改</h6>
 						</p> </a>
 						<a href="#" class="list-group-item" id="menu_shopinfo" onclick="togglepage('menu_shopinfo')"> <h3 class="list-group-item-heading"><span class="glyphicon glyphicon glyphicon-home"></span>&nbsp;&nbsp;<b>店铺信息</b></h3>
 						<p class="list-group-item-text">
@@ -165,8 +186,8 @@
 										</div><!-- /input-group -->
 									</div><!-- /.col-lg-6 -->
 									<div class="col-xs-4">
-										<button type="button" class="btn btn-default" id="listall" onclick="listall()">
-											显示所有
+										<button type="button" class="btn btn-primary" id="listall" onclick="listall()">
+											<span class="glyphicon glyphicon-th-large"></span> 显示所有
 										</button>
 									</div>
 									<div class="col-xs-2">
@@ -194,7 +215,7 @@
 										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
 										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
 										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
-										<td>
+										<td style="text-align: right">
 										<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
 											修改
 										</button>
@@ -237,13 +258,14 @@
 
 							<div id="pbody_coupon">
 								<table class="table table-hover">
-									<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
-									<th>标题</th>
-									<th>类别</th>
-									<th>开始日期</th>
-									<th>截止日期</th>
-									<th></th>
-									<th></th>
+									<thead>
+										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
+										<th>标题</th>
+										<th>类别</th>
+										<th>开始日期</th>
+										<th>截止日期</th>
+										<th></th>
+									</thead>
 
 									<% @coupons.each do |coupon| %>
 									<tr>
@@ -252,7 +274,7 @@
 										<td><%= coupon.usertype%></td>
 										<td><%= coupon.startdate%></td>
 										<td><%= coupon.enddate%></td>
-										<td> <%if coupon.sent== 0%>
+										<td style="text-align: right"> <%if coupon.sent== 0%>
 										<button type="button" class="btn btn-primary" coupid="<%= coupon.id%>" onclick="pubcoupconfirm(this)" id="couppubbtn<%= coupon.id%>">
 											发布
 										</button>
@@ -263,16 +285,15 @@
 										<%if coupon.enddate > DateTime.now%>
 										<div class="number">
 
-											<a data-toggle="modal" href="/coupons/requestcoupon" data-target="#requestcoupon" > <span class="badge badge-success">待兑换 <span>42</span id="couponreq<%= coupon.id%>"></span></a>
-											<a href="#"> <span class="badge" style="color:dimgray;display:block;margin-top:5px" id="couponusd<%= coupon.id%>">已兑换 42</span></a>
+											<%if coupon.coupon_req == 0%><a href="#" data-target="#requestcoupon" id="coup_req_id<%= coupon.id%>" coupid="<%= coupon.id%>"><span class="badge" id="couponbadge<%= coupon.id%>"><%else%><a class="remotedialog" onclick="openrecycle(this)" id="coup_req_id<%= coupon.id%>" coupid="<%= coupon.id%>"><span class="badge badge-success" id="couponbadge<%= coupon.id%>"><%end%>待兑换 <span id="couponreq<%= coupon.id%>"><%= coupon.coupon_req%></span><span></a> <a href="#"> <span class="badge" style="color:dimgray;display:block;margin-top:5px">已兑换<span id="couponusd<%= coupon.id%>"><%= coupon.coupon_usd%></span> </span></a>
 										</div>
-										<button type="button" class="btn btn-success" style="position: relative;bottom:12px;left:10px"  coupid="<%= coupon.id%>" onclick="pubcouprefresh(this)" id="couprefreshbtn<%= coupon.id%>">
+										<button type="button" class="btn btn-success" style="position: relative;bottom:12px"  coupid="<%= coupon.id%>" onclick="pubcouprefresh(this)" id="couprefreshbtn<%= coupon.id%>">
 											刷新
 										</button> <%else%>
 										<div class="number">
-											<a href="#"> <span class="badge" style="color:dimgray;display:block ">已兑换 42</span></a>
+											<a href="#"> <span class="badge" style="color:dimgray;display:block ">已兑换 <%= coupon.coupon_usd%></span></a>
 										</div>
-										<button type="button" class="btn btn-danger"  style="position: relative;bottom:2px;left:10px" coupid="<%= coupon.id%>" onclick="delcoupconfirm(this)" id="coupdeletebtn<%= coupon.id%>">
+										<button type="button" class="btn btn-danger"  style="position: relative;bottom:2px" coupid="<%= coupon.id%>" onclick="delcoupconfirm(this)" id="coupdeletebtn<%= coupon.id%>">
 											删除
 										</button> <%end%><%end%> </td>
 									</tr>
@@ -286,61 +307,65 @@
 						</div>
 					</div>
 
-					<div id="menu_products_panel" class="panel panel-default" style="height:800px;display:none">
-						<div class="panel-heading">
-							商品信息
-						</div>
-						<div class="panel-body">
-
-							<table class="table table-hover">
-								<tr>
-									<td>3</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-
-					<div id="menu_shopinfo_panel" class="panel panel-default" style="height:500px;display:none">
+					<div id="menu_shopinfo_panel" class="panel panel-default" style="height:700px;display:none">
 						<div class="panel-heading">
 							店铺信息
 						</div>
 						<div class="panel-body">
+							<div class="well well-sm container" style="width:650px">
+								<div class="rows">
+									<div class="col-xs-6">
+										<button class="btn btn-primary" type="button" onclick="changepass()" id="changepwdbtn">
+											<span class="glyphicon glyphicon-lock"></span>&nbsp;<b>修改登录密码</b>
+										</button>
+									</div><!-- /.col-lg-6 -->
+									<div class="col-xs-4">
 
-							<table class="table table-hover">
-								<tr>
-									<td>4</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>TB - Monthly</td>
-									<td>01/04/2012</td>
-									<td>Approved</td>
-								</tr>
-							</table>
+									</div>
+									<div class="col-xs-2">
+
+									</div>
+
+								</div>
+							</div>
+
+							<div id="pbody_shop">
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title"> 地址</h3>
+									</div>
+									<div class="panel-body" style="text-align: left">
+										<div id="address" style="font-size: 16px;text-align: left">
+											<%= @shop.address%>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title"> 固定电话</h3>
+									</div>
+									<div class="panel-body" style="text-align: left">
+										<div id="phone" style="font-size: 16px;text-align: left">
+											<%= @shop.phone%>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title"> 移动电话</h3>
+									</div>
+									<div class="panel-body" style="text-align: left">
+										<div id="mobile" style="font-size: 16px;text-align: left">
+											<%= @shop.mobile%>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<script></script>
 						</div>
 					</div>
 
@@ -417,12 +442,12 @@
 		<div class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container" style="width: 900px">
 				<p class="text-muted credit" style="text-align: right; padding-top: 10px">
-					<%= @shopname%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+					<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
 				</p>
 			</div>
 		</div>
 		<div id="shopurl" style="display:none">
-			<%= @shopurl%>
+			<%= @shop.shopurl%>
 		</div>
 
 		<div id="coupon-form">
@@ -430,7 +455,7 @@
 		</div>
 
 		<div id="newcoupon"  class="ui-helper-hidden"  style="width:330px;overflow: hidden" >
-			<%= form_for @coupon, :remote => true,:url => createcoupon_path(@shopid),:html => { :multipart => true } do |f| %>
+			<%= form_for @coupon, :remote => true,:url => createcoupon_path(@shop.id),:html => { :multipart => true } do |f| %>
 
 			<div class="field" style="margin-top:10px">
 				<%= f.label :"标题" %>
@@ -466,7 +491,7 @@
 
 			</div>
 
-			<input type="hidden" id="coupon_shopid" name="coupon[shopid]" value="<%= @shopid%>" />
+			<input type="hidden" id="coupon_shopid" name="coupon[shopid]" value="<%= @shop.id%>" />
 			<div class="field">
 				<%= f.label :"图片" ,:id=>"piclabel"%>
 				<br />
@@ -482,6 +507,37 @@
 			</div>
 
 			<% end %>
+		</div>
+
+		<div id="changepwd"  class="ui-helper-hidden"  style="width:330px;overflow: hidden" >
+
+			<div class="field" style="margin-top:10px">
+				<label>原密码</label>
+				<br />
+				<input id="currentpass" name="shop_pwd" type="password">
+			</div>
+
+			<div class="field">
+				<label>新密码</label>
+				<br />
+				<input id="newpass" name="shop_pwd_new" type="password">
+			</div>
+			<div class="field">
+				<label>确认新密码</label>
+				<br />
+				<input id="newpass_conf" name="shop_pwd_conf" type="password">
+			</div>
+			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="text-align: right">
+				<button type="button" class="btn btn-success" onclick="updatepass();">
+					确定
+				</button>
+
+				<button type="button" class="btn btn-default" onclick="closeuserpwd();">
+					取消
+				</button>
+
+			</div>
+
 		</div>
 
 		<div class="modal fade" id="requestcoupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -512,3 +568,696 @@
 		</div>
 
 	</body>
+	<script>
+		var current_menu = "menu_users";
+		var searchtype = "phone";
+		var cardno = "", telephone = "", balance = "", usertype = "";
+		$(document).ready(function() {
+			//$('.editab').editable('disable');
+			$('input[type=file]').bootstrapFileInput();
+			$('.file-inputs').bootstrapFileInput();
+
+			$('#datepicker .input-daterange').datepicker({
+			});
+			$('.selectpicker').selectpicker();
+			$('#address').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 2,
+				url : '/shops/updateinfo',
+				pk : 'address',
+				title : '修改店铺的地址',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
+			$('#phone').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 2,
+				url : '/shops/updateinfo',
+				pk : 'phone',
+				title : '修改店铺的固定电话',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
+			$('#mobile').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 2,
+				url : '/shops/updateinfo',
+				pk : 'mobile',
+				title : '修改店铺的移动电话',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
+			//$(".remotedialog").on('click', function() {
+			//$('#requestcoupon').removeData('bs.modal');
+			//$('#requestcoupon').modal({
+			//	remote : '/coupons/requestcoupon/' + $(this).attr('coupid')
+			//});
+			//$('#requestcoupon').modal('show');
+			//});
+
+		});
+
+		function openrecycle(ref) {
+			$('#requestcoupon').removeData('bs.modal');
+			$('#requestcoupon').modal({
+				remote : '/coupons/requestcoupon/' + $(ref).attr('coupid')
+			});
+			$('#requestcoupon').modal('show');
+
+		}
+
+		function togglepage(id) {
+			if (id == current_menu) {
+				return;
+			} else {
+				$("#" + current_menu).removeClass("active");
+				$("#" + current_menu + "_panel").hide();
+				$("#" + id).addClass("active");
+				$("#" + id + "_panel").show();
+				current_menu = id;
+			}
+		}
+
+		function delcoupconfirm(ref) {
+			var rid = $(ref).attr('coupid');
+			var txt = $.trim($(ref).text());
+			if (txt == "删除") {
+				$("#delcouponconfirm").dialog({
+					modal : false,
+					dialogClass : "no-close",
+					buttons : {
+						"确认" : function() {
+							delcoupon(rid);
+							$(this).dialog("close");
+						},
+						"取消" : function() {
+							$(this).dialog("close");
+						}
+					},
+					show : {
+						effect : "slideToggle",
+						duration : 100
+					},
+					position : {
+						my : "center center",
+						at : "center center",
+						of : pbody_coupon
+					},
+					open : function(event) {
+						$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-danger');
+						$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-primary');
+					}
+				});
+			} else {
+				//$("[recordid='edt" + rid + "']").editable('toggleDisabled');
+				//$("#changebtn" + rid).removeClass("btn-success").addClass("btn-primary");
+				//$("#changebtn" + rid).html("修改");
+				//$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				//$("#deletebtn" + rid).html("删除");
+			}
+		}
+
+		function pubcoupconfirm(ref) {
+			var rid = $(ref).attr('coupid');
+			var txt = $.trim($(ref).text());
+			if (txt == "发布") {
+				$("#pubcouponconfirm").dialog({
+					modal : false,
+					dialogClass : "no-close",
+					buttons : {
+						"确认" : function() {
+							sendcoupon(rid);
+							$(this).dialog("close");
+						},
+						"取消" : function() {
+							$(this).dialog("close");
+						}
+					},
+					show : {
+						effect : "slideToggle",
+						duration : 100
+					},
+					position : {
+						my : "center center",
+						at : "center center",
+						of : pbody_coupon
+					},
+					open : function(event) {
+						$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-danger');
+						$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-primary');
+					}
+				});
+			} else {
+				//$("[recordid='edt" + rid + "']").editable('toggleDisabled');
+				//$("#changebtn" + rid).removeClass("btn-success").addClass("btn-primary");
+				//$("#changebtn" + rid).html("修改");
+				//$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				//$("#deletebtn" + rid).html("删除");
+			}
+		}
+
+		function delcoupon(rid) {
+			$.post("/coupons/delcoupon", {
+				recid : rid
+			}, null, "script");
+
+		}
+
+		function delconfirm(ref) {
+			var rid = $(ref).attr('recordid');
+			var txt = $.trim($(ref).text());
+			if (txt == "删除") {
+				$("#delconfirm").dialog({
+					modal : false,
+					dialogClass : "no-close",
+					buttons : {
+						"确认" : function() {
+							delrecord(rid);
+							$(this).dialog("close");
+						},
+						"取消" : function() {
+							$(this).dialog("close");
+						}
+					},
+					show : {
+						effect : "slideToggle",
+						duration : 100
+					},
+					position : {
+						my : "center center",
+						at : "center center",
+						of : pbody_customer
+					},
+					open : function(event) {
+						$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-danger');
+						$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-primary');
+					}
+				});
+			} else {
+				$("[recordid='edt" + rid + "']").editable('toggleDisabled');
+				$("#changebtn" + rid).removeClass("btn-success").addClass("btn-primary");
+				$("#changebtn" + rid).html("修改");
+				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				$("#deletebtn" + rid).html("删除");
+			}
+		}
+
+		function delrecord(rid) {
+			$.post("/customers/delcustomer", {
+				recid : rid
+			}, null, "script");
+		}
+
+		function sendcoupon(rid) {
+			$.post("/coupons/sendcoupon", {
+				recid : rid
+			}, null, "script");
+		}
+
+		function newuser() {
+			$("#newuser").dialog({
+				dialogClass : "no-close",
+				modal : true,
+				title : "增加新会员",
+				buttons : {
+					"确认" : function() {
+						//$(this).dialog("close");
+						cardno = $.trim($("#inputcardno").val());
+						telephone = $.trim($("#inputphone").val());
+						balance = $.trim($("#inputbalance").val());
+						usertype = $.trim($("#inputusertype").val());
+						if (!uservalidate(cardno, telephone, balance)) {
+							return;
+						} else {
+							adduser();
+							clearuser();
+							$(this).dialog("close");
+						}
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+						clearuser();
+					}
+				},
+				show : {
+					effect : "slideToggle",
+					duration : 100
+				},
+				position : {
+					my : "center top",
+					at : "center top",
+					of : pbody_customer
+				},
+				open : function(event) {
+					$('.ui-dialog-buttonpane').find('button:contains("确认")').addClass('btn').addClass('btn-success');
+					$('.ui-dialog-buttonpane').find('button:contains("取消")').addClass('btn').addClass('btn-default');
+				}
+			});
+		}
+
+		function adduser() {
+			$.post("/customers/addcustomer", {
+				cardid : cardno,
+				phone : telephone,
+				balance : balance,
+				vusertype : usertype
+			}, null, "script");
+		}
+
+		function uservalidate(cardno, telephone, balance) {
+			var str = "";
+			if (cardno == "") {
+				str = "卡号不能为空";
+				$("#inputcardno").notify(str, {
+					className : "danger",
+					position : "top",
+					autoHideDelay : 2000
+				});
+				return false
+			}
+
+			if (telephone.length > 11) {
+				str = "电话号码不能大于11位";
+				$("#inputphone").notify(str, {
+					className : "danger",
+					position : "top",
+					autoHideDelay : 2000
+				});
+				return false
+			}
+			if (balance.length > 6) {
+				str = "余额不能大于6位";
+				$("#inputbalance").notify(str, {
+					className : "danger",
+					position : "top",
+					autoHideDelay : 2000
+				});
+				return false
+			}
+			return true;
+
+		}
+
+		function clearuser() {
+			$("#inputcardno").val("");
+			$("#inputphone").val("");
+			$("#inputbalance").val("");
+			$("#inputusertype").val("普通会员");
+			cardno = "";
+			telephone = "";
+			balance = "";
+			usertype = "";
+		}
+
+		function selectsearchtype(str) {
+			$("#searchtype").html(str + "<span class='caret'></span>");
+			if (str == '卡号') {
+				searchtype = "realcardid";
+				return;
+			}
+			if (str == '电话号码') {
+				searchtype = "phone";
+				return;
+			}
+			if (str == '用户级别') {
+				searchtype = "level";
+				return;
+			}
+		}
+
+		function search() {
+			searchvalue = $.trim($("#searchtxt").val());
+			if (searchvalue == "") {
+				$("#searchtxt").popover({
+					placement : 'top',
+					content : '请输入要搜索的数据',
+					delay : 500
+				});
+				$("#searchtxt").popover('show');
+				return
+			}
+			$.post("/customers/search", {
+				searchtp : searchtype,
+				searchvalue : searchvalue,
+			}, null, "script");
+		}
+
+		function logout() {
+			$.post("/sessions/destroy_shop", {
+			}, null, "script");
+		}
+
+		function redirect_login() {
+			surl = $.trim($("#shopurl").html());
+			location.href = '/cardbackground/' + surl;
+		}
+
+		function operate(obj) {
+			var txt = $.trim($(obj).text());
+			var rid = $(obj).attr('recordid');
+			if (txt == '修改') {
+				$('#realcardid' + rid).editable({
+					validate : function(value) {
+						if ($.trim(value).length > 12)
+							return '卡号不能大于12位';
+					}
+				});
+				$('#level' + rid).editable({
+					type : 'select',
+					value : 1,
+					source : [{
+						value : 1,
+						text : '普通会员'
+					}, {
+						value : 2,
+						text : 'VIP会员'
+					}, {
+						value : 3,
+						text : '白银会员'
+					}, {
+						value : 4,
+						text : '黄金会员'
+					}, {
+						value : 5,
+						text : '白金会员'
+					}]
+				});
+				$('#phone' + rid).editable({
+					validate : function(value) {
+						if ($.trim(value).length > 11)
+							return '电话号码不能大于11位';
+					}
+				});
+				$('#balance' + rid).editable({
+					type : 'number',
+					validate : function(value) {
+						var regex = /^[0-9]+$/;
+						if (! regex.test(value)) {
+							return '余额只能是数字';
+						}
+						if ($.trim(value).length > 6) {
+							return '余额不能多于6位'
+						}
+					}
+				});
+				$('#bonus' + rid).editable({
+					type : 'number',
+					validate : function(value) {
+						var regex = /^[0-9]+$/;
+						if (! regex.test(value)) {
+							return '积分只能是数字';
+						}
+						if ($.trim(value).length > 6) {
+							return '积分不能多于6位'
+						}
+					}
+				});
+				$("[recordid='edt" + rid + "']").editable('enable');
+				$(obj).removeClass("btn-primary").addClass("btn-success");
+				$(obj).html("保存");
+				$("#deletebtn" + rid).removeClass("btn-danger").addClass("btn-default");
+				$("#deletebtn" + rid).html("取消");
+			} else {
+				updaterecord(rid);
+				$("[recordid='edt" + rid + "']").editable('toggleDisabled');
+				$(obj).removeClass("btn-success").addClass("btn-primary");
+				$(obj).html("修改");
+				$("#deletebtn" + rid).removeClass("btn-default").addClass("btn-danger");
+				$("#deletebtn" + rid).html("删除");
+			}
+		}
+
+		function updaterecord(rid) {
+			var vrealcard = $.trim($("#realcardid" + rid).text());
+			var vlevel = $.trim($("#level" + rid).text());
+			var vphone = $.trim($("#phone" + rid).text());
+			var vbalance = $.trim($("#balance" + rid).text());
+			var vbonus = $.trim($("#bonus" + rid).text());
+			$.post("/customers/updatecustomer", {
+				realcard : vrealcard,
+				level : vlevel,
+				phone : vphone,
+				balance : vbalance,
+				bonus : vbonus,
+				recid : rid
+			}, null, "script");
+		}
+
+		function success(rid) {
+			$("#changebtn" + rid).notify("保存成功", {
+				className : "success",
+				position : "top",
+				autoHideDelay : 2000
+			});
+		}
+
+		function listall() {
+			$.post("/cardbackground/index", {
+				act : 'listall'
+			}, null, "script");
+
+		}
+
+		function newcoupon(shopid) {
+			$("#newcoupon").dialog({
+				dialogClass : "no-close",
+				modal : true,
+				title : "添加新优惠券",
+				show : {
+					effect : "slideToggle",
+					duration : 100
+				},
+				position : {
+					my : "center top",
+					at : "center top",
+					of : pbody_coupon
+				},
+				open : function(event) {
+				}
+			});
+		}
+
+		function closecoupon() {
+			$('#newcoupon').dialog('close');
+			clearnewcoupon();
+			return false;
+		}
+
+		function changepass() {
+			$("#changepwd").dialog({
+				dialogClass : "no-close",
+				modal : true,
+				resizable : false,
+				title : "修改密码",
+				show : {
+					effect : "slideToggle",
+					duration : 100
+				},
+				position : {
+					my : "center top",
+					at : "center top",
+					of : pbody_shop
+				}
+			});
+		}
+
+		function updatepass() {
+			var voldpass = $.trim($("#currentpass").val());
+			var vnewpass = $.trim($("#newpass").val());
+			var vnewpassconf = $.trim($("#newpass_conf").val());
+			if (voldpass == '' || vnewpass == '' || vnewpassconf == '') {
+				$("#currentpass").notify("密码都不能为空", {
+					className : "error",
+					position : "top",
+					arrowShow : true,
+					autoHideDelay : 1000
+				});
+				return false;
+			}
+
+			if (vnewpass != vnewpassconf) {
+				$("#newpass_conf").notify("确认密码和新密码不一致", {
+					className : "error",
+					position : "top",
+					arrowShow : true,
+					autoHideDelay : 1000
+				});
+				return false;
+			}
+
+			$.post("/shops/updateinfo", {
+				pk : 'password',
+				newpass : vnewpass,
+				currpass : voldpass
+			}, null, "script");
+
+		}
+
+		function closeuserpwd() {
+			$('#changepwd').dialog('close');
+			$("#currentpass").val("");
+			$("#newpass").val("");
+			$("#newpass_conf").val("");
+			return false;
+		}
+
+		function changepassfail() {
+			$("#currentpass").notify("管理密码错误", {
+				className : "error",
+				position : "top",
+				arrowShow : true,
+				autoHideDelay : 1000
+			});
+
+		}
+
+		function changepasssucc() {
+			closeuserpwd();
+			$("#changepwdbtn").notify("密码重设成功	", {
+				className : "success",
+				position : "right",
+				arrowShow : true,
+				autoHideDelay : 3000
+			});
+
+		}
+
+		function savecouponsucc() {
+			clearnewcoupon();
+			$("#newcoupon").dialog("close");
+		}
+
+		function savecouponfail() {
+			$("#piclabel").notify("图片必须是小于100K的jpg", {
+				className : "error",
+				position : "right",
+				arrowShow : false,
+				autoHideDelay : 3000
+			});
+		}
+
+		function clearnewcoupon() {
+			$("#coupon_content").val("");
+			$("#coupon_title").val("");
+			$("#coupon_usertype").val("折扣卷");
+			$('.selectpicker').selectpicker('refresh');
+			$i = $("#coupon_pic").prev();
+			$i.html("请选择一个图片");
+		}
+
+		function coupontitlefail() {
+			$("#coupon_title").notify("标题不能长于10个字", {
+				className : "error",
+				position : "top",
+				arrowShow : false,
+				autoHideDelay : 3000
+			});
+		}
+
+		function coupon_sendfail(rid) {
+			$("#couppubbtn" + rid).notify("发送失败，请稍后重试", {
+				className : "error",
+				position : "left",
+				arrowShow : true,
+				autoHideDelay : 3000
+			});
+		}
+
+		function coupon_sendsucc(rid) {
+			$("#couppubbtn" + rid).notify("优惠券发送成功", {
+				className : "success",
+				position : "top",
+				arrowShow : true,
+				autoHideDelay : 3000
+			});
+
+			var strbadge = "<div class='number'><a href='#' data-target='#requestcoupon' id='coup_req_id" + rid + "' coupid='" + rid + "'><span class='badge' id='couponbadge" + rid + "'>待兑换 <span id='couponreq" + rid + "'>0</span><span></a><a href='#'><span class='badge badge-usd'>已兑换<span id='couponusd" + rid + "'>0</span></span></a></div>";
+			var strfresh = "<button type='button' class='btn btn-success' style='position: relative;bottom:12px' coupid='" + rid + "' onclick='pubcouprefresh(this)' id='couprefreshbtn" + rid + "'>刷新</button>";
+
+			$("#couppubbtn" + rid).replaceWith(strbadge);
+			$("#coupdeletebtn" + rid).replaceWith(strfresh);
+
+			$("#coupdeletebtn" + rid).html("刷新");
+		}
+
+		function recycle(cid, qid) {
+			//rid is the coupon id, qid is id of quest;
+			var currentreq = parseInt($("#couponreq" + cid).html());
+			var currentusd = parseInt($("#couponusd" + cid).html());
+
+			if (currentreq == 0) {
+				return;
+			}
+			if (currentreq == 1) {
+				$("#couponbadge" + cid).removeClass("badge-success");
+				$("#coup_req_id" + cid).removeAttr("onclick");
+				$("#coup_req_id" + cid).off();
+			}
+
+			$.post("/coupons/delrequest", {
+				questid : qid,
+				couponid : cid
+			}, null, "script");
+
+			$("#couponreq" + cid).html(currentreq - 1);
+			$("#couponusd" + cid).html(1 + currentusd);
+
+		}
+
+		function recyclesucc(queid) {
+			$("#reqid" + queid).notify("优惠券回收成功", {
+				className : "success",
+				position : "top",
+				arrowShow : true,
+				autoHideDelay : 1000
+			});
+
+			$("#reqid" + queid).remove();
+
+		}
+
+		function pubcouprefresh(ref) {
+
+			var rid = $(ref).attr('coupid');
+			$.post("/coupons/refreshrequest", {
+				couponid : rid
+			}, null, "script");
+		}
+
+		function questrefresh(coupid, reqst, usd) {
+
+			var currentreq = parseInt($("#couponreq" + coupid).html());
+			if (currentreq == 0 && reqst != 0) {
+				$("#couponbadge" + coupid).addClass("badge-success");
+				$("#coup_req_id" + coupid).on('click', function() {
+					$('#requestcoupon').removeData('bs.modal');
+					$('#requestcoupon').modal({
+						remote : '/coupons/requestcoupon/' + $(this).attr('coupid')
+					});
+					$('#requestcoupon').modal('show');
+				});
+			}
+
+			if (reqst == 0 && currentreq != 0) {
+				$("#couponbadge" + coupid).removeClass("badge-success");
+				$("#coup_req_id" + coupid).off();
+				$("#coup_req_id" + coupid).removeAttr("onclick");
+
+			}
+
+			$("#couponreq" + coupid).html(reqst);
+			$("#couponusd" + coupid).html(usd);
+
+		}
+
+	</script>
+</html>

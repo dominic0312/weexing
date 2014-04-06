@@ -14,6 +14,7 @@
 		<%= stylesheet_link_tag "signin.css" %>
 		<%= javascript_include_tag "jquery-191.js" %>
 		<%= javascript_include_tag "notify-custom.js" %>
+		<%= javascript_include_tag "bootstrap.js" %>
 
 		<!-- Custom styles for this template -->
 
@@ -114,8 +115,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-md-offset-4">
-					 <h1 class="text-center login-title">微信会员卡后台登陆</h1>
-			
+					<h1 class="text-center login-title">微信会员卡后台登陆</h1>
+
 					<div class="account-wall">
 						<%= image_tag @shop.logopic.url(:thumb),:class=>"profile-img" %>
 						<p class="profile-name">
@@ -123,10 +124,8 @@
 						</p>
 						<form class="form-signin" action="">
 							<input type="password" class="form-control" placeholder="密码" id="passinput" autofocus>
-							<a class="btn btn-lg btn-primary btn-block" onclick="pass();">
-								登入
-							</a>
-							<a href="#" class="need-help">如何登录? </a><span class="clearfix"></span>
+							<a class="btn btn-lg btn-primary btn-block" onclick="pass();"> 登入 </a>
+							<a href="#" class="need-help" style="display: block;width:80px" data-toggle="popover" data-placement="bottom" data-content="您的运营商会提供初始密码，登录后请马上修改。    如果忘记了密码，请联系运营商复位。运营商的名称在本页面右下角。" id="howto">如何登录? </a><span class="clearfix"></span>
 						</form>
 					</div>
 				</div>
@@ -157,13 +156,19 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 	</body>
 	<script>
+		$('#howto').popover().click(function() {
+			setTimeout(function() {
+				$('#howto').popover('hide');
+			}, 3000);
+		});
+		
 		function pass() {
 			passwd = $.trim($("#passinput").val());
 			sid = $.trim($("#shopid").html());
 			if (passwd == "") {
 				$("#passinput").notify("密码不能为空", {
 					position : "right",
-					autoHideDelay : 3000
+					autoHideDelay : 000
 				});
 			} else {
 				$.post("/cardbackground/passcheck", {
@@ -186,6 +191,5 @@
 			});
 
 		}
-
 	</script>
 </html>

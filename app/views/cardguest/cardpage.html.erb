@@ -7,14 +7,28 @@
 		<%= stylesheet_link_tag "jquery.mobile.structure-1.3.2.css" %>
 		<%= stylesheet_link_tag "jquery.mobile-1.3.2.css" %>
 		<%= stylesheet_link_tag "jquery.mobile.theme-1.3.2.css" %>
-		<link href="/templates/<%=@page.to_s%>/cardstyle.css" media="screen" rel="stylesheet" />
+		<link href="/templates/<%= @page.to_s%>/cardstyle.css" media="screen" rel="stylesheet" />
 		<%= javascript_include_tag "jquery-1.7.1.min.js" %>
 		<%= javascript_include_tag "jquery.mobile-1.3.2.js" %>
 		<%= javascript_include_tag "tempo.js" %>
 
-		
 		<script type="text/javascript">
-			var params = "opendid=dominic";
+			function getParameterByName(name) {
+				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+			}
+
+			var customerid = getParameterByName('customerid');
+
+			function test(cid) {
+				var customerid=$.trim($("#customerid").html());
+				$.post("/coupons/addrequest", {
+					cusid : customerid,
+					couponid : cid,
+				}, null, "script");
+			}
+
+			var params = "customerid=" + customerid;
 			$.ajax({
 				type : "POST",
 				url : "/cardguest/get_customer_info/1",
@@ -22,10 +36,11 @@
 				dataType : "json",
 				success : function(data) {
 					Tempo.prepare("coupons").render(data.coupons);
-					Tempo.prepare("customer_balance").render(data);
-					Tempo.prepare("customer_bonus").render(data);
-					Tempo.prepare("customer_level").render(data);
-					Tempo.prepare("coupon_num").render(data);
+					//Tempo.prepare("customer_balance").render(data);
+					//Tempo.prepare("customer_bonus").render(data);
+					//Tempo.prepare("customer_level").render(data);
+					//Tempo.prepare("coupon_num").render(data);
+					Tempo.prepare("customer").render(data);
 				},
 				error : function(data) {
 					alert("error");

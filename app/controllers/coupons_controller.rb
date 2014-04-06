@@ -146,9 +146,45 @@ class CouponsController < ApplicationController
       format.js
     end
   end
-  
+
   def requestcoupon
-    
+    @requests= Requestcoupon.where(:couponid=>params[:coupid])
   end
 
+  def delrequest
+    @requestid=params[:questid]
+    @coupid=params[:couponid]
+    req=Requestcoupon.find(@requestid)
+    req.destroy
+    coupon=Coupon.find(@coupid)
+    coupon.coupon_req-=1
+    coupon.coupon_usd+=1
+    coupon.save
+    render :js=>"recyclesucc(#{@requestid});"
+
+  end
+
+  def refreshrequest
+    @coupon=Coupon.find(params[:couponid])
+
+    render :js=>"questrefresh(#{@coupon.id},#{@coupon.coupon_req},#{@coupon.coupon_usd});"
+  end
+
+  def addrequest
+    couponid=params[:couponid]
+    customerid=params[:cusid]
+    @coupon=Coupon.find(couponid)
+    @coupon.coupon_req+=1
+
+    @customer = Customer.find(customerid)
+    @requestcoupon=Requestcoupon.new
+    @requestcoupon.couponid=couponid
+    @requestcoupon.cardno=@customer.cardid
+    @requestcoupon.title=@coupon.title
+    @requestcoupon.content=@coupon.content
+    @requestcoupon.save
+    @coupon.save
+    @coupon.customers.delete(@customer)
+    render :js=>""
+  end
 end

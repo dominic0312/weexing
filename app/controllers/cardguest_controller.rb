@@ -22,9 +22,10 @@ class CardguestController < ApplicationController
   end
 
   def get_customer_info
-    #customer_name=params[:customer_name]
-    customer_name='dominic'
-    @customer=Customer.find_by_openid(customer_name)
+    cid=params[:customerid]
+    #logger.info("customer id is:"+cid)
+    #customer_name='dominic'
+    @customer=Customer.find(cid)
     @coupons=@customer.coupons
     @customer.coupon_num=@coupons.size
     @customer

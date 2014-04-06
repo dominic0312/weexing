@@ -3,14 +3,14 @@ class CardbackgroundController < ApplicationController
   before_filter :authshop,:set_cache_buster, :only=>[:index]
   def index
     url=params[:shopurl]
-    shop=Shop.find(session[:shopid])
+    @shop=Shop.find(session[:shopid])
     respond_to do |format|
-      if shop
-        @customers = shop.customers.paginate(:page => params[:page],:per_page => 8).order('id DESC')
-        @coupons = Coupon.where(:shopid => shop.id).paginate(:page => params[:page],:per_page => 4).order('id DESC')
-        @shopid=shop.id
-        @shopname=shop.name
-        @shopurl=url
+      if @shop
+        @customers = @shop.customers.paginate(:page => params[:page],:per_page => 8).order('id DESC')
+        @coupons = Coupon.where(:shopid => @shop.id).paginate(:page => params[:page],:per_page => 4).order('id DESC')
+        @shopid=@shop.id
+        #@shopname=@shop.name
+        #@shopurl=url
         @coupon = Coupon.new
       format.html # index.html.erb
       format.js

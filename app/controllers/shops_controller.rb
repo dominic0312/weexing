@@ -34,7 +34,6 @@ class ShopsController < ApplicationController
   # GET /shops/new
   # GET /shops/new.json
 
-
   # GET /shops/1/edit
   def edit
     @shop = Shop.find(params[:id])
@@ -42,7 +41,6 @@ class ShopsController < ApplicationController
 
   # POST /shops
   # POST /shops.json
-
 
   # PUT /shops/1
   # PUT /shops/1.json
@@ -268,4 +266,35 @@ class ShopsController < ApplicationController
     end
   end
 
+  def updateinfo
+    reqtype=params[:pk]
+    shopid=session[:shopid]
+    if reqtype == 'password'
+      currpass =params[:currpass]
+      shop=Shop.find(shopid)
+      if currpass!=shop.password
+        render :js=>"changepassfail()"
+      else
+        shop.password=params[:newpass]
+        shop.save
+        render :js=>"changepasssucc()"
+      end
+    else
+      shop=Shop.find(shopid)
+       if reqtype == "address"
+        shop.address=params[:value]
+       end
+      
+       if reqtype == "phone"
+         shop.phone=params[:value]   
+       end
+    
+       if reqtype=="mobile"
+          shop.mobile=params[:value]   
+       end
+      
+       shop.save
+       render :js=>""
+    end
+  end
 end

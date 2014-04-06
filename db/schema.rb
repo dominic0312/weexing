@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330103129) do
+ActiveRecord::Schema.define(version: 20140403123739) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20140330103129) do
     t.date     "enddate"
     t.string   "coupon_type"
     t.string   "title"
-    t.integer  "discount"
-    t.integer  "present_value"
+    t.integer  "coupon_req",       default: 0
+    t.integer  "coupon_usd",       default: 0
     t.string   "branch"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 20140330103129) do
     t.string   "cardno"
   end
 
+  add_index "requestcoupons", ["couponid"], name: "index_requestcoupons_on_couponid", using: :btree
+
   create_table "shops", force: true do |t|
     t.string   "name"
     t.text     "address"
@@ -152,6 +154,7 @@ ActiveRecord::Schema.define(version: 20140330103129) do
     t.string   "weixin_secret_key"
     t.string   "weixin_token"
     t.string   "password"
+    t.string   "mobile"
   end
 
   add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree

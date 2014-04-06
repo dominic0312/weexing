@@ -1,256 +1,771 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<%= stylesheet_link_tag "jquery-ui.css" %>
-		<%= stylesheet_link_tag "login.css" %>
-		<title>微行-微信营销专家</title>
-	</head>
-	<body>
-		<div id="header">
-			<div class="wrapper" id="hearder_wrapper">
-				<a href="http://www.weexing.com/" class="dib"><%= image_tag("weixing.png", height: '56', width: '426') %></a>
-				<span class="hd_login_info" id="hd_login"> <%= link_to '立即注册', homepage_regist_url%></td> </span>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>微行</title>
+
+	<!-- Bootstrap core CSS -->
+
+	<%= stylesheet_link_tag "bootstrap311.css" %>
+	<link href="/stylesheets/font-awesome.css" rel="stylesheet">
+	<%= stylesheet_link_tag "bootstrap-theme.css" %>
+	<%= stylesheet_link_tag "flex-slider.css" %>
+	<%= stylesheet_link_tag "loginpage.css" %>
+
+	<%= stylesheet_link_tag "animate.min.css" %>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- Custom styles for this template -->
+	<!--[if lt IE 9]>
+	<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+	<script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<!--[if lt IE 8]>
+	<link href="/stylesheets/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+
+	<style>
+		.equal {
+			color: black
+		}
+
+		body {
+			overflow-x: hidden;
+		}
+
+		.cnrflash {
+			position: absolute;
+			top: -9px;
+			right: 4px;
+			z-index: 1;
+			overflow: hidden;
+			width: 100px;
+			height: 100px;
+			border-radius: 3px 5px 3px 0;
+		}
+
+		.cnrflash-inner {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 145px;
+			height: 145px;
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			-webkit-transform-origin: 100% 100%;
+			-ms-transform-origin: 100% 100%;
+			-o-transform-origin: 100% 100%;
+			-moz-transform-origin: 100% 100%;
+			background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
+			background-size: 4px, auto, auto, auto;
+			background-color: #AA0101;
+			box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
+			-webkit-transform-origin-x: 100%;
+			-webkit-transform-origin-y: 100%;
+		}
+
+		.cnrflash-label {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: block;
+			width: 100%;
+			padding-bottom: 5px;
+			color: white;
+			text-shadow: 0 1px 1px rgba(1, 1, 1, .8);
+			font-size: 0.95em;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		.the-price {
+			background-color: rgba(220, 220, 220, .17);
+			box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+			padding: 20px;
+			margin: 0;
+		}
+
+		.subscript {
+			font-size: 25px;
+		}
+
+		.panel {
+			text-align: center;
+		}
+
+	</style>
+</head>
+<!-- NAVBAR
+================================================== -->
+<body data-spy="scroll">
+	<!-- ******HEADER****** -->
+	<header id="top" class="header navbar-fixed-top">
+		<div class="container">
+			<h1 class="logo pull-left"><a class="scrollto" href="#promo"> <img id="logo-image" class="logo-image" src="/images/logo.png" alt="Logo"> <span class="logo-title"></span> </a></h1><!--//logo-->
+			<nav id="main-nav" class="main-nav navbar-right" role="navigation">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button><!--//nav-toggle-->
+				</div><!--//navbar-header-->
+				<div class="navbar-collapse collapse" id="navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active nav-item sr-only">
+							<a class="scrollto" href="#promo">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="scrollto" href="#features"><h4>特性</h4></a>
+						</li>
+						<li class="nav-item">
+							<a class="scrollto" href="#how"><h4>产品</h4></a>
+						</li>
+						<li class="nav-item">
+							<a class="scrollto" href="#faq"><h4>常见问题</h4></a>
+						</li>
+						<li class="nav-item">
+							<a class="scrollto" href="#story"><h4>价格</h4></a>
+						</li>
+						<li class="nav-item last">
+							<a class="scrollto" href="#contact"><h4>联系我们</h4></a>
+						</li>
+					</ul><!--//nav-->
+				</div><!--//navabr-collapse-->
+			</nav><!--//main-nav-->
 		</div>
-		<!--End of header-->
-		<div id="banner" style="background:#070916 url('/images/Spring.jpg') no-repeat center center">
-			<div class="wrapper" id="banner_wrapper">
-				<div id="loginpanel" class="login-panel" >
-					<h3>登录</h3>
-					<div class="login-mod" id="loginmod">
+	</header><!--//header-->
 
-						<div class="login-err-panel dn" id="err_area">
-							<span class="icon-wrapper"><i class="icon24-login err" style="margin-top:-.2em;*margin-top:0;"></i></span>
-							<span id="err_tips">ddssd</span>
+	<!-- ******PROMO****** -->
+
+	<section id="promo1" class="promo section offset-header has-pattern">
+		<div class="container">
+			<div class="row">
+				<div class="overview col-md-7 col-sm-12 col-xs-12">
+					<h2 class="title"><b>以应用为中心的微信公众平台服务商</b></h2>
+					<ul class="summary">
+						<li>
+							<h3>全面云平台   终生免费升级维护</h3>
+						</li>
+						<li>
+							<h3>专业服务器运维  高可用性</h3>
+						</li>
+						<li>
+							<h3>精心设计的移动apps </h3>
+						</li>
+						<li>
+							<h3>自动生成后台  飞速部署微信公众平台应用</h3>
+						</li>
+					</ul>
+					<div class="download-area">
+						<ul class="btn-group list-inline">
+							<li class="ios-btn">
+								<a href="#" onclick="showpc()">Download from the App Store</a>
+							</li>
+							<li class="android-btn">
+								<a href="#" onclick="showmobile()">Get it from Google Play</a>
+							</li>
+						</ul>
+						<div class="note text-center">
+							<p>
+								试运营期间,应用免费开放。
+								<br />
+								至2014年5月1日
+							</p>
+
+						</div><!--//note-->
+					</div>
+				</div><!--//overview-->
+
+				<!--// iPhone starts -->
+				<div class="phone iphone iphone-black col-md-5 col-sm-12 col-xs-12 ">
+					<div class="iphone-holder phone-holder">
+						<div class="iphone-holder-inner">
+							<div class="slider flexslider">
+								<ul class="slides">
+									<li>
+										<img src="/images/slide-1.png"  alt="" />
+									</li>
+									<li>
+										<img src="/images/slide-2.png"  alt="" />
+									</li>
+									<li>
+										<img src="/images/slide-3.png"  alt="" />
+									</li>
+								</ul><!--//slides-->
+							</div><!--//flexslider-->
+						</div><!--//iphone-holder-inner-->
+					</div><!--//iphone-holder-->
+				</div><!--//iphone-->
+				<!--// iPhone ends -->
+
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//promo-->
+
+	<section id="promo2" class="promo section offset-header has-pattern" style="display:none;">
+		<div class="container">
+			<div class="row">
+				<div class="overview col-md-7 col-sm-12 col-xs-12">
+					<h2 class="title"><b>高可用的后台，聚焦微信应用场景</b></h2>
+					<ul class="summary">
+						<li>
+							<h3>整合客户关系管理(CRM) 精细化运营</h3>
+						</li>
+						<li>
+							<h3>用户界面模板化 </h3>
+						</li>
+						<li>
+							<h3>为代理商OEM的客户端后台 </h3>
+						</li>
+						<li>
+							<h3>按需付费 </h3>
+						</li>
+					</ul>
+					<div class="download-area">
+						<ul class="btn-group list-inline">
+							<li class="ios-btn">
+								<a href="#">Download from the App Store</a>
+							</li>
+							<li class="android-btn">
+								<a href="#" onclick="showmobile()">Get it from Google Play</a>
+							</li>
+						</ul>
+						<div class="note text-center">
+							<p>
+								试运营期间,应用免费开放。
+								<br />
+								至2014年5月1日
+							</p>
+
+						</div><!--//note-->
+					</div>
+				</div><!--//overview-->
+
+				<!--// iPad starts -->
+				<div class="ipad ipad-black col-md-5 col-sm-12 col-xs-12">
+					<div class="ipad-holder">
+						<div class="ipad-holder-inner">
+							<div class="slider flexslider">
+								<ul class="slides">
+									<li>
+										<img src="/images/ipadslide1.png"  alt="" />
+									</li>
+									<li>
+										<img src="/images/ipadslide2.png"  alt="" />
+									</li>
+									<li>
+										<img src="/images/ipadslide3.png"  alt="" />
+									</li>
+								</ul><!--//slides-->
+							</div><!--//flexslider-->
+						</div><!--//ipad-holder-inner-->
+					</div><!--//ipad-holder-->
+				</div><!--//ipad-->
+				<!--// iPad ends -->
+
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//promo-->
+
+	<!-- ******FEATURES****** -->
+	<section id="features" class="features section">
+		<div class="container">
+			<div class="row">
+				<h2 class="title text-center sr-only">Features</h2>
+				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-cloud-upload"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">全面云部署</h3>
+						<p>
+							微行的服务器基于<a href="http://www.aliyun.com" target="blank">阿里云</a> 搭建， 专业的服务器与运营商带来的是极高的可用性， 并可瞬间扩容。 硬件的运维，您不必费心。
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-rocket"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">快速搭建应用</h3>
+						<p>
+							我们的应用是开箱即用的, 您不需要任何专业知识和二次开发, 只要把我们的业务流程整合进您的营销中就可以了。
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-comments"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">利用微信营销</h3>
+						<p>
+							基于微信的广大用户群，我们给您提供自动化，社会化的营销解决方案。
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-cny"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">经济性</h3>
+						<p>
+							我们执行的是诚实，有良心的低价策略，这得益于我们的低成本运营。 在保证高品质的情况下，我们的价格大约是市场价格的一半， 参见<a class="scrollto" href="#story">价格详情</a>.
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+			</div><!--//row-->
+
+			<div class="row">
+				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-wrench"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">实用主义</h3>
+						<p>
+							我们清楚的知道自己的应用能创造的价值，它们不只是宣传工具，而是具有高可用性的，相信您用过后也会认同这一点。
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-users"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">自动化代理</h3>
+						<p>
+							我们为代理商准备了平台，让您的账户下可以管理多个用户，并且不需要您了解技术层面的东西，您可以专心拓展业务。<a href="http://www.weexing.com">代理登入</a>.
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
+					<div class="icon">
+						<i class="fa fa-clock-o"></i>
+					</div><!--//icon-->
+					<div class="content">
+						<h3 class="title">全时支持</h3>
+						<p>
+							云平台的特性让我们随时能对服务器的负荷和app的错误状态进行修正，一切都在我们的掌握之中，免除您的后顾之忧。
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//features-->
+
+	<!-- ******HOW****** -->
+	<section id="how" class="how section has-pattern">
+		<div class="container">
+			<div class="row">
+				<div class="content col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6 text-center">
+					<h2 class="title">运营视频</h2>
+					<p class="intro">
+						我们的视频教程会指导您从零开始搭建一个微信会员卡应用, 您只需要按照视频的指引, 在<a  href="http://mp.weixin.qq.com" target="blank">微信公众平台</a>和<a href="http://www.weexing.com" target="_blank">微行微系统后台</a> 点几下鼠标, 就可以完成
+						这个任务, 我们的努力工作让您不需要专业知识, 就可以轻松搭建微信公众平台应用。
+					</p>
+					<div class="qr-codes hidden-sm hidden-xs">
+						<div class="note">
+							<p>
+								微信扫一扫,关注微行微系统
+							</p>
+							<span class="left-arrow"></span>
+							<span class="right-arrow"></span>
+						</div><!--//note-->
+						<div class="row">
+							<div class="item col-md-6 col-sm-6">
+								<img src="/images/qr-1.png" alt="" />
+								<p>
+									微行微系统
+								</p>
+							</div><!--//item-->
+							<div class="item col-md-6 col-sm-6">
+								<img src="/images/qr-1.png" alt="" />
+								<p>
+									会员卡示例账号
+								</p>
+							</div><!--//item-->
+						</div>
+					</div><!--//qr-codes-->
+				</div><!--//content-->
+				<div id="video-container" class="video-container col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+					<embed src="http://static.youku.com/v/swf/qplayer.swf?winType=adshow&VideoIDS=XNjk0NzgyNTQw&isAutoPlay=false&isShowRelatedVideo=false" wmode="transparent" width="480" align="center" border="0" height="400"></embed>
+				</div><!--//video-->
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//how-->
+
+	<!-- ******FAQ****** -->
+	<section id="faq" class="faq section">
+		<div class="container">
+			<div class="row">
+				<h2 class="title text-center">经常会遇到的问题</h2>
+				<div class="faq-col col-md-6 col-sm-6 col-xs-12">
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行是什么?</h3>
+						<p class="answer">
+							简单的说, 微行能让你快速上线一个微信公众号app的平台, 我们提供现成的软件, 空间, 和解决方案, 供您来搭建自己的营销应用。
+						</p>
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行有什么产品?</h3>
+						<p class="answer">
+							现在我们上线的只有<span data-toggle="tooltip" title="我不是错别字，我是品牌名">汇员卡</span>应用。后续上线的是微信墙，朋友店，家校通，以及微OA应用。都是性价比无与伦比的产品，敬请期待。
+						</p>
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>你们有多少用户了?</h3>
+						<p class="answer">
+							我们是新创立的公司，客户数当然没有十万那么多，但我们不会随便说一个数字，本页面下方有一组计数器，显示每个应用的装机用户数量，这个数字是从数据库实时取出的。
+						</p>
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行提供什么样的培训和技术支持?</h3>
+						<p class="answer">
+							我们尽力使我们的产品自动化，并提供完整的说明文档，因此不提供培训。如果您还有不明白的问题，请放心联系我们。云平台技术让我们可以轻易提供全时的免费技术支持。另外，我们暂时不支持定制开发。
+						</p>
+					</div><!--//item-->
+
+				</div><!--//faq-col-->
+				<div class="faq-col col-md-6 col-sm-6 col-xs-12">
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>能看一下过往客户的示例么?</h3>
+						<p class="answer">
+							下方的"用户的声音"提到的@微信公众号都是我们的用户，您可以去参考。但要提醒您的是，我们的应用搭建十分简单，您可以<a href="http://www.weexing.com">申请一个免费账号</a>，花一点时间自己搭建一个看下效果。
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>怎么做微行的代理商?</h3>
+						<p class="answer">
+							如果您觉得我们的产品不错，我们很欢迎您帮助我们拓展线下市场，我们会给代理商提供基于云的<a href="http://www.weexing.com">客户管理平台</a>，不需要您懂任何技术，您的自有客户的控制权全部下放。
+						</p>
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>做代理商有什么样的优惠政策?</h3>
+						<p class="answer">
+							我们会给您提供专有的客户管理平台，不需要您承担服务器运营成本，经过一系列免费的认证流程后，我们会给您提供售前资料(小册子，ppt). 在客户成交前，您无需垫付任何资金。
+						</p>
+					</div><!--//item-->
+					<div class="item">
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行和其他公司有什么不同?</h3>
+						<p class="answer">
+							我们不是什么都做的团队，我们的目标是以更高的性价比给您提供业界一流的精品应用。我们的应用关注的不只是展示，我们更关注可用性和用户粘度。
+						</p>
+					</div><!--//item-->
+				</div><!--//faq-col-->
+			</div><!--//row-->
+			<div class="more text-center">
+				<h4 class="title">还有问题?</h4>
+				<a class="btn btn-lg btn-theme scrollto" href="#contact">向我们提问<i class="fa fa-arrow-circle-o-down"></i></a>
+			</div>
+		</div><!--//container-->
+	</section><!--//faq-->
+
+	<!-- ******STORY****** -->
+	<section id="story" class="story section has-pattern">
+		<div class="container">
+			<div class="row">
+				<div class="content col-md-5 col-sm-6 col-xs-12 text-center">
+					<h2 class="title">价格</h2>
+					<p>
+						<h3> 微行汇员卡  2014.4.10-2014.5.1 限时免费</h3>
+					</p>
+					<p>
+						<h3> 在此期间开通的所有终端商户将具备永久免费使用汇员卡的权限</h3>
+					</p>
+
+				</div><!--//content-->
+				<div class="team col-md-6 col-sm-5 col-md-offset-1 col-sm-offset-1 col-xs-12">
+					<div class="row">
+						<div class="col-md-6 pricetag">
+							<div class="panel panel-success" style="color:black">
+								<div class="cnrflash">
+									<div class="cnrflash-inner">
+										<span class="cnrflash-label">限时
+											<br>
+											免费</span>
+									</div>
+								</div>
+								<div class="panel-heading">
+									<h3 class="panel-title"> 汇员卡</h3>
+								</div>
+								<div class="panel-body">
+									<div class="the-price">
+										<h1> ￥0<span class="subscript">/年</span></h1>
+										<small>限时抢购 终生免费</small>
+									</div>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td> 1个账户 </td>
+											</tr>
+											<tr class="active">
+												<td> 1000会员上限 </td>
+											</tr>
+											<tr>
+												<td> 30套优惠券上限 </td>
+											</tr>
+											<tr class="active">
+												<td> CRM后台管理 </td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+								<div class="panel-footer">
+									<a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">注册并使用</a>
+								</div>
+							</div>
 						</div>
 
-						<!--End of err_area-->
+						<div class="col-md-6 pricetag">
+							<div class="panel panel-default" style="color:#CCCCCC">
+							
+								<div class="panel-heading">
+									<h3 class="panel-title"> 汇员卡</h3>
+								</div>
+								<div class="panel-body">
+									<div class="the-price">
+										<h1> ￥500<span class="subscript">/年</span></h1>
+										<small>无限支持</small>
+									</div>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td> 1个账户 </td>
+											</tr>
+											<tr class="active">
+												<td> 1000会员上限 </td>
+											</tr>
+											<tr>
+												<td> 30套优惠券上限 </td>
+											</tr>
+											<tr class="active">
+												<td> CRM后台管理 </td>
+											</tr>
 
-						<form class="login-form" id="login-form" action="/usercheck" method="post">
-							<div class="login-un">
-								<span class="icon-wrapper"><i class="icon24-login un"></i></span>
-								<input id="username" name="username" placeholder="邮箱/微信号/QQ号" type="text">
-							</div>
-							<!--End of login-form-->
-							<div class="login-pwd">
-								<span class="icon-wrapper"> <i class="icon24-login pwd"></i></span>
-								<input id="password" name="password" placeholder="密码" type="password">
-								<input name="authenticity_token" type="hidden" value="P9b6xXgCMqQgCxloZEC0y3yEbnbtEKLHQ/CDnGlCwJ4=" />
-							</div>
-							<!--End of login-pwd-->
-						</form>
-
-						<div class="login-btn-panel">
-							<div>
-								<input type="submit" class="login-btn", title= "点击登录" id="commit" value="登录"/>
+										</tbody>
+									</table>
+								</div>
+								<div class="panel-footer">
+									<a href="http://www.jquery2dotnet.com" class="btn btn-default disabled" role="button">注册并使用</a>
+								</div>
 							</div>
 						</div>
-						<!--End of login-btn-panel-->
 
 					</div>
-				</div><!--End of login-panel-->
-				<dl class="qrcode-panel" style="font-size:12px" id="qrcode_area">
-					<dt>
-						<%= image_tag("mp_qrcode1a951a.png")%>
-					</dt>
-					<dd>
-						扫描并关注微行
-					</dd>
-				</dl>
-			</div><!--End of wrapper-->
-		</div><!--End of banner-->
+				</div><!--//team-->
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//story-->
 
-		<div id="banner2" class="banner" style="display:none;background:#070916 url('/images/mountain.jpg') no-repeat center center">
-			<div class="wrapper" id="banner_wrapper2">
-				<div id="div_wrapper" style="position:relative;left:-50px">
-					<div id="product1" class="product"  style="position:absolute;top:50px;left:0;width:448px;height:253px;background:#070916 url('/images/cardpic.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)"
-					onclick="location.href='/card'">
-						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp会员卡 </h3>
-					</div>
+	<!-- ******TESTIMONIALS****** -->
+	<section id="testimonials" class="testimonials section">
+		<div class="container">
+			<div class="row">
+				<h2 class="title text-center">用户的声音</h2>
+				<div class="item col-md-4 col-sm-4">
+					<div class="quote-box">
+						<i class="fa fa-quote-left"></i>
+						<blockquote class="quote">
+							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
+						</blockquote><!--//quote-->
+					</div><!--//quote-box-->
+					<div class="people row">
+						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
+						<p class="details text-center pull-left">
+							<span class="name">晏先生</span>
+							<span class="title">深圳, 咖啡店主</span>
+						</p>
+					</div><!--//people-->
+				</div><!--//item-->
+				<div class="item col-md-4 col-sm-4">
+					<div class="quote-box">
+						<i class="fa fa-quote-left"></i>
+						<blockquote class="quote">
+							<a href="#">@COCO烘焙坊</a> 界面很清新，操作一点都不难。这款应用让我们有了更多的促销手段，比原来发传单方便多了。
+						</blockquote><!--//quote-->
+					</div><!--//quote-box-->
+					<div class="people row">
+						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-2.png" alt="" />
+						<p class="details text-center pull-left">
+							<span class="name">尹小姐</span>
+							<span class="title">东莞, 烘焙店长</span>
+						</p>
+					</div><!--//people-->
+				</div><!--//item-->
+				<div class="item col-md-4 col-sm-4">
+					<div class="quote-box">
+						<i class="fa fa-quote-left"></i>
+						<blockquote class="quote">
+							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
+						</blockquote><!--//quote-->
+					</div><!--//quote-box-->
+					<div class="people row">
+						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
+						<p class="details text-center pull-left">
+							<span class="name">晏先生</span>
+							<span class="title">深圳, 咖啡店主</span>
+						</p>
+					</div><!--//people-->
+				</div><!--//item-->
+			</div><!--//row-->
+			<div class="row">
+				<div class="item col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">
+					<div class="quote-box">
+						<i class="fa fa-quote-left"></i>
+						<blockquote class="quote">
+							<a href="#">@COCO烘焙坊</a> 界面很清新，操作一点都不难。这款应用让我们有了更多的促销手段，比原来发传单方便多了。
+						</blockquote><!--//quote-->
+					</div><!--//quote-box-->
+					<div class="people row">
+						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-2.png" alt="" />
+						<p class="details text-center pull-left">
+							<span class="name">尹小姐</span>
+							<span class="title">东莞, 烘焙店长</span>
+						</p>
+					</div><!--//people-->
+				</div><!--//item-->
+				<div class="item col-md-4 col-sm-4">
+					<div class="quote-box">
+						<i class="fa fa-quote-left"></i>
+						<blockquote class="quote">
+							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
+						</blockquote><!--//quote-->
+					</div><!--//quote-box-->
+					<div class="people row">
+						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
+						<p class="details text-center pull-left">
+							<span class="name">晏先生</span>
+							<span class="title">深圳, 咖啡店主</span>
+						</p>
+					</div><!--//people-->
+				</div><!--//item-->
+			</div>
+			<div class="press row text-center">
+				<h3 class="note">加入微行的用户群,听听大家的声音吧</h3>
+				<ul class="col-md-12 list-inline">
+					<li>
+						<a data-toggle="popover" data-placement="bottom" data-content="微行qq群号:166706916" id="groupnum"><img class="img-responsive" src="/images/group2.png" alt="" /></a>
+					</li>
+					<li class="last">
+						<a data-toggle="popover" data-placement="bottom" data-content="微行咨询qq号:166706916" id="qqnum"><img class="img-responsive" src="/images/qq2.png" alt="" /></a>
+					</li>
+				</ul>
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//Testimonials-->
 
-					<div id="product2" class="product"  style="position:absolute;top:50px;left:600px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
-						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp微店铺 </h3>
-					</div>
-
-					<div id="product3" class="product"  style="position:absolute;top:350px;left:0px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
-						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp地产应用</h3>
-					</div>
-
-					<div id="product4" class="product"  style="position:absolute;top:350px;left:600px;width:448px;height:253px;background:#070916 url('/images/product.jpg') no-repeat center center" onmouseover="highlight(this)" onmouseout="dehighlight(this)" >
-						<h3 style="position:relative;top:20px;left:20px;font-size: 25px"> &nbsp&nbsp&nbsp教育应用 </h3>
-					</div>
+	<!-- ******CONTACT****** -->
+	<section id="contact" class="contact section has-pattern">
+		<div class="container">
+			<div class="row text-center">
+				<h2 class="title">联系我们</h2>
+				<div class="intro col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+					<p>
+						感谢光临，若您对我们的产品或服务感兴趣,请通过如下的方式联系我们。
+					</p>
+					<ul class="list-unstyled contact-details">
+						<li>
+							<i class="fa fa-envelope"></i><a href="mailto:sales@weexing.com">sales@weexing.com</a>
+						</li>
+						<li>
+							<i class="fa fa-phone-square"></i>0800 123 456
+						</li>
+					</ul>
 				</div>
+			</div><!--//row-->
+			<div class="row text-center">
+				<div class="contact-form col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+					<form class="form">
+						<div class="form-group name">
+							<label class="sr-only" for="name">公司</label>
+							<input id="name" type="text" class="form-control" placeholder="公司:">
+						</div><!--//form-group-->
+						<div class="form-group email">
+							<label class="sr-only" for="email">电邮</label>
+							<input id="email" type="email" class="form-control" placeholder="电邮:">
+						</div><!--//form-group-->
+						<div class="form-group message">
+							<label class="sr-only" for="message">留言</label>
+							<textarea id="message" class="form-control" rows="6" placeholder="留言:"></textarea>
+						</div><!--//form-group-->
+						<button type="submit" class="btn btn-lg btn-theme">
+							发送留言
+						</button>
+					</form><!--//form-->
+				</div><!--//contact-form-->
+			</div><!--//row-->
+			<div class="text-center">
 
-			</div><!--End of wrapper-->
-		</div><!--End of banner-->
+			</div><!--//row-->
+		</div><!--//container-->
+	</section><!--//contact-->
+	<!-- ******FOOTER****** -->
+	<footer class="footer">
+		<div class="container">
+			<small class="copyright pull-left">Copyright &copy; 2014 Weexing MicroSystem 微行微系统</small>
 
-		<div id="contain">
-			<div class="wrapper">
-				<div class="simple_box mp_index">
-					<dt>
-						<i class="icon_tip speaker"></i>最新消息
-					</dt>
-					<dd class="">
-						<i>●</i><a href="/news/display/top1" target="_blank"><%= @top1_title%><span class="label_new"><%= image_tag("icon_new.png")%></span></a>
-					</dd>
-					<dd class="">
-						<i>●</i><a href="/news/display/top2" target="_blank"><%= @top2_title%><span class="label_new"><%= image_tag("icon_new.png")%></span></a>
-					</dd>
-				</div><!--End of simple_box_mp_index-->
-			</div><!--End of wrapper-->
-		</div><!--End of contain-->
-		<div id="footer">
-			<span> <a target="_blank" href="/news/display/about">关于微行</a>&nbsp;|&nbsp; <a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/agreement_tmpl&amp;type=info&amp;lang=zh_CN">服务协议 </a>&nbsp;|&nbsp; <a target="_blank" href="http://kf.qq.com/product/weixinmp.html">客服中心</a>&nbsp;|&nbsp; <a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&amp;f=1&amp;ty=1&amp;ap=000011:400792:%7Cm:12%7Cf:400792:m:12" target="_blank">在线客服</a>&nbsp;|&nbsp; <a target="_blank" href="mailto:weixinmp@qq.com">联系邮箱 </a>&nbsp;|&nbsp; </span>
-			<span>Copyright&nbsp; 2012-2013 WEIXING. All Rights Reserved.</span>
+		</div>
+	</footer><!--//footer-->
 
-		</div><!--End of footer-->
-		<!--Java Script starts from here-->
-		<script type="text/javascript" src="/javascripts/jquery-191.js"></script>
-		<script type="text/javascript" src="/javascripts/jquery-ui-1.10.4.custom.js"></script>
-		<script type="text/javascript" src="/javascripts/formhandler.js"></script>
-		<script type="text/javascript">
-			var commit$ = $("#commit");
-			var err_panel$ = $("#err_area");
+	<!-- *****CONFIGURE STYLE****** -->
 
-			function highlight(id) {
-				if (navigator.userAgent.indexOf("MSIE") > 0) {
-					id.filters.alpha.opacity = 80;
-				} else {
-					id.style.opacity = 0.8;
-				}
-			}
+	<%= javascript_include_tag "jquery-102.js" %>
+	<%= javascript_include_tag "jquery-migrate-1.2.1.min.js"%>
+	<%= javascript_include_tag "detectmobilebrowser.js"%>
+	<%= javascript_include_tag "jquery.easing.1.3.js"%>
+	<%= javascript_include_tag "bootstrap311.js"%>
+	<%= javascript_include_tag "jquery.inview.min.js"%>
+	<%= javascript_include_tag "jquery.fitvids.js"%>
+	<%= javascript_include_tag "jquery.scrollTo.min.js"%>
 
-			function dehighlight(id) {
-				if (navigator.userAgent.indexOf("MSIE") > 0) {
-					id.filters.alpha.opacity = 30;
-				} else {
-					id.style.opacity = 0.3;
-				}
-			}
+	<%= javascript_include_tag "jquery.placeholder.js"%>
+	<%= javascript_include_tag "jquery.flexslider-min.js"%>
 
-			function callback() {
-			};
 
-			function runEffect() {
-				var options = {
-					direction : "right"
-				};
-				$("#banner").hide("drop", options, 500, runEffect2);
-				//	$("#banner").hide("drop",options,1000,callback);
-			}
 
-			function runEffect2() {
-				var options = {
-					direction : "left"
-				};
-				//$("#banner").css("background", "#070916 url('/assets/mountain.jpg') no-repeat center center");
+	<%= javascript_include_tag "loginpage.js"%>
+	<!--[if !IE]>-->
+	<%= javascript_include_tag "animations.js"%>
+	<!--<![endif]-->
 
-				$("#banner_wrapper2").css("height", "667px");
-				$("#banner2").show("drop", options, 500, callback);
-			}
+	<!--<![endif]-->
 
-			function setUserCheckPass() {
-				err_panel$.addClass('dn');
-				//$("#hd_login").html("<h3>账户：" + $("#username").val() + "</h3>");
-				runEffect();
-			}
+	<script>
+		$('#qqnum').popover().click(function() {
+			setTimeout(function() {
+				$('#qqnum').popover('hide');
+			}, 3000);
+		});
 
-			function setUserCheckFail() {
-				$("#err_tips").html("用户名/密码错误");
-				err_panel$.removeClass('dn');
-				return;
-			}
+		$('#groupnum').popover().click(function() {
+			setTimeout(function() {
+				$('#groupnum').popover('hide');
+			}, 3000);
+		});
 
-			function setUserNotActive() {
-				$("#err_tips").html("用户账号没有被激活");
-				err_panel$.removeClass('dn');
-				return;
-			}
+		function showpc() {
 
-			var checkform = function() {
-				var user = $.trim($("#username").val());
-				var pass = $.trim($("#password").val());
-				if (user == "") {
-					$("#err_tips").html("用户名不能为空");
-					err_panel$.removeClass('dn');
-					return;
-				}
-				if (pass == "") {
-					$("#err_tips").html("密码不能为空");
-					err_panel$.removeClass('dn');
-					return;
-				} else {
-					$.post("/homepage/usercheck", {
-						username : $.trim($("#username").val()),
-						password : $.trim($("#password").val())
-					}, null, "script");
+			$("#promo1").hide();
+			//$("#promo1").hide('slide');
+			$("#promo2").show();
+		}
 
-				}
-				//}
+		function showmobile() {
+			$("#promo2").hide();
+			$("#promo1").show();
+		}
 
-			};
-			commit$.click(checkform);
+	</script>
+</body>
 
-			//表单初始化
-			//var Msg = "empty";
-			//var Tipid = "#err_area";
-			//$("#Button").attr("disabled", "disabled");
-			//$(Tipid).css("display", "none");
-			//$("#Button").css("background","url(image/Landed_button2.gif)");
-			//初始化完成
-
-			//$(function login() {
-			//$("#account").blur(function() {//用户名文本框失去焦点触发验证事件
-
-			//if ($(this).val() == "")//只处验证不能为空并且只能为英文或者数字或者下划线组成的２－１５个字符
-			//{
-			//	Msg = "用户名不能为空!"
-			// Result(false);
-			//} else {
-			//	if ($(this).val().length < 5 || $(this).val().length > 15) {
-			//	Msg = "用户名由5-15字组成!"
-			//Result(false);
-			//}
-			//}
-			//});
-			//$("#password").blur(function() {
-
-			//	if ($(this).val() == "") {
-			//Msg = "密码不能为空!"
-			//Result(false);
-			//	} else {
-			//if ($(this).val().length > 20) {
-			//Msg = "密码超出20字符!";
-
-			//  Result(false);
-			//}
-			//}
-			//});
-
-			//$("#login_button").click(function() {
-			//
-			//				if (Msg == "empty") {
-			//			} else {
-			//			Result(false);
-			//	}
-			//});
-
-			//})
-			//function Result(Result) {
-			//	if (!Result) {
-			//	$(Tipid).html(Msg);
-			//	$(Tipid).show();
-			//$("#Button").css("background","url(image/Landed_button2.gif)");
-			//$("#Button").attr("disabled", "disabled");
-			//	return false;
-			//} else {
-			//$(Tipid).html(Msg);
-			//$("#Button").removeAttr("disabled");
-			//$("#Button").css("background","url(image/Landed_button.gif)");
-			//$(Tipid).css("display", "inline");
-			//}
-			//}
-		</script>
-	</body>
-</html>

@@ -89,11 +89,14 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         if Customer.ismemberexist(@userid)
            customer=Customer.where(:openid=>@userid).first
            @cid=customer.id
+           @sid=@weixin_public_account.id
            @wname =@weixin_public_account.shopurl
-            #articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com/system/membercards/pics/000/000/007/original/2.jpg','http://www.weexing.com/cardguest/walmart')]
-            #reply_news_message(nil, nil, articles)
+           repurl="http://69d3e956.ngrok.com/cardguest/#{@sid}?customerid=#{@cid}"
+           logger.info(repurl)
+           articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com/system/membercards/pics/000/000/007/original/2.jpg',repurl)]
+            reply_news_message(nil, nil, articles)
            
-            reply_text_message("欢迎回来，我们的老客户,您的url是:#{@cid}")
+            #reply_text_message("欢迎回来，我们的老客户,您的url是:#{@cid}")
         else
           @customer=Customer.new
           @customer.openid = @userid

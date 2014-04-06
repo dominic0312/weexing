@@ -21,6 +21,7 @@ Weexing::Application.routes.draw do
   get 'membercards/display'
   get 'cardbackground/index'
   post 'cardbackground/index'
+  post 'coupons/addrequest'
   get 'sp/:shopurl', to: 'cardbackground#index' 
   get 'cardbackground/login'
   get 'coupons/display'
@@ -46,7 +47,9 @@ Weexing::Application.routes.draw do
   post "customers/delcustomer"
   
   post "coupons/delcoupon"
-  get "coupons/requestcoupon"
+  post "coupons/delrequest"
+  post "coupons/refreshrequest"
+  match "coupons/requestcoupon/:coupid" => "coupons#requestcoupon", via: [:get]
   get  'weixin/:weixin_token', to: 'weixin#index'
   post 'weixin/:weixin_token', to: 'weixin#reply'
   get 'cardbackground/:shopurl', to: 'cardbackground#login'
@@ -105,6 +108,7 @@ Weexing::Application.routes.draw do
   post "shops/updatemembercard"
   post "shops/createshop"
   post "shops/onlineshop"
+  post "shops/updateinfo"
   get "shops/manageshop"
   post "shops/index"
   post "cardguest/get_customer_info"
