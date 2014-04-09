@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :authadmin, :except=>[:create,:activate, :activatesuccess, :activatefail]
+  before_filter :authadmin, :only=>[:index,:show, :new, :edit,:update,:destroy]
+  before_filter :authagency,:set_cache_buster, :only=>[:changepass]
+  before_filter :set_cache_buster, :only=>[:resetpasspage]
   def index
     @users = User.paginate(:page => params[:page]).order('id DESC')
     respond_to do |format|
@@ -47,7 +49,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        Regconfirm.regist_confirm(@user).deliver
+        Regconfirm.delay.regist_confirm(@user)
         format.js { render  :js=> "regsuccess('"+@user.email+"');"}
       else
         format.js { render  :js=> "regfail();"}
@@ -65,6 +67,7 @@ class UsersController < ApplicationController
           user.activated =1
           user.save
           @email=user.email
+          @uname=user.name
           format.html{render :action=>"activatesuccess"}
         else
           format.html{render :action=>"activatefail"}
@@ -112,10 +115,70 @@ class UsersController < ApplicationController
     end
   end
 
+  def resetpassword
+    @user = User.where(:email=>params[:emailreset]).first
+    respond_to do |format|
+
+      Regconfirm.delay.reset_password(@user)
+      format.js { render  :js=> "mailsent();"}
+
+    end
+
+  end
+
+  def resetpasspage
+    userid=params[:userid]
+    token=params[:token]
+    respond_to do |format|
+      if userid && token
+        @user = User.find(userid)
+        if @user && @user.hashed_password == token
+          session[:passreset]='true'
+          format.html{}
+        else
+          format.html{render :action=>"resetfail"}
+        end
+      else
+        render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
+      end
+    end
+  end
+
+  def resetfail
+
+  end
+
+  def resetsuccess
+
+  end
+
+  def changepass
+    @user=User.find(params[:userid])
+    @user.password=params[:regpassword]
+    @user.save
+    render :js=>"changesuccess()" and return
+
+  end
+
   def authadmin
     admin=session[:usertype]
     if admin!='admin'
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
+  end
+
+  def authagency
+    agency=session[:passreset]
+    if agency
+
+      else
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
+    end
+  end
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 end

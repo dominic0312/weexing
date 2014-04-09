@@ -74,6 +74,9 @@
 							<dd id="menu_publishpoints" class="menu_item " onclick="showpage('publishpoints','/pointcodes');">
 								<a href="#">点卡管理</a>
 							</dd>
+							<dd id="menu_publishmessages" class="menu_item " onclick="showpage('publishmessages','/comments');">
+								<a href="#">查看留言</a>
+							</dd>
 						</dl>
 					</div>
 					<script type="text/javascript"></script>
@@ -87,70 +90,27 @@
 							<a href="http://www.iweixing.com" target="_blank">关于微行</a>
 						</li>
 						<li class="links_item">
-							<a href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/agreement_tmpl&type=info&lang=zh_CN&token=962392589" target="_blank">服务协议</a>
+							<a href="#" target="_blank">服务协议</a>
 						</li>
 						<li class="links_item">
-							<a href="http://kf.qq.com/product/weixinmp.html" target="_blank">客服中心</a>
+							<a href="#" target="_blank">客服中心</a>
 						</li>
 						<li class="links_item">
-							<a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&f=1&ty=1&ap=000011:400792:|m:12|f:400792:m:12" target="_blank">在线客服</a>
+							<a href="#" target="_blank">在线客服</a>
 						</li>
 						<li class="links_item">
-							<a href="mailto:weixinmp@qq.com" target="_blank">联系邮箱</a>
+							<a href="#" target="_blank">联系邮箱</a>
 						</li>
 						<li class="links_item">
-							<a href="https://mp.weixin.qq.com/cgi-bin/readtemplate?t=home/infringement_tmpl&lang=zh_CN" target="_blank">侵权投诉</a>
+							<a href="#" target="_blank">侵权投诉</a>
 						</li>
 					</ul>
 					<p class="copyright">
-						Copyright © 2012-2013 Weixing. All Rights Reserved.
+						Copyright © 2012-2013 Weexing. All Rights Reserved.
 					</p>
 				</div>
-				<div id="userinfo" style="width:250px;display:none">
-					<div>
-						用戶名:
-					</div>
-					<div class="style4" style="">
-						<%= @counter%>
-					</div>
-					<div style="">
-						点数:
-					</div>
-					<div class="style4" style="" id="credit_div">
-						<%= @credit%>
-					</div>
-					<div style="margin-left:10px;display:inline">
-						<a class="pay_box" href="#pay">
-						<button type="submit" class="positive" name="pay" onclick="" style="display:inline">
-							兑换点数
-						</button> </a>
-					</div>
-
-					<div style="margin-left:60px;display:inline">
-						<button type="submit" class="positive" name="close" onclick="$.fancybox.close()" style="display:inline">
-							关闭
-						</button>
-					</div>
-				</div>
-				<div id="pay" style="width:200px;display:none">
-					兑换码：
-					<input type="text" id="pay_code">
-					</input>
-					<div id="code_message" style="">
-
-					</div>
-					<div style="margin-left:10px;display:inline">
-
-						<button type="submit" class="positive" name="pay2" onclick="validate_code()" style="display:inline">
-							兑换
-						</button>
-					</div>
-					<div style="margin-left:20px;display:inline">
-						<button type="submit" class="positive" name="close_pay" onclick="clearPaybox()" style="display:inline">
-							关闭
-						</button>
-					</div>
-				</div>
+				
+				
 
 				<%= javascript_include_tag "leftmenu.js" %>
 
@@ -165,54 +125,17 @@
 						color : "#FFFFFF"
 					};
 
-					
-
-				
-
-					function showpage(id,address) {
+					function showpage(id, address) {
 						$("#menu_" + id).addClass("selected");
 						if (currentpage != id) {
 							$("#menu_" + currentpage).removeClass("selected");
 						}
-						$('#page').html("<iframe src='"+address+"' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
+						$('#page').html("<iframe src='" + address + "' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
 						$('#page').show();
 						currentpage = id;
 
 					}
 
-					function showshoppage(id) {
-						$("#menu_" + id).addClass("selected");
-						if (currentpage != id) {
-							$("#menu_" + currentpage).removeClass("selected");
-						}
-						$('#page').html("<iframe src='/shops' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
-						$('#page').show();
-						currentpage = id;
-					}
-
-					function showagencypage(id) {
-						$("#menu_" + id).addClass("selected");
-						if (currentpage != id) {
-							$("#menu_" + currentpage).removeClass("selected");
-						}
-						$('#page').html("<iframe src='/users' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
-						$('#page').show();
-						currentpage = id;
-					}
-
-					function showtemplatepage(id) {
-						$("#menu_" + id).addClass("selected");
-						if (currentpage != id) {
-							$("#menu_" + currentpage).removeClass("selected");
-						}
-						$('#page').html("<iframe src='/usertemplates' width='810' frameborder='0' scrolling='no' height='655'>我們使用了框架技术，但是您的浏览器不支持框架，请升级您的浏览器以便正常访问脚本之家。 </iframe>");
-						$('#page').show();
-						currentpage = id;
-
-					}
-
-					function runEffect() {
-					}
 				</script>
 	</body>
 </html>

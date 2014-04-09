@@ -1,0 +1,35 @@
+<%= javascript_include_tag "jquery-1.js" %>
+<%= javascript_include_tag "jquery-ujs.js" %>
+<%= stylesheet_link_tag "admin.css"%>
+<%= stylesheet_link_tag "pagenate.css" %>
+<div class="mainbody">
+	<h1>留言列表</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>名字</th>
+				<th>邮件</th>
+				<th>消息</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @comments.each do |comment| %>
+			<tr>
+				<td><%= comment.name %></td>
+				<td><%= comment.email %></td>
+				<td><%= comment.message %></td>
+				<td><%= link_to '查看', comment %></td>
+				<td><%= link_to '删除', comment, method: :delete, data: { confirm: '确定删除?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<br>
+
+		<%= will_paginate @comments,:inner_window=>3,:outer_window=>2 %>
+</div>
+

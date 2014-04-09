@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible :credit,:email,:company,:phone,:id,:hashed_password,:usertype,:activated
+  attr_accessible :credit,:email,:company,:phone,:id,:hashed_password,:usertype,:activated,:salt
   validates_presence_of :email
   validates_uniqueness_of :email
   attr_accessor :password_confirmation
@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.authenticate(email, password)
-    user = self.find_by_email(email)
+  def self.authenticate(name, password)
+    user = self.where(:name=> name).first
     if user
       expected_password = encrypted_password(password, user.salt)
       if user.hashed_password != expected_password

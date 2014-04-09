@@ -3,6 +3,8 @@ Weexing::Application.routes.draw do
  
   
 
+
+
   mount WeixinRailsMiddleware::Engine, at: "/"
   #mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
@@ -22,6 +24,14 @@ Weexing::Application.routes.draw do
   get 'cardbackground/index'
   post 'cardbackground/index'
   post 'coupons/addrequest'
+  get 'users/activatesuccess'
+  get 'users/activatefail'
+  post 'users/changepass'
+  post 'users/resetpassword'
+  
+  match "/resetpasswd" => "users#resetpasspage",via: [:get]
+
+  post 'comments/addcomment'
   get 'sp/:shopurl', to: 'cardbackground#index' 
   get 'cardbackground/login'
   get 'coupons/display'
@@ -56,6 +66,7 @@ Weexing::Application.routes.draw do
   resources :usertemplates
   resources :shops
   resources :membercards
+  resources :comments
   #resources :coupons
   
   match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
@@ -66,7 +77,7 @@ Weexing::Application.routes.draw do
   match "/news/display/:id" => "news#display",via: [:get, :post]
   get 'card' => 'card#index'
   get 'cardguest' => 'cardguest#cardpage' 
-  get 'homepage' => 'homepage#login'
+  get 'homepage' => 'homepage#landing'
   
   
   controller :homepage do
@@ -88,12 +99,20 @@ Weexing::Application.routes.draw do
   
   post "users/create"
   post "homepage/usercheck"
+   post "agency/usercheck"
+     post "agency/register"
+   post "agency/reg_check"
+   post "agency/email_check"
   post "admins/adminlogin"
   post "coupons/sendcoupon"
   get 'homepage/apps' 
-  get "homepage/login"
+  get "homepage/landing"
  get "cardguest/cardpage"
  get "cardguest/actinfo"
+  get "agency/login", :as => "agencylogin"
+  get "agency/index"
+  get "agency/interface"
+  get "agency/logout"
  
  
   get "homepage/regist"
@@ -163,7 +182,7 @@ Weexing::Application.routes.draw do
 
 # You can have the root of your site routed with "root"
 # just remember to delete public/index.html.
-root :to => 'homepage#login'
+root :to => 'homepage#landing'
 
 # See how all your routes lay out with "rake routes"
 

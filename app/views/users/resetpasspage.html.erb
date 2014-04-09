@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>微行  代理平台</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/unicorn-login.css" />
+		<script type="text/javascript" src="/js/respond.min.js"></script>
+		<style>
+			.help-inline {
+				color: #999999;
+				font-size: 12px;
+				margin-right: 20px
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="logo">
+				<img src="/images/agency/logo2.png" alt="" />
+			</div>
+			<div id="user">
+				<div class="avatar">
+					<div class="inner"></div>
+					<img src="/images/agency/weexing/ava.png" />
+				</div>
+				<div class="text">
+					<h4>欢迎回来,<span class="user_name"></span></h4>
+				</div>
+			</div>
+			<div id="loginbox" style="height: 170px">
+
+				<form id="resetform" action="#">
+					<div id="resetmessage"><p>
+						您好:<%= @user.name%>,请重新设置您的密码:
+					</p>
+					</div>
+
+					<div class="input-group" id="passgroup">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input id="regpassword" name="regpassword" class="form-control" type="password" placeholder="设置一个新密码" />
+						<input id="userid" name="userid" value="<%= @user.id%>" type="hidden"/>
+					</div>
+					<div id="error_password" style="display:block;width:120px;height:30px;position:absolute;left:410px;bottom:88px;text-align: left"></div>
+					<div class="input-group" id="confirmgroup">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input id="password_confirm" name="password_confirm" class="form-control" type="password" placeholder="确认您的新密码" />
+					</div>
+					<div id="error_password_conf" style="display:block;width:130px;height:30px;position:absolute;left:410px;bottom:50px;text-align: left"></div>
+
+					<div class="form-actions clearfix">
+						<input type="submit" class="btn btn-block btn-success" value="重设密码" id="inputbtn"/>
+					</div>
+				</form>
+			</div>
+
+			<script src="/js/jquery.min.js"></script>
+			<script type="text/javascript" scr="/js/jquery.validate.js"></script>
+			<script src="/js/unicorn.login.js"></script>
+			<script src="/js/jquery.validate.js"></script>
+			<script src="/js/jquery.form.min.js"></script>
+			<%= javascript_include_tag "jquery-ujs.js" %>
+			<script>
+				//var loginbox = $('#loginbox');
+				//var userbox = $('#user');
+				function showRequest(formData, jqForm, options) {
+					// formData is an array; here we use $.param to convert it to a string to display it
+					// but the form plugin does this for you automatically when it submits the data
+					var queryString = $.param(formData);
+
+					// jqForm is a jQuery object encapsulating the form element.  To access the
+					// DOM element for the form do this:
+					// var formElement = jqForm[0];
+
+					alert('About to submit: \n\n' + queryString);
+
+					// here we could return false to prevent the form from being submitted;
+					// returning anything other than false will allow the form submit to continue
+					return true;
+				}
+
+
+				$(document).ready(function() {
+
+					var options = {
+						beforeSubmit : showRequest, // pre-submit callback
+						success : showResponse, // post-submit callback
+
+						// other available options:
+						url : '/users/changepass', // override for form's 'action' attribute
+						type : 'post', // 'get' or 'post', override for form's 'method' attribute
+						dataType : 'script', // 'xml', 'script', or 'json' (expected server response type)
+						clearForm : false // clear all form fields after successful submit
+						//resetForm: true        // reset the form after successful submit
+					};
+
+					// bind form using 'ajaxForm'
+					$('#resetform').ajaxForm(options);
+
+				});
+
+				function showResponse(responseText, statusText, xhr, $form) {
+					// for normal html responses, the first argument to the success callback
+					// is the XMLHttpRequest object's responseText property
+
+					// if the ajaxForm method was passed an Options Object with the dataType
+					// property set to 'xml' then the first argument to the success callback
+					// is the XMLHttpRequest object's responseXML property
+
+					// if the ajaxForm method was passed an Options Object with the dataType
+					// property set to 'json' then the first argument to the success callback
+					// is the json data object returned by the server
+
+					//alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
+				}
+
+
+				$("#resetform").validate({
+					focusInvalid : true,
+					focusCleanup : false,
+					onkeyup : false,
+					rules : {
+						regpassword : {
+							required : true,
+							minlength : 6
+						},
+						password_confirm : {
+							required : true,
+							minlength : 6,
+							equalTo : "#regpassword"
+						}
+					},
+					messages : {
+						regpassword : {
+							required : "密码不能为空",
+							minlength : "密码至少为6位"
+						},
+						password_confirm : {
+							required : "请确认密码",
+							minlength : "密码至少为6位",
+							equalTo : "两次输入密码不一致"
+						}
+					},
+					errorPlacement : function(error, element) {
+						error.appendTo(element.parent().next());
+					},
+
+					/*submitHandler : function(form) {
+
+					 $("#loginform").ajaxSubmit();
+					 return false;
+					 },*/
+
+					errorClass : "help-inline",
+					errorElement : "span",
+				});
+
+				function loginsucc() {
+					var thisForm = $("#loginform");
+					var userinput = $('#username');
+					loginbox.animate({
+						'top' : '+=100px',
+						'opacity' : '0'
+					}, 250, function() {
+						$('.user_name').text(userinput.val());
+						userbox.animate({
+							'top' : "+=175px",
+							'opacity' : '1'
+						}, 250, function() {
+							setTimeout(function() {
+								location.href = '/agency/index'
+							}, 600);
+						});
+					});
+					return true;
+
+				}
+
+				function regsuccess() {
+					switch_container(login, recover_register, 265);
+					str = "注册成功,请查收注册邮箱中的激活邮件,激活后登录.";
+					$("#username_div").notify(str, {
+						className : "success",
+						arrowShow : false,
+						position : "top",
+						autoHideDelay : 4000
+					});
+
+				}
+
+				function setUserNotActive() {
+					str = "您的帐号没有被激活，请查看邮件激活。";
+					$("#username").notify(str, {
+						className : "warning",
+						arrowShow : false,
+						position : "top",
+						autoHideDelay : 4000
+					});
+
+				}
+
+				function changesuccess() {
+					str="<p>密码修改成功</p>";
+					btn="<a href='/agency/login' class='btn btn-block btn-primary'>去登录页面</a>"
+					$("#resetmessage").html(str);
+					$("#passgroup").remove();
+					$("#confirmgroup").remove();
+				    $("#inputbtn").replaceWith(btn);
+				    $("#loginbox").css("height","100px");
+
+				}
+			</script>
+	</body>
+</html>

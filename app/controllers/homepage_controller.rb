@@ -37,6 +37,11 @@ class HomepageController < ApplicationController
       @top2_title="."
     end
   end
+  
+  
+  def landing
+    
+  end
 
   def apps
 
