@@ -39,7 +39,7 @@
 
 		.cnrflash {
 			position: absolute;
-			top: -9px;
+			top: -9pxb;
 			right: 4px;
 			z-index: 1;
 			overflow: hidden;
@@ -99,6 +99,11 @@
 			text-align: center;
 		}
 
+		.counter {
+			font-size: 20px;
+			color: #CCCCCC
+		}
+
 	</style>
 </head>
 <!-- NAVBAR
@@ -107,7 +112,7 @@
 	<!-- ******HEADER****** -->
 	<header id="top" class="header navbar-fixed-top">
 		<div class="container">
-			<h1 class="logo pull-left"><a class="scrollto" href="#promo"> <img id="logo-image" class="logo-image" src="/images/logo.png" alt="Logo"> <span class="logo-title"></span> </a></h1><!--//logo-->
+			<h1 class="logo pull-left"><a class="scrollto" href="#promo"> <img id="logo-image" class="logo-image" src="/images/logo3.png" alt="Logo"> <span class="logo-title"></span> </a></h1><!--//logo-->
 			<nav id="main-nav" class="main-nav navbar-right" role="navigation">
 				<div class="navbar-header">
 					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
@@ -134,6 +139,9 @@
 						<li class="nav-item">
 							<a class="scrollto" href="#story"><h4>价格</h4></a>
 						</li>
+						<li class="nav-item">
+							<a href="/agency/login" target="blank"><h4>代理平台</h4></a>
+						</li>
 						<li class="nav-item last">
 							<a class="scrollto" href="#contact"><h4>联系我们</h4></a>
 						</li>
@@ -144,7 +152,7 @@
 	</header><!--//header-->
 
 	<!-- ******PROMO****** -->
-
+    <section id="promo"> </section>
 	<section id="promo1" class="promo section offset-header has-pattern">
 		<div class="container">
 			<div class="row">
@@ -345,7 +353,7 @@
 					<div class="content">
 						<h3 class="title">自动化代理</h3>
 						<p>
-							我们为代理商准备了平台，让您的账户下可以管理多个用户，并且不需要您了解技术层面的东西，您可以专心拓展业务。<a href="http://www.weexing.com">代理登入</a>.
+							我们为代理商准备了平台，让您的账户下可以管理多个用户，并且不需要您了解技术层面的东西，您可以专心拓展业务。<a href="/agency/login"  target="view_window">代理登入</a>.
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
@@ -424,9 +432,9 @@
 						</p>
 					</div><!--//item-->
 					<div class="item">
-						<h3 class="question"><i class="fa fa-question-circle"></i>你们有多少用户了?</h3>
+						<h3 class="question"><i class="fa fa-question-circle"></i>你们有多少实际用户?</h3>
 						<p class="answer">
-							我们是新创立的公司，客户数当然没有十万那么多，但我们不会随便说一个数字，本页面下方有一组计数器，显示每个应用的装机用户数量，这个数字是从数据库实时取出的。
+							我们是新创立的公司，客户数当然没有十万那么多，但我们不会随便说一个数字，本页面下方有<a class="scrollto" href="#contact">一组计数器</a>，显示每个应用的装机用户数量，这个数字是从数据库实时取出的。
 						</p>
 					</div><!--//item-->
 					<div class="item">
@@ -529,7 +537,7 @@
 
 						<div class="col-md-6 pricetag">
 							<div class="panel panel-default" style="color:#CCCCCC">
-							
+
 								<div class="panel-heading">
 									<h3 class="panel-title"> 汇员卡</h3>
 								</div>
@@ -686,7 +694,7 @@
 			</div><!--//row-->
 			<div class="row text-center">
 				<div class="contact-form col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
-					<form class="form">
+					<form class="form" id="commentform">
 						<div class="form-group name">
 							<label class="sr-only" for="name">公司</label>
 							<input id="name" type="text" class="form-control" placeholder="公司:">
@@ -699,14 +707,27 @@
 							<label class="sr-only" for="message">留言</label>
 							<textarea id="message" class="form-control" rows="6" placeholder="留言:"></textarea>
 						</div><!--//form-group-->
-						<button type="submit" class="btn btn-lg btn-theme">
+						<button class="btn btn-lg btn-theme" onclick="sendcomment()">
 							发送留言
 						</button>
 					</form><!--//form-->
 				</div><!--//contact-form-->
 			</div><!--//row-->
 			<div class="text-center">
-
+				<ul class="social-icons list-inline animated fadeInUp delayp4" style="opacity: 0; ">
+					<li>
+						<a href="#" class="counter" data-toggle="tooltip" title="汇员卡用户计数"  id="formdiv"><b>12</b></br><i class="fa fa-credit-card"></i></a>
+					</li>
+					<li>
+						<a href="#" class="counter" data-toggle="tooltip" title="微信墙用户计数"><b>0</b></br><i class="fa fa-comments-o"></i></a>
+					</li>
+					<li>
+						<a href="#" class="counter" data-toggle="tooltip" title="家校通用户计数"><b>0</b></br><i class="fa fa-pencil-square-o"></i></a>
+					</li>
+					<li>
+						<a href="#" class="counter" data-toggle="tooltip" title="微OA用户计数"><b>0</b></br><i class="fa fa-suitcase"></i></a>
+					</li>
+				</ul>
 			</div><!--//row-->
 		</div><!--//container-->
 	</section><!--//contact-->
@@ -731,9 +752,7 @@
 
 	<%= javascript_include_tag "jquery.placeholder.js"%>
 	<%= javascript_include_tag "jquery.flexslider-min.js"%>
-
-
-
+	<%= javascript_include_tag "notify-custom.js" %>
 	<%= javascript_include_tag "loginpage.js"%>
 	<!--[if !IE]>-->
 	<%= javascript_include_tag "animations.js"%>
@@ -764,6 +783,29 @@
 		function showmobile() {
 			$("#promo2").hide();
 			$("#promo1").show();
+		}
+
+		function sendcomment() {
+			var name = $.trim($("#name").val());
+			var email = $.trim($("#email").val());
+			var message = $.trim($("#email").val());
+			$.post("/comments/addcomment", {
+				username : name,
+				useremail : email,
+				usermessage : message
+			}, null, "script");
+		}
+
+		function commentsucc() {
+			str = "留言成功, 我们会迅速联系您.";
+			$("#formdiv").notify(str, {
+				className : "success",
+				arrowShow: false,
+				position : "top",
+				autoHideDelay : 3000
+			});
+			$("#commentform").remove();
+
 		}
 
 	</script>
