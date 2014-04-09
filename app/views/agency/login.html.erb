@@ -81,7 +81,7 @@
 						<div class="pull-right">
 							<a href="#registerform" class="blue flip-link to-register">注册新账号</a>
 						</div>
-						<input type="submit" class="btn btn-block btn-inverse" value="恢复" />
+						<input type="submit" id="resetbtn" class="btn btn-block btn-inverse" value="恢复" />
 					</div>
 				</form>
 				<form id="registerform" action="#">
@@ -400,6 +400,7 @@
 				function mailsent() {
 					str = "<p>一封重置密码指引邮件已经发送到您的邮箱，请查收</p>";
 					$("#emailreset").attr("disabled","disabled");
+					$("#resetbtn").addClass("disabled");
 					$("#title").html(str);
 				}
 				

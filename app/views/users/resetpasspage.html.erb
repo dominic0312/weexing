@@ -32,9 +32,10 @@
 			<div id="loginbox" style="height: 170px">
 
 				<form id="resetform" action="#">
-					<div id="resetmessage"><p>
-						您好:<%= @user.name%>,请重新设置您的密码:
-					</p>
+					<div id="resetmessage">
+						<p>
+							您好:<%= @user.name%>,请重新设置您的密码:
+						</p>
 					</div>
 
 					<div class="input-group" id="passgroup">
@@ -68,15 +69,6 @@
 					// formData is an array; here we use $.param to convert it to a string to display it
 					// but the form plugin does this for you automatically when it submits the data
 					var queryString = $.param(formData);
-
-					// jqForm is a jQuery object encapsulating the form element.  To access the
-					// DOM element for the form do this:
-					// var formElement = jqForm[0];
-
-					alert('About to submit: \n\n' + queryString);
-
-					// here we could return false to prevent the form from being submitted;
-					// returning anything other than false will allow the form submit to continue
 					return true;
 				}
 
@@ -101,18 +93,6 @@
 				});
 
 				function showResponse(responseText, statusText, xhr, $form) {
-					// for normal html responses, the first argument to the success callback
-					// is the XMLHttpRequest object's responseText property
-
-					// if the ajaxForm method was passed an Options Object with the dataType
-					// property set to 'xml' then the first argument to the success callback
-					// is the XMLHttpRequest object's responseXML property
-
-					// if the ajaxForm method was passed an Options Object with the dataType
-					// property set to 'json' then the first argument to the success callback
-					// is the json data object returned by the server
-
-					//alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
 				}
 
 
@@ -201,13 +181,13 @@
 				}
 
 				function changesuccess() {
-					str="<p>密码修改成功</p>";
-					btn="<a href='/agency/login' class='btn btn-block btn-primary'>去登录页面</a>"
+					str = "<p>密码修改成功</p>";
+					btn = "<a href='/agency/login' class='btn btn-block btn-primary'>去登录页面</a>"
 					$("#resetmessage").html(str);
 					$("#passgroup").remove();
 					$("#confirmgroup").remove();
-				    $("#inputbtn").replaceWith(btn);
-				    $("#loginbox").css("height","100px");
+					$("#inputbtn").replaceWith(btn);
+					$("#loginbox").css("height", "100px");
 
 				}
 			</script>
