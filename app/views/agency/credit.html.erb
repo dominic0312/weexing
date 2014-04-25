@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>微行微系统</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/font-awesome.css" />
+		<link rel="stylesheet" href="/css/fullcalendar.css" />
+		<link rel="stylesheet" href="/css/jquery.jscrollpane.css" />
+		<link rel="stylesheet" href="/css/unicorn.css" />
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/respond.min.js"></script>
+		<![endif]-->
+		<style>
+			.article-post {
+				margin-left: 0;
+			}
+
+			body {
+				background-color: #3C3C3C;
+			}
+		</style>
+
+	</head>
+	<body data-color="grey" class="flat">
+		<div id="wrapper" style="">
+			<div id="header">
+				<h1><a href="/agency/index">微行</a></h1>
+				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>
+			</div>
+
+			<div id="user-nav">
+				<ul class="btn-group">
+					<li class="btn">
+						<a title="" href="/agency/logout"><i class="fa fa-share"></i> <span class="text">登出</span></a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="switcher">
+				<div id="switcher-inner">
+					<h3>标题栏颜色</h3>
+					<h4>颜色</h4>
+					<p id="color-style">
+						<a data-color="orange" title="Orange" class="button-square orange-switcher" href="#"></a>
+						<a data-color="turquoise" title="Turquoise" class="button-square turquoise-switcher" href="#"></a>
+						<a data-color="blue" title="Blue" class="button-square blue-switcher" href="#"></a>
+						<a data-color="green" title="Green" class="button-square green-switcher" href="#"></a>
+						<a data-color="red" title="Red" class="button-square red-switcher" href="#"></a>
+						<a data-color="purple" title="Purple" class="button-square purple-switcher" href="#"></a>
+						<a href="#" data-color="grey" title="Grey" class="button-square grey-switcher"></a>
+					</p>
+					<!--
+					<h4>Background Patterns</h4>
+					<h5>for boxed version</h5>
+					<p id="pattern-switch">
+					<a data-pattern="pattern1" style="background-image:url('assets/img/patterns/pattern1.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern2" style="background-image:url('assets/img/patterns/pattern2.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern3" style="background-image:url('assets/img/patterns/pattern3.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern4" style="background-image:url('assets/img/patterns/pattern4.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern5" style="background-image:url('assets/img/patterns/pattern5.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern6" style="background-image:url('assets/img/patterns/pattern6.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern7" style="background-image:url('assets/img/patterns/pattern7.png');" class="button-square" href="#"></a>
+					<a data-pattern="pattern8" style="background-image:url('assets/img/patterns/pattern8.png');" class="button-square" href="#"></a>
+					</p>-->
+
+				</div>
+				<div id="switcher-button">
+					<i class="fa fa-cogs"></i>
+				</div>
+			</div>
+
+			<div id="sidebar">
+
+				<ul>
+					<li>
+						<a href="index.html"><i class="fa fa-home"></i> <span>账户首页</span></a>
+					</li>
+					<li class="submenu">
+						<a href="#"><i class="fa fa-credit-card"></i> <span>汇员卡</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<a href="/agency/interface">客户管理</a>
+							</li>
+							<li>
+								<a href="/agency/cardguide">操作指南</a>
+							</li>
+						</ul>
+					</li>
+					<li class="submenu">
+						<a href="#"><i class="fa fa-th-list"></i> <span>微行秀</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<a href="/agency/wxshow">客户管理</a>
+							</li>
+							<li>
+								<a href="/agency/wxshowguide">操作指南</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="/agency/wxschool"><i class="fa fa-th"></i> <span>家校通</span></a>
+					</li>
+					<li>
+						<a href="/agency/wxshop"><i class="fa fa-th-list"></i> <span>朋友店</span></a>
+					</li>
+					<li class="submenu">
+						<a href="#"><i class="fa fa-file"></i> <span>微企管</span> <i class="arrow fa fa-chevron-right"></i></a>
+						<ul>
+							<li>
+								<a href="/agency/voa">客户管理</a>
+							</li>
+							<li>
+								<a href="/agency/voaguide">操作指南</a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href="/agency/credit"><i class="fa fa-cny"></i> <span>充值&点数</span></a>
+					</li>
+
+				</ul>
+			</div>
+
+			<div id="content">
+				<div id="content-header" class="mini">
+					<h1>dominic0312</h1>
+
+				</div>
+
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-xs-12  col-sm-6 col-lg-6">
+							<div class="widget-box"  style="height:500px">
+								<div class="widget-title">
+									<span class="icon"><i class="fa fa-signal"></i></span>
+									<h5>账户状态 </h5>
+
+								</div>
+
+								<div class="widget-content">
+									<table class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>应用</th>
+												<th>状态</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="taskDesc"><i class="fa fa-credit-card"></i> 汇员卡 <i class="fa fa-vimeo-square"></i>1.0</td>
+												<td class="taskStatus"><span class="done">已开启</span></td>
+											</tr>
+											<tr>
+												<td class="taskDesc"><i class="fa fa-picture-o"></i> 微行秀</td>
+												<td class="taskStatus"><span class="pending">未开启</span></td>
+											</tr>
+											<tr>
+												<td class="taskDesc"><i class="fa fa-pencil-square-o"></i>家校通 </td>
+												<td class="taskStatus"><span class="pending">未开启</span></td>
+											</tr>
+											<tr>
+												<td class="taskDesc"><i class="fa fa-shopping-cart"></i>朋友店</td>
+												<td class="taskStatus"><span class="pending">未开启</span></td>
+											</tr>
+											<tr>
+												<td class="taskDesc"><i class="fa fa-suitcase"></i>微企管</td>
+												<td class="taskStatus"><span class="pending">未开启</span></td>
+											</tr>
+										</tbody>
+									</table>
+									<ul class="site-stats">
+										<li>
+											<div class="cc">
+												<i class="fa fa-users"></i><strong>0/30</strong><small>商户数</small>
+											</div>
+										</li>
+										<li class="divider"></li>
+										<li>
+											<div class="cc">
+												<i class="fa fa-cloud"></i><strong><span id="credits"><%= @user.credit%></span></strong><small>微行点数</small>
+												<button id="charge"  class="btn btn-primary pull-right" style="margin-top:0">
+													充值
+												</button>
+											</div>
+										</li>
+									</ul>
+
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-xs-12  col-sm-6 col-lg-6">
+							<div class="widget-box"  style="">
+								<div class="widget-title">
+									<span class="icon"><i class="fa fa-signal"></i></span>
+									<h5>密码修改</h5>
+
+								</div>
+
+								<div class="widget-content">
+									<form action="#" class="form-horizontal" id="passform">
+										<div class="form-group">
+											<label class="col-sm-2 col-md-2 col-lg-2 control-label">原密码 </label>
+											<div class="col-sm-7 col-md-7 col-lg-7">
+												<input type="password" id="oldpass" name="oldpass" class="form-control input-sm">
+											</div>
+											<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 col-md-2 col-lg-2 control-label">新密码 </label>
+											<div class="col-sm-7 col-md-7 col-lg-7">
+												<input type="text" class="form-control input-sm" id="password" name="password">
+											</div>
+											<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 col-md-2 col-lg-2 control-label">确认</label>
+											<div class="col-sm-7 col-md-7 col-lg-7">
+												<input type="text" class="form-control input-sm" id="confirm" name="confirm">
+											</div>
+											<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px"></div>
+										</div>
+
+										<div class="form-group" style="padding-right: 20px" >
+											<div class="col-sm-6 col-md-6 col-lg-6"></div>
+											<button type="submit" class="btn btn-primary btn-sm col-sm-3 col-md-3 col-lg-3" >
+												修改
+											</button>
+
+										</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="footer" class="col-xs-12">
+				2013 - 2014 &copy; 微行微系统
+			</div>
+		</div>
+
+		</div>
+
+		<script src="/js/excanvas.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery-ui.custom.js"></script>
+		<script src="/js/jquery.validate.js"></script>
+		<script src="/js/jquery.form.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.flot.min.js"></script>
+		<script src="/js/jquery.flot.resize.min.js"></script>
+		<script src="/js/jquery.sparkline.min.js"></script>
+		<script src="/js/bootbox.min.js"></script>
+		<script src="/js/jquery.nicescroll.min.js"></script>
+		<script src="/js/unicorn.js"></script>
+		<script src="/js/unicorn.dashboard.js"></script>
+		<%= javascript_include_tag "jquery-ujs.js" %>
+		<%= javascript_include_tag "notify-custom.js" %>
+		<script>
+			$(document).ready(function() {
+				var options = {
+					// other available options:
+					url : '/agency/changepass', // override for form's 'action' attribute
+					type : 'post', // 'get' or 'post', override for form's 'method' attribute
+					dataType : 'script', // 'xml', 'script', or 'json' (expected server response type)
+					clearForm : false // clear all form fields after successful submit
+					//resetForm: true        // reset the form after successful submit
+				};
+				// bind form using 'ajaxForm'
+				$('#passform').ajaxForm(options);
+			});
+
+			bootbox.setDefaults({
+				locale : "zh_CN",
+
+			});
+
+			var validator = $("#passform").validate({
+				focusInvalid : false,
+				focusCleanup : true,
+				rules : {
+					oldpass : "required",
+
+					password : {
+						required : true,
+						minlength : 6
+					},
+
+					confirm : {
+						required : true,
+						minlength : 6,
+						equalTo : "#password"
+					}
+				},
+				messages : {
+					oldpass : {
+						required : "请输入原密码",
+					},
+					password : {
+						required : "密码不能为空",
+						minlength : "密码至少6位"
+					},
+					confirm : {
+						required : "请确认密码",
+						minlength : "密码至少6位",
+						equalTo : "两次输入不一致"
+					},
+				},
+				errorPlacement : function(error, element) {
+					error.appendTo(element.parent().next());
+				},
+
+				/*submitHandler : function(form) {
+
+				 $("#loginform").ajaxSubmit();
+				 return false;
+				 },*/
+
+				errorClass : "help-inline",
+				errorElement : "span",
+			});
+
+			function changepasswrong() {
+				str = "原密码错误";
+				$("#oldpass").notify(str, {
+					className : "error",
+					arrowShow : true,
+					position : "right",
+					autoHideDelay : 4000
+				});
+
+			}
+
+			function changepasssucc() {
+				str = "修改成功";
+				$("#oldpass").notify(str, {
+					className : "success",
+					arrowShow : true,
+					position : "right",
+					autoHideDelay : 4000
+				});
+				
+				validator.resetForm();
+
+			}
+
+
+			$('#charge').click(function(e) {
+				e.preventDefault();
+				bootbox.prompt("请输入充值卡号码", function(result) {
+					if (result !== null && result !== '') {
+
+						$.post("/agency/validate_code", {
+							code : result
+						}, function(data) {
+							var msg = "本次充值";
+							var tle = "充值成功";
+							if (data.error) {
+								msg = data.error;
+								tle = "操作失败";
+							} else {
+								msg = msg + data.point + "点";
+								tle = "充值成功";
+								$("#credits").html(data.card_credit);
+							}
+							bootbox.dialog({
+								message : msg,
+								title : tle,
+								buttons : {
+									main : {
+										label : '确定',
+										className : 'btn-success'
+									}
+								}
+							});
+
+						}, "json");
+
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

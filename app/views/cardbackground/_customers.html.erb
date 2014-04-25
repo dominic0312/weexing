@@ -24,6 +24,5 @@
 	</tr>
 	<% end %>
 </table>
-<div class="flickr_pagination">
+
 	<%= ajax_will_paginate @customers, :params=>{:controller=>"cardbackground", :action=>"index"}%>
-</div>

@@ -5,6 +5,8 @@ Weexing::Application.routes.draw do
 
 
 
+  resources :documents
+
   mount WeixinRailsMiddleware::Engine, at: "/"
   #mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
@@ -20,6 +22,16 @@ Weexing::Application.routes.draw do
   
   
   get 'usertemplates/display'
+  post 'agency/changepass'
+  get 'agency/cardguide'
+  get 'agency/wxshow'
+  get 'agency/wxshowguide'
+  get 'agency/wxschool'
+  get 'agency/wxshop'
+  get 'agency/wxshopguide'
+  get 'agency/voa'
+  get 'agency/voaguide'
+  get 'agency/credit'
   get 'membercards/display'
   get 'cardbackground/index'
   post 'cardbackground/index'
@@ -37,20 +49,22 @@ Weexing::Application.routes.draw do
   get 'coupons/display'
   #post 'shops/updatelogo'
   match "/admin" => "admins#login",via: [:get]
-  match "/shops/uploadlogo/:id" => "shops#uploadlogo",via: [:get,:post],:as=>"uploadlogo"
-  match '/shops/updatelogo/:id' => 'shops#updatelogo',via: [:get,:post], :as => "updatelogo"
+  match "/shops/updatelogo/:id" => "shops#updatelogo",via: [:get,:post],:as=>"uploadlogo"
   match '/coupons/newcoupon/:shopid' => 'coupons#newcoupon',via: [:get]
   match '/coupons/createcoupon/:shopid' => 'coupons#createcoupon',via: [:get,:post], :as=>"createcoupon"
   match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
   match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
   match "/useractivate" => "users#activate",via: [:get]
-  
-  match "/shops/setupcard/:id" => "shops#setupcard",via: [:get,:post]
-  
+  match "/shops/updateoem/:id" =>'shops#updateoem', via: [:post]
+  post "shops/shopaccount"
+  post "shops/shopconnect"
   post "cardbackground/passcheck"
   get 'shops/display' 
   get "shops/createshop"
   post "shops/urlcheck"
+  post "shops/connectwx"
+ 
+  post "shops/chargeshop"
   post "customers/search"
   post "customers/addcustomer"
   post "customers/updatecustomer"
@@ -61,6 +75,7 @@ Weexing::Application.routes.draw do
   post "coupons/refreshrequest"
   match "coupons/requestcoupon/:coupid" => "coupons#requestcoupon", via: [:get]
   get  'weixin/:weixin_token', to: 'weixin#index'
+  get  'dispatcher/dispatch'
   post 'weixin/:weixin_token', to: 'weixin#reply'
   get 'cardbackground/:shopurl', to: 'cardbackground#login'
   resources :usertemplates
@@ -70,6 +85,7 @@ Weexing::Application.routes.draw do
   #resources :coupons
   
   match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
+  match "/cardoath/:id" => "cardguest#cardoath", via: [:get, :post]
   match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
   match "/shops/display/:id" => "shops#display",via: [:get, :post]
 
@@ -119,6 +135,7 @@ Weexing::Application.routes.draw do
   post "pointcodes/add_pointcodes"
   post "usertemplates/install_template"
   post "homepage/validate_code"
+  post "agency/validate_code"
   post "card/updateinfo"
   post "card/showinfo"
   post "card/showcardtemplate"
@@ -130,6 +147,7 @@ Weexing::Application.routes.draw do
   post "shops/updateinfo"
   get "shops/manageshop"
   post "shops/index"
+   post "shops/removeshop"
   post "cardguest/get_customer_info"
   post "card/pages"
   get "homepage/signup_login_check"

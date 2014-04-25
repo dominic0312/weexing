@@ -11,6 +11,8 @@
 		<%= stylesheet_link_tag "datepicker3.css" %>
 		<%= stylesheet_link_tag "bootstrap-select.min.css" %>
 
+		<link rel="stylesheet" href="/css/unicorn.css" />
+
 		<%= stylesheet_link_tag "bootstrap-editable.css" %>
 		<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
 		<%= javascript_include_tag "jquery-191.js" %>
@@ -25,6 +27,7 @@
 		<%= javascript_include_tag "bootstrap-datepicker.js" %>
 		<%= javascript_include_tag "bootstrap-datepicker.zh-CN.js" %>
 		<%= javascript_include_tag "bootstrap-select.min.js" %>
+		<%= javascript_include_tag "jquery.unveil.min.js" %>
 
 		<!--[if lt IE 9]>
 		<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
@@ -39,13 +42,10 @@
 	</head>
 	<style>
 		.editab {
-
 		}
-
 		a:hover, a:focus {
 			text-decoration: none;
 		}
-
 		.modal-dialog-center {/* Edited classname 10/03/2014 */
 			margin: 0;
 			position: absolute;
@@ -56,54 +56,46 @@
 			margin-bottom: 5px;
 			margin-top: 5px;
 		}
-
 		.no-close .ui-dialog-titlebar-close {
 			display: none;
 		}
-
 		body {
 			background-color: #eee;
 		}
-
 		.controls {
 			margin-bottom: 10px;
 		}
 		td.coupongrid {
 			padding-top: 50px;
 		}
-
 		.table > tbody > tr > td {
 			vertical-align: middle;
 			padding-left: 5px
 		}
-
 		.field {
 			margin-top: 10px
 		}
-
 		.number {
 			display: inline-block;
 			margin-right: 15px;
 		}
-
 		.badge-success {
 			background-color: #5CB85C;
 		}
-
 		.badge-inverse {
 			background-color: #333;
 		}
-
 		.badge-usd {
 			color: dimgray;
 			display: block;
 			margin-top: 5px
 		}
-
 		.remotedialog {
 			cursor: pointer
 		}
-
+		.editab {
+			text-align: center
+		}
 	</style>
 	<body>
 
@@ -148,7 +140,7 @@
 					</div>
 				</div>
 				<div class="col-xs-9">
-					<div id="menu_users_panel" class="panel panel-default" style="height:700px;">
+					<div id="menu_users_panel" class="panel panel-default" style="">
 						<div class="panel-heading">
 							会员列表
 						</div>
@@ -156,40 +148,8 @@
 						<div class="panel-body" >
 							<div class="well well-sm container" style="width:650px">
 								<div class="rows">
-									<div class="col-xs-6">
-										<div class="input-group">
-											<div class="input-group-btn">
-												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="searchtype">
-													电话号码<span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu">
-													<li>
-														<a href="#" onclick="selectsearchtype('卡号')">卡号</a>
+									<div class="col-xs-10"></div><!-- /.col-lg-6 -->
 
-													</li>
-													<li>
-														<a href="#" onclick="selectsearchtype('电话号码')">电话号码</a>
-													</li>
-													<li class="divider"></li>
-													<li>
-														<a href="#" onclick="selectsearchtype('用户级别')">用户级别</a>
-													</li>
-
-												</ul>
-											</div><!-- /btn-group -->
-											<input type="text" class="form-control" id="searchtxt">
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="button" id="search" onclick="search();">
-													<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
-												</button> </span>
-
-										</div><!-- /input-group -->
-									</div><!-- /.col-lg-6 -->
-									<div class="col-xs-4">
-										<button type="button" class="btn btn-primary" id="listall" onclick="listall()">
-											<span class="glyphicon glyphicon-th-large"></span> 显示所有
-										</button>
-									</div>
 									<div class="col-xs-2">
 										<button class="btn btn-success" type="button" onclick="newuser()">
 											<span class="glyphicon glyphicon-plus"></span>&nbsp;新用户
@@ -199,41 +159,53 @@
 								</div>
 							</div>
 							<div id="pbody_customer">
-								<table class="table table-hover">
-									<th>微信卡号</th>
-									<th>实体卡号</th>
-									<th>级别</th>
-									<th>电话</th>
-									<th>余额</th>
-									<th>积分</th>
-									<th></th>
-									<tr>
+								<table class="table table-bordered table-striped table-hover data-table" id="customertable">
+									<thead>
+										<tr>
+											<th>id</th>
+											<th>微信卡号</th>
+											<th>实体卡号</th>
+											<th>级别</th>
+											<th>电话</th>
+											<th>余额</th>
+											<th>积分</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody id="cusbody">
+
 										<% @customers.each do |customer| %>
-										<td><%= customer.cardid%></td>
-										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
-										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
-										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
-										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
-										<td><a href="#"  class="editab" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
-										<td style="text-align: right">
-										<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
-											修改
-										</button>
-										<button type="button" class="btn btn-danger" recordid="<%= customer.id%>" onclick="delconfirm(this)" id="deletebtn<%= customer.id%>">
-											删除
-										</button></td>
-									</tr>
-									<% end %>
+										<tr id="cusrow<%= customer.id%>">
+											<td class="editab"><%= customer.id%></td>
+											<td class="editab"><%= customer.cardid%></td>
+											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="realcardid<%= customer.id%>"><%= customer.realcardid%></a></td>
+											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="level<%= customer.id%>"><%= customer.level%></a></td>
+											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="phone<%= customer.id%>"><%= customer.phone%></a></td>
+											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
+											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
+											<td style="text-align: center">
+											<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
+												修改
+											</button>
+											<button type="button" class="btn btn-danger" recordid="<%= customer.id%>" onclick="delconfirm(this)" id="deletebtn<%= customer.id%>">
+												删除
+											</button></td>
+										</tr>
+										<% end %>
+									</tbody>
 								</table>
-								<div class="flickr_pagination">
-									<%= ajax_will_paginate @customers, :params=>{:controller=>"cardbackground", :action=>"index"}%>
+								<div class="container" style="width: 680px">
+									<p class="text-muted" style="text-align:right; padding-top: 20px">
+										<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;由&nbsp;<a href="<%=@shop.oemurl%>"><%=@shop.oemname%></a>&nbsp;提供支持.
+									</p>
 								</div>
+
 							</div>
 
 						</div>
 					</div>
 
-					<div id="menu_coupons_panel" class="panel panel-default" style="height:700px;display:none">
+					<div id="menu_coupons_panel" class="panel panel-default" style="display:none">
 						<div class="panel-heading">
 							优惠券
 						</div>
@@ -241,40 +213,38 @@
 						<div class="panel-body">
 							<div class="well well-sm container" style="width:650px">
 								<div class="rows">
-									<div class="col-xs-6">
-										<button class="btn btn-success" type="button" onclick="newcoupon()">
+									<div class="col-xs-12">
+										<button class="btn btn-success pull-right" type="button" onclick="newcoupon()">
 											<span class="glyphicon glyphicon-plus"></span>&nbsp;<b>添加优惠券</b>
 										</button>
 									</div><!-- /.col-lg-6 -->
-									<div class="col-xs-4">
-
-									</div>
-									<div class="col-xs-2">
-
-									</div>
 
 								</div>
 							</div>
 
 							<div id="pbody_coupon">
-								<table class="table table-hover">
+								<table class="table table-bordered table-striped table-hover data-table" id="coupontable">
 									<thead>
-										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
-										<th>标题</th>
-										<th>类别</th>
-										<th>开始日期</th>
-										<th>截止日期</th>
-										<th></th>
+										<tr>
+											<th></th>
+											<th>&nbsp;&nbsp;&nbsp;&nbsp;图片</th>
+											<th>标题</th>
+											<th>类别</th>
+											<th>开始日期</th>
+											<th>截止日期</th>
+											<th></th>
+										</tr>
 									</thead>
 
 									<% @coupons.each do |coupon| %>
-									<tr>
-										<td><%= image_tag coupon.pic.url(:thumb) %></td>
-										<td data-toggle="tooltip" data-placement="top" title="详情:<%= coupon.content%>"><%= coupon.title%></td>
-										<td><%= coupon.usertype%></td>
-										<td><%= coupon.startdate%></td>
-										<td><%= coupon.enddate%></td>
-										<td style="text-align: right"> <%if coupon.sent== 0%>
+									<tr id="couprow<%=coupon.id%>">
+										<td class="editab"><%= coupon.id%></td>
+										<td class="editab"><img src="/images/loader.gif" data-src="<%= coupon.pic.url(:thumb) %>" width="70" height="70"></td>
+										<td class="editab" data-toggle="tooltip" data-placement="top" title="详情:<%= coupon.content%>"><%= coupon.title%></td>
+										<td class="editab"><%= coupon.usertype%></td>
+										<td class="editab"><%= coupon.startdate%></td>
+										<td class="editab"><%= coupon.enddate%></td>
+										<td style="text-align: center"> <%if coupon.sent== 0%>
 										<button type="button" class="btn btn-primary" coupid="<%= coupon.id%>" onclick="pubcoupconfirm(this)" id="couppubbtn<%= coupon.id%>">
 											发布
 										</button>
@@ -299,10 +269,12 @@
 									</tr>
 									<% end %>
 								</table>
-
-								<div class="flickr_pagination">
-									<%= ajax_will_paginate @coupons, :params=>{:controller=>"coupons", :action=>"display"} %>
+								<div class="container" style="width: 680px">
+									<p class="text-muted" style="text-align:right; padding-top: 20px">
+										<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+									</p>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -437,15 +409,9 @@
 				</div>
 
 			</form>
+
 		</div>
 
-		<div class="navbar navbar-default navbar-fixed-bottom">
-			<div class="container" style="width: 900px">
-				<p class="text-muted credit" style="text-align: right; padding-top: 10px">
-					<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
-				</p>
-			</div>
-		</div>
 		<div id="shopurl" style="display:none">
 			<%= @shop.shopurl%>
 		</div>
@@ -566,17 +532,73 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		<div id="custablenew" style="display: none"></div>
 
 	</body>
+	<script src="/js/jquery.dataTables.min.js"></script>
+	<script src="/js/yaya-template.js"></script>
+	<script src="/js/datatabelext.js"></script>
 	<script>
 		var current_menu = "menu_users";
 		var searchtype = "phone";
 		var cardno = "", telephone = "", balance = "", usertype = "";
 		$(document).ready(function() {
 			//$('.editab').editable('disable');
+			$("img").unveil();
 			$('input[type=file]').bootstrapFileInput();
 			$('.file-inputs').bootstrapFileInput();
-
+			var $custable = $('#customertable').dataTable({
+				"bJQueryUI" : true,
+				"bPaginate" : true,
+				"bLengthChange" : false,
+				"sPaginationType" : "full_numbers",
+				"bAutoWidth" : false,
+				"sDom" : '<""l>t<"F"fp>',
+				"bSort" : true,
+				"aoColumns" : [null, {
+					"bSortable" : false
+				}, null, {
+					"bSortable" : false
+				}, {
+					"bSortable" : false
+				}, null, null, {
+					"bSortable" : false
+				}],
+				"aoColumnDefs" : [{
+					"bSearchable" : false,
+					"bVisible" : false,
+					"aTargets" : [0]
+				}],
+				"aaSorting" : [[0, 'desc']],
+			});
+			var $couptable = $('#coupontable').dataTable({
+				"bJQueryUI" : true,
+				"bPaginate" : true,
+				"bSearchable" : false,
+				"iDisplayLength" : 5,
+				"bLengthChange" : false,
+				"sPaginationType" : "full_numbers",
+				"bAutoWidth" : false,
+				"sDom" : '<""l>t<"F"fp>',
+				"bSort" : true,
+				"bFilter" : false,
+				"bInfo" : false,
+				"aoColumns" : [null, {
+					"bSortable" : false
+				}, {
+					"bSortable" : false
+				}, {
+					"bSortable" : false
+				}, null, null, {
+					"bSortable" : false
+				}],
+				"aoColumnDefs" : [{
+					"bSearchable" : false,
+					"bVisible" : false,
+					"aTargets" : [0]
+				}],
+				"aaSorting" : [[0, 'desc']],
+			});
 			$('#datepicker .input-daterange').datepicker({
 			});
 			$('.selectpicker').selectpicker();
@@ -591,7 +613,6 @@
 					type : 'post',
 				}
 			});
-
 			$('#phone').editable({
 				type : 'text',
 				mode : 'inline',
@@ -603,7 +624,6 @@
 					type : 'post',
 				}
 			});
-
 			$('#mobile').editable({
 				type : 'text',
 				mode : 'inline',
@@ -615,7 +635,6 @@
 					type : 'post',
 				}
 			});
-
 			//$(".remotedialog").on('click', function() {
 			//$('#requestcoupon').removeData('bs.modal');
 			//$('#requestcoupon').modal({
@@ -623,16 +642,13 @@
 			//});
 			//$('#requestcoupon').modal('show');
 			//});
-
 		});
-
 		function openrecycle(ref) {
 			$('#requestcoupon').removeData('bs.modal');
 			$('#requestcoupon').modal({
 				remote : '/coupons/requestcoupon/' + $(ref).attr('coupid')
 			});
 			$('#requestcoupon').modal('show');
-
 		}
 
 		function togglepage(id) {
@@ -729,7 +745,22 @@
 			$.post("/coupons/delcoupon", {
 				recid : rid
 			}, null, "script");
+		}
 
+		function removecoupon(rid) {
+			$couptable = $("#coupontable").dataTable();
+			var ele = document.getElementById("couprow" + rid);
+			var pos = $couptable.fnGetPosition(ele);
+			$couptable.fnDeleteRow(pos);
+		}
+
+		function removecustomer(rid) {
+			$custable = $("#customertable").dataTable();
+			var ele = document.getElementById("cusrow" + rid);
+			var pos = $custable.fnGetPosition(ele);
+			$custable.fnDeleteRow(pos);
+
+			//$("#cusrow" + rid).remove();
 		}
 
 		function delconfirm(ref) {
@@ -809,8 +840,14 @@
 					}
 				},
 				show : {
-					effect : "slideToggle",
-					duration : 100
+					effect : "drop",
+					duration : 400,
+					direction : "up"
+				},
+				hide : {
+					effect : "drop",
+					duration : 400,
+					direction : "down"
 				},
 				position : {
 					my : "center top",
@@ -844,7 +881,6 @@
 				});
 				return false
 			}
-
 			if (telephone.length > 11) {
 				str = "电话号码不能大于11位";
 				$("#inputphone").notify(str, {
@@ -864,7 +900,6 @@
 				return false
 			}
 			return true;
-
 		}
 
 		function clearuser() {
@@ -1024,7 +1059,6 @@
 			$.post("/cardbackground/index", {
 				act : 'listall'
 			}, null, "script");
-
 		}
 
 		function newcoupon(shopid) {
@@ -1033,8 +1067,14 @@
 				modal : true,
 				title : "添加新优惠券",
 				show : {
-					effect : "slideToggle",
-					duration : 100
+					effect : "drop",
+					duration : 400,
+					direction : "up"
+				},
+				hide : {
+					effect : "drop",
+					duration : 400,
+					direction : "down"
 				},
 				position : {
 					my : "center top",
@@ -1083,7 +1123,6 @@
 				});
 				return false;
 			}
-
 			if (vnewpass != vnewpassconf) {
 				$("#newpass_conf").notify("确认密码和新密码不一致", {
 					className : "error",
@@ -1093,13 +1132,11 @@
 				});
 				return false;
 			}
-
 			$.post("/shops/updateinfo", {
 				pk : 'password',
 				newpass : vnewpass,
 				currpass : voldpass
 			}, null, "script");
-
 		}
 
 		function closeuserpwd() {
@@ -1117,7 +1154,6 @@
 				arrowShow : true,
 				autoHideDelay : 1000
 			});
-
 		}
 
 		function changepasssucc() {
@@ -1128,7 +1164,6 @@
 				arrowShow : true,
 				autoHideDelay : 3000
 			});
-
 		}
 
 		function savecouponsucc() {
@@ -1179,13 +1214,10 @@
 				arrowShow : true,
 				autoHideDelay : 3000
 			});
-
 			var strbadge = "<div class='number'><a href='#' data-target='#requestcoupon' id='coup_req_id" + rid + "' coupid='" + rid + "'><span class='badge' id='couponbadge" + rid + "'>待兑换 <span id='couponreq" + rid + "'>0</span><span></a><a href='#'><span class='badge badge-usd'>已兑换<span id='couponusd" + rid + "'>0</span></span></a></div>";
 			var strfresh = "<button type='button' class='btn btn-success' style='position: relative;bottom:12px' coupid='" + rid + "' onclick='pubcouprefresh(this)' id='couprefreshbtn" + rid + "'>刷新</button>";
-
 			$("#couppubbtn" + rid).replaceWith(strbadge);
 			$("#coupdeletebtn" + rid).replaceWith(strfresh);
-
 			$("#coupdeletebtn" + rid).html("刷新");
 		}
 
@@ -1193,7 +1225,6 @@
 			//rid is the coupon id, qid is id of quest;
 			var currentreq = parseInt($("#couponreq" + cid).html());
 			var currentusd = parseInt($("#couponusd" + cid).html());
-
 			if (currentreq == 0) {
 				return;
 			}
@@ -1202,15 +1233,12 @@
 				$("#coup_req_id" + cid).removeAttr("onclick");
 				$("#coup_req_id" + cid).off();
 			}
-
 			$.post("/coupons/delrequest", {
 				questid : qid,
 				couponid : cid
 			}, null, "script");
-
 			$("#couponreq" + cid).html(currentreq - 1);
 			$("#couponusd" + cid).html(1 + currentusd);
-
 		}
 
 		function recyclesucc(queid) {
@@ -1220,21 +1248,53 @@
 				arrowShow : true,
 				autoHideDelay : 1000
 			});
-
 			$("#reqid" + queid).remove();
-
 		}
 
 		function pubcouprefresh(ref) {
-
 			var rid = $(ref).attr('coupid');
 			$.post("/coupons/refreshrequest", {
 				couponid : rid
 			}, null, "script");
 		}
 
-		function questrefresh(coupid, reqst, usd) {
+		function addcustomer(id, realcard, phone, balance, level) {
+			//function addcustomer() {
+			var template = YayaTemplate(document.getElementById("customer-template").innerHTML);
+			var str = template.render({
+				cusid : id,
+				cusrealid : realcard,
+				cusphone : phone,
+				cusbalance : balance,
+				cuslevel : level
+			});
+			$custable = $("#customertable").dataTable();
+			var divtr = document.createElement('tr');
+			divtr.innerHTML = str;
+			$(divtr).attr('id','cusrow'+id);
+			$custable.fnAddTr(divtr);
+		}
 
+		function addcoupon(id, picurl, title, content, usertype, startdate, enddate) {
+			var template = YayaTemplate(document.getElementById("coupon-template").innerHTML);
+			var str = template.render({
+				coupid : id,
+				couppic : picurl,
+				couptitle : title,
+				coupcontent : content,
+				couptype : usertype,
+				coupstart : startdate,
+				coupend : enddate
+			});
+			$couptable = $("#coupontable").dataTable();
+			var divtr = document.createElement('tr');
+			divtr.innerHTML = str;
+			$(divtr).attr('id','couprow'+id);
+			$couptable.fnAddTr(divtr);
+			savecouponsucc();
+		}
+
+		function questrefresh(coupid, reqst, usd) {
 			var currentreq = parseInt($("#couponreq" + coupid).html());
 			if (currentreq == 0 && reqst != 0) {
 				$("#couponbadge" + coupid).addClass("badge-success");
@@ -1246,18 +1306,50 @@
 					$('#requestcoupon').modal('show');
 				});
 			}
-
 			if (reqst == 0 && currentreq != 0) {
 				$("#couponbadge" + coupid).removeClass("badge-success");
 				$("#coup_req_id" + coupid).off();
 				$("#coup_req_id" + coupid).removeAttr("onclick");
-
 			}
-
 			$("#couponreq" + coupid).html(reqst);
 			$("#couponusd" + coupid).html(usd);
-
 		}
+	</script>
 
+	<script type="text/template" id="customer-template">
+		{$
+		<td class="editab">{%cusid%}</td>
+		<td class="editab"></td>
+		<td class="editab"><a href="#" recordid='edt{%cusid%}' id="realcardid{%cusid%}">{%cusrealid%}</a></td>
+		<td class="editab"><a href="#" recordid='edt{%cusid%}' id="level{%cusid%}">{%cuslevel%}</a></td>
+		<td class="editab"><a href="#" recordid='edt{%cusid%}' id="phone{%cusid%}">{%cusphone%}</a></td>
+		<td class="editab"><a href="#" recordid='edt{%cusid%}' id="balance{%cusid%}">{%cusbalance%}</a></td>
+		<td class="editab"><a href="#" recordid='edt{%cusid%}' id="bonus{%cusid%}">0</a></td>
+		<td style="text-align: center">
+		<button type="button" class="btn btn-primary" recordid="{%cusid%}" onclick="operate(this)" id="changebtn{%cusid%}">
+		修改
+		</button>
+		<button type="button" class="btn btn-danger" recordid="{%cusid%}" onclick="delconfirm(this)" id="deletebtn{%cusid%}">
+		删除
+		</button></td>
+		$}
+	</script>
+
+	<script type="text/template" id="coupon-template">
+		{$
+		<td class="editab">{%coupid%}</td>
+		<td class="editab"><img src="{%couppic%}" width="70" height="70"></td>
+		<td class="editab" data-toggle="tooltip" data-placement="top" title="详情:{%coupcontent%}">{%couptitle%}</td>
+		<td class="editab">{%couptype%}</td>
+		<td class="editab">{%coupstart%}</td>
+		<td class="editab">{%coupend%}</td>
+		<td style="text-align: center">
+		<button type="button" class="btn btn-primary" coupid="{%coupid%}" onclick="pubcoupconfirm(this)" id="couppubbtn{%coupid%}">
+		发布
+		</button>
+		<button type="button" class="btn btn-danger" coupid="{%coupid%}" onclick="delcoupconfirm(this)" id="coupdeletebtn{%coupid%}">
+		删除
+		</button></td>
+		$}
 	</script>
 </html>

@@ -1,8 +1,14 @@
+#coding: utf-8
 class AgencyController < ApplicationController
 
-  before_filter :authagency, :set_cache_buster, :only=>[:index]
+  before_filter :authagency, :set_cache_buster, :only=>[:index,:interface]
   def index
-
+    @news=News.all
+    @user=User.find(session[:user_id])
+    @documents=Document.all
+    respond_to do |format|
+      format.html
+    end
   end
 
   def login
@@ -87,10 +93,42 @@ class AgencyController < ApplicationController
         Regconfirm.delay.regist_confirm(@user)
         format.js { render  :js=> "regsuccess()"}
       else
-        format.js { render  :js=> "alert('fail');"}
+        format.js { render  :js=> "regfail()"}
       end
     end
 
+  end
+
+  def validate_code
+    pointcode = Pointcode.find_by_secretcode(params[:code])
+    if pointcode
+      if pointcode.used == 1
+        @error='该充值卡号已经被使用'
+        render :json => { :error => @error} and return
+      end
+      user= User.find(session[:user_id])
+      if user
+        credit_p=user.credit
+        credit_p = credit_p + pointcode.point
+        user.update_attributes(:credit=>credit_p)
+        logger.info(user.errors.messages)
+        pointcode.userby=user.email
+        pointcode.used=1
+        pointcode.save
+
+        @point=pointcode.point
+        @credit=user.credit
+        session[:credits]=user.credit
+        render :json => {:point => @point,:card_credit=>@credit} and return
+      else
+      end
+    else
+      render :json => {:error=>"充值卡序列号无效,请联系微行解决"} and return
+    end
+  end
+
+  def credit
+    @user=User.find(session[:user_id])
   end
 
   def authagency
@@ -100,6 +138,25 @@ class AgencyController < ApplicationController
       else
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found and return
     end
+  end
+
+  def changepass
+
+    if user=User.authenticatebyid(session[:user_id],params[:oldpass])
+
+      user.password=params[:password]
+      user.save
+      render :js=>"changepasssucc()"
+    else
+
+      render :js=>"changepasswrong()"
+    end
+  end
+
+  def interface
+    @shops=Shop.where(:user_id=>session[:user_id]).order('id DESC')
+    @templates=Usertemplate.all
+    @membercards=Membercard.all
   end
 
   def set_cache_buster

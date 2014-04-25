@@ -6,7 +6,7 @@ class Shop < ActiveRecord::Base
   belongs_to :membercard
   belongs_to :user
   has_many :customers
-  has_attached_file :logopic, :styles => { :medium => "300x300>", :thumb => "100x100>" },:default_url => "/images/:style/missing.jpg"
+  has_attached_file :logopic, :styles => { :thumb => "100x100>" },:default_url => "/images/:style/deflogo.jpg"
   validates_attachment :logopic, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }
   self.per_page = 5
 end

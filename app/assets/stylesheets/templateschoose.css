@@ -97,26 +97,6 @@ label.css-label {
 	user-select: none;
 }
 
-.btn {
-	-webkit-border-radius: 11;
-	-moz-border-radius: 11;
-	border-radius: 11px;
-	font-family: Arial;
-	color: #cbe0c7;
-	font-size: 20px;
-	background: #549249;
-	padding: 10px 30px 12px 31px;
-	text-decoration: none;
-	position: relative;
-	top:50px;
-	left: 520px;
-	cursor: pointer
-}
-
-.btn:hover {
-	background: #21A334;
-	text-decoration: none;
-}
 
 body{
 	height:550px;

@@ -54,7 +54,6 @@ class CouponsController < ApplicationController
   end
 
   def createcoupon
-
     @coupon = Coupon.new(params[:coupon])
     @shopid=params[:shopid]
     @title=params[:coupon][:title]
@@ -63,10 +62,7 @@ class CouponsController < ApplicationController
       render :js=>"coupontitlefail()" and return
     end
     if @coupon.save
-      @coupons= Coupon.where(:shopid=>@shopid).paginate(:page => params[:page],:per_page => 4).order('id DESC')
-      respond_to do |format|
-        format.js
-      end
+      render :js=>"addcoupon('#{@coupon.id}','#{@coupon.pic.url(:thumb)}','#{@coupon.title}','#{@coupon.content}','#{@coupon.usertype}','#{@coupon.startdate}','#{@coupon.enddate}')" and return 
     else
       render :js=>"savecouponfail();" and return
     end
@@ -139,12 +135,9 @@ class CouponsController < ApplicationController
 
   def delcoupon
     @coupon = Coupon.find(params[:recid])
-    @coupon.destroy
+    #@coupon.destroy
     shopid=session[:shopid]
-    @coupons= Coupon.where(:shopid=>shopid).paginate(:page => params[:page],:per_page => 4).order('id DESC')
-    respond_to do |format|
-      format.js
-    end
+    render :js=>"removecoupon(#{params[:recid]})" and return
   end
 
   def requestcoupon

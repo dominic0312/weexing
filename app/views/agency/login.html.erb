@@ -22,7 +22,6 @@
 				<img src="/images/agency/logo2.png" alt="" />
 			</div>
 			<div id="user">
-				
 				<div class="text">
 					<h4>欢迎回来,<span class="user_name"></span></h4>
 				</div>
@@ -366,6 +365,18 @@
 					str = "注册成功,请查收注册邮箱中的激活邮件,激活后登录.";
 					$("#username_div").notify(str, {
 						className : "success",
+						arrowShow : false,
+						position : "top",
+						autoHideDelay : 4000
+					});
+
+				}
+				
+					function regfail() {
+				
+					str = "注册失败,请联系管理员.";
+					$("#loginbox").notify(str, {
+						className : "error",
 						arrowShow : false,
 						position : "top",
 						autoHideDelay : 4000

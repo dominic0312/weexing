@@ -1,13 +1,13 @@
+#coding: utf-8
 class CardbackgroundController < ApplicationController
-
   before_filter :authshop,:set_cache_buster, :only=>[:index]
   def index
     url=params[:shopurl]
     @shop=Shop.find(session[:shopid])
     respond_to do |format|
       if @shop
-        @customers = @shop.customers.paginate(:page => params[:page],:per_page => 8).order('id DESC')
-        @coupons = Coupon.where(:shopid => @shop.id).paginate(:page => params[:page],:per_page => 4).order('id DESC')
+        @customers = @shop.customers.order('id DESC')
+        @coupons = Coupon.where(:shopid => @shop.id).order('id DESC')
         @shopid=@shop.id
         #@shopname=@shop.name
         #@shopurl=url

@@ -24,6 +24,7 @@ gem 'delayed_job_active_record'
 
 gem 'jquery-rails'
 gem 'acts_as_list'
+gem "cocaine"
 gem 'paperclip' , "= 4.1.0"
 gem 'jbuilder'
 gem 'yajl-ruby'
@@ -32,6 +33,11 @@ gem 'rubyzip', '>= 1.0.0'
 gem 'weixin_rails_middleware'
 gem 'daemons'
 gem 'remotipart', '~> 1.2.1'
+gem 'jquery-fileupload-rails'
+gem 'rspec-rails'
+gem 'weixin_authorize'
+gem "redis-namespace", "~> 1.4.1"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

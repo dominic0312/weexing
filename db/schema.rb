@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407042806) do
+ActiveRecord::Schema.define(version: 20140424124130) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -99,6 +99,30 @@ ActiveRecord::Schema.define(version: 20140407042806) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "diymenus", force: true do |t|
+    t.integer  "public_account_id"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "key"
+    t.string   "url"
+    t.boolean  "is_show"
+    t.integer  "sort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "diymenus", ["key"], name: "index_diymenus_on_key", using: :btree
+  add_index "diymenus", ["parent_id"], name: "index_diymenus_on_parent_id", using: :btree
+  add_index "diymenus", ["public_account_id"], name: "index_diymenus_on_public_account_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.string   "title"
+    t.string   "desc"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "membercards", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -128,6 +152,11 @@ ActiveRecord::Schema.define(version: 20140407042806) do
 
   add_index "pointcodes", ["secretcode"], name: "index_pointcodes_on_secretcode", using: :btree
 
+  create_table "publicaccounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "requestcoupons", force: true do |t|
     t.integer  "couponid"
     t.datetime "created_at"
@@ -143,12 +172,12 @@ ActiveRecord::Schema.define(version: 20140407042806) do
     t.string   "name"
     t.text     "address"
     t.string   "phone"
-    t.integer  "agency"
+    t.string   "status",               default: "停止中"
     t.integer  "membercard_id",        default: 1
     t.integer  "usertemplate_id",      default: 1
     t.string   "logo"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.integer  "online",               default: 0
     t.datetime "exprieddate"
     t.integer  "expried",              default: 0
@@ -163,6 +192,8 @@ ActiveRecord::Schema.define(version: 20140407042806) do
     t.string   "weixin_token"
     t.string   "password"
     t.string   "mobile"
+    t.string   "oemname",              default: "微行微系统"
+    t.string   "oemurl",               default: "http://www.weexing.com/"
   end
 
   add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree

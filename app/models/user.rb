@@ -23,6 +23,17 @@ class User < ActiveRecord::Base
     end
     user
   end
+  
+  def self.authenticatebyid(id, password)
+    user = self.find(id)
+    if user
+      expected_password = encrypted_password(password, user.salt)
+      if user.hashed_password != expected_password
+        user = nil
+      end
+    end
+    user
+  end
 
   def password
     @password

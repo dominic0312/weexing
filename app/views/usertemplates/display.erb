@@ -2,12 +2,15 @@
 <%= stylesheet_link_tag "pagenate.css" %>
 <%= stylesheet_link_tag "ui.notify.css" %>
 <%= stylesheet_link_tag "jquery.fancybox.css" %>
-<%= stylesheet_link_tag "jquery-ui-1.10.4.custom.css" %>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/unicorn.css" />
+<link rel="stylesheet" href="/css/font-awesome.css" />
 <%= javascript_include_tag "jquery-191.js" %>
 <%= javascript_include_tag "jquery-ui-1.10.4.custom.js" %>
 <%= javascript_include_tag "jquery.notify.js" %>
 <%= javascript_include_tag "jquery.fancybox.js" %>
-
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.masonry.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -22,17 +25,17 @@
 			}
 		});
 
+		$('.gallery-masonry').masonry({
+			itemSelector : '.item',
+			isAnimated : true,
+			isFitWidth : true
+		});
+
 		$("#container").notify({
 			speed : 500,
 			expires : 2000
 		});
 
-	});
-
-	$("#templates").hover(function() {
-		$(this).css("border", "solid");
-	}, function() {
-		$(this).css("border", "dashed");
 	});
 
 	function saveTemplate() {
@@ -75,46 +78,54 @@
 	} /* 选定的链接 */
 </style>
 <body>
-<div class="templates">
-	<div id="usertemplates">
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="widget-content">
+				<div class="gallery-masonry">
+					<div class="item">
+						<a href="#" class="thumbnail"> <img src="/img/demo/img1.jpg" alt=""> </a>
+						<div class="actions">
+							<div class="actions-inner">
+								<a title="Edit" href="#" class="tip-top"><i class="fa fa-pencil"></i></a>
+								<a title="Remove" href="#" class="tip-top"><i class="fa fa-trash-o"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<a href="#" class="thumbnail"> <img src="/img/demo/img2.jpg" alt=""> </a>
+						<div class="actions">
+							<div class="actions-inner">
+								<a title="选择" href="#" class="tip-top"><i class="fa fa-pencil"></i></a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 		
-		<ul class="float">
-			<% @usertemplates.each do |usertemplate| %>
-			<li>
-				<a class="lightbox themegrid" id="tem<%= usertemplate.id%>" href="<%= usertemplate.preview.url(:medium)%>&width=800&height=600"> <%= image_tag usertemplate.preview.url(:thumb), title:"点击查看详情", alt:usertemplate.pic, addr:usertemplate.id%> </a>
-				<input type='radio'  id='radio<%= usertemplate.id%>' name='templ'  class="css-checkbox" value=<%= usertemplate.id%> <% if usertemplate.id == @current_template.to_i %> checked="checked"<%end%>/>
-				<label for="radio<%= usertemplate.id%>" class="css-label"><%= usertemplate.name%></label>
-			</li>
-			<% end %>
-		</ul>
-		<div class="flickr_pagination pag_pos">
-			<%= ajax_will_paginate @usertemplates %>
+	</div>
+	<a class="btn btn-primary" onclick="saveTemplate()">保存</a>
+	
+
+	<div id='shopid' style="display:none">
+		<%= @shopid%>
+	</div>
+	<div id="container" style="display:none">
+		<div id="basic-template">
+			<a class="ui-notify-cross ui-notify-close" href="#">x</a>
+			<h1>#{title}</h1>
+			<p>
+				#{text}
+			</p>
+		</div>
+
+		<div id="advanced-template">
+
 		</div>
 	</div>
-</div>
-<div id='shopid' style="display:none">
-	<%= @shopid%>
-</div>
-<div id="container" style="display:none">
-	<!--
-	Later on, you can choose which template to use by referring to the
-	ID assigned to each template.  Alternatively, you could refer
-	to each template by index, so in this example, "basic-tempate" is
-	index 0 and "advanced-template" is index 1.
-	-->
-	<div id="basic-template">
-		<a class="ui-notify-cross ui-notify-close" href="#">x</a>
-		<h1>#{title}</h1>
-		<p>
-			#{text}
-		</p>
-	</div>
 
-	<div id="advanced-template">
-		<!-- ... you get the idea ... -->
-	</div>
-</div>
-
-<a class="btn" onclick="saveTemplate()">保存</a>
 </body>
 
