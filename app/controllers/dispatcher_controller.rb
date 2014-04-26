@@ -1,5 +1,5 @@
 #coding: utf-8
-class ShopsController < ApplicationController
+class DispatcherController < ApplicationController
   require "rest-client"
   require "result-hand"
 
