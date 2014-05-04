@@ -178,6 +178,6 @@ class CouponsController < ApplicationController
     @requestcoupon.save
     @coupon.save
     @coupon.customers.delete(@customer)
-    render :js=>""
+    render :js=>"addcouponsucc(#{@coupon.id})"
   end
 end

@@ -13,10 +13,23 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   private
 
     def response_text_message(options={})
-      @userid=@weixin_message.FromUserName 
+      #@userid=@weixin_message.FromUserName 
       #reply_text_message("Your Message: #{@keyword}")
-      response_addcard
-      #reply_text_message("Your Message: #{@userid}")
+      #esponse_addcard
+      msg="您可以回复:\n 1.查看会员卡。  \n 2.我们的电话号码. \n 3.我们的地址。"
+      if @keyword=="1"
+        msg="hello 1"
+      end
+      
+      if @keyword=="2"
+        msg="这是我们的电话,点击直拨 \n#{@weixin_public_account.phone}"
+      end
+      
+      if @keyword=="3"
+        msg="这是我们的地址,欢迎光临 \n#{@weixin_public_account.address}"
+      end
+      
+      reply_text_message(msg)
     end
 
     # <Location_X>23.134521</Location_X>
@@ -91,21 +104,27 @@ WeixinRailsMiddleware::WeixinController.class_eval do
            @cid=customer.id
            @sid=@weixin_public_account.id
            @wname =@weixin_public_account.shopurl
-           repurl="http://69d3e956.ngrok.com/cardguest/#{@sid}?customerid=#{@cid}"
-           logger.info(repurl)
-           articles = [generate_article('COCO会员卡','COCO烘焙坊的会员卡','http://www.weexing.com/system/membercards/pics/000/000/007/original/2.jpg',repurl)]
-            reply_news_message(nil, nil, articles)
+           @shopname=@weixin_public_account.name
+           @card=@weixin_public_account.membercard.pic.url(:medium)
+           repurl="http://cf57007.ngrok.com/cardguest/#{@sid}?customerid=#{@cid}"
+           #logger.info(@card)
+           articles = [generate_article(@weixin_public_account.name,"欢迎回来,尊敬的会员,您的会员卡在这里",'http://cf57007.ngrok.com#{@card}',repurl)]
+           reply_news_message(nil, nil, articles)
            
             #reply_text_message("欢迎回来，我们的老客户,您的url是:#{@cid}")
         else
           @customer=Customer.new
           @customer.openid = @userid
           @customer.shop_id = @weixin_public_account.id
-          @customer.save
-          @cardid="00000"+@customer.id.to_s
+          @cardid="00000"+(@weixin_public_account.customerno+1).to_s
+          @weixin_public_account.customerno+=1
+          @weixin_public_account.save
           @customer.cardid=@cardid
           @customer.save
-          reply_text_message("欢迎领取会员卡，您的卡号是#{@cardid}")
+          @card=@weixin_public_account.membercard.pic.url(:medium)
+          repurl="http://cf57007.ngrok.com/cardguest/#{@weixin_public_account.id}?customerid=#{@customer.id}"
+          articles = [generate_article(@weixin_public_account.name,"您已经领取了 #{@weixin_public_account.name}的会员卡,卡号是#{@cardid},猛击这里进入","http://cf57007.ngrok.com#{@card}",repurl)]
+          reply_news_message(nil, nil, articles)
         end
       
     end

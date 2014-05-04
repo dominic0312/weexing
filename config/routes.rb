@@ -83,12 +83,12 @@ Weexing::Application.routes.draw do
   resources :membercards
   resources :comments
   #resources :coupons
-  
+  post "cardguest/getcustomerinfo"
   match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
   match "/cardoath/:id" => "cardguest#cardoath", via: [:get, :post]
   match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
   match "/shops/display/:id" => "shops#display",via: [:get, :post]
-
+  
   match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info", via: [:get, :post]
   match "/news/display/:id" => "news#display",via: [:get, :post]
   get 'card' => 'card#index'

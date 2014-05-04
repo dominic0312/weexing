@@ -180,9 +180,10 @@
 
 								</div>
 								<div class="widget-content nopadding">
-									<table class="table table-bordered table-striped table-hover data-table">
+									<table class="table table-bordered table-striped table-hover data-table" id="usertable">
 										<thead>
 											<tr>
+												<th>id</th>
 												<th>客户名称</th>
 												<th>子域名</th>
 												<th>状态</th>
@@ -198,7 +199,7 @@
 												<%else%>
 											<tr class="onlinecol" id="row<%= shop.id%>">
 												<%end%>
-												<div class="row">
+													<td><%= shop.id%></td>
 													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center"><%= shop.name%></td>
 													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center"><%= shop.shopurl%></td>
 													<td class="col-sm-1 col-md-1 col-lg-1" style="text-align: center" class="taskStatus"><span class="status"><%= shop.status%></span></td>
@@ -226,7 +227,6 @@
 													<button class="btn btn-dark-red btn-sm del-modal" id="delbtn<%= shop.id%>" onclick="delconfirm('<%= shop.id%>')">
 														删除
 													</button></td>
-												</div>
 											</tr>
 											<% end %>
 										</tbody>
@@ -379,10 +379,36 @@
 	<%= javascript_include_tag "bootstrap-editable.js" %>
 	<%= javascript_include_tag "notify-custom.js" %>
 	<%= javascript_include_tag "bootstrap.file-input.js" %>
-
+	<script src="/js/datatabelext.js"></script>
 	<script>
 		var currenttemplate = 0;
 		var currentcard = 0;
+		$('#usertable').dataTable({
+			"bJQueryUI" : true,
+			"bLengthChange" : false,
+			"sPaginationType" : "full_numbers",
+			"sDom" : '<""l>t<"F"fp>',
+			"bSort" : true,
+			"bAutoWidth" : false,
+			"aoColumns" : [null, {
+				"bSortable" : false
+			}, {
+				"bSortable" : false
+			}, {
+				"bSortable" : false
+			}, null, null, {
+				"bSortable" : false
+			}],
+			"aoColumnDefs" : [{
+				"bSearchable" : false,
+				"bVisible" : false,
+				"aTargets" : [0]
+			}],
+			"oLanguage" : {
+				"sUrl" : "/js/dataTables.chn.txt"
+			},
+			"aaSorting" : [[0, 'desc']],
+		});
 
 		$('.selectpicker').selectpicker();
 		$('#templates').slick({
@@ -537,7 +563,6 @@
 					$.post("/shops/removeshop", {
 						shopid : sid
 					}, null, "script");
-					$("#row" + sid).remove();
 					$(this).dialog("close");
 				},
 				"取消" : function() {
@@ -728,8 +753,11 @@
 			return false;
 		}
 
-		function removesucc(shopname) {
-			//alert("heool");
+		function removesucc(shopname, shopid) {
+			$usertable = $("#usertable").dataTable();
+			var ele = document.getElementById("row" + shopid);
+			var pos = $usertable.fnGetPosition(ele);
+			$usertable.fnDeleteRow(pos);
 			$.gritter.add({
 				title : '删除成功',
 				text : '商家' + shopname + '已经被删除.',
@@ -743,16 +771,23 @@
 			$("#shopurl").val("");
 		}
 
-		function addtotable(vsid, vsname, vsurl, vstartdate, vexpdate) {
+		function addtotable(vsid, vsname, vsurl, vstartdate, vexpdate, vtemplate, vmemcard) {
 			var template = YayaTemplate(document.getElementById("shoptemplate").innerHTML);
 			var str = template.render({
 				sid : vsid,
 				sname : vsname,
 				surl : vsurl,
 				startdate : vstartdate,
-				expdate : vexpdate
+				expdate : vexpdate,
+				templateid : vtemplate,
+				membercardid : vmemcard
 			});
-			$("#dtable").prepend(str);
+
+			$usertable = $("#usertable").dataTable();
+			var divtr = document.createElement('tr');
+			divtr.innerHTML = str;
+			$(divtr).attr('id', 'row' + vsid);
+			$usertable.fnAddTr(divtr);
 		}
 
 		function online(ref) {
@@ -953,19 +988,18 @@
 			$("#expdate-span").html(expdate);
 			$("#row" + sid + ">td:eq(4)").html(expdate);
 		}
-		
-		function connectwx(){
+
+		function connectwx() {
 			$.post("/shops/connectwx", {
 				appid : 'wxf2fae02e8ee92f67',
-				secid: '769c913b919b850e94f90d6ddf8c2273'
+				secid : '769c913b919b850e94f90d6ddf8c2273'
 			}, null, "script")
 		}
 	</script>
 	<script type="text/template" id="shoptemplate">
 		{$
-
 		<tr class="offlinecol" id="row{%sid%}">
-		<div class="row">
+		<td>{%sid%}</td>
 		<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center">{%sname%}</td>
 		<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center">{%surl%}</td>
 		<td class="col-sm-1 col-md-1 col-lg-1" style="text-align: center" class="taskStatus"><span class="status">停止中</span></td>
@@ -976,29 +1010,32 @@
 		<button class="btn btn-success btn-sm" onclick="online('{%sid%}');return false;">
 		启动
 		</button>
-		<button class="btn btn-dark-blue btn-sm">
+
+		<button class="btn btn-dark-blue btn-sm" onclick="setTemplate(this);return false;" id="shoppage{%sid%}" templateid="{%templateid%}">
 		页面
 		</button>
-		<button class="btn btn-dark-blue btn-sm">
+		<button class="btn btn-dark-blue btn-sm" onclick="setCard(this);return false;" id="shopcard{%sid%}" cardid="{%membercardid%}">
 		卡片
 		</button> </br>
-		<button class="btn btn-dark-blue btn-sm" onclick="removesucc()">
+
+		<button class="btn btn-dark-blue btn-sm" onclick="setConnect(this);return false;">
 		连接
 		</button>
-		<button class="btn btn-dark-blue btn-sm">
+
+		<button class="btn btn-dark-blue btn-sm" onclick="setAccount(this);return false;">
 		账户
 		</button>
+
 		<button class="btn btn-dark-red btn-sm del-modal" id="delbtn{%sid%}" onclick="delconfirm('{%sid%}')">
 		删除
 		</button></td>
-		</div>
 		</tr>
 		$}
 	</script>
 
 	<script type="text/template" id="connect-template">
 		{$
-        <div id="connect-inner">
+		<div id="connect-inner">
 		<div class="widget-box">
 		<div class="widget-title">
 		<h5>连接参数</h5>
@@ -1009,10 +1046,10 @@
 		<tbody>
 		<tr>
 		<td>
-		微信连接网址
+		微信接口
 		</td>
 		<td>
-		http://www.weexing.com/wx/{%wxurl%}
+		http://www.weexing.com/weixin/{%wxurl%}
 		</td>
 
 		</tr>
@@ -1028,8 +1065,7 @@
 		</table>
 		</div>
 		</div>
-		
-		
+
 		<div class="widget-box">
 		<div class="widget-title">
 		<h5>微信菜单设置</h5>
@@ -1040,26 +1076,24 @@
 		<tbody>
 		<tr>
 		<td>
-		微信账号APPID
+		微信普通账号菜单
 		</td>
 		<td>
-		222222222222222222222222222222222222222
+		http://www.weexing.com/weixin
 		</td>
 
 		</tr>
 		<tr>
 		<td>
-		微信账号APPSEC
+		微信认证账号菜单
 		</td>
 		<td>
-		222222222222222222222222222222222222
+		http://www.weexing.com/weixing
 		</td>
 		</tr>
 		</tbody>
 		</table>
-		<div class="row">
-			<button class="btn btn-dark-green pull-right" onclick="connectwx()">连接</button>
-		</div>
+		
 		</div>
 		</div>
 		</div>
@@ -1068,18 +1102,18 @@
 
 	<script type="text/template" id="account-template">
 		{$
-        <div id="account-inner">
+		<div id="account-inner">
 		<div class="widget-box">
 		<div class="widget-title">
 		<h5>商户启用</h5>
 		</div>
 		<div class="widget-content">
 		<div class="row">
-		<div class="col-md-7" style="padding-top:16px">
+		<div class="col-sm-7 col-md-7 col-lg-7" style="padding-top:16px">
 
 		截止日期:<span id="expdate-span">{%expdate%}</span>
 		</div>
-		<div class="col-md-5">
+		<div class="col-sm-5 col-md-5 col-lg-5">
 		<div class="input-group input-group-sm pull-right">
 		<span class="input-group-btn">
 		<button class="btn btn-dark-green btn-sm" onclick="chargeconfirm({%sid%});">续费</button>
@@ -1130,7 +1164,7 @@
 
 		</div>
 		<div class="row">
-		<button class="btn btn-dark-green pull-right" onclick="$('#account-dialog').dialog('close');">确定</button>
+			<div class="col-sm-12 col-md-12 col-lg-12	"><button class="btn btn-dark-green pull-right" onclick="$('#account-dialog').dialog('close');">确定</button></div>
 		</div>
 		</div>
 		$}

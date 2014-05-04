@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424124130) do
+ActiveRecord::Schema.define(version: 20140427093813) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 20140424124130) do
     t.string   "mobile"
     t.string   "oemname",              default: "微行微系统"
     t.string   "oemurl",               default: "http://www.weexing.com/"
+    t.integer  "customerno",           default: 0
   end
 
   add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree

@@ -196,7 +196,7 @@
 								</table>
 								<div class="container" style="width: 680px">
 									<p class="text-muted" style="text-align:right; padding-top: 20px">
-										<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;由&nbsp;<a href="<%=@shop.oemurl%>"><%=@shop.oemname%></a>&nbsp;提供支持.
+										<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;由&nbsp;<a href="<%= @shop.oemurl%>"><%= @shop.oemname%></a>&nbsp;提供支持.
 									</p>
 								</div>
 
@@ -237,7 +237,7 @@
 									</thead>
 
 									<% @coupons.each do |coupon| %>
-									<tr id="couprow<%=coupon.id%>">
+									<tr id="couprow<%= coupon.id%>">
 										<td class="editab"><%= coupon.id%></td>
 										<td class="editab"><img src="/images/loader.gif" data-src="<%= coupon.pic.url(:thumb) %>" width="70" height="70"></td>
 										<td class="editab" data-toggle="tooltip" data-placement="top" title="详情:<%= coupon.content%>"><%= coupon.title%></td>
@@ -570,6 +570,9 @@
 					"aTargets" : [0]
 				}],
 				"aaSorting" : [[0, 'desc']],
+				"oLanguage" : {
+					"sUrl" : "/js/dataTables.chn.txt"
+				}
 			});
 			var $couptable = $('#coupontable').dataTable({
 				"bJQueryUI" : true,
@@ -596,8 +599,11 @@
 					"bSearchable" : false,
 					"bVisible" : false,
 					"aTargets" : [0]
-				}],
+				}],	
 				"aaSorting" : [[0, 'desc']],
+				"oLanguage" : {
+					"sUrl" : "/js/dataTables.chn.txt"
+				}
 			});
 			$('#datepicker .input-daterange').datepicker({
 			});
@@ -1271,7 +1277,7 @@
 			$custable = $("#customertable").dataTable();
 			var divtr = document.createElement('tr');
 			divtr.innerHTML = str;
-			$(divtr).attr('id','cusrow'+id);
+			$(divtr).attr('id', 'cusrow' + id);
 			$custable.fnAddTr(divtr);
 		}
 
@@ -1289,7 +1295,7 @@
 			$couptable = $("#coupontable").dataTable();
 			var divtr = document.createElement('tr');
 			divtr.innerHTML = str;
-			$(divtr).attr('id','couprow'+id);
+			$(divtr).attr('id', 'couprow' + id);
 			$couptable.fnAddTr(divtr);
 			savecouponsucc();
 		}

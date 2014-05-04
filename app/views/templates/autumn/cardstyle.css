@@ -1,4 +1,4 @@
-div#card {
+div#cards {
 	width: 350px;
 	margin: 10px 0;
 	position: relative;
@@ -37,7 +37,7 @@ div .price {
 .ui-listview-filter {
 	margin-top: 20px;
 }
-
+	
 .ui-li-thumb {
 	top: 21px;
 }
@@ -47,6 +47,9 @@ ul.copy-divider {
 }
 
 .cardhead{
-    text-align:center
+    display: block;
+    height:200px;
+    width:100px;
+    overflow: hidden;
 }
 

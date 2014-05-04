@@ -1,7 +1,6 @@
 class CardguestController < ApplicationController
   require "rest-client"
   require "result-hand"
-
   def cardpage
     shopid=params[:id]
     shoppage=Shop.find(shopid)
@@ -29,7 +28,6 @@ class CardguestController < ApplicationController
     url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf2fae02e8ee92f67&secret=769c913b919b850e94f90d6ddf8c2273&code=#{params[:code]}&grant_type=authorization_code"
     openid=load_json(RestClient.post(url,{}))
     customer=Customer.where(:openid=>openid).first
-    
 
     respond_to do |format|
       if shop
@@ -42,7 +40,7 @@ class CardguestController < ApplicationController
         end
         @page=shop.usertemplate.pic
         @cid=customer.id
-         format.html
+      format.html
       else
         format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
       end
@@ -75,4 +73,11 @@ class CardguestController < ApplicationController
   def actinfo
 
   end
+
+  def getcustomerinfo
+    cid=params[:cusid]
+    customer=Customer.find(cid)
+    render :js =>"updateinfo('#{customer.balance}','#{customer.bonus}','#{customer.level}')"
+  end
+
 end

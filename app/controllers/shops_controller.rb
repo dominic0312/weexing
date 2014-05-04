@@ -68,7 +68,7 @@ class ShopsController < ApplicationController
     @shop=Shop.find(params[:shopid]) rescue nil
     if @shop
       @shop.destroy
-      render :js=>"removesucc('#{@shop.name}')" and return
+      render :js=>"removesucc('#{@shop.name}','#{@shop.id}')" and return
     else
       render :js=>"" and return
     end
@@ -151,7 +151,7 @@ class ShopsController < ApplicationController
     startdate=shop.created_at.to_s[0,10]
     expdate=expriedate.to_s[0,10]
     @shop=shop
-    render :js=>"addtotable(#{shop.id},'#{shop.name}','#{shop.shopurl}','#{startdate}','#{expdate}')" and return
+    render :js=>"addtotable(#{shop.id},'#{shop.name}','#{shop.shopurl}','#{startdate}','#{expdate}','#{shop.usertemplate_id}','#{shop.membercard_id}')" and return
   end
 
   def onlineshop
