@@ -60,12 +60,13 @@
 <body>
 	<div data-role="page" id="home" data-theme="b" data-fullscreen="true" data-title="会员卡">
 		<div data-role="content" style="height:380px;overflow:hidden;text-align: center">
-			<div id="card" onclick="flip(this);return false;">
+			<div id="customer_info">
+			<div id="card" onclick="flip(this);return false;" >
 				<img src="/images/card2.png">
 				<div id="logo" style="position:relative;bottom:185px;left:15px; width:100px;height:100px"><img src="/images/coco2.png">
 				</div>
-				<div id="cardno" style="position: relative;bottom:135px;left:80px">
-					NO.00001
+				<div id="cardno" style="position: relative;bottom:135px;left:80px"  data-template>
+					NO.{{cardid}}
 				</div>
 
 			</div>
@@ -84,6 +85,7 @@
 					</p>
 				</div>
 
+			</div>
 			</div>
 
 			<div id="flip" style="position: relative;right:10px;top:20px">
@@ -111,7 +113,7 @@
 					<div class="content-title">	
 						<strong>级别</strong>
 						<div class="content-value" data-template id="level" onclick="updatebalance() ">
-							黄金会员
+							{{level}}
 						</div>
 					</div>
 				</div>

@@ -57,14 +57,15 @@
 							$("#emptytemplate").html("<h3>目前没有优惠券</h3>");
 						}
 						Tempo.prepare("coupons").render(data.coupons);
-
+					    Tempo.prepare("customer_info").render(data.customer);
+                        //alert(data.customer.cardid);
 						//	$("#coupon").trigger('create');
 						Tempo.prepare("shop_info").render(data.shop);
 						//Tempo.prepare("customer_balance").render(data);
 						//alert(cusid);
 						//Tempo.prepare("customer_balance").render(data);
 						//Tempo.prepare("customer_bonus").render(data);
-						//Tempo.prepare("customer_level").render(data);
+						Tempo.prepare("customer_level").render(data.customer);
 						//Tempo.prepare("coupon_num").render(data);
 						//Tempo.prepare("customer").render(data);
 					},
