@@ -61,18 +61,19 @@
 	<div data-role="page" id="home" data-theme="b" data-fullscreen="true" data-title="会员卡">
 		<div data-role="content" style="height:380px;overflow:hidden;text-align: center">
 			<div id="customer_info">
+				<div data-template>
 			<div id="card" onclick="flip(this);return false;" >
-				<img src="/images/card2.png">
+				<img src="<%=card%>">
 				<div id="logo" style="position:relative;bottom:185px;left:15px; width:100px;height:100px"><img src="/images/coco2.png">
 				</div>
-				<div id="cardno" style="position: relative;bottom:135px;left:80px"  data-template>
+				<div id="cardno" style="position: relative;bottom:135px;left:80px">
 					NO.{{cardid}}
 				</div>
 
 			</div>
 
 			<div id="cardback" class="cardhead" onclick="flip(this);return false;" style="display: none">
-				<img src="/images/cardback.png">
+				<img src="<%=cardback%>">
 				<div id="previlege" style="position: relative;bottom:145px;color:grey;text-shadow: 0 0 0 #111;font-size:14px">
 					<p>
 						普通会员: 所有产品95折优惠
@@ -86,7 +87,7 @@
 				</div>
 
 			</div>
-			</div>
+			
 
 			<div id="flip" style="position: relative;right:10px;top:20px">
 				请轻按卡片查看背面的权限说明
@@ -96,7 +97,7 @@
 					<div class="content-title">
 						<strong>储值</strong>
 						<div class="content-value" style="color: gold" data-template onclick="updatebalance()" id="balance">
-							100
+							{{balance}}
 						</div>
 					</div>
 				</div>
@@ -104,7 +105,7 @@
 					<div class="content-title">
 						<strong>积分</strong>
 						<div class="content-value" style="color: gold" data-template id="bonus" onclick="updatebalance()">
-							80
+							{{bonus}}
 						</div>
 					</div>
 
@@ -119,7 +120,8 @@
 				</div>
 
 			</div>
-
+			</div>
+         </div>
 		</div><!-- /content -->
 
 		<div data-role="footer" class="nav-glyphish" data-theme="b" data-position="fixed" data-tap-toggle="false">
@@ -189,7 +191,7 @@
 				</li>
 
 				<li data-template-fallback>
-					Sorry, JavaScript required!
+					需要开启JS环境！
 				</li>
 			</ul>
 		</div>
@@ -214,11 +216,11 @@
 
 		<div data-role="content" style="text-align: center">
 			<div id="shop_info" style="overflow-y:visible">
-				<div id="shopname" style="text-align: center;color: dimgrey"><h1>COCO烘焙坊</h1></div>
-				<div id="address" style="color:white;"><a href="#" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-location" style="width:80%;margin-left: auto;margin-right: auto;white-space: normal"><h5>东莞市凤岗镇竹塘商住小区D16栋</h5></a></div>
+				<div id="shopname" style="text-align: center;color: dimgrey"><h1><%=shop.name%></h1></div>
+				<div id="address" style="color:white;"><a href="#" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-location" style="width:80%;margin-left: auto;margin-right: auto;white-space: normal"><h5><span id="addpoint"><%=shop.address%></span></h5></a></div>
 				<div id="mapicon" style="color:dimgrey" onclick="showmap()" status="init"><h4>点击查看地图</h4></div>
 				 <div id="l-map" style="width:90%;height:200px;margin-left: auto; margin-right: auto; border:solid 4px grey;display: none"></div> 
-				 <div id="phone" style="color:dimgrey" ><a href="tel:13590296140" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-phone" style="width:80%;margin-left: auto;margin-right: auto"><h3>13590296140</h3></a></div>
+				 <div id="phone" style="color:dimgrey" ><a href="tel:13590296140" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-phone" style="width:80%;margin-left: auto;margin-right: auto"><h3><%=shop.phone%></h3></a></div>
 			</div>
   <script type="text/javascript">
 	function showmap() {
@@ -238,8 +240,9 @@
 		}
 		if ($("#mapicon").attr("status") == "init") {
 			var map = new BMap.Map("l-map");
+			var address=$.trim($("#addpoint").html());
 			var myGeo = new BMap.Geocoder();
-			myGeo.getPoint("东莞市凤岗镇竹塘商住小区D16栋", function(point) {
+			myGeo.getPoint(address, function(point) {
 				if (point) {
 					map.centerAndZoom(point, 16);
 					map.addOverlay(new BMap.Marker(point));

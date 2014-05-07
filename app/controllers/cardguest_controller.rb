@@ -1,20 +1,24 @@
 class CardguestController < ApplicationController
   require "rest-client"
   require "result-hand"
+
   def cardpage
     shopid=params[:id]
-    shoppage=Shop.find(shopid)
+    @shoppage=Shop.find(shopid)
 
     respond_to do |format|
-      if shoppage
-        @brandname=shoppage.name
-        @logopic=shoppage.logopic.url
-        @card=shoppage.membercard
+      if @shoppage
+        @brandname=@shoppage.name
+        @logopic=@shoppage.logopic.url
+        @card=@shoppage.membercard
         if @card
-          @cardpic=@card.pic
-        else @cardpic=""
+          @cardpic=@card.pic.url(:medium)
+          @cardpicback=@card.picback.url(:medium)
+        else
+          @cardpic=""
+          @cardpicback=""
         end
-        @page=shoppage.usertemplate.pic
+        @page=@shoppage.usertemplate.pic
       format.html
       else
         format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }

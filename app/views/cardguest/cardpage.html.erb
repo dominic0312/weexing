@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div id="customer" style="display: none"></div>
-		<%= render :partial => "/templates/"+@page.to_s+"/index", :locals => { :card => @cardpic }%>
+		<%= render :partial => "/templates/"+@page.to_s+"/index", :locals => { :card => @cardpic,:cardback=>@cardpicback,:shop=>@shoppage }%>
 		<script type="text/javascript">
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);

@@ -94,6 +94,6 @@ class MembercardsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def membercard_params
-    params.require(:membercard).permit(:name,:pic)
+    params.require(:membercard).permit(:name,:pic,:picback)
   end
 end

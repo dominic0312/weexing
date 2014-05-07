@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427093813) do
+ActiveRecord::Schema.define(version: 20140506104214) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -131,6 +131,10 @@ ActiveRecord::Schema.define(version: 20140427093813) do
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
+    t.string   "picback_file_name"
+    t.string   "picback_content_type"
+    t.integer  "picback_file_size"
+    t.datetime "picback_updated_at"
   end
 
   create_table "news", force: true do |t|

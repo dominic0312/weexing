@@ -7,7 +7,11 @@
   <%= @membercard.name %>
 </p>
 <p>
-<%= image_tag @membercard.pic.url(:thumb) %>
+<%= image_tag @membercard.pic.url(:medium) %>
+</p>
+
+<p>
+<%= image_tag @membercard.picback.url(:medium) %>
 </p>
 
 <%= link_to '返回', membercards_path %>
