@@ -42,6 +42,7 @@ Weexing::Application.routes.draw do
   post 'users/resetpassword'
   
   match "/resetpasswd" => "users#resetpasspage",via: [:get]
+  match "/agency" => "agency#login",via: [:get]
 
   post 'comments/addcomment'
   get 'sp/:shopurl', to: 'cardbackground#index' 

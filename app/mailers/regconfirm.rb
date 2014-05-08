@@ -10,7 +10,7 @@ class Regconfirm < ActionMailer::Base
   def regist_confirm(user)
     @userid=user.id
     @userhash=user.hashed_password
-    @greeting = "欢迎您注册微行微系统"
+    @username = user.name
     mail :to=>user.email,:subject=>"微行微系统注册确认"
   end
   
