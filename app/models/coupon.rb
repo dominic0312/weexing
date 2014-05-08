@@ -5,10 +5,6 @@ class Coupon < ActiveRecord::Base
   validates_attachment :pic,
   :content_type => { :content_type => ["image/jpg", "image/jpeg", "image/png"] },
   :size => { :in => 0..100.kilobytes }
-  #validates_attachment_content_type :pic, :content_type => ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png']
-  # validates_attachment :pic, :presence => true,
-  #:content_type => { :content_type => "*.jpg" },
-  #:size => { :in => 0..100.kilobytes }
   def self.expired?
     enddate > DateTime.now
   end
