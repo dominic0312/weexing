@@ -17,7 +17,7 @@ class Regconfirm < ActionMailer::Base
     def reset_password(user)
     @userid=user.id
     @userhash=user.hashed_password
-    @greeting = "欢迎您注册微行微系统"
+    @username = user.name
     mail :to=>user.email,:subject=>"微行微系统密码重设"
   end
 end

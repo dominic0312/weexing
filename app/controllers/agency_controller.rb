@@ -90,7 +90,7 @@ class AgencyController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        Regconfirm.regist_confirm(@user).deliver
+        Regconfirm.delay.regist_confirm(@user)
         format.js { render  :js=> "regsuccess()"}
       else
         format.js { render  :js=> "regfail()"}
@@ -141,14 +141,11 @@ class AgencyController < ApplicationController
   end
 
   def changepass
-
     if user=User.authenticatebyid(session[:user_id],params[:oldpass])
-
       user.password=params[:password]
       user.save
       render :js=>"changepasssucc()"
     else
-
       render :js=>"changepasswrong()"
     end
   end
