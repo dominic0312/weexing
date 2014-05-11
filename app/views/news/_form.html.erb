@@ -1,30 +1,37 @@
 <%= form_for(@news) do |f| %>
-  <% if @news.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@news.errors.count, "error") %> 这篇文章没有发表成功:</h2>
+<% if @news.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@news.errors.count, "error") %> 这篇文章没有发表成功:</h2>
 
-      <ul>
-      <% @news.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<ul>
+		<% @news.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :标题 %><br />
-    <%= f.text_field :title %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :类型 %><br />
-    <%= f.text_field :doctype %>
-  </div>
-  <div class="field">
-    <%= f.label :内容 %><br />
-    <%= f.text_area :content,:size=>"40x20"%>
-  </div>
-  <div class="actions">
-    <%= f.submit "提交"%>
-  </div>
+<div class="field">
+	<%= f.label :标题 %>
+	<br />
+	<%= f.text_field :title %>
+</div>
+
+<div class="field">
+	<%= f.label :类型 %>
+	<br />
+
+	<%= select(:news,:newstype,[['普通', 'default'], ['警告', 'warning'],['紧急', 'danger']]) %>
+</div>
+
+<div class="field">
+	<%= f.label :内容 %>
+	<br />
+	<%= f.text_area :content,:size=>"40x20"%>
+</div>
+<div class="actions">
+	<%= f.submit "提交"%>
+</div>
 <% end %>

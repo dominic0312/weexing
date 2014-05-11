@@ -26,6 +26,9 @@ class CardbackgroundController < ApplicationController
     @shop=Shop.where(:shopurl=>url).first
     respond_to do |format|
       if @shop
+        if @shop.online==0
+           format.html { render :file => "#{Rails.root}/public/closed", :layout => false, :status => :not_found }
+        end
       format.html # login.html.erb
       format.js
       else

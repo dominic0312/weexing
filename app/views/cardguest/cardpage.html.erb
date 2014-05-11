@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div id="customer" style="display: none"></div>
-		<%= render :partial => "/templates/"+@page.to_s+"/index", :locals => { :card => @cardpic,:cardback=>@cardpicback,:shop=>@shoppage }%>
+		<%= render :partial => "/templates/"+@page.to_s+"/index", :locals => { :logo=>@logopic,:card => @cardpic,:cardback=>@cardpicback,:shop=>@shoppage }%>
 		<script type="text/javascript">
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -57,8 +57,8 @@
 							$("#emptytemplate").html("<h3>目前没有优惠券</h3>");
 						}
 						Tempo.prepare("coupons").render(data.coupons);
-					    Tempo.prepare("customer_info").render(data.customer);
-                        //alert(data.customer.cardid);
+						Tempo.prepare("customer_info").render(data.customer);
+						//alert(data.customer.cardid);
 						//	$("#coupon").trigger('create');
 						Tempo.prepare("shop_info").render(data.shop);
 						//Tempo.prepare("customer_balance").render(data);
@@ -76,10 +76,10 @@
 
 			}
 
-			function updateinfo(balance,bonus,level) {
+			function updateinfo(balance, bonus, level) {
 				$("#balance").html(balance);
-                $("#bonus").html(bonus);
-                $("#level").html(level);
+				$("#bonus").html(bonus);
+				$("#level").html(level);
 			}
 
 

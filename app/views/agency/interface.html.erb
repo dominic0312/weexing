@@ -180,7 +180,7 @@
 
 								</div>
 								<div class="widget-content nopadding">
-									<table class="table table-bordered table-striped table-hover data-table" id="usertable">
+									<table class="table table-bordered data-table" id="usertable">
 										<thead>
 											<tr>
 												<th>id</th>
@@ -200,11 +200,11 @@
 											<tr class="onlinecol" id="row<%= shop.id%>">
 												<%end%>
 													<td><%= shop.id%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center"><%= shop.name%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center"><%= shop.shopurl%></td>
-													<td class="col-sm-1 col-md-1 col-lg-1" style="text-align: center" class="taskStatus"><span class="status"><%= shop.status%></span></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center"><%= shop.created_at.to_s[0,10]%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" class="centercol"  style="text-align: center"><%= shop.exprieddate.to_s[0,10]%></td>
+													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.name%></td>
+													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.shopurl%></td>
+													<td class="col-sm-1 col-md-1 col-lg-1" style="text-align:center" class="taskStatus"><span class="status"><%=shop.status%></span></td>
+													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.created_at.to_s[0,10]%></td>
+													<td class="col-sm-2 col-md-2 col-lg-2" class="centercol" style="text-align:center"><%= shop.exprieddate.to_s[0,10]%></td>
 													<td class="col-sm-3 col-md-3 col-lg-3" style="text-align: center" rid="<%= shop.id%>" id="rec<%= shop.id%>"> <%if shop.online==0%>
 													<button class="btn btn-success btn-sm" onclick="online(this);return false;">
 														启动

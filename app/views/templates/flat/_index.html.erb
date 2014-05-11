@@ -1,88 +1,360 @@
 ﻿
+<style>
+	.nav-glyphish .ui-btn {
+		padding-top: 40px !important;
+	}
+	.nav-glyphish .ui-btn:after {
+		width: 30px !important;
+		height: 30px !important;
+		margin-left: -15px !important;
+		box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		-webkit-box-shadow: none !important;
+		-webkit-border-radius: 0 !important;
+		border-radius: 0 !important;
+	}
+
+	#memcard:after {
+		background: url("/images/icons/card.png") 50% 50% no-repeat;
+		background-size: 26px 18px;
+	}
+	#coupongroup:after {
+		background: url("/images/icons/coupons.png") 50% 50% no-repeat;
+		background-size: 26px 20px;
+	}
+	#contact:after {
+		background: url("/images/icons/contact.png") 50% 50% no-repeat;
+		background-size: 30px 20px;
+	}
+	
+	#mobileico:after {
+		background: url("/images/icons/iphone.png") 50% 50% no-repeat;
+		background-size: 30px 20px;
+	}
+	
+	
+	body
+  {
+  background-image: url(stars.gif);
+  background-repeat: repeat-y;
+  }
+
+	div#card {
+		display: block;
+		width: 275px;
+		height: 173px;
+		position: relative;
+		border: 2px solid;
+		border-radius: 10px;
+		overflow: hidden;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	div#cardback {
+		display: block;
+		width: 275px;
+		height: 173px;
+		position: relative;
+		border: 2px solid;
+		border-radius: 10px;
+		overflow: hidden;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+ 
+​
+
+</style>
+ <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=omWGGb4FXGXzdQN7wxcq5dpY&v=1.0"></script> 
 <body>
-	<div data-role="page" id="home" data-theme="a" data-fullscreen="true">
-		<div data-role="header"></div><!-- /header -->
-		<div data-role="content">
-			<div id="card" class="cardhead">
-				<div id='cs'>
-					<%= image_tag card%>
+	<div data-role="page" id="home" data-theme="a" data-fullscreen="true" data-title="会员卡">
+		 <div data-role="header" data-theme="a">
+        <h1>会员卡</h1>
+        <a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+        <a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+    </div><!-- /header -->
+		
+		
+		<div data-role="content" style="height:380px;overflow:hidden;text-align: center">
+			<div id="customer_info">
+				<div data-template>
+			<div id="card" onclick="flip(this);return false;" >
+				<img src="<%= card%>">
+				<div id="logo" style="position:relative;bottom:185px;left:15px; width:100px;height:100px"><img src="<%= logo%>">
 				</div>
+				<div id="cardno" style="position: relative;bottom:135px;left:80px">
+					NO.{{cardid}}
+				</div>
+
 			</div>
 
-			<div class="ui-grid-b">
+			<div id="cardback" class="cardhead" onclick="flip(this);return false;" style="display: none">
+				<img src="<%= cardback%>">
+				<div id="previlege" style="position: relative;bottom:145px;color:grey;text-shadow: 0 0 0 #111;font-size:14px">
+					<p><%= shop.priv1%></p>
+					<p><%= shop.priv2%></p>
+					<p><%= shop.priv3%></p>
+				</div>
+
+			</div>
+			
+
+			<div id="flip" style="position: relative;right:10px;top:20px">
+				请轻按卡片查看背面的权限说明
+			</div>
+			<div class="ui-grid-b" style="position: relative;top:50px;right:5px;font-size: 22px">
 				<div class="ui-block-a" id="customer_balance">
 					<div class="content-title">
 						<strong>储值</strong>
-						<div class="content-value" data-template>
-							100
+						<div class="content-value" style="color: gold" data-template onclick="updatebalance()" id="balance">
+							{{balance}}
 						</div>
 					</div>
 				</div>
 				<div class="ui-block-b" id="customer_bonus">
 					<div class="content-title">
 						<strong>积分</strong>
-						<div class="content-value" data-template>
-							80
+						<div class="content-value" style="color: gold" data-template id="bonus" onclick="updatebalance()">
+							{{bonus}}
 						</div>
 					</div>
 
 				</div>
 				<div class="ui-block-c" id="customer_level">
-					<div class="content-title">
+					<div class="content-title">	
 						<strong>级别</strong>
-						<div class="content-value" data-template>
-							黃金會員
+						<div class="content-value" data-template id="level" onclick="updatebalance() ">
+							{{level}}
 						</div>
 					</div>
 				</div>
 
 			</div>
-
-			<ul data-role="listview" data-inset="true">
-				<li>
-					<a href="#coupon" class="ui-icon-star ui-btn-icon-left">优惠</a>
-					<span class="ui-li-count countBubl" id="coupon_num">
-						<div data-template>
-							20
-						</div></span>
-				</li>
-
-				<li>
-					<a href="./speakers.html">赠品</a>
-				</li>
-
-				<li>
-					<a href="./schedule.html">在线预定</a>
-				</li>
-
-				<li>
-					<a href="./information.html">联系我们</a>
-				</li>
-
-			</ul>
-
+			</div>
+         </div>
 		</div><!-- /content -->
-	</div>
-	<div data-role="page" id="coupon" data-fullscreen="true">
 
-		<div data-role="header">
-			<h1>优惠卷</h1>
-			<a href="#home" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left">后退</a>
-		</div>
+	 <div data-role="panel" id="left-panel" data-theme="b">
+        <p>Left reveal panel.</p>
+        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a>
+    </div><!-- /panel -->
+    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
+        <p>Right push panel.</p>
+        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
+    </div><!-- /panel -->
+	</div>
+	<div data-role="page" id="coupon" data-theme="a" data-fullscreen="true" data-title="优惠券">
+
 		<div data-role="content">
+			<div id="emptytemplate" style="text-align: center;color: grey"></div>
 			<ul data-role="listview" id="coupons" style="overflow-y:visible">
-				<li data-template  style="overflow-y:visible">
-					<img src="default.png" data-src="{{pic}}" alt="" height="40" /><h3>黃金會員專享</h3>
-					<p>
-						特惠100元
-					</p>
+
+				<li data-template  style="overflow-y:visible" class="ui-grid-c" id="li{{id}}">
+					<div class="ui-grid-c">
+						<div class="ui-block-a" style="width:15%"><img src="" data-src="/images/thumb/miss2.png" alt="" height="40" style="padding-top:5px;padding-right: 10px" />
+						</div>
+						<div class="ui-block-b" style="width:30%">
+							<h5>优惠</h5>
+							<p>
+								{{title}}
+							</p>
+						</div>
+						<div class="ui-block-c" style="width:30%" id="edate{{id}}">
+							<h5>有效日期</h5>
+							<p>
+								至2011-12-13
+							</p>
+						</div>
+						<div class="ui-block-d">
+							<button class="ui-btn ui-btn-corner-all" onclick="showcol(this)"  rid="{{id}}">
+								详细
+							</button>
+						</div>
+					</div>
+					<div class="ui-grid-b"  id="col{{id}}" style="display: none">
+
+						<div class="ui-block-a" style="width:15%">
+							<p>
+
+							</p>
+						</div>
+						<div class="ui-block-b" style="width:60%">
+							<h5>说明</h5>
+								<p style="white-space: normal">
+									{{content}}
+								</p>
+						</div>
+						<div class="ui-block-c" style="width:25%">
+							<button class="ui-btn ui-btn-corner-all" id="use{{id}}" rid="{{id}}" onclick="requestcoup(this)" style="background: #006000">
+								使用
+							</button>
+						</div>
+					</div>
+
 				</li>
+
 				<li data-template-fallback>
-					Sorry, JavaScript required!
+					需要开启JS环境！
 				</li>
 			</ul>
 		</div>
+		<div data-role="footer" class="nav-glyphish" data-theme="a" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar" class="nav-glyphish" data-grid="b">
+				<ul>
+					<li>
+						<a href="#home" id="memcard" data-icon="custom" data-transition="fade">会员卡</a>
+					</li>
+					<li>
+						<a href="#coupon" id="coupongroup" data-icon="custom" data-transition="fade">优惠券</a>
+					</li>
+					<li>
+						<a href="#contactus" id="contact" data-icon="custom" data-transition="fade">联系我们</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
+
+	<div data-role="page" id="contactus" data-theme="a" data-fullscreen="true" data-title="联系我们">
+
+		<div data-role="content" style="text-align: center">
+			<div id="shop_info" style="overflow-y:visible">
+				<div id="shopname" style="text-align: center;color: dimgrey"><h1><%= shop.name%></h1></div>
+				<div id="address" style="color:dimgrey;" onclick="showmap()" status="init">地址:(轻点展开地图)&nbsp;<a href="#" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-location" style="width:80%;margin-left: auto;margin-right: auto;white-space: normal"><h5><span id="addpoint"><%= shop.address%></span></h5></a></div>
+				 <div id="l-map" style="width:90%;height:200px;margin-left: auto; margin-right: auto; border:solid 4px grey;display: none"></div> 
+				 <div id="phone" style="color:dimgrey" >电话:&nbsp;<a href="tel:<% shop.phone%>" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-phone" style="width:80%;margin-left: auto;margin-right: auto"><h3><%= shop.phone%></h3></a></div>
+			     <div id="mobileico" style="color:dimgrey">手机:&nbsp;<a href="tel:<% shop.mobile%>" class="ui-btn ui-shadow ui-corner-all  ui-btn-icon-left ui-icon-phone" style="width:80%;margin-left: auto;margin-right: auto"><h3><%= shop.mobile%></h3></a></div>
+			</div>
+  <script type="text/javascript">
+	function showmap() {
+
+		if ($("#address").attr("status") == "close") {
+			$("#l-map").slideDown(200);
+			$("#address").attr("status", "show");
+			return;
+		}
+
+		if ($("#address").attr("status") == "show") {
+			$("#l-map").slideUp(200);
+			$("#address").attr("status", "close");
+			return;
+		}
+		if ($("#address").attr("status") == "init") {
+			var map = new BMap.Map("l-map");
+			var address = $.trim($("#addpoint").html());
+			var myGeo = new BMap.Geocoder();
+			myGeo.getPoint(address, function(point) {
+				if (point) {
+					map.centerAndZoom(point, 16);
+					map.addOverlay(new BMap.Marker(point));
+				} else {
+					map.centerAndZoom(new BMap.Point(116.404, 39.915), 14);
+				}
+			}, "东莞市");
+			$("#l-map").slideDown(200);
+			$("#address").attr("status", "show");
+		}
+
+		//alert(map);
+	}
+  </script>
+		</div>
+		<div data-role="footer" class="nav-glyphish" data-theme="a" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar" class="nav-glyphish" data-grid="b">
+				<ul>
+					<li>
+						<a href="#home" id="memcard" data-icon="custom" data-transition="fade">会员卡</a>
+					</li>
+					<li>
+						<a href="#coupon" id="coupongroup" data-icon="custom" data-transition="fade">优惠券</a>
+					</li>
+					<li>
+						<a href="#contactus" id="contact" data-icon="custom" data-transition="fade">联系我们</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("[data-role='navbar']").navbar();
+			$("[data-role='header'], [data-role='footer']").toolbar();
+
+		});
+
+		//var customerid = $.trim($("#customer").html());
+		// Update the contents of the toolbars
+
+        $( document ).on( "pagecreate", "#home", function() {
+    $( document ).on( "swipeleft swiperight", "#home", function( e ) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swipeleft" ) {
+                $( "#right-panel" ).panel( "open" );
+            } else if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    });
+});
+
+
+
+
+		$(document).on("pageshow", "[data-role='page']", function() {
+			// Each of the four pages in this demo has a data-title attribute
+			// which value is equal to the text of the nav button
+			// For example, on first page: <div data-role="page" data-title="Info">
+			var current = $(this).jqmData("title");
+
+			// Change the heading
+			$("[data-role='header'] h1").text(current);
+			// Remove active class from nav buttons
+			$("[data-role='navbar'] a.ui-btn-active").removeClass("ui-btn-active");
+
+			// Add active class to current nav button
+			$("[data-role='navbar'] a").each(function() {
+				if ($(this).text() === current) {
+					$(this).addClass("ui-btn-active");
+				}
+			});
+		});
+
+		function showcol(ref) {
+			var s = $(ref).attr("rid");
+			$obj = $("#col" + s);
+			if ($obj.css("display") == "none") {
+				$obj.slideDown(200);
+			} else {
+				$obj.slideUp(200);
+			}
+		}
+
+		function flip(ref) {
+			var ids = $(ref).attr("id");
+			if (ids == 'card') {
+				$("#card").slideUp(300, null);
+				$("#cardback").slideDown(300, null);
+			}
+			if (ids == 'cardback') {
+				$("#cardback").slideUp(300, null);
+				$("#card").slideDown(300, null);
+			}
+			//alert("hello"+ids);
+		}
+
+		function updatebalance() {
+			$.post("/cardguest/getcustomerinfo", {
+				cusid : customerid
+			}, null, "script");
+		}
+	</script>
 
 </body>
 

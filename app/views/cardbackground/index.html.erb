@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Bootstrap 101 Template</title>
+		<title><%= @shop.name%>&nbsp;会员卡</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 		<!-- Bootstrap -->
 		<%= stylesheet_link_tag "bootstrap.css" %>
 		<%= stylesheet_link_tag "bootstrap-theme.css" %>
-		<%= stylesheet_link_tag "pagenate.css" %>
 		<%= stylesheet_link_tag "datepicker3.css" %>
 		<%= stylesheet_link_tag "bootstrap-select.min.css" %>
 
@@ -305,6 +304,29 @@
 
 								<div class="panel panel-default">
 									<div class="panel-heading">
+										<h3 class="panel-title"> 会员卡特权</h3>
+									</div>
+									<div class="panel-body" style="text-align: left">
+										<div style="font-size: 16px;text-align: left">
+											<p>
+												特权一:&nbsp;<span id="priv1"><%= @shop.priv1%></span>
+											</p>
+										</div>
+										<div style="font-size: 16px;text-align: left">
+											<p>
+												特权二:&nbsp;<span id="priv2"><%= @shop.priv2%></span>
+											</p>
+										</div>
+										<div style="font-size: 16px;text-align: left">
+											<p>
+												特权三:&nbsp;<span id="priv3"><%= @shop.priv3%></span>
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
 										<h3 class="panel-title"> 地址</h3>
 									</div>
 									<div class="panel-body" style="text-align: left">
@@ -319,7 +341,7 @@
 										<h3 class="panel-title"> 固定电话</h3>
 									</div>
 									<div class="panel-body" style="text-align: left">
-										<div id="phone" style="font-size: 16px;text-align: left">
+										<div id="phone" style="font-size: 16px;text-align: left;width:30%">
 											<%= @shop.phone%>
 										</div>
 									</div>
@@ -330,7 +352,7 @@
 										<h3 class="panel-title"> 移动电话</h3>
 									</div>
 									<div class="panel-body" style="text-align: left">
-										<div id="mobile" style="font-size: 16px;text-align: left">
+										<div id="mobile" style="font-size: 16px;text-align: left;width:30%">
 											<%= @shop.mobile%>
 										</div>
 									</div>
@@ -599,7 +621,7 @@
 					"bSearchable" : false,
 					"bVisible" : false,
 					"aTargets" : [0]
-				}],	
+				}],
 				"aaSorting" : [[0, 'desc']],
 				"oLanguage" : {
 					"sUrl" : "/js/dataTables.chn.txt"
@@ -608,6 +630,43 @@
 			$('#datepicker .input-daterange').datepicker({
 			});
 			$('.selectpicker').selectpicker();
+
+			$('#priv1').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 1,
+				url : '/shops/updateinfo',
+				pk : 'priv1',
+				title : '修改第一个会员权限',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
+			$('#priv2').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 1,
+				url : '/shops/updateinfo',
+				pk : 'priv2',
+				title : '修改第二个会员权限',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
+			$('#priv3').editable({
+				type : 'text',
+				mode : 'inline',
+				rows : 1,
+				url : '/shops/updateinfo',
+				pk : 'priv3',
+				title : '修改第三个会员权限',
+				ajaxOptions : {
+					type : 'post',
+				}
+			});
+
 			$('#address').editable({
 				type : 'text',
 				mode : 'inline',

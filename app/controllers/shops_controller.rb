@@ -343,16 +343,21 @@ class ShopsController < ApplicationController
       end
     else
       shop=Shop.find(shopid)
-      if reqtype == "address"
+      
+      case reqtype
+      when 'address'
         shop.address=params[:value]
-      end
-
-      if reqtype == "phone"
+      when 'phone'
         shop.phone=params[:value]
-      end
-
-      if reqtype=="mobile"
+      when 'mobile'
         shop.mobile=params[:value]
+      when 'priv1'
+        shop.priv1=params[:value]
+      when 'priv2'
+        shop.priv2=params[:value]
+      when 'priv3'
+        shop.priv3=params[:value]
+      else
       end
 
       shop.save

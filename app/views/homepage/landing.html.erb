@@ -796,7 +796,7 @@
 		function sendcomment() {
 			var name = $.trim($("#name").val());
 			var email = $.trim($("#email").val());
-			var message = $.trim($("#email").val());
+			var message = $.trim($("#message").val());
 			$.post("/comments/addcomment", {
 				username : name,
 				useremail : email,

@@ -8,8 +8,11 @@ class CardguestController < ApplicationController
 
     respond_to do |format|
       if @shoppage
+        if @shoppage.online==0
+           format.html { render :file => "#{Rails.root}/public/closed", :layout => false, :status => :not_found }
+        end
         @brandname=@shoppage.name
-        @logopic=@shoppage.logopic.url
+        @logopic=@shoppage.logopic.url(:thumb)
         @card=@shoppage.membercard
         if @card
           @cardpic=@card.pic.url(:medium)

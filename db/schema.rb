@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506104214) do
+ActiveRecord::Schema.define(version: 20140509203710) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -140,9 +140,10 @@ ActiveRecord::Schema.define(version: 20140506104214) do
   create_table "news", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "doctype",    default: "news"
+    t.string   "newstype",   default: "default"
   end
 
   create_table "pointcodes", force: true do |t|
@@ -199,6 +200,9 @@ ActiveRecord::Schema.define(version: 20140506104214) do
     t.string   "oemname",              default: "微行微系统"
     t.string   "oemurl",               default: "http://www.weexing.com/"
     t.integer  "customerno",           default: 0
+    t.string   "priv1"
+    t.string   "priv2"
+    t.string   "priv3"
   end
 
   add_index "shops", ["weixin_secret_key"], name: "index_shops_on_weixin_secret_key", using: :btree
