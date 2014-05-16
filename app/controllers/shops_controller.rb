@@ -165,10 +165,12 @@ class ShopsController < ApplicationController
         render :js=>"onlinefail('#{shop.name}')" and return
       end
       shop.online=1
+      shop.status="运行中"
       shop.save
       render :js=>"onlinesuccess('#{shop.name}','#{shop.id}')" and return
     elsif operation == "offline"
       shop.online=0
+      shop.status="停止中"
       shop.save
       render :js=>"offlinesuccess('#{shop.name}','#{shop.id}')" and return
     end

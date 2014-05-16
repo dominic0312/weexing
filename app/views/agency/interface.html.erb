@@ -224,7 +224,7 @@
 													<button class="btn btn-dark-blue btn-sm" onclick="setAccount(this);return false;">
 														账户
 													</button>
-													<button class="btn btn-dark-red btn-sm del-modal" id="delbtn<%= shop.id%>" onclick="delconfirm('<%= shop.id%>')">
+													<button class="btn btn-dark-red btn-sm del-modal"  onclick="delconfirm(this);return false;">
 														删除
 													</button></td>
 											</tr>
@@ -733,7 +733,8 @@
 			});
 		}
 
-		function delconfirm(sid) {
+		function delconfirm(ref) {
+			var sid = $(ref).parent().attr("rid");
 			$("#delete-dialog").dialog("option", "shopid", sid);
 			$("#delete-dialog").dialog("open");
 			return false;
@@ -785,8 +786,9 @@
 
 			$usertable = $("#usertable").dataTable();
 			var divtr = document.createElement('tr');
-			divtr.innerHTML = str;
+			$(divtr).html(str);
 			$(divtr).attr('id', 'row' + vsid);
+			$(divtr).attr('class', 'offlinecol');
 			$usertable.fnAddTr(divtr);
 		}
 
@@ -998,7 +1000,6 @@
 	</script>
 	<script type="text/template" id="shoptemplate">
 		{$
-		<tr class="offlinecol" id="row{%sid%}">
 		<td>{%sid%}</td>
 		<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center">{%sname%}</td>
 		<td class="col-sm-2 col-md-2 col-lg-2" style="text-align: center">{%surl%}</td>
@@ -1007,7 +1008,7 @@
 		<td class="col-sm-2 col-md-2 col-lg-2"class="centercol"  style="text-align: center">{%expdate%}</td>
 		<td class="col-sm-3 col-md-3 col-lg-3 " style="text-align: center">
 
-		<button class="btn btn-success btn-sm" onclick="online('{%sid%}');return false;">
+		<button class="btn btn-success btn-sm" onclick="online(this);return false;">
 		启动
 		</button>
 
@@ -1026,10 +1027,9 @@
 		账户
 		</button>
 
-		<button class="btn btn-dark-red btn-sm del-modal" id="delbtn{%sid%}" onclick="delconfirm('{%sid%}')">
+		<button class="btn btn-dark-red btn-sm del-modal" onclick="delconfirm(this);return false">
 		删除
 		</button></td>
-		</tr>
 		$}
 	</script>
 

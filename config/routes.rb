@@ -66,7 +66,6 @@ Weexing::Application.routes.draw do
   post "shops/connectwx"
  
   post "shops/chargeshop"
-  post "customers/search"
   post "customers/addcustomer"
   post "customers/updatecustomer"
   post "customers/delcustomer"

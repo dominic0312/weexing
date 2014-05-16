@@ -62,7 +62,7 @@ class CouponsController < ApplicationController
       render :js=>"coupontitlefail()" and return
     end
     if @coupon.save
-      render :js=>"addcoupon('#{@coupon.id}','#{@coupon.pic.url(:thumb)}','#{@coupon.title}','#{@coupon.content}','#{@coupon.usertype}','#{@coupon.startdate}','#{@coupon.enddate}')" and return 
+      render :js=>"addcoupon('#{@coupon.id}','#{@coupon.pic.url(:thumb)}','#{@coupon.title}','#{@coupon.content}','#{@coupon.usertype}','#{@coupon.startdate}','#{@coupon.enddate}')" and return
     else
       render :js=>"savecouponfail();" and return
     end
@@ -127,7 +127,6 @@ class CouponsController < ApplicationController
         @customers.each do |customer|
           customer.coupons << @coupon
         end
-
         render  :js=>"coupon_sendsucc(#{@id});" and return
       end
     end
@@ -135,7 +134,7 @@ class CouponsController < ApplicationController
 
   def delcoupon
     @coupon = Coupon.find(params[:recid])
-    #@coupon.destroy
+    @coupon.destroy
     shopid=session[:shopid]
     render :js=>"removecoupon(#{params[:recid]})" and return
   end

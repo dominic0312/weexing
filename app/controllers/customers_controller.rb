@@ -83,21 +83,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  def search
-    searchtp=params[:searchtp]
-    searchval=params[:searchvalue]
-    shopid=session[:shopid]
-    if searchtp && searchval
-      @customers= Customer.where("#{searchtp}='#{searchval}' and shop_id='#{shopid}'").paginate(:page => params[:page],:per_page => 8).order('id DESC')
-    else
-      render  :js=> "searchfail();" and return
-    end
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
   def addcustomer
     customer=Customer.new
     customer.realcardid=params[:cardid]
@@ -109,7 +94,7 @@ class CustomersController < ApplicationController
     customer.save
 
     @customers= Customer.where(:shop_id=>shopid).paginate(:page => params[:page],:per_page => 8).order('id DESC')
-    render :js=>"addcustomer('#{shopid}','#{customer.realcardid}','#{customer.phone}','#{customer.balance}','#{customer.level}');" and return
+    render :js=>"addcustomer('#{customer.id}','#{customer.realcardid}','#{customer.phone}','#{customer.balance}','#{customer.level}');" and return
   end
 
   def delcustomer

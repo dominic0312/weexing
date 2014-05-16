@@ -70,15 +70,15 @@
 </style>
  <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=omWGGb4FXGXzdQN7wxcq5dpY&v=1.0"></script> 
 <body>
-	<div data-role="page" id="home" data-theme="a" data-fullscreen="true" data-title="会员卡">
-		 <div data-role="header" data-theme="a">
-        <h1>会员卡</h1>
-        <a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
-        <a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+	<div data-role="page" id="home" data-theme="b" data-fullscreen="true" data-title="会员卡">
+		 <div data-role="header" data-theme="b">
+        <h1>coco烘焙坊</h1>
+        <a href="#left-panel" data-icon="shop" data-iconpos="left" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">优惠</a>
+        <a href="#right-panel" data-icon="user" data-iconpos="right" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">联系</a>
     </div><!-- /header -->
 		
 		
-		<div data-role="content" style="height:380px;overflow:hidden;text-align: center">
+		<div data-role="content" style="height:400px;overflow:hidden;text-align: center">
 			<div id="customer_info">
 				<div data-template>
 			<div id="card" onclick="flip(this);return false;" >
@@ -102,51 +102,138 @@
 			</div>
 			
 
-			<div id="flip" style="position: relative;right:10px;top:20px">
+			<div id="flip" style="position: relative;right:10px;top:10px">
 				请轻按卡片查看背面的权限说明
 			</div>
-			<div class="ui-grid-b" style="position: relative;top:50px;right:5px;font-size: 22px">
-				<div class="ui-block-a" id="customer_balance">
-					<div class="content-title">
-						<strong>储值</strong>
-						<div class="content-value" style="color: gold" data-template onclick="updatebalance()" id="balance">
-							{{balance}}
+			
+			
+			
+			
+			
+			<ul data-role="listview" style="overflow-y:visible;position: relative;top:30px;margin-left:5px;margin-right:5px;margin-top:5px">
+
+				<li style="margin-bottom:3px">
+					<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<div style="text-align: center"><strong>储值</strong>
+						</div>
+						
+					</div>
+					
+					<div class="ui-block-b">
+						<div data-template id="balance" onclick="updatebalance()" style="text-align: center">
+							100
 						</div>
 					</div>
-				</div>
-				<div class="ui-block-b" id="customer_bonus">
-					<div class="content-title">
-						<strong>积分</strong>
-						<div class="content-value" style="color: gold" data-template id="bonus" onclick="updatebalance()">
-							{{bonus}}
+</div>					
+
+				</li>
+				
+					<li style="margin-bottom:3px">
+							<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<div style="text-align: center">	<strong>积分</strong>
 						</div>
+						
+					</div>
+					
+					<div class="ui-block-b">
+						<div  style="color: gold;text-align: center" data-template id="bonus" onclick="updatebalance()">
+							30
+						</div>
+						
+					</div>
 					</div>
 
-				</div>
-				<div class="ui-block-c" id="customer_level">
-					<div class="content-title">	
-						<strong>级别</strong>
-						<div class="content-value" data-template id="level" onclick="updatebalance() ">
-							{{level}}
+				</li>
+				
+				
+				<li>
+						<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<div style="text-align: center"><strong>级别</strong>
 						</div>
+						
 					</div>
-				</div>
-
-			</div>
+					
+					<div class="ui-block-b">
+					   <div style="color: gold;text-align: center" data-template onclick="updatebalance()" id="level">
+							黄金会员
+						</div>
+						
+					</div>
+					</div>
+				</li>
+				
+			</ul>
+		
 			</div>
          </div>
 		</div><!-- /content -->
 
 	 <div data-role="panel" id="left-panel" data-theme="b">
-        <p>Left reveal panel.</p>
-        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a>
+	 	<div data-role="content">
+			<div id="emptytemplate" style="text-align: center;color: grey"></div>
+			<ul data-role="listview" id="coupons" style="overflow-y:visible">
+
+				<li data-template  style="overflow-y:visible" class="ui-grid-c" id="li{{id}}">
+					<div class="ui-grid-c">
+						<div class="ui-block-a" style="width:15%"><img src="" data-src="/images/thumb/miss2.png" alt="" height="40" style="padding-top:5px;padding-right: 10px" />
+						</div>
+						<div class="ui-block-b" style="width:30%">
+							<h5>优惠</h5>
+							<p>
+								{{title}}
+							</p>
+						</div>
+						<div class="ui-block-c" style="width:30%" id="edate{{id}}">
+							<h5>有效日期</h5>
+							<p>
+								至2011-12-13
+							</p>
+						</div>
+						<div class="ui-block-d">
+							<button class="ui-btn ui-btn-corner-all" onclick="showcol(this)"  rid="{{id}}">
+								详细
+							</button>
+						</div>
+					</div>
+					<div class="ui-grid-b"  id="col{{id}}" style="display: none">
+
+						<div class="ui-block-a" style="width:15%">
+							<p>
+
+							</p>
+						</div>
+						<div class="ui-block-b" style="width:60%">
+							<h5>说明</h5>
+								<p style="white-space: normal">
+									{{content}}
+								</p>
+						</div>
+						<div class="ui-block-c" style="width:25%">
+							<button class="ui-btn ui-btn-corner-all" id="use{{id}}" rid="{{id}}" onclick="requestcoup(this)" style="background: #006000">
+								使用
+							</button>
+						</div>
+					</div>
+
+				</li>
+
+				<li data-template-fallback>
+					需要开启JS环境！
+				</li>
+			</ul>
+		</div>
+      
     </div><!-- /panel -->
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
+       
+        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-home ui-btn-icon-right">会员卡</a>
         <p>Right push panel.</p>
-        <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
     </div><!-- /panel -->
 	</div>
-	<div data-role="page" id="coupon" data-theme="a" data-fullscreen="true" data-title="优惠券">
+	<div data-role="page" id="coupon" data-theme="b" data-fullscreen="true" data-title="优惠券">
 
 		<div data-role="content">
 			<div id="emptytemplate" style="text-align: center;color: grey"></div>
@@ -201,24 +288,10 @@
 				</li>
 			</ul>
 		</div>
-		<div data-role="footer" class="nav-glyphish" data-theme="a" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar" class="nav-glyphish" data-grid="b">
-				<ul>
-					<li>
-						<a href="#home" id="memcard" data-icon="custom" data-transition="fade">会员卡</a>
-					</li>
-					<li>
-						<a href="#coupon" id="coupongroup" data-icon="custom" data-transition="fade">优惠券</a>
-					</li>
-					<li>
-						<a href="#contactus" id="contact" data-icon="custom" data-transition="fade">联系我们</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		
 	</div>
 
-	<div data-role="page" id="contactus" data-theme="a" data-fullscreen="true" data-title="联系我们">
+	<div data-role="page" id="contactus" data-theme="b" data-fullscreen="true" data-title="联系我们">
 
 		<div data-role="content" style="text-align: center">
 			<div id="shop_info" style="overflow-y:visible">
@@ -262,21 +335,7 @@
 	}
   </script>
 		</div>
-		<div data-role="footer" class="nav-glyphish" data-theme="a" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar" class="nav-glyphish" data-grid="b">
-				<ul>
-					<li>
-						<a href="#home" id="memcard" data-icon="custom" data-transition="fade">会员卡</a>
-					</li>
-					<li>
-						<a href="#coupon" id="coupongroup" data-icon="custom" data-transition="fade">优惠券</a>
-					</li>
-					<li>
-						<a href="#contactus" id="contact" data-icon="custom" data-transition="fade">联系我们</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		
 	</div>
 
 	<script>
@@ -289,39 +348,17 @@
 		//var customerid = $.trim($("#customer").html());
 		// Update the contents of the toolbars
 
-        $( document ).on( "pagecreate", "#home", function() {
-    $( document ).on( "swipeleft swiperight", "#home", function( e ) {
-        // We check if there is no open panel on the page because otherwise
-        // a swipe to close the left panel would also open the right panel (and v.v.).
-        // We do this by checking the data that the framework stores on the page element (panel: open).
-        if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
-            if ( e.type === "swipeleft" ) {
-                $( "#right-panel" ).panel( "open" );
-            } else if ( e.type === "swiperight" ) {
-                $( "#left-panel" ).panel( "open" );
-            }
-        }
-    });
-});
-
-
-
-
-		$(document).on("pageshow", "[data-role='page']", function() {
-			// Each of the four pages in this demo has a data-title attribute
-			// which value is equal to the text of the nav button
-			// For example, on first page: <div data-role="page" data-title="Info">
-			var current = $(this).jqmData("title");
-
-			// Change the heading
-			$("[data-role='header'] h1").text(current);
-			// Remove active class from nav buttons
-			$("[data-role='navbar'] a.ui-btn-active").removeClass("ui-btn-active");
-
-			// Add active class to current nav button
-			$("[data-role='navbar'] a").each(function() {
-				if ($(this).text() === current) {
-					$(this).addClass("ui-btn-active");
+		$(document).on("pagecreate", "#home", function() {
+			$(document).on("swipeleft swiperight", "#home", function(e) {
+				// We check if there is no open panel on the page because otherwise
+				// a swipe to close the left panel would also open the right panel (and v.v.).
+				// We do this by checking the data that the framework stores on the page element (panel: open).
+				if ($(".ui-page-active").jqmData("panel") !== "open") {
+					if (e.type === "swipeleft") {
+						$("#right-panel").panel("open");
+					} else if (e.type === "swiperight") {
+						$("#left-panel").panel("open");
+					}
 				}
 			});
 		});
