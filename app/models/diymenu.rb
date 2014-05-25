@@ -1,6 +1,6 @@
 class Diymenu < ActiveRecord::Base
 
-  validates_uniqueness_of :name
+  #validates_uniqueness_of :name
 
   CLICK_TYPE = "click".freeze # key
   VIEW_TYPE  = "view".freeze  # url
@@ -32,13 +32,13 @@ class Diymenu < ActiveRecord::Base
       where.not(id: current_menu.id).map{|menu| [menu.name, menu.id]}
     end
 
-    def parent_menus
-      includes(:sub_menus).where(parent_id: nil, is_show: true).order("sort").limit(3)
+    def parent_menus(sid)
+      includes(:sub_menus).where(parent_id: nil, is_show: true, public_account_id: sid).order("sort").limit(3)
     end
 
-    def build_menu
+    def build_menu(shopid)
       Jbuilder.encode do |json|
-        json.button (parent_menus) do |menu|
+        json.button (parent_menus(shopid)) do |menu|
           json.name menu.name
           if menu.has_sub_menu?
             json.sub_button(menu.sub_menus) do |sub_menu|

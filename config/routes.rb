@@ -40,6 +40,9 @@ Weexing::Application.routes.draw do
   get 'users/activatefail'
   post 'users/changepass'
   post 'users/resetpassword'
+  post 'wxinterface/menuset'
+  post 'wxinterface/loadmenu'
+  post 'wxinterface/pubmenu'
   
   match "/resetpasswd" => "users#resetpasspage",via: [:get]
   match "/agency" => "agency#login",via: [:get]
@@ -57,6 +60,8 @@ Weexing::Application.routes.draw do
   match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
   match "/useractivate" => "users#activate",via: [:get]
   match "/shops/updateoem/:id" =>'shops#updateoem', via: [:post]
+  match "/shops/updateappinfo/:id" =>'shops#updateappinfo', via: [:post]
+  
   post "shops/shopaccount"
   post "shops/shopconnect"
   post "cardbackground/passcheck"
@@ -74,9 +79,9 @@ Weexing::Application.routes.draw do
   post "coupons/delrequest"
   post "coupons/refreshrequest"
   match "coupons/requestcoupon/:coupid" => "coupons#requestcoupon", via: [:get]
-  get  'weixin/:weixin_token', to: 'weixin#index'
+  get  'wx/:weixin_token', to: 'weixin#index'
   get  'dispatcher/dispatch'
-  post 'weixin/:weixin_token', to: 'weixin#reply'
+  post 'wx/:weixin_token', to: 'weixin#reply'
   get 'cardbackground/:shopurl', to: 'cardbackground#login'
   resources :usertemplates
   resources :shops

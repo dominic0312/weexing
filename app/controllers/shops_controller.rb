@@ -212,7 +212,7 @@ class ShopsController < ApplicationController
     if sid
       @shop=Shop.find(sid)
     end
-    render :js=>"shopconnect('#{@shop.weixin_secret_key}','#{@shop.weixin_token}');"
+    render :js=>"shopconnect('#{@shop.weixin_secret_key}','#{@shop.weixin_token}','#{sid}','#{@shop.appid}','#{@shop.appsec}');"
   end
 
   def updatelogo
@@ -247,6 +247,23 @@ class ShopsController < ApplicationController
     shop.save
     render :js=>"" and return
   end
+  
+ def updateappinfo
+    reqtype=params[:pk]
+    shopid=params[:id]
+    shop=Shop.find(shopid)
+    if reqtype == 'appid'
+      shop.appid =params[:value]
+    end
+
+    if reqtype == "appsec"
+      shop.appsec=params[:value]
+    end
+    shop.save
+    render :js=>"" and return
+  end
+  
+
 
   def sysinfo
     sid=params[:id]

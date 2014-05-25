@@ -29,6 +29,80 @@
 			}
 			.onlinecol {
 			}
+
+			.config {
+				display: none;
+			}
+
+			.config_del {
+				position: absolute;
+				bottom: 3px;
+				right: 5px;
+				color: blue;
+				margin-right: 0;
+			}
+
+			.config_open {
+				position: absolute;
+				bottom: 3px;
+				right: 65px;
+				color: blue;
+				margin-right: 0;
+			}
+
+			.config_change {
+				position: absolute;
+				bottom: 3px;
+				right: 35px;
+				color: blue;
+				margin-right: 0;
+			}
+
+			.menu_level1 {
+				position: relative
+			}
+
+			.secondmenu {
+				display: none;
+				position: absolute;
+				top: -48px;
+				left: 0;
+				width: 70%;
+				height: 90%;
+				color: blue;
+				font-size: 12px;
+			}
+
+			.menu_1 {
+				top: -48px
+			}
+
+			.menu_2 {
+				top: -92px
+			}
+			.menu_3 {
+				top: -136px
+			}
+			.menu_4 {
+				top: -180px
+			}
+			.menu_5 {
+				top: -224px
+			}
+
+			.deletemenu {
+				display: block;
+				color: red;
+				background: rgba(255, 255, 255, 0.2);
+				width: 20px;
+				height: 10px;
+				top: -5px;
+				right: 10px;
+				position: absolute;
+				text-align: center;
+				line-height: 40px;
+			}
+
 			.onlinecol .status {
 				font-size: 13px;
 				color: #5CB85C
@@ -199,34 +273,34 @@
 												<%else%>
 											<tr class="onlinecol" id="row<%= shop.id%>">
 												<%end%>
-													<td><%= shop.id%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.name%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.shopurl%></td>
-													<td class="col-sm-1 col-md-1 col-lg-1" style="text-align:center" class="taskStatus"><span class="status"><%=shop.status%></span></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.created_at.to_s[0,10]%></td>
-													<td class="col-sm-2 col-md-2 col-lg-2" class="centercol" style="text-align:center"><%= shop.exprieddate.to_s[0,10]%></td>
-													<td class="col-sm-3 col-md-3 col-lg-3" style="text-align: center" rid="<%= shop.id%>" id="rec<%= shop.id%>"> <%if shop.online==0%>
-													<button class="btn btn-success btn-sm" onclick="online(this);return false;">
-														启动
-													</button> <%else%>
-													<button class="btn btn-danger btn-sm" onclick="online(this);return false;">
-														停止
-													</button> <%end%>
-													<button class="btn btn-dark-blue btn-sm" onclick="setTemplate(this);return false;" id="shoppage<%= shop.id%>" templateid="<%= shop.usertemplate_id%>">
-														页面
-													</button>
-													<button class="btn btn-dark-blue btn-sm" onclick="setCard(this);return false;" id="shopcard<%= shop.id%>" cardid="<%= shop.membercard_id%>">
-														卡片
-													</button> </br>
-													<button class="btn btn-dark-blue btn-sm" onclick="setConnect(this);return false;">
-														连接
-													</button>
-													<button class="btn btn-dark-blue btn-sm" onclick="setAccount(this);return false;">
-														账户
-													</button>
-													<button class="btn btn-dark-red btn-sm del-modal"  onclick="delconfirm(this);return false;">
-														删除
-													</button></td>
+												<td><%= shop.id%></td>
+												<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.name%></td>
+												<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.shopurl%></td>
+												<td class="col-sm-1 col-md-1 col-lg-1" style="text-align:center" class="taskStatus"><span class="status"><%= shop.status%></span></td>
+												<td class="col-sm-2 col-md-2 col-lg-2" style="text-align:center"><%= shop.created_at.to_s[0,10]%></td>
+												<td class="col-sm-2 col-md-2 col-lg-2" class="centercol" style="text-align:center"><%= shop.exprieddate.to_s[0,10]%></td>
+												<td class="col-sm-3 col-md-3 col-lg-3" style="text-align: center" rid="<%= shop.id%>" id="rec<%= shop.id%>"> <%if shop.online==0%>
+												<button class="btn btn-success btn-sm" onclick="online(this);return false;">
+													启动
+												</button> <%else%>
+												<button class="btn btn-danger btn-sm" onclick="online(this);return false;">
+													停止
+												</button> <%end%>
+												<button class="btn btn-dark-blue btn-sm" onclick="setTemplate(this);return false;" id="shoppage<%= shop.id%>" templateid="<%= shop.usertemplate_id%>">
+													页面
+												</button>
+												<button class="btn btn-dark-blue btn-sm" onclick="setCard(this);return false;" id="shopcard<%= shop.id%>" cardid="<%= shop.membercard_id%>">
+													卡片
+												</button> </br>
+												<button class="btn btn-dark-blue btn-sm" onclick="setConnect(this);return false;">
+													连接
+												</button>
+												<button class="btn btn-dark-blue btn-sm" onclick="setAccount(this);return false;">
+													账户
+												</button>
+												<button class="btn btn-dark-red btn-sm del-modal"  onclick="delconfirm(this);return false;">
+													删除
+												</button></td>
 											</tr>
 											<% end %>
 										</tbody>
@@ -259,6 +333,68 @@
 
 			<div id="charge-dialog" title="续费确认">
 				充值<span id="month-span">1</span>个月需要<b><span id="point-span">1</span></b>点数，请确认。
+			</div>
+
+			<div id="addmenu-dialog" title="菜单内容">
+				<table class="table table-bordered table-striped table-hover">
+					<tbody>
+						<tr>
+							<td style="width:30%">标题 </td>
+							<td>
+							<input class="inputfield" type="text" id="menutitle">
+							</td>
+						</tr>
+						<tr>
+							<td style="width:30%">链接 </td>
+							<td>
+							<input class="inputfield" type="text" id="menuurl">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="changemenu-dialog" title="菜单内容">
+				<table class="table table-bordered table-striped table-hover">
+					<tbody>
+						<tr>
+							<td style="width:30%">标题 </td>
+							<td>
+							<input class="inputfield" type="text" id="menutitle_c">
+							</td>
+						</tr>
+						<tr>
+							<td style="width:30%">链接 </td>
+							<td>
+							<input class="inputfield" type="text" id="menuurl_c">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<b>本菜单如果存在子菜单 则此处的链接无效</b>
+			</div>
+
+			<div id="addmenu2-dialog" title="二级菜单">
+				<table class="table table-bordered table-striped table-hover">
+					<tbody>
+						<tr>
+							<td style="width:30%">上级 </td>
+							<td><select class="form-control" id="menuselect"></select></td>
+						</tr>
+						<tr>
+							<td style="width:30%">标题 </td>
+							<td>
+							<input class="inputfield" type="text" id="menutitle2">
+							</td>
+						</tr>
+						<tr>
+							<td style="width:30%">链接 </td>
+							<td>
+							<input class="inputfield" type="text" id="menuurl2">
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 
 			<div id="new-dialog" title="建立新商户">
@@ -438,8 +574,8 @@
 		$("#connect-dialog").dialog({
 			autoOpen : false,
 			modal : true,
-			height : 500,
-			width : 600,
+			height : 600,
+			width : 620,
 			//maxHeight : 900,
 			//maxWidth : 680,
 			resizable : false,
@@ -490,6 +626,7 @@
 				direction : "down"
 			}
 		});
+
 		$("#template-dialog").dialog({
 			autoOpen : false,
 			modal : true,
@@ -896,16 +1033,206 @@
 			$("#card-dialog").dialog("close");
 		}
 
-		function shopconnect(seckey, token) {
+		function shopconnect(seckey, token,shopid,aid,asec) {
 			var template = YayaTemplate(document.getElementById("connect-template").innerHTML);
 			var str = template.render({
 				wxurl : seckey,
 				wxtoken : token,
+				sid:shopid,
+				appid:aid,
+				appsec:asec
+			});
+
+			$("#addmenu-dialog").dialog({
+				autoOpen : false,
+				modal : false,
+				//maxHeight : 900,
+				//maxWidth : 680,
+				resizable : false,
+				title : '添加菜单',
+				closeText : "关闭",
+				appendTo : "#connect-dialog",
+				buttons : {
+					"确认" : function() {
+						menuprocess();
+						$(this).dialog("close");
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+					}
+				},
+				show : {
+					effect : "drop",
+					duration : 400,
+					direction : "up"
+				},
+				hide : {
+					effect : "drop",
+					duration : 400,
+					direction : "down"
+				}
+			});
+
+			$("#addmenu2-dialog").dialog({
+				autoOpen : false,
+				modal : false,
+				//maxHeight : 900,
+				//maxWidth : 680,
+				resizable : false,
+				title : '添加二级菜单',
+				closeText : "关闭",
+				appendTo : "#connect-dialog",
+				buttons : {
+					"确认" : function() {
+						var s = $(this).dialog("option", "level1");
+						menuprocess2(s);
+						$(this).dialog("close");
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+					}
+				},
+				show : {
+					effect : "drop",
+					duration : 400,
+					direction : "up"
+				},
+				hide : {
+					effect : "drop",
+					duration : 400,
+					direction : "down"
+				}
+			});
+
+			$("#changemenu-dialog").dialog({
+				autoOpen : false,
+				modal : false,
+				//maxHeight : 900,
+				//maxWidth : 680,
+				resizable : false,
+				title : '修改菜单',
+				closeText : "关闭",
+				appendTo : "#connect-dialog",
+				buttons : {
+					"确认" : function() {
+						var i = $(this).dialog("option", "index");
+						var lv = $(this).dialog("option", "level");
+						if (lv == 1) {
+							var $destbtn = $("#menuset").children().eq(i).children("span.title_c");
+						} else {
+							var lv2 = parseInt($(this).dialog("option", "lv2id"));
+							var $destbtn = $("#menuset").children().eq(i).children("div").eq(lv2 - 1).children("span.title_c");
+						}
+						var $title = $("#menutitle_c").val()
+						var $url = $("#menuurl_c").val();
+						$destbtn.html($title);
+						$destbtn.attr("url", $url);
+						$(this).dialog("close");
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+					}
+				},
+				show : {
+					effect : "drop",
+					duration : 400,
+					direction : "up"
+				},
+				hide : {
+					effect : "drop",
+					duration : 400,
+					direction : "down"
+				}
 			});
 
 			$("#connect-inner").replaceWith(str);
+			$('#appid').editable({
+				type : 'text',
+				mode : 'popup',
+				rows : 1,
+				emptytext : '请点击此处输入',
+				url : '/shops/updateappinfo/'+shopid,
+				pk : 'appid',
+				ajaxOptions : {
+					type : 'post'
+				}
+			});
+			$('#appsec').editable({
+				type : 'text',
+				mode : 'popup',
+				rows : 1,
+				emptytext : '请点击此处输入',
+				url : '/shops/updateappinfo/'+shopid,
+				pk : 'appsec',
+				ajaxOptions : {
+					type : 'post'
+				}
+			});
+			loadmenu(shopid);
 			$("#connect-dialog").dialog("open");
 		}
+		
+		function loadmenu(sid){
+			$.ajax({
+				url : "/wxinterface/loadmenu",
+				dataType : 'json',
+				//contentType : 'application/json; charset=UTF-8', // This is the money shot
+				data : {shopid:sid},
+				type : 'POST',
+				complete: function (data, status) {
+					  if (status=='success'){
+					  	m=data.responseJSON.menus;
+					  	generatemenu(m);
+					  }
+					  else{
+					  	
+					  }
+                }
+				//complete :
+				//menusavesucc() // etc
+			  });
+		}
+
+       function generatemenu(menu){
+       	         var level1=-1;
+       	         var level2=0;
+       	         for (m in menu)
+                 {
+                 
+                // $("#menuset").append("<button class='btn btn-default menu_level1' status='closed' style='height:90%'><span class='title_c' url='" + $("#menuurl").val() + "'>" + $("#menutitle").val() + "</span><span class='config config_open' onclick='showsubmenu(this)'>展开</span>&nbsp;&nbsp;<span class='config config_change' onclick='configmenu(this,1);'>修改</span>&nbsp;&nbsp;<span class='config config_del' onclick='removemenu(this);'>刪除</span></button>");
+                     if(!menu[m].parent_id){
+                      $("#menuset").append("<button class='btn btn-default menu_level1' status='closed' style='height:90%'><span class='title_c' url='" + menu[m].url + "'>" + menu[m].name + "</span><span class='config config_open' onclick='showsubmenu(this)'>展开</span>&nbsp;&nbsp;<span class='config config_change' onclick='configmenu(this,1);'>修改</span>&nbsp;&nbsp;<span class='config config_del' onclick='removemenu(this);'>刪除</span></button>");
+                      level1=level1+1;
+                      level2=0;
+                     }
+                     else{
+                     	obj=$("#menuset").children('button').eq(level1);
+                     	obj.append("<div class='btn btn-default secondmenu'><span class='title_c' url='" + menu[m].url + "'>" + menu[m].name +
+              "</span><span class='config config_change' onclick='configmenu(this,2);'>修改</span>&nbsp;&nbsp;<span class='config config_del' onclick='removemenu2(this);'>刪除</span></div>");
+                        dest=obj.children('div').last();
+                        level2=level2+1;
+                        dest.addClass("menu_" + level2);
+			            dest.attr("lv2", level2);
+                     }
+                  }
+                  if (level1==0){
+                  	$(".menu_level1").css('width','100%');
+                  }
+                  if (level1==1){
+                  	$(".menu_level1").css('width','49%');
+                  }
+                  if (level1==2){
+                  	$(".menu_level1").css('width','32%');
+                  }
+                  
+                  $('.menu_level1').hover(function() {
+				     $(this).find('span.config').show();
+			         }, function() {
+				     $(this).find('span.config').hide();
+			      });
+       	         //menu.each(function(){alert("ddd");});
+       }
+
 
 		function shopaccount(id, exp, logo, phone, oemname, oemurl) {
 			var template = YayaTemplate(document.getElementById("account-template").innerHTML);
@@ -981,6 +1308,53 @@
 			}
 		}
 
+		function addmenu() {
+
+			if ($("#menuset").children().length == 3) {
+				$.gritter.add({
+					title : '操作失败',
+					text : '一级菜单最多只能有三个',
+					sticky : false
+				});
+				return;
+			}
+			$("#addmenu-dialog").dialog("option", {
+				level1 : 1,
+				level2 : 2
+			});
+			$("#menutitle").val("");
+			$("#menuurl").val("");
+			$("#addmenu-dialog").dialog("open");
+			//}
+		}
+
+		function addmenu2() {
+			var level1len = $("#menuset").children().length;
+			if (level1len == 0) {
+				$.gritter.add({
+					title : '操作失败',
+					text : '必须要有一级菜单',
+					sticky : false
+				});
+				return;
+			}
+
+			$("#menuselect option").remove();
+			$("#menutitle2").val("");
+			$("#menuurl2").val("");
+
+			$("#menuset").children().each(function(index) {
+				$("#menuselect").append($("<option></option>").attr("value", index).text($(this).find('span.title_c').html()));
+			});
+
+			//$("#menuselect").append($("<option></option>").attr("value", "值").text("文字"));
+			$("#addmenu2-dialog").dialog("option", {
+				level1 : 1,
+				level2 : 2
+			});
+			$("#addmenu2-dialog").dialog("open");
+		}
+
 		function chargesucc(sid, shopname, expdate) {
 			$.gritter.add({
 				title : '充值成功',
@@ -997,6 +1371,226 @@
 				secid : '769c913b919b850e94f90d6ddf8c2273'
 			}, null, "script")
 		}
+
+		function addlevel1() {
+			if ($("#menuset").attr("level1") == "0") {
+				$("#menuset").html("<button class='btn btn-primary'>hello</button>");
+			}
+		}
+
+		function configmenu(ref, lv) {
+			var $target = $(ref).siblings().eq(0);
+			var title = $target.html();
+			var url = $target.attr("url");
+			$("#menutitle_c").val(title);
+			$("#menuurl_c").val(url);
+			if (lv == 1) {
+				var ind = $("#menuset > button").index($(ref).parent());
+				$("#changemenu-dialog").dialog("option", {
+					index : ind,
+					level : lv
+				});
+			}
+			if (lv == 2) {
+				var ind = $("#menuset > button").index($(ref).parent().parent());
+				$("#changemenu-dialog").dialog("option", {
+					index : ind,
+					level : lv,
+					lv2id : $target.parent().attr('lv2')
+				});
+			}
+			$("#changemenu-dialog").dialog("open");
+		}
+
+		function removemenu(ref) {
+			var menunum = $(ref).parent().siblings().length;
+			if (menunum == 1) {
+				$(ref).parent().remove();
+				$(".menu_level1").css("width", "100%");
+				return;
+			}
+			if (menunum == 2) {
+				$(ref).parent().remove();
+				$(".menu_level1").css("width", "49%");
+				return;
+			}
+			$(ref).parent().remove();
+		}
+
+		function removemenu2(ref) {
+			var divs = $(ref).parent().siblings('div');
+			var menunum = divs.length + 1;
+			var ind = $(ref).parent().attr("lv2");
+			if (ind == menunum) {
+				$(ref).parent().remove();
+			} else {
+				divs.each(function(index) {
+					var lv = $(this).attr("lv2");
+					var newlv = lv - 1;
+					if (lv > ind) {
+						$(this).removeClass("menu_" + lv).addClass("menu_" + newlv);
+						$(this).attr('lv2', newlv);
+						$(ref).parent().remove();
+					}
+				});
+
+				//$(ref).parent().remove();
+			}
+		
+		}
+
+		function menuprocess() {
+			$("#menuset").append("<button class='btn btn-default menu_level1' status='closed' style='height:90%'><span class='title_c' url='" + $("#menuurl").val() + "'>" + $("#menutitle").val() + "</span><span class='config config_open' onclick='showsubmenu(this)'>展开</span>&nbsp;&nbsp;<span class='config config_change' onclick='configmenu(this,1);'>修改</span>&nbsp;&nbsp;<span class='config config_del' onclick='removemenu(this);'>刪除</span></button>");
+			var menunum = $("#menuset").children().length;
+			if (menunum == 1) {
+				$(".menu_level1").css("width", "100%");
+			}
+			if (menunum == 2) {
+				$(".menu_level1").css("width", "49%");
+			}
+
+			if (menunum == 3) {
+				$(".menu_level1").css("width", "32%");
+			}
+
+			$('.menu_level1').hover(function() {
+
+				$(this).find('span.config').show();
+			}, function() {
+				$(this).find('span.config').hide();
+			});
+		}
+
+		function menuprocess2() {
+
+			//<a data-toggle="dropdown" href="#">Dropdown trigger</a>
+			var target = $("#menuselect").val();
+			var index = parseInt(target);
+			var obj = $("#menuset").children().eq(index);
+			var s = obj.children("div").length;
+			if (s == 5) {
+				$.gritter.add({
+					title : '操作失败',
+					text : '二级菜单最多5项',
+					//image : 'img/demo/envelope.png',
+					sticky : false,
+				});
+				return;
+			}
+			s = s + 1;
+			//var $str=$("#menuset").children(index);
+			obj.append("<div class='btn btn-default secondmenu'><span class='title_c' url='" + $("#menuurl2").val() + "'>" + $("#menutitle2").val() + "</span><span class='config config_change' onclick='configmenu(this,2);'>修改</span>&nbsp;&nbsp;<span class='config config_del' onclick='removemenu2(this);'>刪除</span></div>");
+			var s = obj.children("div").length;
+			var dest = obj.children("div").last();
+			dest.addClass("menu_" + s);
+			dest.attr("lv2", s);
+		}
+
+		function showsubmenu(ref) {
+			var mainmenu = $(ref).parent();
+			var menus = mainmenu.find("div.secondmenu");
+			if (menus.length > 0) {
+				var status = mainmenu.attr("status");
+				if (status == "closed") {
+					menus.show();
+					mainmenu.attr('status', 'opened');
+					mainmenu.children().eq(1).html("收起");
+					return;
+				}
+
+				if (status == "opened") {
+					menus.hide();
+					mainmenu.attr('status', 'closed');
+					mainmenu.children().eq(1).html("展开");
+					return;
+				}
+
+			} else {
+				return;
+			}
+		}
+
+		function menusavesucc() {
+			$.gritter.add({
+				title : '成功',
+				text : '菜单保存成功',
+				sticky : false,
+			});
+		}
+
+		function savemenu() {
+			lv1 = $("#menuset").children('button');
+			shopid=$.trim($("#connect-sid").html());
+			data = {};
+			data.menus = [];
+			lv1.each(function(index) {
+				m = $(this).children().eq(0);
+				m1 = {};
+				m1.title = m.html();
+				m1.url = m.attr("url");
+				m1.key="";
+				m1.type="link";
+				m1.sid=shopid;
+				id1=index*6;
+				m1.id=id1;
+				//menu.push(m.html());
+				//menu.push(m.attr("url"));
+				//data.menus[index]=m1;
+				data.menus.push(m1);
+				m2 = $(this).children('div');
+				m2.each(function(index2) {
+				menu2 = {};
+				m2s = $(this).children().eq(0);
+				menu2["title"] = m2s.html();
+				menu2["url"] = m2s.attr("url");
+				menu2.key="";
+				menu2.type="link";
+				menu2.sid=shopid;
+				menu2.id=id1+index2+1;
+				data.menus.push(menu2);
+				});
+			});
+			if(data.menus.length>0)
+			{
+			$.ajax({
+				url : "/wxinterface/menuset",
+				dataType : 'json',
+				//contentType : 'application/json; charset=UTF-8', // This is the money shot
+				data : data,
+				type : 'POST',
+				complete: function (data, status) {
+                	$.gritter.add({
+				      title : '成功',
+				      text : '菜单保存成功',
+				      sticky : false,
+			          });
+                }
+				//complete :
+				//menusavesucc() // etc
+			  });
+			 }
+			else{
+				$.gritter.add({
+				      title : '保存失败',
+				      text : '无法保存空菜单',
+				      sticky : false,
+			          });
+			}
+			//alert(JSON.stringify(data));
+		}
+
+		function pubmenu() {
+			sid=$.trim($("#connect-sid").html());
+			aid=$.trim($("#appid").html());
+			asec=$.trim($("#appsec").html());
+			$.post("/wxinterface/pubmenu", {
+						shopid : sid,
+						appid:aid,
+						appsec:asec
+					}, null, "script");
+					//$(this).dialog("close");
+		}
+
 	</script>
 	<script type="text/template" id="shoptemplate">
 		{$
@@ -1036,6 +1630,7 @@
 	<script type="text/template" id="connect-template">
 		{$
 		<div id="connect-inner">
+		<div id="connect-sid"  id="connectsid" style="display: none">{%sid%}</div>	
 		<div class="widget-box">
 		<div class="widget-title">
 		<h5>连接参数</h5>
@@ -1046,19 +1641,35 @@
 		<tbody>
 		<tr>
 		<td>
-		微信接口
+		URL
 		</td>
 		<td>
-		http://www.weexing.com/weixin/{%wxurl%}
+		http://www.weexing.com/wx/{%wxurl%}
 		</td>
 
 		</tr>
 		<tr>
 		<td>
-		微信Token
+		Token
 		</td>
 		<td>
 		{%wxtoken%}
+		</td>
+		</tr>
+		<tr>
+		<td>
+		Appid
+		</td>
+		<td>
+		<div id="appid">{%appid%}</div>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		AppSecret
+		</td>
+		<td>
+		<div id="appsec">{%appsec%}</div>
 		</td>
 		</tr>
 		</tbody>
@@ -1093,7 +1704,19 @@
 		</tr>
 		</tbody>
 		</table>
-		
+		<div class="table-bordered" style="padding-bottom:0px;postion:absolute">
+		<div style="display:inline-block;margin:5px;width:25%"><button class="btn btn-primary" onclick="addmenu()"><span class="glyphicon glyphicon-plus"></span>一级菜单</button><br><button onclick="addmenu2()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>二级菜单</button></div>
+		<div id="menuset" level1="0" style="display:inline-block;border:dashed 1px;width:72%;height:65px;bottom:55px;position:absolute;right:30px;padding:2px;text-align: center">
+		</div>
+		</div>
+
+		<div class="row">
+		<div class="pull-right" style="text-align: right;">
+		<button class="btn btn-default" onclick="savemenu();return false;"><span class="glyphicon glyphicon-floppy-save">&nbsp;保存</button>
+		<button class="btn btn-success" onclick="pubmenu();return false;"><span class="glyphicon glyphicon-send">&nbsp;发布</button>
+		</div>
+		</div>
+
 		</div>
 		</div>
 		</div>
@@ -1164,7 +1787,7 @@
 
 		</div>
 		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12	"><button class="btn btn-dark-green pull-right" onclick="$('#account-dialog').dialog('close');">确定</button></div>
+		<div class="col-sm-12 col-md-12 col-lg-12	"><button class="btn btn-dark-green pull-right" onclick="$('#account-dialog').dialog('close');">确定</button></div>
 		</div>
 		</div>
 		$}

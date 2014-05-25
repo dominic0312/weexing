@@ -1,0 +1,1 @@
+json.menus @menus, :name, :url,:parent_id
