@@ -32,7 +32,7 @@ class CardbackgroundController < ApplicationController
       format.html # login.html.erb
       format.js
       else
-        format.html { render :file => "#{Rails.root}/public/500", :layout => false, :status => :not_found }
+        format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
       end
     end
 
