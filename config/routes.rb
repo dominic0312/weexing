@@ -82,7 +82,7 @@ Weexing::Application.routes.draw do
   get  'wx/:weixin_token', to: 'weixin#index'
   get  'dispatcher/dispatch'
   post 'wx/:weixin_token', to: 'weixin#reply'
-  get 'cardbackground/:shopurl', to: 'cardbackground#login'
+  get 'ca/:shopurl', to: 'cardbackground#login'
   resources :usertemplates
   resources :shops
   resources :membercards
