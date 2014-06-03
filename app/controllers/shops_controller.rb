@@ -16,16 +16,6 @@ class ShopsController < ApplicationController
     end
   end
 
-  def display
-    userid=session[:user_id]
-    @shops = Shop.where(:user_id=>userid).paginate(:page => params[:page]).order('id DESC')
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js
-    end
-
-  end
-
   # GET /shops/1
   # GET /shops/1.json
   def show
@@ -177,14 +167,6 @@ class ShopsController < ApplicationController
 
   end
 
-  def manageshop
-    @shops = Shop.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json
-    end
-  end
-
   def uploadlogo
     sid=params[:id]
     if sid
@@ -262,24 +244,6 @@ class ShopsController < ApplicationController
     shop.save
     render :js=>"" and return
   end
-  
-
-
-  def sysinfo
-    sid=params[:id]
-    if sid
-      shop=Shop.find(sid)
-      @shopurl=shop.shopurl
-      @token=shop.weixin_token
-      @shopid=sid
-      @secret=shop.weixin_secret_key
-    end
-
-    respond_to do |format|
-      format.html {}# index.html.erb
-      format.json
-    end
-  end
 
   def urlcheck
     url=params[:url_name]
@@ -289,13 +253,10 @@ class ShopsController < ApplicationController
     if shop
       render  :js=> "urlexist()" and return
     end
-
     shop =Shop.find(sid);
     shop.shopurl=url
-    shop.password=url
     shop.save
     render :js=>"urlsuccess();"
-
   end
 
   def authadmin

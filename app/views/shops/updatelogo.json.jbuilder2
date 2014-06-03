@@ -1,3 +1,0 @@
-Jbuilder.encode do |json|
-json.(@shop, :name, :id)
-end

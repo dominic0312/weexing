@@ -5,7 +5,6 @@ class MembercardsController < ApplicationController
   # GET /membercards.json
   def index
     @membercards = Membercard.paginate(:page => params[:page],:per_page => 15).order('id DESC')
-   
   end
 
   # GET /membercards/1

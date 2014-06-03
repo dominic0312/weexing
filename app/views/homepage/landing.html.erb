@@ -9,102 +9,23 @@
 
 	<!-- Bootstrap core CSS -->
 
-	<%= stylesheet_link_tag "bootstrap311.css" %>
-	<link href="/stylesheets/font-awesome.css" rel="stylesheet">
-	<%= stylesheet_link_tag "bootstrap-theme.css" %>
-	<%= stylesheet_link_tag "flex-slider.css" %>
-	<%= stylesheet_link_tag "loginpage.css" %>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/font-awesome.css" />
+	<link rel="stylesheet" href="/css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="/css/flex-slider.css" />
+	<link rel="stylesheet" href="/css/loginpage.css" />
+	<link rel="stylesheet" href="/css/animate.min.css" />
+	<link rel="stylesheet" href="/css/bootstrap-magnify.min.css">
 
-	<%= stylesheet_link_tag "animate.min.css" %>
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- Custom styles for this template -->
 	<!--[if lt IE 9]>
-	<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-	<script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+	<script src="/js/html5shiv.js"></script>
+	<script src="/js/respond.min.js"></script>
 	<![endif]-->
 
 	<!--[if lt IE 8]>
-	<link href="/stylesheets/font-awesome-ie7.min.css" rel="stylesheet">
+	<link href="/css/font-awesome-ie7.min.css" rel="stylesheet">
 	<![endif]-->
 
-	<style>
-		.equal {
-			color: black
-		}
-
-		body {
-			overflow-x: hidden;
-		}
-
-		.cnrflash {
-			position: absolute;
-			top: -9pxb;
-			right: 4px;
-			z-index: 1;
-			overflow: hidden;
-			width: 100px;
-			height: 100px;
-			border-radius: 3px 5px 3px 0;
-		}
-
-		.cnrflash-inner {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			width: 145px;
-			height: 145px;
-			-ms-transform: rotate(45deg);
-			-o-transform: rotate(45deg);
-			-moz-transform: rotate(45deg);
-			-webkit-transform: rotate(45deg);
-			-webkit-transform-origin: 100% 100%;
-			-ms-transform-origin: 100% 100%;
-			-o-transform-origin: 100% 100%;
-			-moz-transform-origin: 100% 100%;
-			background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
-			background-size: 4px, auto, auto, auto;
-			background-color: #AA0101;
-			box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
-			-webkit-transform-origin-x: 100%;
-			-webkit-transform-origin-y: 100%;
-		}
-
-		.cnrflash-label {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			display: block;
-			width: 100%;
-			padding-bottom: 5px;
-			color: white;
-			text-shadow: 0 1px 1px rgba(1, 1, 1, .8);
-			font-size: 0.95em;
-			font-weight: bold;
-			text-align: center;
-		}
-
-		.the-price {
-			background-color: rgba(220, 220, 220, .17);
-			box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
-			padding: 20px;
-			margin: 0;
-		}
-
-		.subscript {
-			font-size: 25px;
-		}
-
-		.panel {
-			text-align: center;
-		}
-
-		.counter {
-			font-size: 20px;
-			color: #CCCCCC
-		}
-
-	</style>
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -157,19 +78,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="overview col-md-7 col-sm-12 col-xs-12">
-					<h2 class="title"><b>以应用为中心的微信公众平台服务商</b></h2>
+					<h2 class="title" style="font-size: 70px"><b>移动 沟通 微行</b></h2>
 					<ul class="summary">
 						<li>
-							<h3>全面云平台   终生免费升级维护</h3>
+							<h3>好的产品 永远是少数</h3>
 						</li>
 						<li>
-							<h3>专业服务器运维  高可用性</h3>
-						</li>
-						<li>
-							<h3>精心设计的移动apps </h3>
-						</li>
-						<li>
-							<h3>自动生成后台  飞速部署微信公众平台应用</h3>
+							<h3>我们是其中之一 </h3>
 						</li>
 					</ul>
 					<div class="download-area">
@@ -185,7 +100,7 @@
 							<p>
 								试运营期间,应用免费开放。
 								<br />
-								至2014年5月1日
+								至2014年7月1日
 							</p>
 
 						</div><!--//note-->
@@ -199,13 +114,13 @@
 							<div class="slider flexslider">
 								<ul class="slides">
 									<li>
-										<img src="/images/slide-1.png"  alt="" />
+										<img data-toggle="magnify" src="/images/slide-1.png"  alt="" />
 									</li>
 									<li>
-										<img src="/images/slide-2.png"  alt="" />
+										<img data-toggle="magnify" src="/images/slide-2.png"  alt="" />
 									</li>
 									<li>
-										<img src="/images/slide-3.png"  alt="" />
+										<img data-toggle="magnify" src="/images/slide-3.png"  alt="" />
 									</li>
 								</ul><!--//slides-->
 							</div><!--//flexslider-->
@@ -222,19 +137,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="overview col-md-7 col-sm-12 col-xs-12">
-					<h2 class="title"><b>高可用的后台，聚焦微信应用场景</b></h2>
+					<h2 class="title" style="font-size: 70px"><b>实用 好用 微行</b></h2>
 					<ul class="summary">
 						<li>
-							<h3>整合客户关系管理(CRM) 精细化运营</h3>
+							<h3>我们崇尚简单</h3>
 						</li>
 						<li>
-							<h3>用户界面模板化 </h3>
-						</li>
-						<li>
-							<h3>为代理商OEM的客户端后台 </h3>
-						</li>
-						<li>
-							<h3>按需付费 </h3>
+							<h3>而且,功能应有尽有 </h3>
 						</li>
 					</ul>
 					<div class="download-area">
@@ -250,7 +159,7 @@
 							<p>
 								试运营期间,应用免费开放。
 								<br />
-								至2014年5月1日
+								至2014年7月1日
 							</p>
 
 						</div><!--//note-->
@@ -264,13 +173,13 @@
 							<div class="slider flexslider">
 								<ul class="slides">
 									<li>
-										<img src="/images/ipadslide1.png"  alt="" />
+										<img data-toggle="magnify" src="/images/ipadslide1.png"  alt="" />
 									</li>
 									<li>
-										<img src="/images/ipadslide2.png"  alt="" />
+										<img data-toggle="magnify" src="/images/ipadslide2.png"  alt="" />
 									</li>
 									<li>
-										<img src="/images/ipadslide3.png"  alt="" />
+										<img data-toggle="magnify" src="/images/ipadslide3.png"  alt="" />
 									</li>
 								</ul><!--//slides-->
 							</div><!--//flexslider-->
@@ -307,17 +216,6 @@
 						<h3 class="title">快速搭建应用</h3>
 						<p>
 							我们的应用是开箱即用的, 您不需要任何专业知识和二次开发, 只要把我们的业务流程整合进您的营销中就可以了。
-						</p>
-					</div><!--//content-->
-				</div><!--//item-->
-				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-comments"></i>
-					</div><!--//icon-->
-					<div class="content">
-						<h3 class="title">利用微信营销</h3>
-						<p>
-							基于微信的广大用户群，我们给您提供自动化，社会化的营销解决方案。
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
@@ -379,13 +277,12 @@
 				<div class="content col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6 text-center">
 					<h2 class="title">运营指南</h2>
 					<p class="intro">
-						我们的教程会指导您从零开始搭建一个微信会员卡应用, 在<a  href="http://mp.weixin.qq.com" target="blank">微信公众平台</a>和<a href="http://www.weexing.com" target="_blank">微行微系统后台</a> 点几下鼠标, 就可以完成
-						这个任务, 我们的努力工作让您不需要专业知识, 就可以轻松搭建微信公众平台应用。
+						我们的教程会指导您从零开始搭建一个移动会员卡应用。 
 					</p>
 					<div class="qr-codes hidden-sm hidden-xs">
 						<div class="note">
 							<p>
-								微信扫一扫,关注微行微系统
+							               关注微行微系统
 							</p>
 							<span class="left-arrow"></span>
 							<span class="right-arrow"></span>
@@ -406,8 +303,7 @@
 						</div>
 					</div><!--//qr-codes-->
 				</div><!--//content-->
-				<div id="guide-container" class="video-container col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-				</div><!--//video-->
+				<div id="guide-container" class="video-container col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6"></div><!--//video-->
 			</div><!--//row-->
 		</div><!--//container-->
 	</section><!--//how-->
@@ -421,13 +317,13 @@
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>微行是什么?</h3>
 						<p class="answer">
-							简单的说, 微行能让你快速上线一个微信公众号app的平台, 我们提供现成的软件, 空间, 和解决方案, 供您来搭建自己的营销应用。
+							简单的说, 微行能让你快速上线一个移动app的平台, 我们提供现成的软件, 空间, 和解决方案, 供您来搭建自己的营销应用。
 						</p>
 					</div><!--//item-->
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>微行有什么产品?</h3>
 						<p class="answer">
-							现在我们上线的只有<span data-toggle="tooltip" title="我不是错别字，我是品牌名">汇员卡</span>应用。后续上线的是微信墙，朋友店，家校通，以及微OA应用。都是性价比无与伦比的产品，敬请期待。
+							现在我们上线的只有<span data-toggle="tooltip" title="我不是错别字，我是品牌名">汇员卡</span>应用。后续上线的是照片墙，朋友店，家校通，以及微OA应用。都是性价比无与伦比的产品，敬请期待。
 						</p>
 					</div><!--//item-->
 					<div class="item">
@@ -448,7 +344,7 @@
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>能看一下过往客户的示例么?</h3>
 						<p class="answer">
-							下方的"用户的声音"提到的@微信公众号都是我们的用户，您可以去参考。但要提醒您的是，我们的应用搭建十分简单，您可以<a href="http://www.weexing.com">申请一个免费账号</a>，花一点时间自己搭建一个看下效果。
+							您可以去参考我们的现有客户。但要提醒您的是，我们的应用搭建十分简单，您可以<a href="http://www.weexing.com">申请一个免费账号</a>，花一点时间自己搭建一个看下效果。
 					</div><!--//item-->
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>怎么做微行的代理商?</h3>
@@ -739,82 +635,25 @@
 
 	<!-- *****CONFIGURE STYLE****** -->
 
-	<%= javascript_include_tag "jquery-102.js" %>
-	<%= javascript_include_tag "jquery-migrate-1.2.1.min.js"%>
-	<%= javascript_include_tag "detectmobilebrowser.js"%>
-	<%= javascript_include_tag "jquery.easing.1.3.js"%>
-	<%= javascript_include_tag "bootstrap311.js"%>
-	<%= javascript_include_tag "jquery.inview.min.js"%>
-	<%= javascript_include_tag "jquery.fitvids.js"%>
-	<%= javascript_include_tag "jquery.scrollTo.min.js"%>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="/js/detectmobilebrowser.js"></script>
+	<script src="/js/jquery.easing.1.3.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/jquery.inview.min.js"></script>
+	<script src="/js/jquery.fitvids.js"></script>
+	<script src="/js/jquery.scrollTo.min.js"></script>
+	<script src="/js/jquery.placeholder.js"></script>
+	<script src="/js/jquery.flexslider-min.js"></script>
+	<script src="/js/loginpage.js"></script>
+	<script src="/js/notify-custom.js"></script>
+	 <script src="/js/bootstrap-magnify.min.js"></script>
 
-	<%= javascript_include_tag "jquery.placeholder.js"%>
-	<%= javascript_include_tag "jquery.flexslider-min.js"%>
-	<%= javascript_include_tag "notify-custom.js" %>
-	<%= javascript_include_tag "loginpage.js"%>
 	<!--[if !IE]>-->
-	<%= javascript_include_tag "animations.js"%>
-	<!--<![endif]-->
-
+	<script src="/js/animations.js"></script>
 	<!--<![endif]-->
 
 	<script>
-		if (navigator.appName.indexOf("Internet Explorer") != -1) {//yeah, he's using IE
-			var badBrowser = (navigator.appVersion.indexOf("MSIE 9") == -1 && //v9 is ok
-			navigator.appVersion.indexOf("MSIE 1") == -1 //v10, 11, 12, etc. is fine too
-			);
-
-			if (badBrowser) {
-				// navigate to error page
-			}
-		}
-
-		$('#qqnum').popover().click(function() {
-			setTimeout(function() {
-				$('#qqnum').popover('hide');
-			}, 3000);
-		});
-
-		$('#groupnum').popover().click(function() {
-			setTimeout(function() {
-				$('#groupnum').popover('hide');
-			}, 3000);
-		});
-
-		function showpc() {
-
-			$("#promo1").hide();
-			//$("#promo1").hide('slide');
-			$("#promo2").show();
-		}
-
-		function showmobile() {
-			$("#promo2").hide();
-			$("#promo1").show();
-		}
-
-		function sendcomment() {
-			var name = $.trim($("#name").val());
-			var email = $.trim($("#email").val());
-			var message = $.trim($("#message").val());
-			$.post("/comments/addcomment", {
-				username : name,
-				useremail : email,
-				usermessage : message
-			}, null, "script");
-		}
-
-		function commentsucc() {
-			str = "留言成功, 我们会迅速联系您.";
-			$("#formdiv").notify(str, {
-				className : "success",
-				arrowShow : false,
-				position : "top",
-				autoHideDelay : 3000
-			});
-			$("#commentform").remove();
-
-		}
 
 	</script>
 </body>

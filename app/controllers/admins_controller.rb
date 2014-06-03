@@ -3,7 +3,6 @@ class AdminsController < ApplicationController
   
   def index
     @account=session[:user_name]
-
   end
 
   def login
@@ -11,9 +10,6 @@ class AdminsController < ApplicationController
   end
   
   def adminlogin
-    
-    #logger.info(params[:username])
-    #logger.info(params[:password])
     if user = User.authenticate(params[:username], params[:password])
       if user.usertype != 'admin'
         render  :js=> "setUserNotAdmin();" and return
@@ -27,12 +23,7 @@ class AdminsController < ApplicationController
     #redirect_to admin_url,:notice =>  params[:username]
     else
       render  :js=> "setUserCheckFail();" and return
-    #redirect_to homepage_login_url,:notice => 'user_not_exist'
     end
-  #[params[:username],params[:password]]
-  # redirect_to :action => "login",:notice => 'Invalid cart'
-  #,:notice => [params[:username],params[:password]]
-    
     
   end
   

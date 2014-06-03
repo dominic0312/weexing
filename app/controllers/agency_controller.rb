@@ -16,8 +16,6 @@ class AgencyController < ApplicationController
   end
 
   def usercheck
-    #logger.info(params[:username])
-    #logger.info(params[:password])
     if user = User.authenticate(params[:username], params[:password])
       if user.activated == 0
         render  :js=> "setUserNotActive();" and return
@@ -25,22 +23,15 @@ class AgencyController < ApplicationController
       session[:user_name] = user.name
       session[:credits] = user.credit
       session[:user_id] = user.id
-      #render(:action=>regist)
       render  :js=> "loginsucc()" and return
-    #render  :js=> "window.location = '/admin';"
-    #redirect_to admin_url,:notice =>  params[:username]
     else
       render  :js=> "userpasswrong()"
-
-    #redirect_to homepage_login_url,:notice => 'user_not_exist'
     end
-  #[params[:username],params[:password]]
-  # redirect_to :action => "login",:notice => 'Invalid cart'
-  #,:notice => [params[:username],params[:password]]
   end
 
   def logout
     session[:user_name] = nil
+    session[:credits] = nil
     session[:user_id] = nil
     session[:usertype] = nil
     redirect_to agencylogin_url
@@ -55,7 +46,6 @@ class AgencyController < ApplicationController
       @res='true'
       render  json:@res and return
     end
-
   end
 
   def email_check
@@ -111,7 +101,6 @@ class AgencyController < ApplicationController
         credit_p=user.credit
         credit_p = credit_p + pointcode.point
         user.update_attributes(:credit=>credit_p)
-        logger.info(user.errors.messages)
         pointcode.userby=user.email
         pointcode.used=1
         pointcode.save
@@ -150,7 +139,7 @@ class AgencyController < ApplicationController
     end
   end
 
-  def interface
+  def mcard
     @shops=Shop.where(:user_id=>session[:user_id]).order('id DESC')
     @templates=Usertemplate.all
     @membercards=Membercard.all

@@ -24,22 +24,6 @@ class NewsController < ApplicationController
     end
   end
 
-  def display
-    if params[:id] == 'top1'
-      @news = News.find_by_doctype('top1')
-    elsif params[:id] == 'top2'
-      @news = News.find_by_doctype('top2')
-    else
-      @news = News.find_by_doctype(params[:id])
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @news }
-    end
-  end
-
-  # GET /news/new
-  # GET /news/new.json
   def new
     @news = News.new
 

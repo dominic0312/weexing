@@ -10,116 +10,24 @@
 		<title>登录</title>
 
 		<!-- Bootstrap core CSS -->
-		<%= stylesheet_link_tag "bootstrap.css" %>
-		<%= stylesheet_link_tag "signin.css" %>
-		<%= javascript_include_tag "jquery-191.js" %>
-		<%= javascript_include_tag "notify-custom.js" %>
-		<%= javascript_include_tag "bootstrap.js" %>
-		
-			<!--[if lte IE 7]>
-	<script>window.location = '/browser'</script>
-	<![endif]-->
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/cardback-login.css" />
 
-		<!-- Custom styles for this template -->
-
-		<!-- Just for debugging purposes. Don't actually copy this line! -->
-		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<!--[if lte IE 7]>
+		<script>window.location = '/browser'</script>
 		<![endif]-->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		
+		<!--[if lt IE 9]>
+		<script src="/js/html5shiv.js"></script>
+		<script src="/js/respond.min.js"></script>
+		<![endif]-->
+		
 	</head>
-	<style>
-		.form-signin {
-			max-width: 330px;
-			padding: 15px;
-			margin: 0 auto;
-			padding-top: 5px;
-		}
-		.form-signin .form-signin-heading, .form-signin .checkbox {
-			margin-bottom: 10px;
-		}
-		.form-signin .checkbox {
-			font-weight: normal;
-		}
-		.form-signin .form-control {
-			position: relative;
-			font-size: 16px;
-			height: auto;
-			padding: 10px;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-		}
-		.form-signin .form-control:focus {
-			z-index: 2;
-		}
-		.form-signin input[type="password"] {
-			margin-bottom: 10px;
-		}
-		.account-wall {
-			margin-top: 20px;
-			padding: 40px 0px 20px 0px;
-			background-color: #f7f7f7;
-			-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-			-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		}
-		.login-title {
-			color: #555;
-			font-size: 18px;
-			font-weight: 400;
-			display: block;
-		}
-		.profile-img {
-			width: 96px;
-			height: 96px;
-			margin: 0 auto 10px;
-			display: block;
-			-moz-border-radius: 50%;
-			-webkit-border-radius: 50%;
-			border-radius: 50%;
-		}
-		.profile-name {
-			font-size: 16px;
-			font-weight: bold;
-			text-align: center;
-			margin-bottom: 20px;
-			height: 1em;
-		}
-		.profile-email {
-			display: block;
-			padding: 0 8px;
-			font-size: 15px;
-			color: #404040;
-			line-height: 2;
-			font-size: 14px;
-			text-align: center;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			-moz-box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			box-sizing: border-box;
-		}
-		.need-help {
-			display: block;
-			margin-top: 10px;
-		}
-		.new-account {
-			display: block;
-			margin-top: 10px;
-		}
-	</style>
-
 	<body>
-
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3 col-md-3 col-lg-4">
-					</div>
+				<div class="col-sm-3 col-md-3 col-lg-4"></div>
 				<div class="col-sm-6 col-md-6 col-lg-4">
 					<h1 class="text-center login-title">微信会员卡后台登陆</h1>
 
@@ -135,23 +43,20 @@
 						</form>
 					</div>
 				</div>
-				
-				<div class="col-sm-3 col-md-3 col-lg-4 ">
-					</div>
+
+				<div class="col-sm-3 col-md-3 col-lg-4 "></div>
 			</div>
 		</div>
 		<div class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-3 col-md-3 col-lg-4">
-					</div>
+					<div class="col-sm-3 col-md-3 col-lg-4"></div>
 					<div class="col-sm-6 col-md-6 col-lg-4">
-				<p class="text-muted credit" style="text-align: right;margin-top:15px">
-					<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
-				</p>
-				</div>
-				<div class="col-sm-3 col-md-3 col-lg-4 ">
+						<p class="text-muted credit" style="text-align: right;margin-top:15px">
+							<%= @shop.name%>  2014 &nbsp; &nbsp;&nbsp;Designed By&nbsp;<a href="http://www.weexing.com">微行微系统</a> .
+						</p>
 					</div>
+					<div class="col-sm-3 col-md-3 col-lg-4 "></div>
 				</div>
 			</div>
 
@@ -172,41 +77,8 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 	</body>
-	<script>
-		$('#howto').popover().click(function() {
-			setTimeout(function() {
-				$('#howto').popover('hide');
-			}, 3000);
-		});
-		
-		function pass() {
-			passwd = $.trim($("#passinput").val());
-			sid = $.trim($("#shopid").html());
-			if (passwd == "") {
-				$("#passinput").notify("密码不能为空", {
-					position : "right",
-					autoHideDelay : 000
-				});
-			} else {
-				$.post("/cardbackground/passcheck", {
-					shopid : sid,
-					password : passwd
-				}, null, "script");
-
-			}
-		}
-
-		function checksuccess() {
-			surl = $.trim($("#shopurl").html());
-			location.href = '/sp/' + surl;
-		}
-
-		function checkfail() {
-			$("#passinput").notify("密码错误,登录失败", {
-				position : "right",
-				autoHideDelay : 3000
-			});
-
-		}
-	</script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/notify-custom.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/cardback-login.js"></script>
 </html>

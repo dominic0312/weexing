@@ -1,27 +1,13 @@
 Weexing::Application.routes.draw do
- 
- 
-  
-
-
-
   resources :documents
-
   mount WeixinRailsMiddleware::Engine, at: "/"
   #mount WeixinRailsMiddleware::Engine, at: WeixinRailsMiddleware.config.engine_path
   resources :news
-
   resources :pointcodes
-
-
-
-  resources :customers
-
-
+  post "pointcodes/add_pointcodes"
+  #resources :customers
   resources :card_templates
-  
-  
-  get 'usertemplates/display'
+
   post 'agency/changepass'
   get 'agency/cardguide'
   get 'agency/wxshow'
@@ -32,130 +18,102 @@ Weexing::Application.routes.draw do
   get 'agency/voa'
   get 'agency/voaguide'
   get 'agency/credit'
-  get 'membercards/display'
-  get 'cardbackground/index'
-  post 'cardbackground/index'
-  post 'coupons/addrequest'
+  post 'agency/usercheck'
+  post 'agency/register'
+  post 'agency/reg_check'
+  post 'agency/email_check'
+  get "agency/login", :as => "agencylogin"
+  get "agency/index"
+  get "agency/mcard"
+  get "agency/logout"
+  post "agency/validate_code"
+  match "/agency" => "agency#login",via: [:get]
+
+  #post 'cardbackground/index'
+
   get 'users/activatesuccess'
   get 'users/activatefail'
   post 'users/changepass'
   post 'users/resetpassword'
+  match "/resetpasswd" => "users#resetpasspage",via: [:get]
+
   post 'wxinterface/menuset'
   post 'wxinterface/loadmenu'
   post 'wxinterface/pubmenu'
-  
-  match "/resetpasswd" => "users#resetpasspage",via: [:get]
-  match "/agency" => "agency#login",via: [:get]
 
   post 'comments/addcomment'
-  get 'sp/:shopurl', to: 'cardbackground#index' 
+
+  get 'cardbackground/index'
+  get 'sp/:shopurl', to: 'cardbackground#index'
   get 'cardbackground/login'
-  get 'coupons/display'
   #post 'shops/updatelogo'
-  match "/admin" => "admins#login",via: [:get]
-  match "/shops/updatelogo/:id" => "shops#updatelogo",via: [:get,:post],:as=>"uploadlogo"
-  match '/coupons/newcoupon/:shopid' => 'coupons#newcoupon',via: [:get]
+
+  post 'coupons/addrequest'
   match '/coupons/createcoupon/:shopid' => 'coupons#createcoupon',via: [:get,:post], :as=>"createcoupon"
-  match "/shops/sysinfo/:id" => "shops#sysinfo",via: [:get,:post],:as=>"sysinfo"
-  match '/shops/updatesysinfo/:id' => 'shops#updatesysinfo',via: [:get,:post], :as => "updatesysinfo"
-  match "/useractivate" => "users#activate",via: [:get]
-  match "/shops/updateoem/:id" =>'shops#updateoem', via: [:post]
-  match "/shops/updateappinfo/:id" =>'shops#updateappinfo', via: [:post]
-  
-  post "shops/shopaccount"
-  post "shops/shopconnect"
-  post "cardbackground/passcheck"
-  get 'shops/display' 
-  get "shops/createshop"
-  post "shops/urlcheck"
-  post "shops/connectwx"
- 
-  post "shops/chargeshop"
-  post "customers/addcustomer"
-  post "customers/updatecustomer"
-  post "customers/delcustomer"
-  
   post "coupons/delcoupon"
   post "coupons/delrequest"
   post "coupons/refreshrequest"
   match "coupons/requestcoupon/:coupid" => "coupons#requestcoupon", via: [:get]
-  get  'wx/:weixin_token', to: 'weixin#index'
-  get  'dispatcher/dispatch'
-  post 'wx/:weixin_token', to: 'weixin#reply'
-  get 'ca/:shopurl', to: 'cardbackground#login'
-  resources :usertemplates
-  resources :shops
-  resources :membercards
-  resources :comments
-  #resources :coupons
-  post "cardguest/getcustomerinfo"
-  match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
-  match "/cardoath/:id" => "cardguest#cardoath", via: [:get, :post]
-  match "/shops/createshop/:id" => "shops#createshop",via: [:get  ]
-  match "/shops/display/:id" => "shops#display",via: [:get, :post]
-  
-  match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info", via: [:get, :post]
-  match "/news/display/:id" => "news#display",via: [:get, :post]
-  get 'card' => 'card#index'
-  get 'cardguest' => 'cardguest#cardpage' 
-  get 'homepage' => 'homepage#landing'
-  
-  
-  controller :homepage do
-  end
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-  end
-  
-  
-
-
-
-  resources :users
-  get "sessions/destroy"
-  post "sessions/destroy_shop"
-  post "test/check"
-  get "admins/index"
-  
-  post "users/create"
-  post "homepage/usercheck"
-   post "agency/usercheck"
-     post "agency/register"
-   post "agency/reg_check"
-   post "agency/email_check"
-  post "admins/adminlogin"
   post "coupons/sendcoupon"
-  get 'homepage/apps' 
-  get "homepage/landing"
- get "cardguest/cardpage"
- get "cardguest/actinfo"
-  get "agency/login", :as => "agencylogin"
-  get "agency/index"
-  get "agency/interface"
-  get "agency/logout"
- 
- 
-  get "homepage/regist"
-  post "pointcodes/add_pointcodes"
-  post "usertemplates/install_template"
-  post "homepage/validate_code"
-  post "agency/validate_code"
-  post "card/updateinfo"
-  post "card/showinfo"
-  post "card/showcardtemplate"
-  post "card/updatecardtemplate"
+  
+  match "/shops/updatelogo/:id" => "shops#updatelogo",via: [:get,:post],:as=>"uploadlogo"
+  match "/shops/updateoem/:id" =>'shops#updateoem', via: [:post]
+  match "/shops/updateappinfo/:id" =>'shops#updateappinfo', via: [:post]
+  post "shops/shopaccount"
+  post "shops/shopconnect"
+  resources :shops
+  post "shops/urlcheck"
+  post "shops/connectwx"
+  post "shops/chargeshop"
   post "shops/updateusertemplate"
   post "shops/updatemembercard"
   post "shops/createshop"
   post "shops/onlineshop"
   post "shops/updateinfo"
-  get "shops/manageshop"
   post "shops/index"
-   post "shops/removeshop"
+  post "shops/removeshop"
+
+  post "cardbackground/passcheck"
+  get 'ca/:shopurl', to: 'cardbackground#login'
+
+  post "customers/addcustomer"
+  post "customers/updatecustomer"
+  post "customers/delcustomer"
+
+  get  'wx/:weixin_token', to: 'weixin#index'
+  post 'wx/:weixin_token', to: 'weixin#reply'
+
+  get  'dispatcher/dispatch'
+
+  resources :usertemplates
+  post "usertemplates/install_template"
+
+  resources :membercards
+  resources :comments
+
+  match "/cardoath/:id" => "cardguest#cardoath", via: [:get, :post]
+  post "cardguest/getcustomerinfo"
+  match "/cardguest/:id" => "cardguest#cardpage", via: [:get, :post]
+  match "/cardguest/get_customer_info/:id"=> "cardguest#get_customer_info", via: [:get, :post]
+  get "cardguest/cardpage"
   post "cardguest/get_customer_info"
-  post "card/pages"
-  get "homepage/signup_login_check"
+  get "cardguest/actinfo"
+  #get 'cardguest' => 'cardguest#cardpage'
+
+  match "/useractivate" => "users#activate",via: [:get]
+  resources :users
+  post "users/create"
+
+  get "sessions/destroy"
+  post "sessions/destroy_shop"
+
+  match "/admin" => "admins#login",via: [:get]
+  get "admins/index"
+  post "admins/adminlogin"
+
+  get 'homepage' => 'homepage#landing'
+  root :to => 'homepage#landing'
+end
 # The priority is based upon order of creation:
 # first created -> highest priority.
 
@@ -205,11 +163,10 @@ Weexing::Application.routes.draw do
 
 # You can have the root of your site routed with "root"
 # just remember to delete public/index.html.
-root :to => 'homepage#landing'
 
 # See how all your routes lay out with "rake routes"
 
 # This is a legacy wild controller route that's not recommended for RESTful applications.
 # Note: This route will make all actions in every controller accessible via GET requests.
 # match ':controller(/:action(/:id))(.:format)'
-end
+

@@ -1,0 +1,131 @@
+.article-post {
+	margin-left: 0;
+}
+body {
+	background-color: #3C3C3C;
+}
+.onlinecol {
+}
+
+.config {
+	display: none;
+}
+
+.config_del {
+	position: absolute;
+	bottom: 3px;
+	right: 5px;
+	color: blue;
+	margin-right: 0;
+}
+
+.config_open {
+	position: absolute;
+	bottom: 3px;
+	right: 65px;
+	color: blue;
+	margin-right: 0;
+}
+
+.config_change {
+	position: absolute;
+	bottom: 3px;
+	right: 35px;
+	color: blue;
+	margin-right: 0;
+}
+
+.menu_level1 {
+	position: relative
+}
+
+.secondmenu {
+	display: none;
+	position: absolute;
+	top: -48px;
+	left: 0;
+	width: 70%;
+	height: 90%;
+	color: blue;
+	font-size: 12px;
+}
+
+.menu_1 {
+	top: -48px
+}
+
+.menu_2 {
+	top: -92px
+}
+.menu_3 {
+	top: -136px
+}
+.menu_4 {
+	top: -180px
+}
+.menu_5 {
+	top: -224px
+}
+
+.deletemenu {
+	display: block;
+	color: red;
+	background: rgba(255, 255, 255, 0.2);
+	width: 20px;
+	height: 10px;
+	top: -5px;
+	right: 10px;
+	position: absolute;
+	text-align: center;
+	line-height: 40px;
+}
+
+.onlinecol .status {
+	font-size: 13px;
+	color: #5CB85C
+}
+.offlinecol {
+}
+.offlinecol .status {
+	font-size: 13px;
+	color: #D9534F
+}
+.centercol {
+	vertical-align: middle
+}
+.field {
+	margin-top: 10px
+}
+.inputfield {
+	margin-top: 10px
+}
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}
+.menuframe {
+	display: inline-block;
+	border: dashed 1px;
+	width: 72%;
+	height: 65px;
+	bottom: 55px;
+	position: absolute;
+	right: 30px;
+	padding: 2px;
+	text-align: center
+}
+
+.addfirstmenu {
+	display: inline-block;
+	margin: 5px;
+	width: 25%
+}
+
+.menucontainer {
+	padding-bottom: 0px;
+	postion: absolute
+}
+.logospan {
+	font-size: 10px;
+	color: blue
+}
+

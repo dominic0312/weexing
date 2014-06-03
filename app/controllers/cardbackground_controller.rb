@@ -9,8 +9,6 @@ class CardbackgroundController < ApplicationController
         @customers = @shop.customers.order('id DESC')
         @coupons = Coupon.where(:shopid => @shop.id).order('id DESC')
         @shopid=@shop.id
-        #@shopname=@shop.name
-        #@shopurl=url
         @coupon = Coupon.new
       format.html # index.html.erb
       format.js
