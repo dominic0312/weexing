@@ -8,6 +8,8 @@ Weexing::Application.routes.draw do
   #resources :customers
   resources :card_templates
 
+  get 'payment/pay'
+  match "payment/paysuccess" => "payment#charge",via: [:get]
   post 'agency/changepass'
   get 'agency/cardguide'
   get 'agency/wxshow'
@@ -49,11 +51,13 @@ Weexing::Application.routes.draw do
   #post 'shops/updatelogo'
 
   post 'coupons/addrequest'
-  match '/coupons/createcoupon/:shopid' => 'coupons#createcoupon',via: [:get,:post], :as=>"createcoupon"
+  #match '/coupons/createcoupon/:shopid' => 'coupons#createcoupon',via: [:get,:post], :as=>"createcoupon"
+  post 'coupons/createcoupon'
   post "coupons/delcoupon"
   post "coupons/delrequest"
   post "coupons/refreshrequest"
   match "coupons/requestcoupon/:coupid" => "coupons#requestcoupon", via: [:get]
+  match "coupons/customercoupon/:cusid" => "coupons#customercoupon", via: [:get]
   post "coupons/sendcoupon"
   
   match "/shops/updatelogo/:id" => "shops#updatelogo",via: [:get,:post],:as=>"uploadlogo"

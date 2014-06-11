@@ -12,6 +12,66 @@ $(document).ready(function() {
 		autoclose : true,
 		todayHighlight : true
 	});
+
+	var optionscoupon = {
+		beforeSubmit : showRequest, // pre-submit callback
+		//success : showResponse, // post-submit callback
+
+		// other available options:
+		url : '/coupons/createcoupon', // override for form's 'action' attribute
+		type : 'post', // 'get' or 'post', override for form's 'method' attribute
+		dataType : 'script', // 'xml', 'script', or 'json' (expected server response type)
+		clearForm : false // clear all form fields after successful submit
+		//resetForm: true        // reset the form after successful submit
+	};
+	
+	//$('#newcouponform').ajaxForm(optionscoupon); 
+	$('#newcouponform').validate({
+		focusInvalid : false,
+		focusCleanup : false,
+		onkeyup : false,
+		rules : {
+			coupon_title : {
+				required : true
+			},
+			coupon_content : {
+				required : true
+			},
+			coupon_startdate : {
+				required : true
+			},
+			coupon_enddate : {
+				required : true
+			}
+		},
+		messages : {
+
+			coupon_title : {
+				required : "标题不能为空"
+			},
+			coupon_content : {
+				required : "内容不能为空"
+			},
+			coupon_startdate : {
+				required : "请选择起始日期--"
+			},
+			coupon_enddate : {
+				required : "请选择截止日期"
+			}
+		},
+		errorPlacement : function(error, element) {
+			error.appendTo(element.parent().next());
+		},
+
+		submitHandler : function(form) {
+		 $("#newcouponform").ajaxSubmit(optionscoupon);
+		 return false;
+		 },
+
+		errorClass : "help-inline",
+		errorElement : "span"
+	});
+
 	var $custable = $('#customertable').dataTable({
 		"bJQueryUI" : true,
 		"bPaginate" : true,
@@ -75,7 +135,7 @@ $(document).ready(function() {
 
 	$('#priv1').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 1,
 		url : '/shops/updateinfo',
 		pk : 'priv1',
@@ -87,7 +147,7 @@ $(document).ready(function() {
 
 	$('#priv2').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 1,
 		url : '/shops/updateinfo',
 		pk : 'priv2',
@@ -99,7 +159,7 @@ $(document).ready(function() {
 
 	$('#priv3').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 1,
 		url : '/shops/updateinfo',
 		pk : 'priv3',
@@ -111,7 +171,7 @@ $(document).ready(function() {
 
 	$('#address').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 2,
 		url : '/shops/updateinfo',
 		pk : 'address',
@@ -122,7 +182,7 @@ $(document).ready(function() {
 	});
 	$('#phone').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 2,
 		url : '/shops/updateinfo',
 		pk : 'phone',
@@ -133,7 +193,7 @@ $(document).ready(function() {
 	});
 	$('#mobile').editable({
 		type : 'text',
-		mode : 'inline',
+		mode : 'popup',
 		rows : 2,
 		url : '/shops/updateinfo',
 		pk : 'mobile',
@@ -408,7 +468,7 @@ function clearuser() {
 	$("#inputcardno").val("");
 	$("#inputphone").val("");
 	$("#inputbalance").val("");
-	$("#inputusertype").val("普通会员");
+	$("#inputusertype").val("普通");
 	cardno = "";
 	telephone = "";
 	balance = "";
@@ -440,19 +500,19 @@ function operate(obj) {
 			value : 1,
 			source : [{
 				value : 1,
-				text : '普通会员'
+				text : '普通'
 			}, {
 				value : 2,
-				text : 'VIP会员'
+				text : 'VIP'
 			}, {
 				value : 3,
-				text : '白银会员'
+				text : '白银'
 			}, {
 				value : 4,
-				text : '黄金会员'
+				text : '黄金'
 			}, {
 				value : 5,
-				text : '白金会员'
+				text : '白金'
 			}]
 		});
 		$('#phone' + rid).editable({
@@ -531,6 +591,31 @@ function listall() {
 }
 
 function newcoupon(shopid) {
+	$("#newcoupon").dialog({
+		dialogClass : "no-close",
+		modal : false,
+		title : "添加新优惠券",
+		show : {
+			effect : "drop",
+			duration : 400,
+			direction : "up"
+		},
+		hide : {
+			effect : "drop",
+			duration : 400,
+			direction : "down"
+		},
+		position : {
+			my : "center top",
+			at : "center top",
+			of : pbody_coupon
+		},
+		open : function(event) {
+		}
+	});
+}
+
+function personalcoupon(shopid) {
 	$("#newcoupon").dialog({
 		dialogClass : "no-close",
 		modal : false,

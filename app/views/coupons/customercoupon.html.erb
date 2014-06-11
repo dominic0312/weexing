@@ -1,0 +1,46 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				&times;
+			</button>
+			<h4 class="modal-title">优惠券回收</h4>
+
+		</div>
+		<div class="modal-body">
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>卡号</th>
+						<th>优惠券名称</th>
+						<th>使用日期</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+                    <% @requests.each do |req| %>
+					<tr id="reqid<%=req.id%>">
+						<td><%=req.cardno%></td>
+						<td data-toggle="tooltip" data-placement="top" title="<%=req.content%>"><%=req.title%></td>
+						<td><%=req.created_at%></td>
+						<td>
+						<button type="button" class="btn btn-primary" coupid="1" onclick="recycle(<%=req.couponid%>,<%=req.id%>)" id="couppubbtn1">
+							回收
+						</button></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">
+				关闭
+			</button>
+
+		</div>
+	</div>
+	<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

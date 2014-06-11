@@ -21,7 +21,6 @@
 		<![endif]-->
 	</head>
 	<style>
-
 	</style>
 	<body>
 
@@ -110,6 +109,9 @@
 											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="balance<%= customer.id%>"><%= customer.balance%></a></td>
 											<td class="editab"><a href="#" recordid='edt<%= customer.id%>' id="bonus<%= customer.id%>"><%= customer.bonus%></a></td>
 											<td style="text-align: center">
+											<button type="button" class="btn btn-success" recordid="<%= customer.id%>" onclick="customerrecycle(this)" id="couponbtn<%= customer.id%>">
+												优惠
+											</button>
 											<button type="button" class="btn btn-primary" recordid="<%= customer.id%>" onclick="operate(this)" id="changebtn<%= customer.id%>">
 												修改
 											</button>
@@ -139,9 +141,15 @@
 						<div class="panel-body">
 							<div class="well well-sm container" style="width:650px">
 								<div class="rows">
-									<div class="col-xs-12">
+									<div class="col-xs-9">
 										<button class="btn btn-success pull-right" type="button" onclick="newcoupon()">
-											<span class="glyphicon glyphicon-plus"></span>&nbsp;<b>添加优惠券</b>
+											<span class="glyphicon glyphicon-plus"></span>&nbsp;<b>发送给特定会员</b>
+										</button>
+									</div><!-- /.col-lg-6 -->
+
+									<div class="col-xs-3">
+										<button class="btn btn-success pull-right" type="button" onclick="newcoupon()">
+											<span class="glyphicon glyphicon-plus"></span>&nbsp;<b>添加全店优惠券</b>
 										</button>
 									</div><!-- /.col-lg-6 -->
 
@@ -345,11 +353,11 @@
 
 				<div class="controls">
 					<select id="inputusertype" name="coupon[usertype]" class="selectpicker">
-						<option value="普通会员">普通会员</option>
-						<option value="VIP会员">VIP会员</option>
-						<option value="白银会员">白银会员</option>
-						<option value="黄金会员">黄金会员</option>
-						<option value="白金会员">白金会员</option>
+						<option value="普通">普通</option>
+						<option value="VIP">VIP</option>
+						<option value="白银">白银</option>
+						<option value="黄金">黄金</option>
+						<option value="白金">白金</option>
 					</select>
 				</div>
 
@@ -378,58 +386,55 @@
 		</div>
 
 		<div id="newcoupon"  class="ui-helper-hidden"  style="width:330px;overflow: hidden" >
-			<%= form_for @coupon, :remote => true,:url => createcoupon_path(@shop.id),:html => { :multipart => true } do |f| %>
+			<form id="newcouponform" action="#">
+				<div class="field" style="margin-top:10px">
+					<label for="coupon_标题">标题</label>
+					<br />
+					<input id="coupon_title" name="coupon_title" type="text" >
+				</div>
+				<div id="error_title" style=""></div>
 
-			<div class="field" style="margin-top:10px">
-				<%= f.label :"标题" %>
-				<br />
-				<%= f.text_field :title %>
-			</div>
+				<div class="field">
+					<label for="coupon_详细">详细</label>
+					<br />
+					<input id="coupon_content" name="coupon_content" type="text">
+				</div>
+				<div id="error_content" style=""></div>
+				<div class="field">
 
-			<div class="field">
-				<%= f.label :"详细" %>
-				<br />
-				<%= f.text_field :content %>
-			</div>
-			<div class="field">
+					<label for="coupon_优惠券类型">优惠券类型</label>
+					<br />
+					<select id="coupon_usertype" name="coupon[usertype]" class="selectpicker">
+						<option value="折扣卷">折扣卷</option>
+						<option value="礼品卷">礼品卷</option>
+					</select>
 
-				<%= f.label :"优惠券类型" %>
-				<br />
-				<select id="coupon_usertype" name="coupon[usertype]" class="selectpicker">
-					<option value="折扣卷">折扣卷</option>
-					<option value="礼品卷">礼品卷</option>
-					<option value="礼品卷">积分卷</option>
-				</select>
+				</div>
+				<div class="field" id="datepicker">
 
-			</div>
-			<div class="field" id="datepicker">
+					<label for="coupon_截止日期">截止日期</label>
+					<br />
+					<div class="input-daterange input-group" id="datepickers">
+						<input type="text" class="input-sm form-control" name="coupon_startdate" id="coupon_startdate" />
+						<span class="input-group-addon">到</span>
+						<input type="text" class="input-sm form-control" name="coupon_enddate" id="coupon_enddate" />
+					</div>
+					<div id="error_date" style=""></div>
 
-				<%= f.label :"截止日期" %>
-				<br />
-				<div class="input-daterange input-group" id="datepickers">
-					<input type="text" class="input-sm form-control" name="	" id="coupon_startdate" />
-					<span class="input-group-addon">到</span>
-					<input type="text" class="input-sm form-control" name="coupon[enddate]" id="coupon_enddate	" />
 				</div>
 
-			</div>
+				<input type="hidden" id="coupon_shopid" name="coupon[shopid]" value="<%= @shop.id%>" />
+				<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="text-align: right">
 
-			<input type="hidden" id="coupon_shopid" name="coupon[shopid]" value="<%= @shop.id%>" />
-			<div class="field">
-				<%= f.label :"图片" ,:id=>"piclabel"%>
-				<br />
-				<input id="coupon_pic" name="coupon[pic]" title="请选择一个图片" type="file" data-filename-placement="inside" class="btn">
-			</div>
-			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="text-align: right">
-				<%= f.submit "确定",:id=>"commit",:class=>"btn btn-success", :data => {:'disable-with' => "正在生成..."}%>
+					<input type="submit" id="resetbtn" class="btn btn-success" value="确定" />
 
-				<button type="button" class="btn btn-default" onclick="closecoupon();">
-					取消
-				</button>
+					<button type="button" class="btn btn-default" onclick="closecoupon();">
+						取消
+					</button>
 
-			</div>
+				</div>
+			</form>
 
-			<% end %>
 		</div>
 
 		<div id="changepwd"  class="ui-helper-hidden"  style="width:330px;overflow: hidden" >
@@ -489,34 +494,91 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		
+			<div class="modal fade" id="customercoupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title">Modal title</h4>
+
+					</div>
+					<div class="modal-body">
+						<div class="te"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+						<button type="button" class="btn btn-primary">
+							Save changes
+						</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
 		<div id="custablenew" style="display: none"></div>
 
 	</body>
-	
-	<script src="/js/jquery.min.js"></script>
-		<script src="/js/jquery-ujs.js"></script>
-		<script src="/js/notify-custom.js"></script>
-		<script src="/js/jquery.iframe-transport.js"></script>
-		<script src="/js/jquery.remotipart.js"></script>
-		<script src="/js/jquery-ui.custom.min.js"></script>
-		<script src="/js/bootstrap.js"></script>
-		<script src="/js/bootstrap.file-input.js"></script>
-		<script src="/js/bootstrap-editable.js"></script>
-		<script src="/js/bootstrap-datepicker.js"></script>
 
-		<script src="/js/bootstrap-select.min.js"></script>
-		<script src="/js/jquery.unveil.min.js"></script>
-		<script src="/js/jquery.dataTables.min.js"></script>
-		<script src="/js/yaya-template.js"></script>
-		<script src="/js/datatabelext.js"></script>
-		<script src="/js/cardbackground-index.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ujs.js"></script>
+	<script src="/js/notify-custom.js"></script>
+	<script src="/js/jquery.iframe-transport.js"></script>
+	<script src="/js/jquery.remotipart.js"></script>
+	<script src="/js/jquery-ui.custom.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/bootstrap.file-input.js"></script>
+	<script src="/js/bootstrap-editable.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/jquery.validate.js"></script>
+	<script src="/js/bootstrap-select.min.js"></script>
+	<script src="/js/jquery.unveil.min.js"></script>
+	<script src="/js/jquery.dataTables.min.js"></script>
+	<script src="/js/yaya-template.js"></script>
+	<script src="/js/datatabelext.js"></script>
+	<script src="/js/jquery.form.min.js"></script>
+	<script src="/js/cardbackground-index.js"></script>
 
 	<!--[if lte IE 7]>
 	<script>window.location = '/browser'</script>
 	<![endif]-->
 
 	<script>
-		
+		function showRequest(formData, jqForm, options) {
+			var queryString = $.param(formData);
+			//alert(queryString);
+			return true;
+		}
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
+		}
+
+		function createcoupon() {
+			couptitle = $.trim($("#coupon_title").val());
+			coupspid = $.trim($("#coupon_shopid").val());
+			//alert(coupspid);
+			$.post("/coupons/createcoupon", {
+				title : couptitle,
+				shopid : coupspid
+			}, null, "script");
+
+		}
+
+		function customerrecycle(ref) {
+			$('#customercoupon').removeData('bs.modal');
+			$('#customercoupon').modal({
+				remote : '/coupons/customercoupon/' + $(ref).attr('recordid')
+			});
+			$('#requestcoupon').modal('show');
+		}
+
 	</script>
 
 	<script type="text/template" id="customer-template">

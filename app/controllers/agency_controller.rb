@@ -21,6 +21,7 @@ class AgencyController < ApplicationController
         render  :js=> "setUserNotActive();" and return
       end
       session[:user_name] = user.name
+      session[:user_email] = user.email
       session[:credits] = user.credit
       session[:user_id] = user.id
       render  :js=> "loginsucc()" and return
@@ -31,6 +32,7 @@ class AgencyController < ApplicationController
 
   def logout
     session[:user_name] = nil
+    session[:user_email] = nil 
     session[:credits] = nil
     session[:user_id] = nil
     session[:usertype] = nil

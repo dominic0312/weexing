@@ -1,9 +1,10 @@
 class CouponsController < ApplicationController
 
   def createcoupon
-    @coupon = Coupon.new(params[:coupon])
+    @coupon = Coupon.new()
+    @coupon.title=params[:title]
     @shopid=params[:shopid]
-    @title=params[:coupon][:title]
+  
     @len=@title.split(//u).length
     if @len>10
       render :js=>"coupontitlefail()" and return
@@ -43,6 +44,10 @@ class CouponsController < ApplicationController
 
   def requestcoupon
     @requests= Requestcoupon.where(:couponid=>params[:coupid])
+  end
+  
+  def customercoupon
+    @requests= Coupon.where(:couponid=>params[:coupid])
   end
 
   def delrequest

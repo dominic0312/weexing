@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140524145439) do
+ActiveRecord::Schema.define(version: 20140610130734) do
 
   create_table "card_templates", force: true do |t|
     t.string   "card_name"
@@ -146,6 +146,15 @@ ActiveRecord::Schema.define(version: 20140524145439) do
     t.string   "newstype",   default: "default"
   end
 
+  create_table "payrecords", force: true do |t|
+    t.string   "user_email"
+    t.string   "order_id"
+    t.integer  "points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "processed",  default: 0
+  end
+
   create_table "pointcodes", force: true do |t|
     t.string   "secretcode"
     t.string   "userby",     default: "empty"
@@ -195,7 +204,7 @@ ActiveRecord::Schema.define(version: 20140524145439) do
     t.datetime "logopic_updated_at"
     t.string   "weixin_secret_key"
     t.string   "weixin_token"
-    t.string   "password"
+    t.string   "password",             default: "88888888"
     t.string   "mobile"
     t.string   "oemname",              default: "微行微系统"
     t.string   "oemurl",               default: "http://www.weexing.com/"

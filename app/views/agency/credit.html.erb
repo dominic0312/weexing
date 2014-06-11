@@ -5,7 +5,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/css/font-awesome.css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="/css/fullcalendar.css" />
 		<link rel="stylesheet" href="/css/jquery.jscrollpane.css" />
 		<link rel="stylesheet" href="/css/unicorn.css" />
@@ -174,16 +174,22 @@
 									<ul class="site-stats">
 										<li>
 											<div class="cc">
-												<i class="fa fa-users"></i><strong>0/30</strong><small>商户数</small>
+												<i class="fa fa-users fa-2x"></i>&nbsp;&nbsp;<strong>0/30</strong><small>商户数</small>
 											</div>
 										</li>
 										<li class="divider"></li>
 										<li>
 											<div class="cc">
-												<i class="fa fa-cloud"></i><strong><span id="credits"><%= @user.credit%></span></strong><small>微行点数</small>
-												<button id="charge"  class="btn btn-primary pull-right" style="margin-top:0">
-													充值
-												</button>
+
+												<i class="fa fa-cloud fa-2x"></i>&nbsp;&nbsp;<strong><span id="credits"><%= @user.credit%></span></strong><small>微行点数</small>
+												<div class="pull-right">
+													<button id="charge"  class="btn btn-dark-green" style="margin-top:0;" data-toggle="tooltip" title="充值卡请联系客户代表购买">
+														<i class="fa fa-qq">&nbsp;充值卡兑换</i>
+													</button>
+													&nbsp;&nbsp;
+
+													<a href="/payment/pay" id="alipaybtn"  class="btn btn-warning" style="margin-top:0" target="blank" data-toggle="modal" data-target="#alipay"> <i class="fa fa-cny">&nbsp;支付宝充值</i> </a>
+												</div>
 											</div>
 										</li>
 									</ul>
@@ -254,9 +260,6 @@
 		<script src="/js/jquery.validate.js"></script>
 		<script src="/js/jquery.form.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
-		<script src="/js/jquery.flot.min.js"></script>
-		<script src="/js/jquery.flot.resize.min.js"></script>
-		<script src="/js/jquery.sparkline.min.js"></script>
 		<script src="/js/bootbox.min.js"></script>
 		<script src="/js/jquery.nicescroll.min.js"></script>
 		<script src="/js/agency.js"></script>
@@ -345,8 +348,24 @@
 					position : "right",
 					autoHideDelay : 4000
 				});
-				
+
 				validator.resetForm();
+
+			}
+
+			function alipay() {
+				var reg = new RegExp("^[0-9]*[1-9][0-9]*$");
+				var obj = $("#pointinput").val();
+				//alert(obj);
+
+				if (obj.match(reg) == null) {
+					//alert("请输入大于零的整数!");
+					$("#alipayerr").html("点数应为大于0的整数");
+					return;
+				} else {
+					$("#alipayerr").html("");
+					window.open('/payment/pay?point='+obj,'alipay','')
+				}
 
 			}
 
@@ -386,5 +405,89 @@
 				});
 			});
 		</script>
+
+		<div class="modal fade" id="alipay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">请确定您要充值的点数</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-cny">&nbsp;&nbsp;&nbsp;价格</i>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<li>
+										微行点数人民币 1元/点
+									</li>
+									<li>
+										具体服务需要的点数请参见首页
+									</li>
+								</ul>
+
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-info">&nbsp;&nbsp;&nbsp;协议</i>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<li>
+										点数在充值之后,无合理原因不予退款
+									</li>
+									<li>
+										服务开启之后 客户点数一次性扣除 暂停服务不能收回点数
+									</li>
+									<li>
+										如微行出现运营问题 剩余点数承诺全额退款
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-plus-square">&nbsp;&nbsp;&nbsp;点数</i>
+							</div>
+							<div class="panel-body">
+
+								<div class="row">
+
+									<div class="col-xs-3" style="padding-top:5px">
+										要充值的点数
+									</div>
+									<div class="col-xs-4">
+										<input type="text" class="form-control" id="pointinput" placeholder="0">
+									</div>
+
+									<div class="col-xs-5" style="padding-top:5px;color:red" id="alipayerr"></div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<img src="/images/alipay.gif"  alt="支付宝" class="pull-left"/>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							关闭
+						</button>
+						<button type="button" class="btn btn-dark-green" onclick="alipay()">
+							前往支付宝支付
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
 	</body>
 </html>

@@ -37,6 +37,7 @@ gem 'jquery-fileupload-rails'
 gem 'rspec-rails'
 gem 'weixin_authorize'
 gem "redis-namespace", "~> 1.4.1"
+gem 'china_pay'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
