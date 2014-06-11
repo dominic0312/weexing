@@ -17,7 +17,7 @@ class PaymentController < ApplicationController
     payrecord.points=@point
     payrecord.save
     #logger.info(@order_id)
-    @subject = '微行微系统点数'+@point+'点' # 订单标题
+    @subject = '微行微系统点数'+@point.to_s+'点' # 订单标题
     @description = '感谢您充值微行微系统' # 订单内容
 
     @order = @merchant.create_order(@order_id, @subject, @description)

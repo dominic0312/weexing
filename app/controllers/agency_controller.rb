@@ -1,7 +1,7 @@
 #coding: utf-8
 class AgencyController < ApplicationController
 
-  before_filter :authagency, :set_cache_buster, :only=>[:index,:interface]
+  before_filter :authagency, :set_cache_buster, :only=>[:index,:mcard, :credit]
   def index
     @news=News.all
     @user=User.find(session[:user_id])
