@@ -33,7 +33,7 @@ class PaymentController < ApplicationController
     @direct_pay.after_payment_redirect_url(@return_url)
 
     # 交易状态变更异步通知地址
-    @notify_url = 'http://www.weexing.com'
+    @notify_url = 'http://www.weexing.com/payment/paysuccess?orderid='+@order_id
     @direct_pay.notification_callback_url(@notify_url)
 
     redirect_to @direct_pay.gateway_api_url
