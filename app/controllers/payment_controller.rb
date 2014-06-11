@@ -58,6 +58,9 @@ class PaymentController < ApplicationController
        else
          render action: "paymentfailed" and return 
        end
+        @username=user.name
+        @useremail=user.email
+        @point=order.points
         render action: "paymentsuccess"
   end
   

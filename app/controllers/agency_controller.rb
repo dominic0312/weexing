@@ -120,6 +120,7 @@ class AgencyController < ApplicationController
 
   def credit
     @user=User.find(session[:user_id])
+    @shopnum=Shop.where(:user_id=>session[:user_id]).length
   end
 
   def authagency
