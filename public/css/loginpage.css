@@ -202,9 +202,9 @@ blockquote {
 	padding-top: 90px;
 }
 .has-pattern {
-	background-image: url('/images/pattern-1.png');
+	/*background-image: url('/images/pattern-1.png');
 	background-repeat: repeat;
-	background-position: left top;
+	background-position: left top;*/
 }
 .delayp1 {
 	animation-delay: .1s;
@@ -446,14 +446,15 @@ blockquote {
 }
 /* ======= Promo Section ======= */
 .promo {
-	background-color: #7cb75e;
-	color: #fff;
+	/*background-color: #7cb75e;*/
+	background:#c5c4c0 url("/images/banner_bg2.jpg") center top no-repeat fixed
+	/*color: #fff;*/
 }
 .promo .container {
 	padding-bottom: 15px;
 }
 .promo .overview {
-	margin-top: 60px;
+	margin-top: 30px;
 	padding-left: 30px;
 	padding-right: 30px;
 }
@@ -497,8 +498,8 @@ blockquote {
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
 	display: block;
-	width: 200px;
-	height: 60px;
+	width: 180px;
+	height: 54px;
 	text-indent: -9999px;
 	margin-right: 30px;
 }
@@ -506,10 +507,10 @@ blockquote {
 	background-color: #365626;
 }
 .promo .overview .btn-group li.ios-btn a {
-	background-image: url('/images/pc.png');
+	background-image: url('/images/pcs.png');
 }
 .promo .overview .btn-group li.android-btn a {
-	background-image: url('/images/mobile.png');
+	background-image: url('/images/mobiles.png');
 }
 .promo .overview .note {
 	position: relative;
@@ -556,22 +557,22 @@ blockquote {
 .promo .iphone .iphone-holder {
 	position: relative;
 	width: 320px;
-	height: 600px;
+	height: 435px;
 	background-repeat: no-repeat;
 	background-position: left top;
 }
 .promo .iphone.iphone-black .iphone-holder {
-	background-image: url('../images//iphone-black.png');
+	background-image: url('../images/iphone-black.png');
 }
 .promo .iphone.iphone-white .iphone-holder {
 	background-image: url('../images/iphone/iphone-white.png');
 }
 .promo .iphone .iphone-holder-inner {
 	position: absolute;
-	width: 222px;
+	width: 167px;
 	height: 394px;
-	left: 51px;
-	top: 103px;
+	left: 38px;
+	top: 77px;
 }
 .promo .iphone .flexslider .flex-control-nav {
 	bottom: -50px;
@@ -622,24 +623,25 @@ blockquote {
 }
 .promo .ipad .ipad-holder {
 	position: relative;
-	width: 620px;
-	height: 600px;
-	top: 100px;
+	width: 560px;
+	height: 435px;
+	top: 50px;
+	right:120px;
 	background-repeat: no-repeat;
 	background-position: left top;
 }
 .promo .ipad.ipad-black .ipad-holder {
-	background-image: url('/images/pc-black.png');
+	background-image: url('/images/pc2s.png');
 }
 .promo .ipad.ipad-white .ipad-holder {
 	background-image: url('../images/ipad/ipad-white.png');
 }
 .promo .ipad .ipad-holder-inner {
 	position: absolute;
-	width: 400px;
-	height: 228px;
-	left: 51px;
-	top: 17px;
+	width: 406px;
+	height: 200px;
+	left: 76px;
+	top: 22px;
 }
 .promo .ipad .flexslider .flex-control-nav {
 	bottom: -55px;
@@ -656,7 +658,7 @@ blockquote {
 }
 /* ======= Features Section ======= */
 .features {
-	padding: 80px 0;
+	padding: 80px 0 30px 0;
 }
 .features .icon {
 	position: relative;
@@ -696,7 +698,7 @@ blockquote {
 	vertical-align: middle;
 }
 .features .content {
-	padding: 30px;
+	padding: 15px;
 }
 .features .content .title {
 	color: #7cb75e;
@@ -738,11 +740,11 @@ blockquote {
 	color: #777777;
 }
 .how .video-container {
-	margin-top: 50px;
+	margin-top: 0;
 }
 /* ======= FAQ Section ======= */
 .faq {
-	padding: 80px 0;
+	padding: 50px 0;
 }
 .faq .title {
 	margin-bottom: 60px;
@@ -830,13 +832,13 @@ blockquote {
 }
 /* ======= Testimonials Section ======= */
 .testimonials {
-	padding: 80px 0;
+	padding: 30px 0;
 }
 .testimonials .title {
 	margin-bottom: 60px;
 }
 .testimonials .item {
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 .testimonials .item .quote-box {
 	background: #f5f5f5;
@@ -882,7 +884,7 @@ blockquote {
 }
 .testimonials .item .people .user-pic {
 	max-width: 60px;
-	max-height: 60px;
+	max-height: 160px;
 }
 .testimonials .item .people .user-pic, .testimonials .item .people .user-pic *, .testimonials .item .people .user-pic *:before, .testimonials .item .people .user-pic *:after {
 	-webkit-box-sizing: content-box;
@@ -1141,12 +1143,7 @@ blockquote {
 		-o-background-size: 300px auto;
 		background-size: 300px auto;
 	}
-	.promo .iphone .iphone-holder-inner {
-		width: 208px;
-		height: 394px;
-		left: 48px;
-		top: 96px;
-	}
+
 	.promo .android .android-holder-inner {
 		width: 238px;
 		height: 394px;
@@ -1196,9 +1193,6 @@ blockquote {
 	}
 	.promo .overview .summary li {
 		text-align: left;
-	}
-	.promo .overview .download-area {
-		margin: 0 auto;
 	}
 	.promo .phone {
 		text-align: center;

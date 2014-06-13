@@ -15,7 +15,13 @@ jQuery(document).ready(function($) {
 				$(this).addClass('animated fadeInUp delayp2');
 			}
 		});
-		$('#promo1 .ios').css('opacity', 0).one('inview', function(isInView) {
+		$('#promo1 .ios-btn').css('opacity', 0).one('inview', function(isInView) {
+			if (isInView) {
+				$(this).addClass('animated fadeInLeft delayp3');
+			}
+		});
+		
+		$('#promo1 .android-btn').css('opacity', 0).one('inview', function(isInView) {
 			if (isInView) {
 				$(this).addClass('animated fadeInLeft delayp3');
 			}
@@ -29,6 +35,19 @@ jQuery(document).ready(function($) {
 		$('#promo2 .summary').css('opacity', 0).one('inview', function(isInView) {
 			if (isInView) {
 				$(this).addClass('animated fadeInUp delayp2');
+			}
+		});
+		
+		
+		$('#promo2 .ios-btn').css('opacity', 0).one('inview', function(isInView) {
+			if (isInView) {
+				$(this).addClass('animated fadeInLeft delayp3');
+			}
+		});
+		
+		$('#promo2 .android-btn').css('opacity', 0).one('inview', function(isInView) {
+			if (isInView) {
+				$(this).addClass('animated fadeInLeft delayp3');
 			}
 		});
 
@@ -52,7 +71,7 @@ jQuery(document).ready(function($) {
 		});
 
 		/* Animate elements in #How */
-		$('#how .video-wrapper').css('opacity', 0).one('inview', function(event, isInView) {
+		$('#guide-container').css('opacity', 0).one('inview', function(event, isInView) {
 			if (isInView) {
 				$(this).addClass('animated fadeInLeft delayp1');
 			}
@@ -113,6 +132,12 @@ jQuery(document).ready(function($) {
 		});
 
 		$('#testimonials .people').css('opacity', 0).one('inview', function(event, isInView) {
+			if (isInView) {
+				$(this).addClass('animated fadeInUp delayp3');
+			}
+		});
+		
+		$('#testimonials .content').css('opacity', 0).one('inview', function(event, isInView) {
 			if (isInView) {
 				$(this).addClass('animated fadeInUp delayp3');
 			}

@@ -1220,7 +1220,6 @@
 		Slick.prototype.startLoad = function() {
 
 			var _ = this;
-
 			if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
 
 				_.$prevArrow.hide();
@@ -1457,7 +1456,6 @@
 		Slick.prototype.updateDots = function() {
 
 			var _ = this;
-
 			if (_.$dots !== null) {
 
 				_.$dots.find('li').removeClass('slick-active');

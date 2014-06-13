@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="/css/loginpage.css" />
 	<link rel="stylesheet" href="/css/animate.min.css" />
 	<link rel="stylesheet" href="/css/bootstrap-magnify.min.css">
+	<link rel="stylesheet" href="/css/slick.css"/>
 
 	<!--[if lt IE 9]>
 	<script src="/js/html5shiv.js"></script>
@@ -25,108 +26,258 @@
 	<!--[if lt IE 8]>
 	<link href="/css/font-awesome-ie7.min.css" rel="stylesheet">
 	<![endif]-->
+	<style>
+		header#header nav.navbar .navbar-header a#header_logo {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			border: 0;
+			display: block;
+			padding: 0;
+			width: 220px;
+			height: 58px;
+			overflow: hidden;
+			line-height: 100em;
+			text-indent: 200em;
+			background-repeat: no-repeat;
+			background-image: url('/images/logo2.png');
+		}
+
+		header#header nav.navbar .navbar-right:last-child {
+			margin-right: 0;
+		}
+
+		header#header ul.nav > li.divider-vertical {
+			border-style: solid;
+			border-width: 1px;
+			opacity: .5;
+			height: 58px;
+			border-left-color: #111415;
+			border-right-color: #646668;
+		}
+
+		.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+			border-color: #101010;
+		}
+
+		header#header nav.navbar#header_outer ul#header_menu {
+			margin-left: 190px;
+		}
+
+		header#header nav.navbar#header_outer ul#header_menu > li.active > a {
+			color: white;
+			background: #555;
+			box-shadow: none;
+		}
+
+		header#header nav.navbar#header_outer ul#header_menu > li > a {
+			line-height: 35px;
+			height: 35px;
+			padding: 0 20px;
+			margin-top: 12px;
+			border-radius: 3px;
+			color: #AAA;
+		}
+		* {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box
+		}
+		*:before, *:after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box
+		}
+		html {
+			font-size: 62.5%;
+			-webkit-tap-highlight-color: rgba(0,0,0,0)
+		}
+		body {
+			font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", Tahoma, Arial, STHeiti, sans-serif;
+			font-size: 14px;
+			line-height: 1.428571429;
+			color: #333;
+			background-color: #fff
+		}
+		input, button, select, textarea {
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit
+		}
+		a {
+			color: #428bca;
+			text-decoration: none
+		}
+		a:hover, a:focus {
+			color: #2a6496;
+			text-decoration: underline
+		}
+		a:focus {
+			outline: thin dotted;
+			outline: 5px auto -webkit-focus-ring-color;
+			outline-offset: -2px
+		}
+		figure {
+			margin: 0
+		}
+
+		header#header ul.nav > li > a {
+			height: 58px;
+			line-height: 58px;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		#contact {
+			/*height: 460px;*/
+			background: #7CB75E url("/images/pat.png") repeat center top;
+			color: white;
+			text-align: center;
+		}
+
+		#story {
+			/*height: 460px;*/
+			background: #7CB75E url("/images/pat.png") repeat center top;
+			color: white;
+			text-align: center;
+		}
+
+		#testimonials {
+			border: solid 1px #E1E1E1;
+			border-width: 1px 0;
+			background: #F4F4F4 url("/images/div-grey-top.png") no-repeat center top;
+		}
+
+		#how {
+			border: solid 1px #E1E1E1;
+			border-width: 1px 0;
+			background: #F4F4F4 url("/images/div-grey-top.png") no-repeat center top;
+		}
+
+		#faq {
+			border: solid 1px #E1E1E1;
+			border-width: 1px 0;
+			background: #F4F4F4 url("/images/div-grey-top.png") no-repeat center top;
+		}
+		.uname{
+			
+		}
+		.utitle{}
+
+	</style>
 
 </head>
 <!-- NAVBAR
 ================================================== -->
 <body data-spy="scroll">
 	<!-- ******HEADER****** -->
-	<header id="top" class="header navbar-fixed-top">
-		<div class="container">
-			<h1 class="logo pull-left"><a class="scrollto" href="#promo"> <img id="logo-image" class="logo-image" src="/images/logo3.png" alt="Logo"> <span class="logo-title"></span> </a></h1><!--//logo-->
-			<nav id="main-nav" class="main-nav navbar-right" role="navigation">
-				<div class="navbar-header">
-					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button><!--//nav-toggle-->
-				</div><!--//navbar-header-->
-				<div class="navbar-collapse collapse" id="navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active nav-item sr-only">
-							<a class="scrollto" href="#promo">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="scrollto" href="#features"><h4>特性</h4></a>
-						</li>
-						<li class="nav-item">
-							<a class="scrollto" href="#how"><h4>产品</h4></a>
-						</li>
-						<li class="nav-item">
-							<a class="scrollto" href="#faq"><h4>常见问题</h4></a>
-						</li>
-						<li class="nav-item">
-							<a class="scrollto" href="#story"><h4>价格</h4></a>
-						</li>
-						<li class="nav-item">
-							<a href="/agency/login" target="blank"><h4>代理平台</h4></a>
-						</li>
-						<li class="nav-item last">
-							<a class="scrollto" href="#contact"><h4>联系我们</h4></a>
-						</li>
-					</ul><!--//nav-->
-				</div><!--//navabr-collapse-->
-			</nav><!--//main-nav-->
+	<header id="header">
+		<!--[if lte IE 9]>
+		<div id="warning_info" class="text-warning fade in mb_0">
+		<button data-dismiss="alert" class="close" type="button">×</button>
+		<strong>您正在使用低版本浏览器，</strong> 在本页面的显示效果可能有差异。
+		建议您升级到
+		<a href="http://www.google.cn/intl/zh-CN/chrome/" target="_blank">Chrome</a>
+		或以下浏览器：
+		<a href="www.mozilla.org/en-US/firefox/‎" target="_blank">Firefox</a> /
+		<a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> /
+		<a href="http://www.opera.com/" target="_blank">Opera</a> /
+		<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_blank">
+		Internet Explorer 10</a>
 		</div>
-	</header><!--//header-->
+		<![endif]-->
+
+		<nav id="header_outer" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-header-collapse" wt-tracker="Header|Collapse|Toggle Navbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a id="header_logo" class="navbar-brand" wt-tracker="Header|Logo|Goto Index" href="/" title="Worktile">微行</a>
+			</div>
+			<div class="collapse navbar-collapse navbar-header-collapse">
+
+				<ul id="header_menu" class="nav navbar-nav">
+					<li class="active">
+						<a class="scrollto scrollmenu" href="#promo" id="item1"><img src="/images/menu1.png"></a>
+					</li>
+					<li>
+						<a class="scrollto scrollmenu" href="#features" wt-tracker="Header|Menu|Goto Signin" id="item2"><img src="/images/menu2.png"></a>
+					</li>
+					<li>
+						<a class="scrollto scrollmenu" href="#how"  id="item3"><img src="/images/menu3.png"></a>
+					</li>
+					<li>
+						<a class="scrollto scrollmenu" href="#faq" id="item4"><img src="/images/menu4.png"></a>
+					</li>
+					<li>
+						<a class="scrollto scrollmenu" href="#story" id="item5"><img src="/images/menu5.png"></a>
+					</li>
+
+					<li>
+						<a class="scrollto scrollmenu" href="#contact" id="item6"><img src="/images/menu6.png"></a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right ng-scope" ng-controller="user_ctrl" id="header_me">
+					<li class="divider-vertical hidden-xs"></li>
+
+					<li>
+						<a class="mr_15" href="/agency/login" target="blank"><i class="fa fa-desktop">&nbsp;代理商登录</i></a>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+
+	</header>
 
 	<!-- ******PROMO****** -->
 	<section id="promo"></section>
 	<section id="promo1" class="promo section offset-header has-pattern">
-		<div class="container">
+		<div class="container" style="width:1200px">
 			<div class="row">
-				<div class="overview col-md-7 col-sm-12 col-xs-12">
-					<h2 class="title" style="font-size: 70px"><b>移动 沟通 微行</b></h2>
-					<ul class="summary">
-						<li>
-							<h3>好的产品 永远是少数</h3>
-						</li>
-						<li>
-							<h3>我们是其中之一 </h3>
-						</li>
+				<div class="col-xs-1"></div>
+				<div class="overview col-xs-6">
+					<h2 class="title pull-left" style="font-size: 70px;color:white"><b>移动 沟通</b></h2>
+					<ul class="summary pull-left" style="color: white">
+						<h3><b>我们让移动沟通更自然</b></h3>
+						<h3><b>为您轻松创造价值 </b></h3>
 					</ul>
-					<div class="download-area">
+					<div class="download-area" style="position: relative;right:70px">
 						<ul class="btn-group list-inline">
-							<li class="ios-btn">
+							<li class="ios-btn pull-left">
 								<a href="#" onclick="showpc()">Download from the App Store</a>
 							</li>
 							<li class="android-btn">
 								<a href="#" onclick="showmobile()">Get it from Google Play</a>
 							</li>
 						</ul>
-						<div class="note text-center">
-							<p>
-								试运营期间,应用免费开放。
-								<br />
-								至2014年7月1日
-							</p>
-
-						</div><!--//note-->
 					</div>
 				</div><!--//overview-->
 
 				<!--// iPhone starts -->
-				<div class="phone iphone iphone-black col-md-5 col-sm-12 col-xs-12 ">
+				<div class="phone iphone iphone-black col-xs-4">
 					<div class="iphone-holder phone-holder">
-						<div class="iphone-holder-inner">
+						<div class="iphone-holder-inner" >
 							<div class="slider flexslider">
 								<ul class="slides">
 									<li>
-										<img data-toggle="magnify" src="/images/slide-1.png"  alt="" />
+										<img src="/images/slide-1.png"  alt="" />
 									</li>
 									<li>
-										<img data-toggle="magnify" src="/images/slide-2.png"  alt="" />
+										<img src="/images/slide-2.png"  alt="" />
 									</li>
 									<li>
-										<img data-toggle="magnify" src="/images/slide-3.png"  alt="" />
+										<img src="/images/slide-3.png"  alt="" />
 									</li>
 								</ul><!--//slides-->
 							</div><!--//flexslider-->
 						</div><!--//iphone-holder-inner-->
 					</div><!--//iphone-holder-->
 				</div><!--//iphone-->
+				<div class="col-xs-1"></div>
 				<!--// iPhone ends -->
 
 			</div><!--//row-->
@@ -134,19 +285,18 @@
 	</section><!--//promo-->
 
 	<section id="promo2" class="promo section offset-header has-pattern" style="display:none;">
-		<div class="container">
+		<div class="container"  style="width:1300px">
 			<div class="row">
-				<div class="overview col-md-7 col-sm-12 col-xs-12">
-					<h2 class="title" style="font-size: 70px"><b>实用 好用 微行</b></h2>
-					<ul class="summary">
-						<li>
-							<h3>我们崇尚简单</h3>
-						</li>
-						<li>
-							<h3>而且,功能应有尽有 </h3>
-						</li>
+				<div class="col-xs-1"></div>
+				<div class="overview col-xs-5">
+					<h2 class="title pull-left" style="font-size: 70px;color:white"><b>实用 好用 &nbsp;</b></h2>
+					<ul class="summary pull-left" style="color: white">
+
+						<h3><b>实用的功能</b></h3>
+						<h3><b>不多 不少</b></h3>
+
 					</ul>
-					<div class="download-area">
+					<div class="download-area" style="position: relative;right:70px">
 						<ul class="btn-group list-inline">
 							<li class="ios-btn">
 								<a href="#">Download from the App Store</a>
@@ -155,19 +305,11 @@
 								<a href="#" onclick="showmobile()">Get it from Google Play</a>
 							</li>
 						</ul>
-						<div class="note text-center">
-							<p>
-								试运营期间,应用免费开放。
-								<br />
-								至2014年7月1日
-							</p>
-
-						</div><!--//note-->
 					</div>
 				</div><!--//overview-->
 
 				<!--// iPad starts -->
-				<div class="ipad ipad-black col-md-5 col-sm-12 col-xs-12">
+				<div class="ipad ipad-black col-xs-6">
 					<div class="ipad-holder">
 						<div class="ipad-holder-inner">
 							<div class="slider flexslider">
@@ -198,35 +340,51 @@
 			<div class="row">
 				<h2 class="title text-center sr-only">Features</h2>
 				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-cloud-upload"></i>
+					<div class="icon2">
+						<img src="/images/upload_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">全面云部署</h3>
+						<img src="/images/des1.png">
+						<h3 class="title"></h3>
 						<p>
-							微行的服务器基于<a href="http://www.aliyun.com" target="blank">阿里云</a> 搭建， 专业的服务器与运营商带来的是极高的可用性， 并可瞬间扩容。 硬件的运维，您不必费心。
+							微行基于最新云技术搭建 可自动扩容 无需担心维护
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
 				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-rocket"></i>
+					<div class="icon2">
+						<img src="/images/meter_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">快速搭建应用</h3>
+						<img src="/images/des2.png">
+						<h3 class="title"></h3>
 						<p>
-							我们的应用是开箱即用的, 您不需要任何专业知识和二次开发, 只要把我们的业务流程整合进您的营销中就可以了。
+							不需要空间申请 域名申请的繁琐步骤 应用瞬间上线
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
 				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-cny"></i>
+					<div class="icon2">
+						<img src="/images/trends_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">经济性</h3>
+						<img src="/images/des3.png">
+						<h3 class="title"></h3>
 						<p>
-							我们执行的是诚实，有良心的低价策略，这得益于我们的低成本运营。 在保证高品质的情况下，我们的价格大约是市场价格的一半， 参见<a class="scrollto" href="#story">价格详情</a>.
+							云技术使我们可以帮您节省支出 用多少买多少 不浪费
+						</p>
+					</div><!--//content-->
+				</div><!--//item-->
+
+				<div class="item col-md-3 col-sm-6 col-xs-12 text-center">
+					<div class="icon2">
+						<img src="/images/tools_128px.png" />
+					</div><!--//icon-->
+					<div class="content">
+						<img src="/images/des4.png">
+						<h3 class="title"></h3>
+						<p>
+							精心打造的行业app 每一个功能都实际可用 不做过度开发
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
@@ -234,35 +392,38 @@
 
 			<div class="row">
 				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-wrench"></i>
+					<div class="icon2">
+						<img src="/images/security_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">实用主义</h3>
+						<img src="/images/des5.png">
+						<h3 class="title"></h3>
 						<p>
-							我们清楚的知道自己的应用能创造的价值，它们不只是宣传工具，而是具有高可用性的，相信您用过后也会认同这一点。
+							采用业界尖端加密技术保护您的商业信息 我们也不掌握您的密码
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
 				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-users"></i>
+					<div class="icon2">
+						<img src="/images/settings_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">自动化代理</h3>
+						<img src="/images/des6.png">
+						<h3 class="title"></h3>
 						<p>
-							我们为代理商准备了平台，让您的账户下可以管理多个用户，并且不需要您了解技术层面的东西，您可以专心拓展业务。<a href="/agency/login"  target="view_window">代理登入</a>.
+							应用开通 支付 上线 停止操作全部自助操作  并提供代理商管理界面
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
 				<div class="item col-md-4 col-sm-6 col-xs-12 text-center">
-					<div class="icon">
-						<i class="fa fa-clock-o"></i>
+					<div class="icon2">
+						<img src="/images/clock_128px.png" />
 					</div><!--//icon-->
 					<div class="content">
-						<h3 class="title">全时支持</h3>
+						<img src="/images/des7.png">
+						<h3 class="title"></h3>
 						<p>
-							云平台的特性让我们随时能对服务器的负荷和app的错误状态进行修正，一切都在我们的掌握之中，免除您的后顾之忧。
+							出现问题？ 不用担心 我们的服务团队随时在线解决
 						</p>
 					</div><!--//content-->
 				</div><!--//item-->
@@ -275,14 +436,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="content col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6 text-center">
-					<h2 class="title">运营指南</h2>
+					<img src="/images/guide.png">
+					<h2 class="title"></h2>
 					<p class="intro">
-						我们的教程会指导您从零开始搭建一个移动会员卡应用。 
+						我们的教程会指导您从零开始搭建微信会员卡应用
 					</p>
 					<div class="qr-codes hidden-sm hidden-xs">
 						<div class="note">
 							<p>
-							               关注微行微系统
+								查看示例系统
 							</p>
 							<span class="left-arrow"></span>
 							<span class="right-arrow"></span>
@@ -303,19 +465,31 @@
 						</div>
 					</div><!--//qr-codes-->
 				</div><!--//content-->
-				<div id="guide-container" class="video-container col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6"></div><!--//video-->
+				<div id="guide-container" class="video-container col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6" style="padding-bottom:10px">
+					<div><img src="/images/guide1.jpg">
+					</div>
+					<div><img src="/images/guide2.jpg">
+					</div>
+					<div><img src="/images/guide3.jpg">
+					</div>
+					<div><img src="/images/guide4.jpg">
+					</div>
+					<div><img src="/images/guide5.jpg">
+					</div>
+
+				</div><!--//video-->
 			</div><!--//row-->
 		</div><!--//container-->
 	</section><!--//how-->
 
 	<!-- ******FAQ****** -->
 	<section id="faq" class="faq section">
-		<div class="container">
+		<div class="container" class="faqcon">
 			<div class="row">
-				<h2 class="title text-center">经常会遇到的问题</h2>
+				<h2 class="title text-center"><img src="/images/faq.png"></h2>
 				<div class="faq-col col-md-6 col-sm-6 col-xs-12">
 					<div class="item">
-						<h3 class="question"><i class="fa fa-question-circle"></i>微行是什么?</h3>
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行是做什么的?</h3>
 						<p class="answer">
 							简单的说, 微行能让你快速上线一个移动app的平台, 我们提供现成的软件, 空间, 和解决方案, 供您来搭建自己的营销应用。
 						</p>
@@ -327,15 +501,15 @@
 						</p>
 					</div><!--//item-->
 					<div class="item">
-						<h3 class="question"><i class="fa fa-question-circle"></i>你们有多少实际用户?</h3>
+						<h3 class="question"><i class="fa fa-question-circle"></i>多少实际用户在使用微行?</h3>
 						<p class="answer">
-							我们是新创立的公司，客户数当然没有十万那么多，但我们不会随便说一个数字，本页面下方有<a class="scrollto" href="#contact">一组计数器</a>，显示每个应用的装机用户数量，这个数字是从数据库实时取出的。
+							本页面下方有<a class="scrollto" href="#contact">一组计数器</a>，显示每个应用的装机用户数量，这个数字是从数据库实时取出的。
 						</p>
 					</div><!--//item-->
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>微行提供什么样的培训和技术支持?</h3>
 						<p class="answer">
-							我们尽力使我们的产品自动化，并提供完整的说明文档，因此不提供培训。如果您还有不明白的问题，请放心联系我们。云平台技术让我们可以轻易提供全时的免费技术支持。另外，我们暂时不支持定制开发。
+							我们尽力使我们的产品自动化，并提供完整的说明文档. 如果您还有不明白的问题，请放心联系我们。云平台技术让我们可以轻易提供全时的免费技术支持。
 						</p>
 					</div><!--//item-->
 
@@ -344,24 +518,24 @@
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>能看一下过往客户的示例么?</h3>
 						<p class="answer">
-							您可以去参考我们的现有客户。但要提醒您的是，我们的应用搭建十分简单，您可以<a href="http://www.weexing.com">申请一个免费账号</a>，花一点时间自己搭建一个看下效果。
+							您可以去参考我们的示例。我们的应用搭建十分简单，您可以<a href="http://www.weexing.com/agency">申请一个免费账号</a>，自己搭建一个应用体验。
 					</div><!--//item-->
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>怎么做微行的代理商?</h3>
 						<p class="answer">
-							如果您觉得我们的产品不错，我们很欢迎您帮助我们拓展线下市场，我们会给代理商提供基于云的<a href="http://www.weexing.com">客户管理平台</a>，不需要您懂任何技术，您的自有客户的控制权全部下放。
+							如果您觉得我们的产品不错，我们很欢迎您帮助我们拓展线下市场，我们会给代理商提供基于云的<a href="http://www.weexing.com/agency">客户管理平台</a>，不需要您懂任何技术，您的自有客户的控制权全部下放。
 						</p>
 					</div><!--//item-->
 					<div class="item">
 						<h3 class="question"><i class="fa fa-question-circle"></i>做代理商有什么样的优惠政策?</h3>
 						<p class="answer">
-							我们会给您提供专有的客户管理平台，不需要您承担服务器运营成本，经过一系列免费的认证流程后，我们会给您提供售前资料(小册子，ppt). 在客户成交前，您无需垫付任何资金。
+							我们会给您提供专有的客户管理平台，经过一系列免费的认证流程后，我们会给您提供售前资料(小册子，ppt)，您无需垫付任何资金。
 						</p>
 					</div><!--//item-->
 					<div class="item">
-						<h3 class="question"><i class="fa fa-question-circle"></i>微行和其他公司有什么不同?</h3>
+						<h3 class="question"><i class="fa fa-question-circle"></i>微行的方向是什么?</h3>
 						<p class="answer">
-							我们不是什么都做的团队，我们的目标是以更高的性价比给您提供业界一流的精品应用。我们的应用关注的不只是展示，我们更关注可用性和用户粘度。
+							我们的目标是以更高的性价比给您提供业界一流的精品应用。我们的应用关注的不只是展示，我们更关注可用性和用户粘度。
 						</p>
 					</div><!--//item-->
 				</div><!--//faq-col-->
@@ -378,13 +552,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="content col-md-5 col-sm-6 col-xs-12 text-center">
-					<h2 class="title">价格</h2>
-					<p>
-						<h3> 微行汇员卡  2014.4.10-2014.5.1 限时免费</h3>
-					</p>
-					<p>
-						<h3> 在此期间开通的所有终端商户将具备永久免费使用汇员卡的权限</h3>
-					</p>
+					<img src="/images/card.png">
+					<div style="margin-top: 50px">
+						<p>
+							<img src="/images/free.png">
+						</p>
+					</div>
 
 				</div><!--//content-->
 				<div class="team col-md-6 col-sm-5 col-md-offset-1 col-sm-offset-1 col-xs-12">
@@ -415,7 +588,7 @@
 												<td> 1000会员上限 </td>
 											</tr>
 											<tr>
-												<td> 30套优惠券上限 </td>
+												<td> 50张优惠券上限 </td>
 											</tr>
 											<tr class="active">
 												<td> CRM后台管理 </td>
@@ -425,7 +598,7 @@
 									</table>
 								</div>
 								<div class="panel-footer">
-									<a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">注册并使用</a>
+									<a href="http://www.weexing.com/agency" class="btn btn-success" role="button" target="blank">注册并使用</a>
 								</div>
 							</div>
 						</div>
@@ -434,7 +607,7 @@
 							<div class="panel panel-default" style="color:#CCCCCC">
 
 								<div class="panel-heading">
-									<h3 class="panel-title"> 汇员卡</h3>
+									<h3 class="panel-title"> 微行秀</h3>
 								</div>
 								<div class="panel-body">
 									<div class="the-price">
@@ -450,7 +623,7 @@
 												<td> 1000会员上限 </td>
 											</tr>
 											<tr>
-												<td> 30套优惠券上限 </td>
+												<td> 30套模板上限 </td>
 											</tr>
 											<tr class="active">
 												<td> CRM后台管理 </td>
@@ -473,89 +646,10 @@
 
 	<!-- ******TESTIMONIALS****** -->
 	<section id="testimonials" class="testimonials section">
-		<div class="container">
-			<div class="row">
-				<h2 class="title text-center">用户的声音</h2>
-				<div class="item col-md-4 col-sm-4">
-					<div class="quote-box">
-						<i class="fa fa-quote-left"></i>
-						<blockquote class="quote">
-							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
-						</blockquote><!--//quote-->
-					</div><!--//quote-box-->
-					<div class="people row">
-						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
-						<p class="details text-center pull-left">
-							<span class="name">晏先生</span>
-							<span class="title">深圳, 咖啡店主</span>
-						</p>
-					</div><!--//people-->
-				</div><!--//item-->
-				<div class="item col-md-4 col-sm-4">
-					<div class="quote-box">
-						<i class="fa fa-quote-left"></i>
-						<blockquote class="quote">
-							<a href="#">@COCO烘焙坊</a> 界面很清新，操作一点都不难。这款应用让我们有了更多的促销手段，比原来发传单方便多了。
-						</blockquote><!--//quote-->
-					</div><!--//quote-box-->
-					<div class="people row">
-						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-2.png" alt="" />
-						<p class="details text-center pull-left">
-							<span class="name">尹小姐</span>
-							<span class="title">东莞, 烘焙店长</span>
-						</p>
-					</div><!--//people-->
-				</div><!--//item-->
-				<div class="item col-md-4 col-sm-4">
-					<div class="quote-box">
-						<i class="fa fa-quote-left"></i>
-						<blockquote class="quote">
-							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
-						</blockquote><!--//quote-->
-					</div><!--//quote-box-->
-					<div class="people row">
-						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
-						<p class="details text-center pull-left">
-							<span class="name">晏先生</span>
-							<span class="title">深圳, 咖啡店主</span>
-						</p>
-					</div><!--//people-->
-				</div><!--//item-->
-			</div><!--//row-->
-			<div class="row">
-				<div class="item col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2">
-					<div class="quote-box">
-						<i class="fa fa-quote-left"></i>
-						<blockquote class="quote">
-							<a href="#">@COCO烘焙坊</a> 界面很清新，操作一点都不难。这款应用让我们有了更多的促销手段，比原来发传单方便多了。
-						</blockquote><!--//quote-->
-					</div><!--//quote-box-->
-					<div class="people row">
-						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-2.png" alt="" />
-						<p class="details text-center pull-left">
-							<span class="name">尹小姐</span>
-							<span class="title">东莞, 烘焙店长</span>
-						</p>
-					</div><!--//people-->
-				</div><!--//item-->
-				<div class="item col-md-4 col-sm-4">
-					<div class="quote-box">
-						<i class="fa fa-quote-left"></i>
-						<blockquote class="quote">
-							<a href="#">@五月咖啡</a> 微行的会员卡使用真的很简单, 后台操作几分钟就会了, 界面也很很简洁和清晰, 不会找不到要用的东西。
-						</blockquote><!--//quote-->
-					</div><!--//quote-box-->
-					<div class="people row">
-						<img class="img-rounded user-pic col-md-5 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" src="/images/people-1.png" alt="" />
-						<p class="details text-center pull-left">
-							<span class="name">晏先生</span>
-							<span class="title">深圳, 咖啡店主</span>
-						</p>
-					</div><!--//people-->
-				</div><!--//item-->
-			</div>
+				<h2 class="title text-center"><img src="/images/howtheysay.png"></h2>
+				
 			<div class="press row text-center">
-				<h3 class="note">加入微行的用户群,听听大家的声音吧</h3>
+				<h3 class="note"></h3>
 				<ul class="col-md-12 list-inline">
 					<li>
 						<a data-toggle="popover" data-placement="bottom" data-content="微行qq群号:166706916" id="groupnum"><img class="img-responsive" src="/images/group2.png" alt="" /></a>
@@ -565,7 +659,6 @@
 					</li>
 				</ul>
 			</div><!--//row-->
-		</div><!--//container-->
 	</section><!--//Testimonials-->
 
 	<!-- ******CONTACT****** -->
@@ -629,7 +722,7 @@
 	<!-- ******FOOTER****** -->
 	<footer class="footer">
 		<div class="container" style="text-align: center">
-			<small class="copyright">Copyright &copy; 2014 Weexing MicroSystem&nbsp;&nbsp;微行微系统 。 <a href="http	://www.miitbeian.gov.cn">粤ICP备14018684号-1</a></small>
+			<small class="copyright">Copyright &copy; 2014 Weexing MicroSystem&nbsp;&nbsp;微行微系统 <a href="http	://www.miitbeian.gov.cn">粤ICP备14018684号-1</a></small>
 		</div>
 	</footer><!--//footer-->
 
@@ -647,14 +740,40 @@
 	<script src="/js/jquery.flexslider-min.js"></script>
 	<script src="/js/loginpage.js"></script>
 	<script src="/js/notify-custom.js"></script>
-	 <script src="/js/bootstrap-magnify.min.js"></script>
+	<script src="/js/bootstrap-magnify.min.js"></script>
+	<script src="/js/slick.js"></script>
 
 	<!--[if !IE]>-->
 	<script src="/js/animations.js"></script>
 	<!--<![endif]-->
 
 	<script>
+		var currentmenu = 'item1';
+		$('#guide-container').slick({
+			dots : true,
+			arrows : false
+		});
+		
+			$('#voice').slick({
+			dots : true,
+			arrows : false,
+			speed:800,
+			autoplaySpeed : 2000
+		});
 
+		$(".scrollmenu").bind("click", function() {
+			if (currentmenu == $(this).attr('id')) {
+
+			} else {
+				$("#" + currentmenu).parent().removeClass("active");
+				$(this).parent().addClass("active");
+				currentmenu = $(this).attr('id');
+			}
+		});
+
+		function changemenu(ref) {
+
+		}
 	</script>
 </body>
 
