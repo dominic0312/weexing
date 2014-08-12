@@ -82,7 +82,7 @@ class AgencyController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        Regconfirm.delay.regist_confirm(@user)
+        Regconfirm.regist_confirm(@user)
         format.js { render  :js=> "regsuccess()"}
       else
         format.js { render  :js=> "regfail()"}
