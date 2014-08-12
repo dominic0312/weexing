@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        Regconfirm.delay.regist_confirm(@user)
+        Regconfirm.regist_confirm(@user).deliver
         format.js { render  :js=> "regsuccess('"+@user.email+"');"}
       else
         format.js { render  :js=> "regfail();"}
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
     @user = User.where(:email=>params[:emailreset]).first
     respond_to do |format|
 
-      Regconfirm.delay.reset_password(@user)
+      Regconfirm.reset_password(@user).deliver
       format.js { render  :js=> "mailsent();"}
 
     end
